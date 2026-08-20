@@ -1,0 +1,3758 @@
+{
+  "portfolio_balance": 4120.086805100808,
+  "active_holdings": [],
+  "execution_logs": [
+    {
+      "time": 1783918807.764989,
+      "action": "FILLED_BUY",
+      "symbol": "INFY.NS",
+      "shares": 0.1935,
+      "price": 1072.5
+    },
+    {
+      "time": 1783918820.581259,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1404,
+      "price": 1404.1
+    },
+    {
+      "time": 1783918865.3601694,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2287,
+      "price": 818.85
+    },
+    {
+      "time": 1783919164.6004002,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "INFY.NS",
+      "shares": 0.1935,
+      "price": 1069.955722
+    },
+    {
+      "time": 1783919402.3472757,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1404,
+      "price": 1400.582733
+    },
+    {
+      "time": 1783919634.055839,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1413,
+      "price": 1402.2
+    },
+    {
+      "time": 1783919863.8158295,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0666,
+      "price": 176.41
+    },
+    {
+      "time": 1783920055.5179,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0666,
+      "price": 176.758446
+    },
+    {
+      "time": 1783920123.1150558,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0137,
+      "price": 13755.0
+    },
+    {
+      "time": 1783920318.1392064,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1413,
+      "price": 1398.806985
+    },
+    {
+      "time": 1783920388.5213377,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1349,
+      "price": 1398.7
+    },
+    {
+      "time": 1783921065.6893015,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2287,
+      "price": 820.814381
+    },
+    {
+      "time": 1783921251.6728818,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0137,
+      "price": 13803.489092
+    },
+    {
+      "time": 1783921973.2210271,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1349,
+      "price": 1401.32524
+    },
+    {
+      "time": 1783922038.3531632,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.148,
+      "price": 1402.0
+    },
+    {
+      "time": 1783922171.3829134,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.148,
+      "price": 1399.477921
+    },
+    {
+      "time": 1783922242.5796626,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1481,
+      "price": 1401.0
+    },
+    {
+      "time": 1783922563.2334037,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1481,
+      "price": 1398.016859
+    },
+    {
+      "time": 1783922645.2274117,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1482,
+      "price": 1399.4
+    },
+    {
+      "time": 1783922705.7481432,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.1106,
+      "price": 177.4
+    },
+    {
+      "time": 1783923081.9154646,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.1106,
+      "price": 176.828925
+    },
+    {
+      "time": 1783923485.8517087,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1936,
+      "price": 1017.7
+    },
+    {
+      "time": 1783923997.2787738,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0973,
+      "price": 1923.7
+    },
+    {
+      "time": 1783924043.411831,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.9995,
+      "price": 177.85
+    },
+    {
+      "time": 1783924313.3545878,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2068,
+      "price": 816.75
+    },
+    {
+      "time": 1783924738.0910442,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "WIPRO.NS",
+      "shares": 0.9995,
+      "price": 178.572852
+    },
+    {
+      "time": 1783925320.6538076,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2068,
+      "price": 818.815618
+    },
+    {
+      "time": 1783925356.8677857,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1482,
+      "price": 1402.897827
+    },
+    {
+      "time": 1783927165.3326159,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1936,
+      "price": 1019.959734
+    },
+    {
+      "time": 1783927493.7439308,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0973,
+      "price": 1928.854308
+    },
+    {
+      "time": 1783928071.1797533,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.1076,
+      "price": 1928.2
+    },
+    {
+      "time": 1783929015.5362325,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1516,
+      "price": 1299.9
+    },
+    {
+      "time": 1783929056.2221978,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1331,
+      "price": 1406.0
+    },
+    {
+      "time": 1783929482.9345794,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1516,
+      "price": 1298.482808
+    },
+    {
+      "time": 1783929536.6941936,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1331,
+      "price": 1402.836837
+    },
+    {
+      "time": 1783929559.4365685,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.1076,
+      "price": 1924.576605
+    },
+    {
+      "time": 1783929679.6750774,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1477,
+      "price": 1403.7
+    },
+    {
+      "time": 1783929981.6567597,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2406,
+      "price": 818.6
+    },
+    {
+      "time": 1783930016.3673728,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0971,
+      "price": 1927.5
+    },
+    {
+      "time": 1783930147.605799,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.137,
+      "price": 1297.6
+    },
+    {
+      "time": 1783930278.0966733,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.166,
+      "price": 1017.4
+    },
+    {
+      "time": 1783931409.8169107,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1477,
+      "price": 1406.965991
+    },
+    {
+      "time": 1783931431.2366178,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.166,
+      "price": 1019.587585
+    },
+    {
+      "time": 1783931475.3964703,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1275,
+      "price": 1406.5
+    },
+    {
+      "time": 1783931987.8765895,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0971,
+      "price": 1926.184705
+    },
+    {
+      "time": 1783932255.7637796,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1275,
+      "price": 1408.640583
+    },
+    {
+      "time": 1783932333.25571,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1339,
+      "price": 1409.1
+    },
+    {
+      "time": 1783932698.5367708,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.004,
+      "price": 178.48
+    },
+    {
+      "time": 1783932776.133718,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2406,
+      "price": 820.125253
+    },
+    {
+      "time": 1783932925.791458,
+      "action": "FILLED_BUY",
+      "symbol": "INFY.NS",
+      "shares": 0.1632,
+      "price": 1103.5
+    },
+    {
+      "time": 1783933421.302401,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2091,
+      "price": 818.25
+    },
+    {
+      "time": 1783933624.611348,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.137,
+      "price": 1295.073964
+    },
+    {
+      "time": 1783933636.9800315,
+      "action": "FILLED_BUY",
+      "symbol": "TCS.NS",
+      "shares": 0.0785,
+      "price": 2182.0
+    },
+    {
+      "time": 1783933687.9868314,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.004,
+      "price": 178.172363
+    },
+    {
+      "time": 1783934186.2442992,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "INFY.NS",
+      "shares": 0.1632,
+      "price": 1101.021887
+    },
+    {
+      "time": 1783934699.3988562,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1339,
+      "price": 1411.782226
+    },
+    {
+      "time": 1783944681.7278113,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2091,
+      "price": 817.228214
+    },
+    {
+      "time": 1783944717.925601,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.1144,
+      "price": 178.32
+    },
+    {
+      "time": 1783944884.5921245,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1342,
+      "price": 1406.8
+    },
+    {
+      "time": 1783945032.852555,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1754,
+      "price": 1022.5
+    },
+    {
+      "time": 1784004948.7544787,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "TCS.NS",
+      "shares": 0.0785,
+      "price": 2191.24306
+    },
+    {
+      "time": 1784005003.6660001,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1342,
+      "price": 1392.184615
+    },
+    {
+      "time": 1784005016.9495273,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1754,
+      "price": 997.286049
+    },
+    {
+      "time": 1784008053.0795987,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.1144,
+      "price": 177.897431
+    },
+    {
+      "time": 1784015244.7450323,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1475,
+      "price": 1402.9
+    },
+    {
+      "time": 1784016928.7661676,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1475,
+      "price": 1399.209236
+    },
+    {
+      "time": 1784017389.127001,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1474,
+      "price": 1403.2
+    },
+    {
+      "time": 1784021818.3447387,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1953,
+      "price": 1006.3
+    },
+    {
+      "time": 1784064682.4219096,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.7502,
+      "price": 248.9
+    },
+    {
+      "time": 1784064958.9338949,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0913,
+      "price": 1942.6
+    },
+    {
+      "time": 1784078742.2475026,
+      "action": "FILLED_SHORT",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6165,
+      "price": 273.35
+    },
+    {
+      "time": 1784087180.1168227,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1953,
+      "price": 1020.070339
+    },
+    {
+      "time": 1784087219.6014228,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0088,
+      "price": 175.25
+    },
+    {
+      "time": 1784087222.9268115,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1474,
+      "price": 1416.697978
+    },
+    {
+      "time": 1784087234.555255,
+      "action": "FILLED_BUY",
+      "symbol": "INFY.NS",
+      "shares": 0.1655,
+      "price": 1077.6
+    },
+    {
+      "time": 1784087332.4593468,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6165,
+      "price": 274.735223
+    },
+    {
+      "time": 1784087371.3140552,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.7502,
+      "price": 247.843808
+    },
+    {
+      "time": 1784088199.439968,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "INFY.NS",
+      "shares": 0.1655,
+      "price": 1081.992179
+    },
+    {
+      "time": 1784088626.4468603,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1826,
+      "price": 1036.6
+    },
+    {
+      "time": 1784088864.2271645,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1826,
+      "price": 1030.785503
+    },
+    {
+      "time": 1784089389.445655,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0088,
+      "price": 175.599309
+    },
+    {
+      "time": 1784089924.259074,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2432,
+      "price": 814.65
+    },
+    {
+      "time": 1784090036.635546,
+      "action": "FILLED_BUY",
+      "symbol": "TCS.NS",
+      "shares": 0.0864,
+      "price": 2179.5
+    },
+    {
+      "time": 1784090319.0622017,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0168,
+      "price": 175.85
+    },
+    {
+      "time": 1784090622.8593807,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1193,
+      "price": 1423.4
+    },
+    {
+      "time": 1784091179.075654,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "TCS.NS",
+      "shares": 0.0864,
+      "price": 2189.503286
+    },
+    {
+      "time": 1784092074.7555711,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0168,
+      "price": 175.672677
+    },
+    {
+      "time": 1784093008.0684364,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1378,
+      "price": 1304.0
+    },
+    {
+      "time": 1784093430.2832417,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.6868,
+      "price": 248.62
+    },
+    {
+      "time": 1784095003.42182,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.6868,
+      "price": 247.377192
+    },
+    {
+      "time": 1784095093.2683196,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.621,
+      "price": 274.9
+    },
+    {
+      "time": 1784095871.441421,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1193,
+      "price": 1421.20514
+    },
+    {
+      "time": 1784096131.5109909,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0913,
+      "price": 1961.246575
+    },
+    {
+      "time": 1784098915.7670605,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1378,
+      "price": 1300.140334
+    },
+    {
+      "time": 1784100391.0280504,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2432,
+      "price": 813.659673
+    },
+    {
+      "time": 1784100414.820818,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.621,
+      "price": 273.45615
+    },
+    {
+      "time": 1784182570.636509,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1989,
+      "price": 1040.3
+    },
+    {
+      "time": 1784183941.6136303,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1989,
+      "price": 1035.404044
+    },
+    {
+      "time": 1784185670.8166878,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1462,
+      "price": 1414.6
+    },
+    {
+      "time": 1784187072.0997555,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.1007,
+      "price": 1950.6
+    },
+    {
+      "time": 1784187369.058604,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0523,
+      "price": 177.4
+    },
+    {
+      "time": 1784188165.9063823,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.171,
+      "price": 1036.8
+    },
+    {
+      "time": 1784188644.813725,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1462,
+      "price": 1408.006347
+    },
+    {
+      "time": 1784188967.0051136,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.7261,
+      "price": 246.18
+    },
+    {
+      "time": 1784259970.5311356,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.0523,
+      "price": 175.260309
+    },
+    {
+      "time": 1784260032.3644724,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.171,
+      "price": 1040.68003
+    },
+    {
+      "time": 1784260033.454911,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.1007,
+      "price": 1943.969888
+    },
+    {
+      "time": 1784260081.7086391,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.1345,
+      "price": 174.27
+    },
+    {
+      "time": 1784260105.5642638,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0967,
+      "price": 1941.5
+    },
+    {
+      "time": 1784260847.1409264,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.1345,
+      "price": 173.936701
+    },
+    {
+      "time": 1784261737.463632,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1318,
+      "price": 1429.0
+    },
+    {
+      "time": 1784261799.8426366,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2193,
+      "price": 815.45
+    },
+    {
+      "time": 1784263626.2769303,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1618,
+      "price": 1050.1
+    },
+    {
+      "time": 1784267554.626063,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.7261,
+      "price": 246.18279
+    },
+    {
+      "time": 1784267599.3333344,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0967,
+      "price": 1940.874389
+    },
+    {
+      "time": 1784268204.345616,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1618,
+      "price": 1046.760994
+    },
+    {
+      "time": 1784273194.68532,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1318,
+      "price": 1435.554286
+    },
+    {
+      "time": 1784273455.3097398,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1497,
+      "price": 1320.6
+    },
+    {
+      "time": 1784273506.632801,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0967,
+      "price": 1942.1
+    },
+    {
+      "time": 1784273560.1350787,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6465,
+      "price": 275.9
+    },
+    {
+      "time": 1784273715.628712,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.686,
+      "price": 247.03
+    },
+    {
+      "time": 1784277053.9167104,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1497,
+      "price": 1316.845134
+    },
+    {
+      "time": 1784278766.811128,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2193,
+      "price": 819.429793
+    },
+    {
+      "time": 1784279439.1681378,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0967,
+      "price": 1934.537917
+    },
+    {
+      "time": 1784281864.4698718,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1306,
+      "price": 1448.3
+    },
+    {
+      "time": 1784282682.6248298,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1352,
+      "price": 1329.0
+    },
+    {
+      "time": 1784303871.8579834,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1616,
+      "price": 1056.3
+    },
+    {
+      "time": 1784539794.2348957,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6465,
+      "price": 275.270686
+    },
+    {
+      "time": 1784539805.5966022,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1352,
+      "price": 1321.456142
+    },
+    {
+      "time": 1784539813.9008603,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ONGC.NS",
+      "shares": 0.686,
+      "price": 250.266968
+    },
+    {
+      "time": 1784539860.9956899,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 1.068,
+      "price": 176.56
+    },
+    {
+      "time": 1784539917.0853355,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6498,
+      "price": 275.65
+    },
+    {
+      "time": 1784540129.269835,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.087,
+      "price": 1956.2
+    },
+    {
+      "time": 1784650538.3111715,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 1.068,
+      "price": 174.733674
+    },
+    {
+      "time": 1784650561.924276,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1306,
+      "price": 1461.876957
+    },
+    {
+      "time": 1784650562.7550886,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1616,
+      "price": 1068.955996
+    },
+    {
+      "time": 1784650612.6527154,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0259,
+      "price": 1463.1
+    },
+    {
+      "time": 1784650788.0715322,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.035,
+      "price": 1069.2
+    },
+    {
+      "time": 1784650834.5637944,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.1485,
+      "price": 249.75
+    },
+    {
+      "time": 1784691976.063274,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.087,
+      "price": 1926.661176
+    },
+    {
+      "time": 1784692028.2856681,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6498,
+      "price": 274.143878
+    },
+    {
+      "time": 1784692055.5132334,
+      "action": "FILLED_BUY",
+      "symbol": "TCS.NS",
+      "shares": 0.0182,
+      "price": 2209.0
+    },
+    {
+      "time": 1784692056.9906402,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0259,
+      "price": 1450.853803
+    },
+    {
+      "time": 1784692112.8141067,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1464,
+      "price": 274.18
+    },
+    {
+      "time": 1784692140.5689952,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0206,
+      "price": 1932.4
+    },
+    {
+      "time": 1784692561.5129926,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ONGC.NS",
+      "shares": 0.1485,
+      "price": 252.410415
+    },
+    {
+      "time": 1784692579.8861609,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.035,
+      "price": 1062.61725
+    },
+    {
+      "time": 1784693164.6485822,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0206,
+      "price": 1934.313866
+    },
+    {
+      "time": 1784693393.040822,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.028,
+      "price": 1445.3
+    },
+    {
+      "time": 1784693659.2529674,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0207,
+      "price": 1937.3
+    },
+    {
+      "time": 1784696146.7196908,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "TCS.NS",
+      "shares": 0.0182,
+      "price": 2207.43012
+    },
+    {
+      "time": 1784701459.23517,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0207,
+      "price": 1939.65588
+    },
+    {
+      "time": 1784702173.272604,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.028,
+      "price": 1443.660007
+    },
+    {
+      "time": 1784745392.1067402,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.1623,
+      "price": 251.9
+    },
+    {
+      "time": 1784746918.7736151,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0382,
+      "price": 1059.6
+    },
+    {
+      "time": 1784747028.220195,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0278,
+      "price": 1440.7
+    },
+    {
+      "time": 1784750657.8518858,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0204,
+      "price": 1944.0
+    },
+    {
+      "time": 1784778371.3594882,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1464,
+      "price": 272.201164
+    },
+    {
+      "time": 1784778405.3904436,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0382,
+      "price": 1050.348696
+    },
+    {
+      "time": 1784778621.3629558,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0204,
+      "price": 1932.523898
+    },
+    {
+      "time": 1784782480.5362236,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.1623,
+      "price": 252.070495
+    },
+    {
+      "time": 1784785588.4098332,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0278,
+      "price": 1435.763129
+    },
+    {
+      "time": 1784802058.3893108,
+      "action": "FILLED_SHORT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0288,
+      "price": 1434.6
+    },
+    {
+      "time": 1784816272.997824,
+      "action": "FILLED_SHORT",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0324,
+      "price": 1272.5
+    },
+    {
+      "time": 1784868229.5109642,
+      "action": "FILLED_SHORT",
+      "symbol": "INFY.NS",
+      "shares": 0.0398,
+      "price": 1032.4
+    },
+    {
+      "time": 1784868988.5098581,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0324,
+      "price": 1271.422711
+    },
+    {
+      "time": 1784869322.8289907,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "INFY.NS",
+      "shares": 0.0398,
+      "price": 1020.981039
+    },
+    {
+      "time": 1784874924.5689628,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0288,
+      "price": 1429.751793
+    },
+    {
+      "time": 1784874981.8003464,
+      "action": "FILLED_SHORT",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1526,
+      "price": 270.4
+    },
+    {
+      "time": 1784876316.5728126,
+      "action": "FILLED_SHORT",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0554,
+      "price": 743.7
+    },
+    {
+      "time": 1784876658.2176044,
+      "action": "FILLED_SHORT",
+      "symbol": "INFY.NS",
+      "shares": 0.0399,
+      "price": 1029.5
+    },
+    {
+      "time": 1784881829.7676153,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0554,
+      "price": 747.643947
+    },
+    {
+      "time": 1784883328.9295228,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "INFY.NS",
+      "shares": 0.0399,
+      "price": 1031.918055
+    },
+    {
+      "time": 1784887767.4511223,
+      "action": "FILLED_SHORT",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0213,
+      "price": 1936.6
+    },
+    {
+      "time": 1785123990.186661,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1526,
+      "price": 272.812613
+    },
+    {
+      "time": 1785124337.9275136,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0213,
+      "price": 1947.937356
+    },
+    {
+      "time": 1785311303.329477,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2244,
+      "price": 183.87
+    },
+    {
+      "time": 1785311516.7977579,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1481,
+      "price": 275.79
+    },
+    {
+      "time": 1785311867.7520895,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.054,
+      "price": 749.2
+    },
+    {
+      "time": 1785312100.3853958,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0202,
+      "price": 1983.1
+    },
+    {
+      "time": 1785312884.2662652,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0276,
+      "price": 1438.7
+    },
+    {
+      "time": 1785316237.8756027,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2244,
+      "price": 183.334801
+    },
+    {
+      "time": 1785316601.3443575,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2159,
+      "price": 183.63
+    },
+    {
+      "time": 1785383153.8404777,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0276,
+      "price": 1426.815579
+    },
+    {
+      "time": 1785383206.991065,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2159,
+      "price": 185.696352
+    },
+    {
+      "time": 1785383266.0923707,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2156,
+      "price": 185.78
+    },
+    {
+      "time": 1785383271.0727909,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0202,
+      "price": 2003.796158
+    },
+    {
+      "time": 1785383286.1261854,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0281,
+      "price": 1426.8
+    },
+    {
+      "time": 1785383323.9716685,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0378,
+      "price": 1047.8
+    },
+    {
+      "time": 1785383610.1689327,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2156,
+      "price": 188.193274
+    },
+    {
+      "time": 1785383683.7399042,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0198,
+      "price": 2007.0
+    },
+    {
+      "time": 1785384625.8508182,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.054,
+      "price": 745.891341
+    },
+    {
+      "time": 1785384801.83098,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0532,
+      "price": 746.25
+    },
+    {
+      "time": 1785385435.0036008,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0378,
+      "price": 1049.592749
+    },
+    {
+      "time": 1785386508.2083023,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2107,
+      "price": 188.25
+    },
+    {
+      "time": 1785386850.3362222,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2107,
+      "price": 190.191314
+    },
+    {
+      "time": 1785387564.1156354,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0198,
+      "price": 1998.690947
+    },
+    {
+      "time": 1785387716.3508399,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0281,
+      "price": 1423.900989
+    },
+    {
+      "time": 1785387987.636099,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0202,
+      "price": 2006.4
+    },
+    {
+      "time": 1785388165.4701638,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0281,
+      "price": 1424.9
+    },
+    {
+      "time": 1785388587.225355,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 13920.0
+    },
+    {
+      "time": 1785392183.4508605,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0281,
+      "price": 1422.743606
+    },
+    {
+      "time": 1785393886.1979234,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0308,
+      "price": 1289.7
+    },
+    {
+      "time": 1785394638.1955621,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 13932.115337
+    },
+    {
+      "time": 1785394666.407941,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0278,
+      "price": 1428.9
+    },
+    {
+      "time": 1785400927.4091263,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0202,
+      "price": 2003.988964
+    },
+    {
+      "time": 1785401020.4123552,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0198,
+      "price": 2004.6
+    },
+    {
+      "time": 1785401205.7156768,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0308,
+      "price": 1288.469587
+    },
+    {
+      "time": 1785401431.6537886,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14039.0
+    },
+    {
+      "time": 1785403249.632783,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14196.628055
+    },
+    {
+      "time": 1785403259.4327042,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2122,
+      "price": 186.95
+    },
+    {
+      "time": 1785404963.825532,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0532,
+      "price": 754.056486
+    },
+    {
+      "time": 1785405094.116193,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14205.0
+    },
+    {
+      "time": 1785405516.4565558,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0278,
+      "price": 1428.729233
+    },
+    {
+      "time": 1785405527.052358,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0525,
+      "price": 756.15
+    },
+    {
+      "time": 1785405537.0463505,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0525,
+      "price": 751.612833
+    },
+    {
+      "time": 1785405576.2835083,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0308,
+      "price": 1288.7
+    },
+    {
+      "time": 1785469620.4278088,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2122,
+      "price": 182.059295
+    },
+    {
+      "time": 1785469644.9415784,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.1655,
+      "price": 239.65
+    },
+    {
+      "time": 1785470336.4937294,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14223.892922
+    },
+    {
+      "time": 1785470352.400893,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.218,
+      "price": 181.9
+    },
+    {
+      "time": 1785470777.2713473,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0308,
+      "price": 1293.741966
+    },
+    {
+      "time": 1785470778.3397517,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.1655,
+      "price": 238.662858
+    },
+    {
+      "time": 1785470781.553225,
+      "action": "FILLED_BUY",
+      "symbol": "INFY.NS",
+      "shares": 0.0359,
+      "price": 1115.6
+    },
+    {
+      "time": 1785470782.8608346,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0276,
+      "price": 1437.6
+    },
+    {
+      "time": 1785474472.9907506,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "INFY.NS",
+      "shares": 0.0359,
+      "price": 1126.789888
+    },
+    {
+      "time": 1785474481.8798885,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0354,
+      "price": 1120.8
+    },
+    {
+      "time": 1785474482.9538221,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0198,
+      "price": 2004.691744
+    },
+    {
+      "time": 1785474507.8601894,
+      "action": "FILLED_BUY",
+      "symbol": "INFY.NS",
+      "shares": 0.0352,
+      "price": 1127.3
+    },
+    {
+      "time": 1785477473.4198966,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0354,
+      "price": 1133.108255
+    },
+    {
+      "time": 1785477477.163048,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0197,
+      "price": 2011.6
+    },
+    {
+      "time": 1785482036.2968307,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0197,
+      "price": 2030.977382
+    },
+    {
+      "time": 1785482040.290329,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14216.0
+    },
+    {
+      "time": 1785484731.7316637,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "INFY.NS",
+      "shares": 0.0352,
+      "price": 1132.105669
+    },
+    {
+      "time": 1785484733.8518894,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0348,
+      "price": 1141.6
+    },
+    {
+      "time": 1785484957.776774,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 0.218,
+      "price": 183.978637
+    },
+    {
+      "time": 1785484960.2556694,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0305,
+      "price": 1302.0
+    },
+    {
+      "time": 1785488726.8907275,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0348,
+      "price": 1144.455606
+    },
+    {
+      "time": 1785488739.544046,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.053,
+      "price": 748.65
+    },
+    {
+      "time": 1785740538.9021978,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1481,
+      "price": 279.728085
+    },
+    {
+      "time": 1785740549.9529834,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14164.263615
+    },
+    {
+      "time": 1785740629.298812,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0124,
+      "price": 14178.0
+    },
+    {
+      "time": 1785740828.9628062,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0858,
+      "price": 1961.6
+    },
+    {
+      "time": 1785751032.4794652,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0858,
+      "price": 1943.2185
+    },
+    {
+      "time": 1785751084.8770936,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0124,
+      "price": 14086.070273
+    },
+    {
+      "time": 1785751102.0235817,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2123,
+      "price": 188.66
+    },
+    {
+      "time": 1785751209.4743977,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1417,
+      "price": 279.85
+    },
+    {
+      "time": 1785752697.136439,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0305,
+      "price": 1318.173944
+    },
+    {
+      "time": 1785752699.1841574,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0276,
+      "price": 1459.580846
+    },
+    {
+      "time": 1785752701.9061992,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0274,
+      "price": 1460.0
+    },
+    {
+      "time": 1785752707.8424258,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0301,
+      "price": 1319.0
+    },
+    {
+      "time": 1785815155.4814894,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0301,
+      "price": 1307.09668
+    },
+    {
+      "time": 1785815173.9149563,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2123,
+      "price": 187.578199
+    },
+    {
+      "time": 1785815179.4143243,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0274,
+      "price": 1446.787231
+    },
+    {
+      "time": 1785815235.7491748,
+      "action": "FILLED_BUY",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0309,
+      "price": 1308.3
+    },
+    {
+      "time": 1785815242.4377434,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0347,
+      "price": 1155.0
+    },
+    {
+      "time": 1785815331.7137063,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0273,
+      "price": 1450.0
+    },
+    {
+      "time": 1785815784.8108723,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.053,
+      "price": 749.051904
+    },
+    {
+      "time": 1785815789.6781292,
+      "action": "FILLED_BUY",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0203,
+      "price": 1958.0
+    },
+    {
+      "time": 1785819190.7010174,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0309,
+      "price": 1301.286362
+    },
+    {
+      "time": 1785819317.6268914,
+      "action": "FILLED_BUY",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0532,
+      "price": 745.1
+    },
+    {
+      "time": 1785819588.834954,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0347,
+      "price": 1151.403809
+    },
+    {
+      "time": 1785819610.3986294,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.1634,
+      "price": 242.65
+    },
+    {
+      "time": 1785821280.6176238,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0273,
+      "price": 1444.623848
+    },
+    {
+      "time": 1785821356.5113635,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0345,
+      "price": 1148.1
+    },
+    {
+      "time": 1785823627.9007394,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0532,
+      "price": 740.990168
+    },
+    {
+      "time": 1785823634.633151,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14200.0
+    },
+    {
+      "time": 1785824019.991314,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.1634,
+      "price": 241.543464
+    },
+    {
+      "time": 1785824052.5856173,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2108,
+      "price": 188.06
+    },
+    {
+      "time": 1785825323.1972458,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0345,
+      "price": 1143.138961
+    },
+    {
+      "time": 1785825431.8531184,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0275,
+      "price": 1442.0
+    },
+    {
+      "time": 1785827086.3233898,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14116.060874
+    },
+    {
+      "time": 1785827153.5401835,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14132.0
+    },
+    {
+      "time": 1785827228.9803176,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1417,
+      "price": 278.864903
+    },
+    {
+      "time": 1785829910.7533736,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0275,
+      "price": 1433.790448
+    },
+    {
+      "time": 1785830069.3259695,
+      "action": "FILLED_BUY",
+      "symbol": "ONGC.NS",
+      "shares": 0.166,
+      "price": 241.17
+    },
+    {
+      "time": 1785830770.303024,
+      "action": "FILLED_BUY",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1422,
+      "price": 278.7
+    },
+    {
+      "time": 1785834409.12578,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14066.150076
+    },
+    {
+      "time": 1785834521.0630355,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0275,
+      "price": 1440.8
+    },
+    {
+      "time": 1785837828.9641562,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0203,
+      "price": 1948.661181
+    },
+    {
+      "time": 1785837835.6275558,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14147.0
+    },
+    {
+      "time": 1785839194.4277787,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2108,
+      "price": 186.219979
+    },
+    {
+      "time": 1785839198.4364786,
+      "action": "FILLED_BUY",
+      "symbol": "TCS.NS",
+      "shares": 0.0161,
+      "price": 2460.0
+    },
+    {
+      "time": 1785904033.4055812,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "TCS.NS",
+      "shares": 0.0161,
+      "price": 2431.918432
+    },
+    {
+      "time": 1785904041.55613,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0275,
+      "price": 1445.802925
+    },
+    {
+      "time": 1785904131.4537692,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ONGC.NS",
+      "shares": 0.166,
+      "price": 240.182742
+    },
+    {
+      "time": 1785904182.973428,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0279,
+      "price": 1448.4
+    },
+    {
+      "time": 1785904407.4381351,
+      "action": "FILLED_BUY",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2136,
+      "price": 187.3
+    },
+    {
+      "time": 1785904815.5761771,
+      "action": "FILLED_BUY",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0342,
+      "price": 1159.6
+    },
+    {
+      "time": 1785910132.7046268,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14130.450038
+    },
+    {
+      "time": 1785910223.207708,
+      "action": "FILLED_BUY",
+      "symbol": "TCS.NS",
+      "shares": 0.0163,
+      "price": 2430.3
+    },
+    {
+      "time": 1785910745.6990933,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0342,
+      "price": 1156.113359
+    },
+    {
+      "time": 1785911167.4036596,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0279,
+      "price": 1442.342475
+    },
+    {
+      "time": 1785912098.2732325,
+      "action": "FILLED_BUY",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14130.0
+    },
+    {
+      "time": 1785912306.6235647,
+      "action": "FILLED_BUY",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0274,
+      "price": 1443.6
+    },
+    {
+      "time": 1785913131.2494426,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "WIPRO.NS",
+      "shares": 0.2136,
+      "price": 186.514934
+    },
+    {
+      "time": 1785914063.6868145,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1422,
+      "price": 279.357521
+    },
+    {
+      "time": 1785914205.5096514,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0274,
+      "price": 1435.295504
+    },
+    {
+      "time": 1785914734.218518,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "TCS.NS",
+      "shares": 0.0163,
+      "price": 2418.340544
+    },
+    {
+      "time": 1785993551.8656313,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "price": 14113.485889
+    }
+  ],
+  "closed_trades": [
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.1935,
+      "direction": "LONG",
+      "entry_price": 1072.5,
+      "exit_price": 1069.955722,
+      "profit_loss": -0.7,
+      "profit_pct": -0.24,
+      "time": 1783919164.6004002,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1404,
+      "direction": "LONG",
+      "entry_price": 1404.1,
+      "exit_price": 1400.582733,
+      "profit_loss": -0.69,
+      "profit_pct": -0.25,
+      "time": 1783919402.3472757,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.0666,
+      "direction": "LONG",
+      "entry_price": 176.41,
+      "exit_price": 176.758446,
+      "profit_loss": 0.18,
+      "profit_pct": 0.2,
+      "time": 1783920055.5179,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1413,
+      "direction": "LONG",
+      "entry_price": 1402.2,
+      "exit_price": 1398.806985,
+      "profit_loss": -0.68,
+      "profit_pct": -0.24,
+      "time": 1783920318.1392064,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2287,
+      "direction": "LONG",
+      "entry_price": 818.85,
+      "exit_price": 820.814381,
+      "profit_loss": 0.26,
+      "profit_pct": 0.24,
+      "time": 1783921065.6893015,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0137,
+      "direction": "LONG",
+      "entry_price": 13755.0,
+      "exit_price": 13803.489092,
+      "profit_loss": 0.48,
+      "profit_pct": 0.35,
+      "time": 1783921251.6728818,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1349,
+      "direction": "LONG",
+      "entry_price": 1398.7,
+      "exit_price": 1401.32524,
+      "profit_loss": 0.17,
+      "profit_pct": 0.19,
+      "time": 1783921973.2210271,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.148,
+      "direction": "LONG",
+      "entry_price": 1402.0,
+      "exit_price": 1399.477921,
+      "profit_loss": -0.58,
+      "profit_pct": -0.18,
+      "time": 1783922171.3829134,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1481,
+      "direction": "LONG",
+      "entry_price": 1401.0,
+      "exit_price": 1398.016859,
+      "profit_loss": -0.65,
+      "profit_pct": -0.21,
+      "time": 1783922563.2334037,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.1106,
+      "direction": "LONG",
+      "entry_price": 177.4,
+      "exit_price": 176.828925,
+      "profit_loss": -0.83,
+      "profit_pct": -0.32,
+      "time": 1783923081.9154646,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.9995,
+      "direction": "LONG",
+      "entry_price": 177.85,
+      "exit_price": 178.572852,
+      "profit_loss": 0.54,
+      "profit_pct": 0.41,
+      "time": 1783924738.0910442,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2068,
+      "direction": "LONG",
+      "entry_price": 816.75,
+      "exit_price": 818.815618,
+      "profit_loss": 0.26,
+      "profit_pct": 0.25,
+      "time": 1783925320.6538076,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1482,
+      "direction": "LONG",
+      "entry_price": 1399.4,
+      "exit_price": 1402.897827,
+      "profit_loss": 0.31,
+      "profit_pct": 0.25,
+      "time": 1783925356.8677857,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1936,
+      "direction": "LONG",
+      "entry_price": 1017.7,
+      "exit_price": 1019.959734,
+      "profit_loss": 0.24,
+      "profit_pct": 0.22,
+      "time": 1783927165.3326159,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0973,
+      "direction": "LONG",
+      "entry_price": 1923.7,
+      "exit_price": 1928.854308,
+      "profit_loss": 0.31,
+      "profit_pct": 0.27,
+      "time": 1783927493.7439308,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1516,
+      "direction": "LONG",
+      "entry_price": 1299.9,
+      "exit_price": 1298.482808,
+      "profit_loss": -0.41,
+      "profit_pct": -0.11,
+      "time": 1783929482.9345794,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1331,
+      "direction": "LONG",
+      "entry_price": 1406.0,
+      "exit_price": 1402.836837,
+      "profit_loss": -0.61,
+      "profit_pct": -0.22,
+      "time": 1783929536.6941936,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.1076,
+      "direction": "LONG",
+      "entry_price": 1928.2,
+      "exit_price": 1924.576605,
+      "profit_loss": -0.6,
+      "profit_pct": -0.19,
+      "time": 1783929559.4365685,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1477,
+      "direction": "LONG",
+      "entry_price": 1403.7,
+      "exit_price": 1406.965991,
+      "profit_loss": 0.27,
+      "profit_pct": 0.23,
+      "time": 1783931409.8169107,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.166,
+      "direction": "LONG",
+      "entry_price": 1017.4,
+      "exit_price": 1019.587585,
+      "profit_loss": 0.19,
+      "profit_pct": 0.22,
+      "time": 1783931431.2366178,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0971,
+      "direction": "LONG",
+      "entry_price": 1927.5,
+      "exit_price": 1926.184705,
+      "profit_loss": -0.31,
+      "profit_pct": -0.07,
+      "time": 1783931987.8765895,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1275,
+      "direction": "LONG",
+      "entry_price": 1406.5,
+      "exit_price": 1408.640583,
+      "profit_loss": 0.09,
+      "profit_pct": 0.15,
+      "time": 1783932255.7637796,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2406,
+      "direction": "LONG",
+      "entry_price": 818.6,
+      "exit_price": 820.125253,
+      "profit_loss": 0.17,
+      "profit_pct": 0.19,
+      "time": 1783932776.133718,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.137,
+      "direction": "LONG",
+      "entry_price": 1297.6,
+      "exit_price": 1295.073964,
+      "profit_loss": -0.52,
+      "profit_pct": -0.19,
+      "time": 1783933624.611348,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.004,
+      "direction": "LONG",
+      "entry_price": 178.48,
+      "exit_price": 178.172363,
+      "profit_loss": -0.49,
+      "profit_pct": -0.17,
+      "time": 1783933687.9868314,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.1632,
+      "direction": "LONG",
+      "entry_price": 1103.5,
+      "exit_price": 1101.021887,
+      "profit_loss": -0.58,
+      "profit_pct": -0.22,
+      "time": 1783934186.2442992,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1339,
+      "direction": "LONG",
+      "entry_price": 1409.1,
+      "exit_price": 1411.782226,
+      "profit_loss": 0.17,
+      "profit_pct": 0.19,
+      "time": 1783934699.3988562,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2091,
+      "direction": "LONG",
+      "entry_price": 818.25,
+      "exit_price": 817.228214,
+      "profit_loss": -0.38,
+      "profit_pct": -0.12,
+      "time": 1783944681.7278113,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "TCS.NS",
+      "shares": 0.0785,
+      "direction": "LONG",
+      "entry_price": 2182.0,
+      "exit_price": 2191.24306,
+      "profit_loss": 0.55,
+      "profit_pct": 0.42,
+      "time": 1784004948.7544787,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1342,
+      "direction": "LONG",
+      "entry_price": 1406.8,
+      "exit_price": 1392.184615,
+      "profit_loss": -2.15,
+      "profit_pct": -1.04,
+      "time": 1784005003.6660001,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1754,
+      "direction": "LONG",
+      "entry_price": 1022.5,
+      "exit_price": 997.286049,
+      "profit_loss": -4.6,
+      "profit_pct": -2.47,
+      "time": 1784005016.9495273,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.1144,
+      "direction": "LONG",
+      "entry_price": 178.32,
+      "exit_price": 177.897431,
+      "profit_loss": -0.67,
+      "profit_pct": -0.24,
+      "time": 1784008053.0795987,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1475,
+      "direction": "LONG",
+      "entry_price": 1402.9,
+      "exit_price": 1399.209236,
+      "profit_loss": -0.75,
+      "profit_pct": -0.26,
+      "time": 1784016928.7661676,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1953,
+      "direction": "LONG",
+      "entry_price": 1006.3,
+      "exit_price": 1020.070339,
+      "profit_loss": 2.49,
+      "profit_pct": 1.37,
+      "time": 1784087180.1168227,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1474,
+      "direction": "LONG",
+      "entry_price": 1403.2,
+      "exit_price": 1416.697978,
+      "profit_loss": 1.78,
+      "profit_pct": 0.96,
+      "time": 1784087222.9268115,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6165,
+      "direction": "SHORT",
+      "entry_price": 273.35,
+      "exit_price": 274.735223,
+      "profit_loss": -1.02,
+      "profit_pct": -0.51,
+      "time": 1784087332.4593468,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.7502,
+      "direction": "LONG",
+      "entry_price": 248.9,
+      "exit_price": 247.843808,
+      "profit_loss": -0.98,
+      "profit_pct": -0.42,
+      "time": 1784087371.3140552,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.1655,
+      "direction": "LONG",
+      "entry_price": 1077.6,
+      "exit_price": 1081.992179,
+      "profit_loss": 0.55,
+      "profit_pct": 0.41,
+      "time": 1784088199.439968,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1826,
+      "direction": "LONG",
+      "entry_price": 1036.6,
+      "exit_price": 1030.785503,
+      "profit_loss": -1.25,
+      "profit_pct": -0.56,
+      "time": 1784088864.2271645,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.0088,
+      "direction": "LONG",
+      "entry_price": 175.25,
+      "exit_price": 175.599309,
+      "profit_loss": 0.18,
+      "profit_pct": 0.2,
+      "time": 1784089389.445655,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "TCS.NS",
+      "shares": 0.0864,
+      "direction": "LONG",
+      "entry_price": 2179.5,
+      "exit_price": 2189.503286,
+      "profit_loss": 0.68,
+      "profit_pct": 0.46,
+      "time": 1784091179.075654,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.0168,
+      "direction": "LONG",
+      "entry_price": 175.85,
+      "exit_price": 175.672677,
+      "profit_loss": -0.36,
+      "profit_pct": -0.1,
+      "time": 1784092074.7555711,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.6868,
+      "direction": "LONG",
+      "entry_price": 248.62,
+      "exit_price": 247.377192,
+      "profit_loss": -1.02,
+      "profit_pct": -0.5,
+      "time": 1784095003.42182,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1193,
+      "direction": "LONG",
+      "entry_price": 1423.4,
+      "exit_price": 1421.20514,
+      "profit_loss": -0.43,
+      "profit_pct": -0.15,
+      "time": 1784095871.441421,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0913,
+      "direction": "LONG",
+      "entry_price": 1942.6,
+      "exit_price": 1961.246575,
+      "profit_loss": 1.52,
+      "profit_pct": 0.96,
+      "time": 1784096131.5109909,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1378,
+      "direction": "LONG",
+      "entry_price": 1304.0,
+      "exit_price": 1300.140334,
+      "profit_loss": -0.71,
+      "profit_pct": -0.3,
+      "time": 1784098915.7670605,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2432,
+      "direction": "LONG",
+      "entry_price": 814.65,
+      "exit_price": 813.659673,
+      "profit_loss": -0.44,
+      "profit_pct": -0.12,
+      "time": 1784100391.0280504,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.621,
+      "direction": "LONG",
+      "entry_price": 274.9,
+      "exit_price": 273.45615,
+      "profit_loss": -1.07,
+      "profit_pct": -0.53,
+      "time": 1784100414.820818,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1989,
+      "direction": "LONG",
+      "entry_price": 1040.3,
+      "exit_price": 1035.404044,
+      "profit_loss": -1.18,
+      "profit_pct": -0.47,
+      "time": 1784183941.6136303,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1462,
+      "direction": "LONG",
+      "entry_price": 1414.6,
+      "exit_price": 1408.006347,
+      "profit_loss": -1.17,
+      "profit_pct": -0.47,
+      "time": 1784188644.813725,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.0523,
+      "direction": "LONG",
+      "entry_price": 177.4,
+      "exit_price": 175.260309,
+      "profit_loss": -2.44,
+      "profit_pct": -1.21,
+      "time": 1784259970.5311356,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.171,
+      "direction": "LONG",
+      "entry_price": 1036.8,
+      "exit_price": 1040.68003,
+      "profit_loss": 0.49,
+      "profit_pct": 0.37,
+      "time": 1784260032.3644724,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.1007,
+      "direction": "LONG",
+      "entry_price": 1950.6,
+      "exit_price": 1943.969888,
+      "profit_loss": -0.86,
+      "profit_pct": -0.34,
+      "time": 1784260033.454911,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.1345,
+      "direction": "LONG",
+      "entry_price": 174.27,
+      "exit_price": 173.936701,
+      "profit_loss": -0.58,
+      "profit_pct": -0.19,
+      "time": 1784260847.1409264,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.7261,
+      "direction": "LONG",
+      "entry_price": 246.18,
+      "exit_price": 246.18279,
+      "profit_loss": -0.18,
+      "profit_pct": 0.0,
+      "time": 1784267554.626063,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0967,
+      "direction": "LONG",
+      "entry_price": 1941.5,
+      "exit_price": 1940.874389,
+      "profit_loss": -0.25,
+      "profit_pct": -0.03,
+      "time": 1784267599.3333344,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1618,
+      "direction": "LONG",
+      "entry_price": 1050.1,
+      "exit_price": 1046.760994,
+      "profit_loss": -0.71,
+      "profit_pct": -0.32,
+      "time": 1784268204.345616,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1318,
+      "direction": "LONG",
+      "entry_price": 1429.0,
+      "exit_price": 1435.554286,
+      "profit_loss": 0.67,
+      "profit_pct": 0.46,
+      "time": 1784273194.68532,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1497,
+      "direction": "LONG",
+      "entry_price": 1320.6,
+      "exit_price": 1316.845134,
+      "profit_loss": -0.76,
+      "profit_pct": -0.28,
+      "time": 1784277053.9167104,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.2193,
+      "direction": "LONG",
+      "entry_price": 815.45,
+      "exit_price": 819.429793,
+      "profit_loss": 0.69,
+      "profit_pct": 0.49,
+      "time": 1784278766.811128,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0967,
+      "direction": "LONG",
+      "entry_price": 1942.1,
+      "exit_price": 1934.537917,
+      "profit_loss": -0.92,
+      "profit_pct": -0.39,
+      "time": 1784279439.1681378,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6465,
+      "direction": "LONG",
+      "entry_price": 275.9,
+      "exit_price": 275.270686,
+      "profit_loss": -0.58,
+      "profit_pct": -0.23,
+      "time": 1784539794.2348957,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.1352,
+      "direction": "LONG",
+      "entry_price": 1329.0,
+      "exit_price": 1321.456142,
+      "profit_loss": -1.2,
+      "profit_pct": -0.57,
+      "time": 1784539805.5966022,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.686,
+      "direction": "LONG",
+      "entry_price": 247.03,
+      "exit_price": 250.266968,
+      "profit_loss": 2.05,
+      "profit_pct": 1.31,
+      "time": 1784539813.9008603,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 1.068,
+      "direction": "LONG",
+      "entry_price": 176.56,
+      "exit_price": 174.733674,
+      "profit_loss": -2.14,
+      "profit_pct": -1.03,
+      "time": 1784650538.3111715,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.1306,
+      "direction": "LONG",
+      "entry_price": 1448.3,
+      "exit_price": 1461.876957,
+      "profit_loss": 1.58,
+      "profit_pct": 0.94,
+      "time": 1784650561.924276,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.1616,
+      "direction": "LONG",
+      "entry_price": 1056.3,
+      "exit_price": 1068.955996,
+      "profit_loss": 1.87,
+      "profit_pct": 1.2,
+      "time": 1784650562.7550886,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.087,
+      "direction": "LONG",
+      "entry_price": 1956.2,
+      "exit_price": 1926.661176,
+      "profit_loss": -2.74,
+      "profit_pct": -1.51,
+      "time": 1784691976.063274,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.6498,
+      "direction": "LONG",
+      "entry_price": 275.65,
+      "exit_price": 274.143878,
+      "profit_loss": -1.16,
+      "profit_pct": -0.55,
+      "time": 1784692028.2856681,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0259,
+      "direction": "LONG",
+      "entry_price": 1463.1,
+      "exit_price": 1450.853803,
+      "profit_loss": -0.35,
+      "profit_pct": -0.84,
+      "time": 1784692056.9906402,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.1485,
+      "direction": "LONG",
+      "entry_price": 249.75,
+      "exit_price": 252.410415,
+      "profit_loss": 0.36,
+      "profit_pct": 1.07,
+      "time": 1784692561.5129926,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.035,
+      "direction": "LONG",
+      "entry_price": 1069.2,
+      "exit_price": 1062.61725,
+      "profit_loss": -0.27,
+      "profit_pct": -0.62,
+      "time": 1784692579.8861609,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0206,
+      "direction": "LONG",
+      "entry_price": 1932.4,
+      "exit_price": 1934.313866,
+      "profit_loss": -0.0,
+      "profit_pct": 0.1,
+      "time": 1784693164.6485822,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "TCS.NS",
+      "shares": 0.0182,
+      "direction": "LONG",
+      "entry_price": 2209.0,
+      "exit_price": 2207.43012,
+      "profit_loss": -0.07,
+      "profit_pct": -0.07,
+      "time": 1784696146.7196908,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0207,
+      "direction": "LONG",
+      "entry_price": 1937.3,
+      "exit_price": 1939.65588,
+      "profit_loss": 0.01,
+      "profit_pct": 0.12,
+      "time": 1784701459.23517,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.028,
+      "direction": "LONG",
+      "entry_price": 1445.3,
+      "exit_price": 1443.660007,
+      "profit_loss": -0.09,
+      "profit_pct": -0.11,
+      "time": 1784702173.272604,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1464,
+      "direction": "LONG",
+      "entry_price": 274.18,
+      "exit_price": 272.201164,
+      "profit_loss": -0.33,
+      "profit_pct": -0.72,
+      "time": 1784778371.3594882,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0382,
+      "direction": "LONG",
+      "entry_price": 1059.6,
+      "exit_price": 1050.348696,
+      "profit_loss": -0.39,
+      "profit_pct": -0.87,
+      "time": 1784778405.3904436,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0204,
+      "direction": "LONG",
+      "entry_price": 1944.0,
+      "exit_price": 1932.523898,
+      "profit_loss": -0.27,
+      "profit_pct": -0.59,
+      "time": 1784778621.3629558,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.1623,
+      "direction": "LONG",
+      "entry_price": 251.9,
+      "exit_price": 252.070495,
+      "profit_loss": -0.01,
+      "profit_pct": 0.07,
+      "time": 1784782480.5362236,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0278,
+      "direction": "LONG",
+      "entry_price": 1440.7,
+      "exit_price": 1435.763129,
+      "profit_loss": -0.18,
+      "profit_pct": -0.34,
+      "time": 1784785588.4098332,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0324,
+      "direction": "SHORT",
+      "entry_price": 1272.5,
+      "exit_price": 1271.422711,
+      "profit_loss": -0.01,
+      "profit_pct": 0.08,
+      "time": 1784868988.5098581,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.0398,
+      "direction": "SHORT",
+      "entry_price": 1032.4,
+      "exit_price": 1020.981039,
+      "profit_loss": 0.41,
+      "profit_pct": 1.11,
+      "time": 1784869322.8289907,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0288,
+      "direction": "SHORT",
+      "entry_price": 1434.6,
+      "exit_price": 1429.751793,
+      "profit_loss": 0.1,
+      "profit_pct": 0.34,
+      "time": 1784874924.5689628,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0554,
+      "direction": "SHORT",
+      "entry_price": 743.7,
+      "exit_price": 747.643947,
+      "profit_loss": -0.26,
+      "profit_pct": -0.53,
+      "time": 1784881829.7676153,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.0399,
+      "direction": "SHORT",
+      "entry_price": 1029.5,
+      "exit_price": 1031.918055,
+      "profit_loss": -0.14,
+      "profit_pct": -0.23,
+      "time": 1784883328.9295228,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1526,
+      "direction": "SHORT",
+      "entry_price": 270.4,
+      "exit_price": 272.812613,
+      "profit_loss": -0.41,
+      "profit_pct": -0.89,
+      "time": 1785123990.186661,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0213,
+      "direction": "SHORT",
+      "entry_price": 1936.6,
+      "exit_price": 1947.937356,
+      "profit_loss": -0.28,
+      "profit_pct": -0.59,
+      "time": 1785124337.9275136,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2244,
+      "direction": "LONG",
+      "entry_price": 183.87,
+      "exit_price": 183.334801,
+      "profit_loss": -0.16,
+      "profit_pct": -0.29,
+      "time": 1785316237.8756027,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0276,
+      "direction": "LONG",
+      "entry_price": 1438.7,
+      "exit_price": 1426.815579,
+      "profit_loss": -0.37,
+      "profit_pct": -0.83,
+      "time": 1785383153.8404777,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2159,
+      "direction": "LONG",
+      "entry_price": 183.63,
+      "exit_price": 185.696352,
+      "profit_loss": 0.41,
+      "profit_pct": 1.13,
+      "time": 1785383206.991065,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0202,
+      "direction": "LONG",
+      "entry_price": 1983.1,
+      "exit_price": 2003.796158,
+      "profit_loss": 0.38,
+      "profit_pct": 1.04,
+      "time": 1785383271.0727909,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2156,
+      "direction": "LONG",
+      "entry_price": 185.78,
+      "exit_price": 188.193274,
+      "profit_loss": 0.48,
+      "profit_pct": 1.3,
+      "time": 1785383610.1689327,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.054,
+      "direction": "LONG",
+      "entry_price": 749.2,
+      "exit_price": 745.891341,
+      "profit_loss": -0.22,
+      "profit_pct": -0.44,
+      "time": 1785384625.8508182,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0378,
+      "direction": "LONG",
+      "entry_price": 1047.8,
+      "exit_price": 1049.592749,
+      "profit_loss": 0.03,
+      "profit_pct": 0.17,
+      "time": 1785385435.0036008,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2107,
+      "direction": "LONG",
+      "entry_price": 188.25,
+      "exit_price": 190.191314,
+      "profit_loss": 0.37,
+      "profit_pct": 1.03,
+      "time": 1785386850.3362222,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0198,
+      "direction": "LONG",
+      "entry_price": 2007.0,
+      "exit_price": 1998.690947,
+      "profit_loss": -0.2,
+      "profit_pct": -0.41,
+      "time": 1785387564.1156354,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0281,
+      "direction": "LONG",
+      "entry_price": 1426.8,
+      "exit_price": 1423.900989,
+      "profit_loss": -0.12,
+      "profit_pct": -0.2,
+      "time": 1785387716.3508399,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0281,
+      "direction": "LONG",
+      "entry_price": 1424.9,
+      "exit_price": 1422.743606,
+      "profit_loss": -0.1,
+      "profit_pct": -0.15,
+      "time": 1785392183.4508605,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 13920.0,
+      "exit_price": 13932.115337,
+      "profit_loss": -0.01,
+      "profit_pct": 0.09,
+      "time": 1785394638.1955621,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0202,
+      "direction": "LONG",
+      "entry_price": 2006.4,
+      "exit_price": 2003.988964,
+      "profit_loss": -0.09,
+      "profit_pct": -0.12,
+      "time": 1785400927.4091263,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0308,
+      "direction": "LONG",
+      "entry_price": 1289.7,
+      "exit_price": 1288.469587,
+      "profit_loss": -0.08,
+      "profit_pct": -0.1,
+      "time": 1785401205.7156768,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14039.0,
+      "exit_price": 14196.628055,
+      "profit_loss": 0.4,
+      "profit_pct": 1.12,
+      "time": 1785403249.632783,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0532,
+      "direction": "LONG",
+      "entry_price": 746.25,
+      "exit_price": 754.056486,
+      "profit_loss": 0.38,
+      "profit_pct": 1.05,
+      "time": 1785404963.825532,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0278,
+      "direction": "LONG",
+      "entry_price": 1428.9,
+      "exit_price": 1428.729233,
+      "profit_loss": -0.04,
+      "profit_pct": -0.01,
+      "time": 1785405516.4565558,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0525,
+      "direction": "LONG",
+      "entry_price": 756.15,
+      "exit_price": 751.612833,
+      "profit_loss": -0.28,
+      "profit_pct": -0.6,
+      "time": 1785405537.0463505,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2122,
+      "direction": "LONG",
+      "entry_price": 186.95,
+      "exit_price": 182.059295,
+      "profit_loss": -1.08,
+      "profit_pct": -2.62,
+      "time": 1785469620.4278088,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14205.0,
+      "exit_price": 14223.892922,
+      "profit_loss": 0.01,
+      "profit_pct": 0.13,
+      "time": 1785470336.4937294,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0308,
+      "direction": "LONG",
+      "entry_price": 1288.7,
+      "exit_price": 1293.741966,
+      "profit_loss": 0.12,
+      "profit_pct": 0.39,
+      "time": 1785470777.2713473,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.1655,
+      "direction": "LONG",
+      "entry_price": 239.65,
+      "exit_price": 238.662858,
+      "profit_loss": -0.2,
+      "profit_pct": -0.41,
+      "time": 1785470778.3397517,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.0359,
+      "direction": "LONG",
+      "entry_price": 1115.6,
+      "exit_price": 1126.789888,
+      "profit_loss": 0.36,
+      "profit_pct": 1.0,
+      "time": 1785474472.9907506,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0198,
+      "direction": "LONG",
+      "entry_price": 2004.6,
+      "exit_price": 2004.691744,
+      "profit_loss": -0.04,
+      "profit_pct": 0.0,
+      "time": 1785474482.9538221,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0354,
+      "direction": "LONG",
+      "entry_price": 1120.8,
+      "exit_price": 1133.108255,
+      "profit_loss": 0.4,
+      "profit_pct": 1.1,
+      "time": 1785477473.4198966,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0197,
+      "direction": "LONG",
+      "entry_price": 2011.6,
+      "exit_price": 2030.977382,
+      "profit_loss": 0.34,
+      "profit_pct": 0.96,
+      "time": 1785482036.2968307,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "INFY.NS",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 1127.3,
+      "exit_price": 1132.105669,
+      "profit_loss": 0.13,
+      "profit_pct": 0.43,
+      "time": 1785484731.7316637,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.218,
+      "direction": "LONG",
+      "entry_price": 181.9,
+      "exit_price": 183.978637,
+      "profit_loss": 0.41,
+      "profit_pct": 1.14,
+      "time": 1785484957.776774,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0348,
+      "direction": "LONG",
+      "entry_price": 1141.6,
+      "exit_price": 1144.455606,
+      "profit_loss": 0.06,
+      "profit_pct": 0.25,
+      "time": 1785488726.8907275,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1481,
+      "direction": "LONG",
+      "entry_price": 275.79,
+      "exit_price": 279.728085,
+      "profit_loss": 0.54,
+      "profit_pct": 1.43,
+      "time": 1785740538.9021978,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14216.0,
+      "exit_price": 14164.263615,
+      "profit_loss": -0.18,
+      "profit_pct": -0.36,
+      "time": 1785740549.9529834,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0858,
+      "direction": "LONG",
+      "entry_price": 1961.6,
+      "exit_price": 1943.2185,
+      "profit_loss": -1.74,
+      "profit_pct": -0.94,
+      "time": 1785751032.4794652,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0124,
+      "direction": "LONG",
+      "entry_price": 14178.0,
+      "exit_price": 14086.070273,
+      "profit_loss": -1.31,
+      "profit_pct": -0.65,
+      "time": 1785751084.8770936,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0305,
+      "direction": "LONG",
+      "entry_price": 1302.0,
+      "exit_price": 1318.173944,
+      "profit_loss": 0.45,
+      "profit_pct": 1.24,
+      "time": 1785752697.1350727,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0276,
+      "direction": "LONG",
+      "entry_price": 1437.6,
+      "exit_price": 1459.580846,
+      "profit_loss": 0.57,
+      "profit_pct": 1.53,
+      "time": 1785752699.1841574,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0301,
+      "direction": "LONG",
+      "entry_price": 1319.0,
+      "exit_price": 1307.09668,
+      "profit_loss": -0.4,
+      "profit_pct": -0.9,
+      "time": 1785815155.4814894,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2123,
+      "direction": "LONG",
+      "entry_price": 188.66,
+      "exit_price": 187.578199,
+      "profit_loss": -0.27,
+      "profit_pct": -0.57,
+      "time": 1785815173.9149563,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0274,
+      "direction": "LONG",
+      "entry_price": 1460.0,
+      "exit_price": 1446.787231,
+      "profit_loss": -0.4,
+      "profit_pct": -0.9,
+      "time": 1785815179.4143243,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.053,
+      "direction": "LONG",
+      "entry_price": 748.65,
+      "exit_price": 749.051904,
+      "profit_loss": -0.02,
+      "profit_pct": 0.05,
+      "time": 1785815784.8108723,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "RELIANCE.NS",
+      "shares": 0.0309,
+      "direction": "LONG",
+      "entry_price": 1308.3,
+      "exit_price": 1301.286362,
+      "profit_loss": -0.26,
+      "profit_pct": -0.54,
+      "time": 1785819190.7010174,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0347,
+      "direction": "LONG",
+      "entry_price": 1155.0,
+      "exit_price": 1151.403809,
+      "profit_loss": -0.16,
+      "profit_pct": -0.31,
+      "time": 1785819588.834954,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0273,
+      "direction": "LONG",
+      "entry_price": 1450.0,
+      "exit_price": 1444.623848,
+      "profit_loss": -0.19,
+      "profit_pct": -0.37,
+      "time": 1785821280.6176238,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "HDFCBANK.NS",
+      "shares": 0.0532,
+      "direction": "LONG",
+      "entry_price": 745.1,
+      "exit_price": 740.990168,
+      "profit_loss": -0.26,
+      "profit_pct": -0.55,
+      "time": 1785823627.9007394,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.1634,
+      "direction": "LONG",
+      "entry_price": 242.65,
+      "exit_price": 241.543464,
+      "profit_loss": -0.22,
+      "profit_pct": -0.46,
+      "time": 1785824019.991314,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0345,
+      "direction": "LONG",
+      "entry_price": 1148.1,
+      "exit_price": 1143.138961,
+      "profit_loss": -0.21,
+      "profit_pct": -0.43,
+      "time": 1785825323.1972458,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14200.0,
+      "exit_price": 14116.060874,
+      "profit_loss": -0.27,
+      "profit_pct": -0.59,
+      "time": 1785827086.3233898,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1417,
+      "direction": "LONG",
+      "entry_price": 279.85,
+      "exit_price": 278.864903,
+      "profit_loss": -0.18,
+      "profit_pct": -0.35,
+      "time": 1785827228.9803176,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0275,
+      "direction": "LONG",
+      "entry_price": 1442.0,
+      "exit_price": 1433.790448,
+      "profit_loss": -0.27,
+      "profit_pct": -0.57,
+      "time": 1785829910.7533736,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14132.0,
+      "exit_price": 14066.150076,
+      "profit_loss": -0.22,
+      "profit_pct": -0.47,
+      "time": 1785834409.12578,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SUNPHARMA.NS",
+      "shares": 0.0203,
+      "direction": "LONG",
+      "entry_price": 1958.0,
+      "exit_price": 1948.661181,
+      "profit_loss": -0.23,
+      "profit_pct": -0.48,
+      "time": 1785837828.9641562,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2108,
+      "direction": "LONG",
+      "entry_price": 188.06,
+      "exit_price": 186.219979,
+      "profit_loss": -0.43,
+      "profit_pct": -0.98,
+      "time": 1785839194.4277787,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "TCS.NS",
+      "shares": 0.0161,
+      "direction": "LONG",
+      "entry_price": 2460.0,
+      "exit_price": 2431.918432,
+      "profit_loss": -0.49,
+      "profit_pct": -1.14,
+      "time": 1785904033.4055812,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0275,
+      "direction": "LONG",
+      "entry_price": 1440.8,
+      "exit_price": 1445.802925,
+      "profit_loss": 0.1,
+      "profit_pct": 0.35,
+      "time": 1785904041.55613,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ONGC.NS",
+      "shares": 0.166,
+      "direction": "LONG",
+      "entry_price": 241.17,
+      "exit_price": 240.182742,
+      "profit_loss": -0.2,
+      "profit_pct": -0.41,
+      "time": 1785904131.4537692,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14147.0,
+      "exit_price": 14130.450038,
+      "profit_loss": -0.09,
+      "profit_pct": -0.12,
+      "time": 1785910132.7046268,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BAJFINANCE.NS",
+      "shares": 0.0342,
+      "direction": "LONG",
+      "entry_price": 1159.6,
+      "exit_price": 1156.113359,
+      "profit_loss": -0.16,
+      "profit_pct": -0.3,
+      "time": 1785910745.6990933,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0279,
+      "direction": "LONG",
+      "entry_price": 1448.4,
+      "exit_price": 1442.342475,
+      "profit_loss": -0.21,
+      "profit_pct": -0.42,
+      "time": 1785911167.4036596,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "WIPRO.NS",
+      "shares": 0.2136,
+      "direction": "LONG",
+      "entry_price": 187.3,
+      "exit_price": 186.514934,
+      "profit_loss": -0.21,
+      "profit_pct": -0.42,
+      "time": 1785913131.2494426,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NIFTYBEES.NS",
+      "shares": 0.1422,
+      "direction": "LONG",
+      "entry_price": 278.7,
+      "exit_price": 279.357521,
+      "profit_loss": 0.05,
+      "profit_pct": 0.24,
+      "time": 1785914063.6868145,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ICICIBANK.NS",
+      "shares": 0.0274,
+      "direction": "LONG",
+      "entry_price": 1443.6,
+      "exit_price": 1435.295504,
+      "profit_loss": -0.27,
+      "profit_pct": -0.58,
+      "time": 1785914205.5096514,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "TCS.NS",
+      "shares": 0.0163,
+      "direction": "LONG",
+      "entry_price": 2430.3,
+      "exit_price": 2418.340544,
+      "profit_loss": -0.23,
+      "profit_pct": -0.49,
+      "time": 1785914734.218518,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MARUTI.NS",
+      "shares": 0.0028,
+      "direction": "LONG",
+      "entry_price": 14130.0,
+      "exit_price": 14113.485889,
+      "profit_loss": -0.09,
+      "profit_pct": -0.12,
+      "time": 1785993551.8656313,
+      "reason": "STOP_LOSS"
+    }
+  ]
+}

@@ -1,0 +1,384 @@
+{
+  "agent_weights": {
+    "Trending Bull": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "Sideways": {
+      "Technical Analyst": 0.945814733348591,
+      "Fundamental Analyst": 1.0256098598674401,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0256098598674401,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.026583443182887,
+      "Correlation Agent": 1.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 0.9658787070836333,
+      "Fundamental Analyst": 1.0980857787073255,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 0.955144711092065,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0854016918381728,
+      "Correlation Agent": 1.0
+    }
+  },
+  "total_closed_trades": 31,
+  "winning_trades": 11,
+  "retrain_count": 5,
+  "_trades_since_last_retrain": 4,
+  "_trade_history": [
+    {
+      "pnl_pct": -0.5487033680555442,
+      "pnl": -22.708408627405333,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.11467935312628308,
+      "pnl": 4.752636809975229,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 1.4389078459213924,
+      "pnl": 13.506224866417142,
+      "is_win": true,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -1.2458415206929732,
+      "pnl": -11.586488799513594,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -1.6113994632256594,
+      "pnl": -14.97164667463288,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.6825946331208514,
+      "pnl": -6.3430016316782485,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": 0.7466320733369736,
+      "pnl": 6.942304419288348,
+      "is_win": true,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.4507816533238883,
+      "pnl": -4.230612899406424,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.5814813097488427,
+      "pnl": -5.347750330243912,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.017208633996274248,
+      "pnl": -0.15826313850550378,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.5521062327324171,
+      "pnl": -5.079706771885185,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.41817602530872505,
+      "pnl": -3.8474584873468984,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.5203037362637247,
+      "pnl": -4.784935926725893,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.3241834857798685,
+      "pnl": -3.0117070023040924,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.3123661748261238,
+      "pnl": -2.873602782654757,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": 0.8752440584859078,
+      "pnl": 7.9697222693256435,
+      "is_win": true,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.624145064970218,
+      "pnl": -5.686096781631363,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": 0.13841010054237335,
+      "pnl": 1.2602788173611543,
+      "is_win": true,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": 0.8729305616450042,
+      "pnl": 7.963442991071929,
+      "is_win": true,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": 0.03168154536798092,
+      "pnl": 0.2915772531696348,
+      "is_win": true,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.166298737163719,
+      "pnl": -1.5451621636710797,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.05470813527874141,
+      "pnl": -0.4981492882072871,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.5948342959848095,
+      "pnl": -5.52388983508672,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.3937503864365535,
+      "pnl": -3.6587904489541643,
+      "is_win": false,
+      "regime": "High Volatility"
+    },
+    {
+      "pnl_pct": -0.5728479534946811,
+      "pnl": -5.365325095359854,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.0350473598631933,
+      "pnl": 0.32752645191305874,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.6158724137103607,
+      "pnl": -5.765000407332607,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.1235764450197705,
+      "pnl": 1.1369969058105198,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.4012150871559466,
+      "pnl": 13.144948382381244,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.14016186876995568,
+      "pnl": 1.301638482336557,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.1538783170731695,
+      "pnl": -1.4300660469743889,
+      "is_win": false,
+      "regime": "Sideways"
+    }
+  ],
+  "_batch_weight_deltas": {
+    "Trending Bull": {
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": 0.0,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.0,
+      "Correlation Agent": 0.0
+    },
+    "Sideways": {
+      "Technical Analyst": -0.0020332221610616283,
+      "Fundamental Analyst": -0.003388703601769379,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": -0.003388703601769379,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": -0.003388703601769379,
+      "Correlation Agent": 0.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": 0.0,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.0,
+      "Correlation Agent": 0.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": 0.0,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.0,
+      "Correlation Agent": 0.0
+    }
+  },
+  "agent_alpha": {
+    "Trending Bull": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "Sideways": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.1369858796753838,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.1369858796753838,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.1418537962526178,
+      "Correlation Agent": 1.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 1.1784072095252398,
+      "Fundamental Analyst": 1.4912004226070565,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.2788333073510405,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.432464007549548,
+      "Correlation Agent": 1.0
+    }
+  },
+  "agent_beta": {
+    "Trending Bull": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "Sideways": {
+      "Technical Analyst": 1.270926333257045,
+      "Fundamental Analyst": 1.0089365803381822,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0089365803381822,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0089365803381822,
+      "Correlation Agent": 1.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 1.3490136741070726,
+      "Fundamental Analyst": 1.0007715290704278,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.5031097518907153,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0054555483586824,
+      "Correlation Agent": 1.0
+    }
+  },
+  "_agent_trade_counts": {
+    "Trending Bull": {
+      "Technical Analyst": 0,
+      "Fundamental Analyst": 0,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 0,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 0,
+      "Correlation Agent": 0
+    },
+    "Sideways": {
+      "Technical Analyst": 107,
+      "Fundamental Analyst": 107,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 107,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 7,
+      "Correlation Agent": 0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 0,
+      "Fundamental Analyst": 0,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 0,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 0,
+      "Correlation Agent": 0
+    },
+    "High Volatility": {
+      "Technical Analyst": 22,
+      "Fundamental Analyst": 22,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 22,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 22,
+      "Correlation Agent": 0
+    }
+  }
+}

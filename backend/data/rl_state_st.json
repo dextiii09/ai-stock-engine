@@ -1,0 +1,624 @@
+{
+  "agent_weights": {
+    "Trending Bull": {
+      "Technical Analyst": 1.0922717572022882,
+      "Fundamental Analyst": 1.0505052867098135,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 0.9313128100746535,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.1634091483370705,
+      "Correlation Agent": 1.0
+    },
+    "Sideways": {
+      "Technical Analyst": 1.0263611170860867,
+      "Fundamental Analyst": 1.2373448761832664,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 0.6827076389575117,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 0.855408041841277,
+      "Correlation Agent": 1.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    }
+  },
+  "total_closed_trades": 71,
+  "winning_trades": 26,
+  "retrain_count": 13,
+  "_trades_since_last_retrain": 3,
+  "_trade_history": [
+    {
+      "pnl_pct": -0.5036972566572879,
+      "pnl": -20.841284397748495,
+      "is_win": false,
+      "regime": "Trending Bear"
+    },
+    {
+      "pnl_pct": -0.7872952784772643,
+      "pnl": -36.072579991432576,
+      "is_win": false,
+      "regime": "Trending Bear"
+    },
+    {
+      "pnl_pct": 0.14219775307382915,
+      "pnl": 6.191959584664801,
+      "is_win": true,
+      "regime": "Trending Bear"
+    },
+    {
+      "pnl_pct": 3.762546546670099,
+      "pnl": 37.47569985994244,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 4.853952395346236,
+      "pnl": 49.32726290789117,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 2.782536660690256,
+      "pnl": 28.559909594359624,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 4.494127506237644,
+      "pnl": 45.21482721072812,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.5181852420701094,
+      "pnl": -5.327386113945522,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.5059515093635082,
+      "pnl": -4.998512611222395,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.14412647107492105,
+      "pnl": 1.4669891441167238,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.5166200779521715,
+      "pnl": -5.102259957527963,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.5039912420988654,
+      "pnl": -4.980491042119297,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.4814244046193902,
+      "pnl": -4.757254873844772,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.09988830032844767,
+      "pnl": 1.0064967612316877,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.09469785399820488,
+      "pnl": 0.9354943560366564,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.1535521121645007,
+      "pnl": 1.5318247722063916,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.10226361863030131,
+      "pnl": -1.010447657619693,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.3026977708592871,
+      "pnl": 3.021411459824094,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.22603280057801625,
+      "pnl": -2.233601887439818,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.7115665975603902,
+      "pnl": -7.031588718032026,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.193002528910542,
+      "pnl": -1.9071091106749236,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.7009129146024151,
+      "pnl": -6.926372414270077,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.14230555088785082,
+      "pnl": 1.420434950735853,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.3503219848109413,
+      "pnl": -3.496646518489456,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 2.6787868306886033,
+      "pnl": 26.99586881798882,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -2.4289295658756442,
+      "pnl": -23.98866087690692,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.6289648208348728,
+      "pnl": -6.274347997537802,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -1.8968861396835186,
+      "pnl": -18.92427159785143,
+      "is_win": false,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": 0.9888168183938164,
+      "pnl": 9.9639786928891,
+      "is_win": true,
+      "regime": "Trending Bull"
+    },
+    {
+      "pnl_pct": -0.6865286058091307,
+      "pnl": -6.984308938931122,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.7141615952397974,
+      "pnl": -7.1926423698809,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.6928715073928848,
+      "pnl": -7.11970114864539,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.3830899285362153,
+      "pnl": 36.85376477648015,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.3263351181102483,
+      "pnl": -5.593772263200208,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.09965234165840778,
+      "pnl": 2.1174979550191892,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.7049595957766829,
+      "pnl": -18.286801196691158,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.49424780647232763,
+      "pnl": -15.068727910741018,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.8198483996412459,
+      "pnl": -11.92186752061366,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.0542774197247721,
+      "pnl": -1.1571822219648311,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.1380469312587324,
+      "pnl": 4.077208498677464,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.0559338575007033,
+      "pnl": 15.121096468146106,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -1.1587679111817115,
+      "pnl": -19.77164520460542,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 4.602958841353019,
+      "pnl": 42.93716370301274,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.2012631707693127,
+      "pnl": 17.734199574946842,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.6493040481311688,
+      "pnl": -10.89086036473509,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.6458947253306285,
+      "pnl": -15.593754454206191,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.17934061190964656,
+      "pnl": -4.227101255490197,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.4511716770513803,
+      "pnl": -7.486465076729644,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.3401593634749255,
+      "pnl": -5.63068306096784,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.0999999999999923,
+      "pnl": -1.2057643139999072,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.2259953318077903,
+      "pnl": 22.375307526252982,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.0240506566368609,
+      "pnl": 0.293542106345285,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.6686188913084066,
+      "pnl": -7.535808995956813,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.6390785463970236,
+      "pnl": -10.904358758622038,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.39104242530674393,
+      "pnl": -4.658643523567662,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -2.2694306958187056,
+      "pnl": -24.131057887143015,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.1929727398533414,
+      "pnl": 12.548890605520683,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.824600129564895,
+      "pnl": 22.517313200834906,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.7054641146531061,
+      "pnl": -7.664267890662131,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.163922921054227,
+      "pnl": 1.7618192621139315,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 0.23441855169972123,
+      "pnl": 2.562885498405649,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.5639233152558932,
+      "pnl": -6.534872120878163,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.7488701250736276,
+      "pnl": -9.390511413662352,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.7068028120268852,
+      "pnl": -5.675351902867078,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.1657870091512538,
+      "pnl": -1.3525887903778084,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.49860105001418636,
+      "pnl": -3.971638768809612,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.27287560936644223,
+      "pnl": -2.208630787132506,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -5.619185987777667,
+      "pnl": -36.24753077141713,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -6.9437021677567685,
+      "pnl": -29.490475128647574,
+      "is_win": false,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 1.471505634083714,
+      "pnl": 9.5538637823729,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": -0.665492828690672,
+      "pnl": -6.192137559540811,
+      "is_win": false,
+      "regime": "Trending Bull"
+    }
+  ],
+  "_batch_weight_deltas": {
+    "Trending Bull": {
+      "Technical Analyst": -0.04912959570635566,
+      "Fundamental Analyst": 0.028235399831238885,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": -0.03840014377048489,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.028235399831238885,
+      "Correlation Agent": 0.0
+    },
+    "Sideways": {
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": 0.0,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.0,
+      "Correlation Agent": 0.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": 0.0,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.0,
+      "Correlation Agent": 0.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
+      "News & Sentiment AI": 0.0,
+      "Macro Economic AI": 0.0,
+      "Volatility Agent": 0.0,
+      "Liquidity Agent": 0.0,
+      "Correlation Agent": 0.0
+    }
+  },
+  "agent_alpha": {
+    "Trending Bull": {
+      "Technical Analyst": 1.5170474056326118,
+      "Fundamental Analyst": 1.503064770541272,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.3407321383094002,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.9986443651770973,
+      "Correlation Agent": 1.0
+    },
+    "Sideways": {
+      "Technical Analyst": 1.486570116259564,
+      "Fundamental Analyst": 2.1924034891274506,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0077235871671222,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.3308369827086153,
+      "Correlation Agent": 1.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    }
+  },
+  "agent_beta": {
+    "Trending Bull": {
+      "Technical Analyst": 1.0556886196211728,
+      "Fundamental Analyst": 1.250538336992206,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.6841680879361303,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.181598623491745,
+      "Correlation Agent": 1.0
+    },
+    "Sideways": {
+      "Technical Analyst": 1.3547645308291298,
+      "Fundamental Analyst": 1.0056791082111192,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 2.5941853923795617,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 2.0537967735022313,
+      "Correlation Agent": 1.0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    },
+    "High Volatility": {
+      "Technical Analyst": 1.0,
+      "Fundamental Analyst": 1.0,
+      "News & Sentiment AI": 1.0,
+      "Macro Economic AI": 1.0,
+      "Volatility Agent": 1.0,
+      "Liquidity Agent": 1.0,
+      "Correlation Agent": 1.0
+    }
+  },
+  "_agent_trade_counts": {
+    "Trending Bull": {
+      "Technical Analyst": 22,
+      "Fundamental Analyst": 22,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 22,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 22,
+      "Correlation Agent": 0
+    },
+    "Sideways": {
+      "Technical Analyst": 146,
+      "Fundamental Analyst": 146,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 146,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 46,
+      "Correlation Agent": 0
+    },
+    "Trending Bear": {
+      "Technical Analyst": 0,
+      "Fundamental Analyst": 0,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 0,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 0,
+      "Correlation Agent": 0
+    },
+    "High Volatility": {
+      "Technical Analyst": 0,
+      "Fundamental Analyst": 0,
+      "News & Sentiment AI": 0,
+      "Macro Economic AI": 0,
+      "Volatility Agent": 0,
+      "Liquidity Agent": 0,
+      "Correlation Agent": 0
+    }
+  }
+}

@@ -1,0 +1,3780 @@
+{
+  "portfolio_balance": 104036.547412119,
+  "active_holdings": [],
+  "execution_logs": [
+    {
+      "time": 1783027905.3584466,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "price": 29551.75
+    },
+    {
+      "time": 1783027917.0518415,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "price": 29551.75
+    },
+    {
+      "time": 1783029361.1507902,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.1692,
+      "price": 29551.75
+    },
+    {
+      "time": 1783060971.5088573,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "price": 20000.0
+    },
+    {
+      "time": 1783060971.5314248,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "price": 19500.0
+    },
+    {
+      "time": 1783069342.602186,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "price": 29767.5
+    },
+    {
+      "time": 1783070702.1649458,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "price": 29767.5
+    },
+    {
+      "time": 1783183517.5631847,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "price": 29767.5
+    },
+    {
+      "time": 1783256752.9851682,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "price": 29767.5
+    },
+    {
+      "time": 1783957402.9304597,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "price": 207.22
+    },
+    {
+      "time": 1783957669.5600863,
+      "action": "FILLED_BUY",
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "price": 316.89
+    },
+    {
+      "time": 1783957706.1364923,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.8326,
+      "price": 661.23
+    },
+    {
+      "time": 1783957821.9613886,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "price": 390.9085
+    },
+    {
+      "time": 1783958041.7030265,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "price": 248.11
+    },
+    {
+      "time": 1783958556.1773882,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "price": 206.195735
+    },
+    {
+      "time": 1783958756.6026049,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "price": 205.94
+    },
+    {
+      "time": 1783965922.7506616,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "price": 316.092026
+    },
+    {
+      "time": 1783965938.7206337,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "price": 204.063712
+    },
+    {
+      "time": 1784005017.104214,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "price": 29484.25
+    },
+    {
+      "time": 1784007932.7627075,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "price": 29612.252434
+    },
+    {
+      "time": 1784025206.8037453,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "price": 568.64
+    },
+    {
+      "time": 1784026203.9718902,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "price": 575.779508
+    },
+    {
+      "time": 1784031499.981664,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "price": 1795.64
+    },
+    {
+      "time": 1784032151.227263,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "price": 1795.979882
+    },
+    {
+      "time": 1784056196.7935941,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "price": 77.3
+    },
+    {
+      "time": 1784057445.3330483,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "price": 77.098318
+    },
+    {
+      "time": 1784061916.4595182,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "price": 1873.98
+    },
+    {
+      "time": 1784064045.5491178,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "price": 64595.0391
+    },
+    {
+      "time": 1784066613.2688184,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "price": 64501.212353
+    },
+    {
+      "time": 1784068023.7980196,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "price": 580.8
+    },
+    {
+      "time": 1784068502.9277916,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "price": 1891.385481
+    },
+    {
+      "time": 1784072934.3870614,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "price": 77.75
+    },
+    {
+      "time": 1784075182.082117,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "price": 77.482553
+    },
+    {
+      "time": 1784075221.0542297,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "price": 1878.84
+    },
+    {
+      "time": 1784078350.8816676,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "price": 1871.804678
+    },
+    {
+      "time": 1784079627.7745533,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "price": 579.751076
+    },
+    {
+      "time": 1784095806.7243836,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "price": 581.02
+    },
+    {
+      "time": 1784098874.1901178,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "price": 578.524697
+    },
+    {
+      "time": 1784098890.3472817,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "price": 1872.9399
+    },
+    {
+      "time": 1784100117.5968974,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "price": 77.74
+    },
+    {
+      "time": 1784100469.2254682,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "price": 1864.849039
+    },
+    {
+      "time": 1784100565.101641,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "price": 64452.3008
+    },
+    {
+      "time": 1784102106.3185005,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "price": 384.784121
+    },
+    {
+      "time": 1784102119.9705439,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "price": 211.8
+    },
+    {
+      "time": 1784124591.657593,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "price": 253.554995
+    },
+    {
+      "time": 1784124605.6554596,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "META",
+      "shares": 6.8326,
+      "price": 670.236198
+    },
+    {
+      "time": 1784124813.2381494,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "price": 394.33
+    },
+    {
+      "time": 1784124856.2047815,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "price": 253.98
+    },
+    {
+      "time": 1784125869.0571957,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "price": 210.246429
+    },
+    {
+      "time": 1784126099.8889916,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "price": 210.76
+    },
+    {
+      "time": 1784126319.1815286,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "price": 209.855148
+    },
+    {
+      "time": 1784126569.5311234,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "price": 253.713015
+    },
+    {
+      "time": 1784130131.9563208,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "price": 209.18
+    },
+    {
+      "time": 1784135123.0220835,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "price": 207.609173
+    },
+    {
+      "time": 1784135126.0818071,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "price": 394.833061
+    },
+    {
+      "time": 1784135135.027214,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.7869,
+      "price": 675.205
+    },
+    {
+      "time": 1784145002.4493108,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 17.1052,
+      "price": 254.51
+    },
+    {
+      "time": 1784145521.4686213,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.4637,
+      "price": 395.245
+    },
+    {
+      "time": 1784264644.4618053,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MSFT",
+      "shares": 10.4637,
+      "price": 401.014446
+    },
+    {
+      "time": 1784264687.154992,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AMZN",
+      "shares": 17.1052,
+      "price": 249.82044
+    },
+    {
+      "time": 1784264726.407255,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "META",
+      "shares": 6.7869,
+      "price": 664.032707
+    },
+    {
+      "time": 1784264762.962414,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 21.8709,
+      "price": 207.47
+    },
+    {
+      "time": 1784264893.4385643,
+      "action": "FILLED_BUY",
+      "symbol": "AAPL",
+      "shares": 12.9347,
+      "price": 333.27
+    },
+    {
+      "time": 1784264960.9722145,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.2089,
+      "price": 401.12
+    },
+    {
+      "time": 1784267553.239934,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "price": 62741.405223
+    },
+    {
+      "time": 1784267556.0953543,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "price": 74.283432
+    },
+    {
+      "time": 1784267679.3350039,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3532,
+      "price": 1822.7
+    },
+    {
+      "time": 1784276294.1637514,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.3532,
+      "price": 1821.768451
+    },
+    {
+      "time": 1784276843.9677684,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3519,
+      "price": 1823.58
+    },
+    {
+      "time": 1784285717.231009,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0645,
+      "price": 63128.9609
+    },
+    {
+      "time": 1784288855.0263708,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0645,
+      "price": 63315.278389
+    },
+    {
+      "time": 1784290827.0815203,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.3519,
+      "price": 1831.877507
+    },
+    {
+      "time": 1784299012.748058,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 7.6389,
+      "price": 561.44
+    },
+    {
+      "time": 1784302215.5106382,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.6389,
+      "price": 561.7686
+    },
+    {
+      "time": 1784303330.4061923,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.8941,
+      "price": 4018.7
+    },
+    {
+      "time": 1784322912.178582,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1197,
+      "price": 28768.75
+    },
+    {
+      "time": 1784539739.8638127,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.1197,
+      "price": 28915.63753
+    },
+    {
+      "time": 1784540994.707323,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1169,
+      "price": 28918.0
+    },
+    {
+      "time": 1784650521.2757618,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.8941,
+      "price": 4081.007948
+    },
+    {
+      "time": 1784650542.4519181,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.1169,
+      "price": 29325.343147
+    },
+    {
+      "time": 1784650596.1913185,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2553,
+      "price": 4081.8
+    },
+    {
+      "time": 1784650643.870038,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29310.75
+    },
+    {
+      "time": 1784650711.641295,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29309.25
+    },
+    {
+      "time": 1784650730.718443,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29313.75
+    },
+    {
+      "time": 1784651950.1308413,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29313.25
+    },
+    {
+      "time": 1784652107.5171134,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29309.75
+    },
+    {
+      "time": 1784652234.7069268,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29306.75
+    },
+    {
+      "time": 1784653184.6506152,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29322.25
+    },
+    {
+      "time": 1784654500.8141015,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29335.25
+    },
+    {
+      "time": 1784654535.5914042,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29335.25
+    },
+    {
+      "time": 1784655750.6014433,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29346.75
+    },
+    {
+      "time": 1784655785.5312617,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29346.75
+    },
+    {
+      "time": 1784656305.7718515,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29344.25
+    },
+    {
+      "time": 1784656372.9723558,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29339.0
+    },
+    {
+      "time": 1784656420.196656,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29336.5
+    },
+    {
+      "time": 1784656876.8097355,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0351,
+      "price": 29361.25
+    },
+    {
+      "time": 1784657687.703022,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0351,
+      "price": 29347.25
+    },
+    {
+      "time": 1784657947.9652069,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0351,
+      "price": 29354.25
+    },
+    {
+      "time": 1784658028.3956747,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0351,
+      "price": 29345.25
+    },
+    {
+      "time": 1784658097.023456,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29349.0
+    },
+    {
+      "time": 1784658339.952021,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29340.0
+    },
+    {
+      "time": 1784658489.4893858,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29341.5
+    },
+    {
+      "time": 1784658796.4598472,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2553,
+      "price": 4082.0
+    },
+    {
+      "time": 1784658830.6706705,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2528,
+      "price": 4082.0
+    },
+    {
+      "time": 1784658845.1002717,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2528,
+      "price": 4082.0
+    },
+    {
+      "time": 1784658863.7165039,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2527,
+      "price": 4083.5
+    },
+    {
+      "time": 1784658927.7905977,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2527,
+      "price": 4090.0
+    },
+    {
+      "time": 1784658961.3268304,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29333.0
+    },
+    {
+      "time": 1784659061.232548,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0355,
+      "price": 29329.0
+    },
+    {
+      "time": 1784659142.952728,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2523,
+      "price": 4089.0
+    },
+    {
+      "time": 1784659174.378546,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2523,
+      "price": 4089.0
+    },
+    {
+      "time": 1784659278.3627121,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2524,
+      "price": 4087.8
+    },
+    {
+      "time": 1784659604.044093,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0355,
+      "price": 29327.5
+    },
+    {
+      "time": 1784659917.64119,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29327.75
+    },
+    {
+      "time": 1784660208.4201713,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29350.5
+    },
+    {
+      "time": 1784660340.0687983,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29339.75
+    },
+    {
+      "time": 1784662202.7264452,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29315.75
+    },
+    {
+      "time": 1784662236.7807355,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29311.75
+    },
+    {
+      "time": 1784662765.9923687,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29297.25
+    },
+    {
+      "time": 1784663529.5379713,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29324.0
+    },
+    {
+      "time": 1784665384.442602,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29297.25
+    },
+    {
+      "time": 1784665453.2214272,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29309.0
+    },
+    {
+      "time": 1784665568.7072291,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29298.5
+    },
+    {
+      "time": 1784665621.9667883,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29296.5
+    },
+    {
+      "time": 1784666419.354107,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29293.25
+    },
+    {
+      "time": 1784666470.068308,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29293.25
+    },
+    {
+      "time": 1784666800.0166595,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29296.75
+    },
+    {
+      "time": 1784666901.239776,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29299.75
+    },
+    {
+      "time": 1784667165.0864198,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29295.0
+    },
+    {
+      "time": 1784667401.5086172,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29291.75
+    },
+    {
+      "time": 1784667631.4847686,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29282.5
+    },
+    {
+      "time": 1784668307.3196213,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29290.0
+    },
+    {
+      "time": 1784668422.5204914,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2524,
+      "price": 4081.6001
+    },
+    {
+      "time": 1784668475.2180662,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2527,
+      "price": 4081.6001
+    },
+    {
+      "time": 1784668855.9875689,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29290.0
+    },
+    {
+      "time": 1784669145.0657327,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29290.0
+    },
+    {
+      "time": 1784672101.7675183,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "price": 29293.0
+    },
+    {
+      "time": 1784676559.0474033,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2527,
+      "price": 4086.2
+    },
+    {
+      "time": 1784804775.6681988,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0358,
+      "price": 29101.25
+    },
+    {
+      "time": 1784810832.4224975,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MNQ=F",
+      "shares": 0.0358,
+      "price": 28816.141728
+    },
+    {
+      "time": 1784825065.911014,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28693.25
+    },
+    {
+      "time": 1784829081.1279685,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2573,
+      "price": 4044.8999
+    },
+    {
+      "time": 1784837465.2736487,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28685.154202
+    },
+    {
+      "time": 1784837649.4326425,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28707.75
+    },
+    {
+      "time": 1784877531.4071856,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2573,
+      "price": 4047.925
+    },
+    {
+      "time": 1784877896.581512,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28658.01826
+    },
+    {
+      "time": 1784878433.26119,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0364,
+      "price": 28636.5
+    },
+    {
+      "time": 1784887851.5547478,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0364,
+      "price": 28724.026029
+    },
+    {
+      "time": 1784899501.3409038,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0364,
+      "price": 28586.0
+    },
+    {
+      "time": 1784903602.6882775,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2561,
+      "price": 4064.6001
+    },
+    {
+      "time": 1784913799.8944893,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MNQ=F",
+      "shares": 0.0364,
+      "price": 28301.484562
+    },
+    {
+      "time": 1784914086.1451094,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28508.75
+    },
+    {
+      "time": 1784918011.7861898,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2561,
+      "price": 4057.157053
+    },
+    {
+      "time": 1784918083.7497241,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2564,
+      "price": 4060.2
+    },
+    {
+      "time": 1784919544.0517547,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2564,
+      "price": 4056.3
+    },
+    {
+      "time": 1784919599.811968,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2566,
+      "price": 4056.1001
+    },
+    {
+      "time": 1784921201.0126524,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28239.265648
+    },
+    {
+      "time": 1784921513.8918626,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0365,
+      "price": 28236.75
+    },
+    {
+      "time": 1784942562.2365992,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2566,
+      "price": 4055.3999
+    },
+    {
+      "time": 1784942802.2134988,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2567,
+      "price": 4055.3999
+    },
+    {
+      "time": 1784947159.7950547,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2567,
+      "price": 4055.3999
+    },
+    {
+      "time": 1784947222.9217246,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2567,
+      "price": 4055.3999
+    },
+    {
+      "time": 1784955660.9160476,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2567,
+      "price": 4070.8
+    },
+    {
+      "time": 1784955766.8091705,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784955950.803645,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784955991.7406156,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956009.2818508,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956030.4711537,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956103.9900668,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956125.6842804,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956221.6287541,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956242.2514837,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956336.706353,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956357.262794,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956411.546229,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956471.0983992,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956508.9520109,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956529.2543862,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956584.529048,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956604.7745166,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956678.7658641,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956699.5961702,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956735.8605843,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956773.1606603,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956793.9565604,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956813.7320008,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956831.9005556,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956852.373826,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956908.679463,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784956929.603933,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957099.5150137,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957175.0124595,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957196.334644,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957216.995182,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957335.724062,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957421.5710762,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957484.5176167,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957528.2160995,
+      "action": "FILLED_SHORT",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1784957569.0408177,
+      "action": "FILLED_COVER",
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "price": 4070.8
+    },
+    {
+      "time": 1785104443.5401113,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0365,
+      "price": 28608.814831
+    },
+    {
+      "time": 1785151692.0707583,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28714.5
+    },
+    {
+      "time": 1785152273.9067707,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2514,
+      "price": 4102.6001
+    },
+    {
+      "time": 1785164600.0423193,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2514,
+      "price": 4074.498694
+    },
+    {
+      "time": 1785164711.3937373,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28093.590414
+    },
+    {
+      "time": 1785167687.366648,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2554,
+      "price": 4077.8999
+    },
+    {
+      "time": 1785219114.058346,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2554,
+      "price": 4043.8542
+    },
+    {
+      "time": 1785224282.9406312,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 27954.5
+    },
+    {
+      "time": 1785228670.8081598,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 28036.613555
+    },
+    {
+      "time": 1785229703.0848444,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 28004.75
+    },
+    {
+      "time": 1785240993.0663736,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 28011.616393
+    },
+    {
+      "time": 1785242900.8932886,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 27991.25
+    },
+    {
+      "time": 1785246957.9570744,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 27721.234578
+    },
+    {
+      "time": 1785249578.6488087,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "price": 27794.5
+    },
+    {
+      "time": 1785311140.5552802,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "price": 27966.202801
+    },
+    {
+      "time": 1785311325.0947752,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "price": 4105.5
+    },
+    {
+      "time": 1785313953.369339,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.037,
+      "price": 27866.25
+    },
+    {
+      "time": 1785317156.645284,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.037,
+      "price": 28000.537971
+    },
+    {
+      "time": 1785318666.9178917,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0368,
+      "price": 27990.75
+    },
+    {
+      "time": 1785323190.2302835,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "price": 4082.108835
+    },
+    {
+      "time": 1785323341.0977478,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2546,
+      "price": 4085.8
+    },
+    {
+      "time": 1785327482.297788,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0368,
+      "price": 27989.5
+    },
+    {
+      "time": 1785328201.6754186,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0369,
+      "price": 27895.5
+    },
+    {
+      "time": 1785328578.415041,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2546,
+      "price": 4070.969763
+    },
+    {
+      "time": 1785328767.754975,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.253,
+      "price": 4074.1001
+    },
+    {
+      "time": 1785330590.8659596,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0369,
+      "price": 27910.5
+    },
+    {
+      "time": 1785334035.2201357,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.253,
+      "price": 4060.028193
+    },
+    {
+      "time": 1785334322.4200885,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2563,
+      "price": 4062.3999
+    },
+    {
+      "time": 1785345825.6562984,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.2563,
+      "price": 4106.090998
+    },
+    {
+      "time": 1785345847.8543024,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0376,
+      "price": 27720.75
+    },
+    {
+      "time": 1785346013.756251,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "price": 4101.8999
+    },
+    {
+      "time": 1785348665.0343928,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0376,
+      "price": 27869.198903
+    },
+    {
+      "time": 1785348732.469867,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "price": 4140.741063
+    },
+    {
+      "time": 1785348864.4775846,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2521,
+      "price": 4130.2998
+    },
+    {
+      "time": 1785350537.1030202,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2521,
+      "price": 4113.328168
+    },
+    {
+      "time": 1785350634.9195752,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.253,
+      "price": 4115.2998
+    },
+    {
+      "time": 1785350809.8546414,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 27739.75
+    },
+    {
+      "time": 1785351030.912081,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "price": 27901.834836
+    },
+    {
+      "time": 1785351607.9517498,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.253,
+      "price": 4155.648774
+    },
+    {
+      "time": 1785351638.5867157,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2503,
+      "price": 4159.5
+    },
+    {
+      "time": 1785353567.2258468,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2503,
+      "price": 4145.615929
+    },
+    {
+      "time": 1785353633.8151994,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2511,
+      "price": 4145.2002
+    },
+    {
+      "time": 1785354512.2239854,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2511,
+      "price": 4121.461149
+    },
+    {
+      "time": 1785354588.7622926,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2522,
+      "price": 4128.1001
+    },
+    {
+      "time": 1785355704.1305892,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2522,
+      "price": 4106.041298
+    },
+    {
+      "time": 1785355768.5190842,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "price": 4104.7998
+    },
+    {
+      "time": 1785363726.2573647,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "price": 27470.5
+    },
+    {
+      "time": 1785366375.476188,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "price": 4146.493522
+    },
+    {
+      "time": 1785366382.9040265,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2508,
+      "price": 4147.3999
+    },
+    {
+      "time": 1785368432.7790878,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "price": 27553.398854
+    },
+    {
+      "time": 1785371374.2233121,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2508,
+      "price": 4132.517501
+    },
+    {
+      "time": 1785371441.8264859,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2518,
+      "price": 4133.8999
+    },
+    {
+      "time": 1785380694.750969,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2518,
+      "price": 4124.945879
+    },
+    {
+      "time": 1785380761.5542884,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2521,
+      "price": 4128.2998
+    },
+    {
+      "time": 1785383999.6975534,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2521,
+      "price": 4019.652269
+    },
+    {
+      "time": 1785384074.8229797,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2528,
+      "price": 4115.6001
+    },
+    {
+      "time": 1785384604.879582,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0374,
+      "price": 27522.25
+    },
+    {
+      "time": 1785390425.7781138,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2528,
+      "price": 4092.740302
+    },
+    {
+      "time": 1785390495.003808,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2542,
+      "price": 4089.3
+    },
+    {
+      "time": 1785400421.9568596,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0374,
+      "price": 27516.895894
+    },
+    {
+      "time": 1785401122.178506,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "price": 27507.0
+    },
+    {
+      "time": 1785405690.100853,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.2542,
+      "price": 4130.001704
+    },
+    {
+      "time": 1785405694.2443392,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2516,
+      "price": 4131.3999
+    },
+    {
+      "time": 1785407509.7363353,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "price": 27620.52299
+    },
+    {
+      "time": 1785408589.6035721,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0373,
+      "price": 27620.75
+    },
+    {
+      "time": 1785416405.3803594,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.0373,
+      "price": 27818.113851
+    },
+    {
+      "time": 1785416946.4870348,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.037,
+      "price": 27814.5
+    },
+    {
+      "time": 1785418336.5450768,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.037,
+      "price": 27846.0
+    },
+    {
+      "time": 1785420641.803118,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MGC=F",
+      "shares": 0.2516,
+      "price": 4174.419505
+    },
+    {
+      "time": 1785742103.4832768,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2531,
+      "price": 4110.7998
+    },
+    {
+      "time": 1785751299.1228828,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0361,
+      "price": 28539.75
+    },
+    {
+      "time": 1785754805.1186433,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0361,
+      "price": 28530.75
+    },
+    {
+      "time": 1785755279.0343757,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0361,
+      "price": 28541.5
+    },
+    {
+      "time": 1785757651.3808856,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0361,
+      "price": 28494.75
+    },
+    {
+      "time": 1785757819.5021102,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28466.25
+    },
+    {
+      "time": 1785758023.428677,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28459.75
+    },
+    {
+      "time": 1785758060.7810872,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28457.75
+    },
+    {
+      "time": 1785758183.557409,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28469.25
+    },
+    {
+      "time": 1785758344.289412,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28445.5
+    },
+    {
+      "time": 1785758752.0346136,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "price": 28411.0
+    },
+    {
+      "time": 1785758869.5429986,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28410.75
+    },
+    {
+      "time": 1785772912.7474334,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MGC=F",
+      "shares": 0.2531,
+      "price": 4091.737566
+    },
+    {
+      "time": 1785772943.0527585,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "price": 28763.966663
+    },
+    {
+      "time": 1785773006.515949,
+      "action": "FILLED_BUY",
+      "symbol": "MGC=F",
+      "shares": 0.2541,
+      "price": 4095.3999
+    },
+    {
+      "time": 1785773228.1328013,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0358,
+      "price": 28798.75
+    },
+    {
+      "time": 1785774877.523071,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0358,
+      "price": 28835.75
+    },
+    {
+      "time": 1785774935.6183722,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28837.25
+    },
+    {
+      "time": 1785774997.553194,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28833.0
+    },
+    {
+      "time": 1785775022.5034263,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28833.0
+    },
+    {
+      "time": 1785777162.4767663,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28825.25
+    },
+    {
+      "time": 1785777172.964994,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28825.25
+    },
+    {
+      "time": 1785777647.0476055,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28841.25
+    },
+    {
+      "time": 1785777680.2615058,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28841.25
+    },
+    {
+      "time": 1785778273.1421473,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28869.0
+    },
+    {
+      "time": 1785778611.241124,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28877.5
+    },
+    {
+      "time": 1785779032.1414905,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28887.25
+    },
+    {
+      "time": 1785779062.937173,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28887.25
+    },
+    {
+      "time": 1785779225.8440497,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28890.75
+    },
+    {
+      "time": 1785779527.2398093,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28880.25
+    },
+    {
+      "time": 1785779539.23673,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28887.25
+    },
+    {
+      "time": 1785779565.7114017,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28887.25
+    },
+    {
+      "time": 1785779715.8837914,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "price": 28885.25
+    },
+    {
+      "time": 1785779930.043216,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28895.0
+    },
+    {
+      "time": 1785780405.9814694,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28915.5
+    },
+    {
+      "time": 1785780431.4775736,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28915.5
+    },
+    {
+      "time": 1785780953.0993931,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28952.5
+    },
+    {
+      "time": 1785781002.4867387,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28951.5
+    },
+    {
+      "time": 1785781819.0728645,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28928.75
+    },
+    {
+      "time": 1785782037.651683,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28930.0
+    },
+    {
+      "time": 1785782159.2304914,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28920.75
+    },
+    {
+      "time": 1785782237.502182,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28912.75
+    },
+    {
+      "time": 1785783146.190045,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28902.25
+    },
+    {
+      "time": 1785783170.105887,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28902.25
+    },
+    {
+      "time": 1785783246.3861415,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28901.25
+    },
+    {
+      "time": 1785783304.9442213,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28909.5
+    },
+    {
+      "time": 1785783351.1855345,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28912.5
+    },
+    {
+      "time": 1785783451.3018858,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28899.0
+    },
+    {
+      "time": 1785783648.444853,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28918.5
+    },
+    {
+      "time": 1785783663.571919,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28918.5
+    },
+    {
+      "time": 1785784251.1781785,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28923.0
+    },
+    {
+      "time": 1785784436.3427422,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28936.25
+    },
+    {
+      "time": 1785784840.532408,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28912.75
+    },
+    {
+      "time": 1785784878.5638099,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28912.75
+    },
+    {
+      "time": 1785785263.617686,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28905.0
+    },
+    {
+      "time": 1785785348.4761302,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28915.5
+    },
+    {
+      "time": 1785785681.8880017,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28919.0
+    },
+    {
+      "time": 1785785732.7939682,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28919.0
+    },
+    {
+      "time": 1785785901.095408,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28917.25
+    },
+    {
+      "time": 1785786013.9763858,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28912.5
+    },
+    {
+      "time": 1785786091.2234004,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "price": 28914.5
+    },
+    {
+      "time": 1785802347.8507812,
+      "action": "FILLED_SELL",
+      "symbol": "MGC=F",
+      "shares": 0.2541,
+      "price": 4117.2002
+    }
+  ],
+  "closed_trades": [
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "entry_price": 29551.75,
+      "exit_price": 29551.75,
+      "profit_loss": -0.0,
+      "profit_pct": 0.0,
+      "time": 1783027917.075756,
+      "reason": "Committee consensus reached with 32.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "direction": "SHORT",
+      "entry_price": 20000.0,
+      "exit_price": 19500.0,
+      "profit_loss": 125.0,
+      "profit_pct": 2.5,
+      "time": 1783060971.5449355,
+      "reason": "Test cover profit"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "direction": "SHORT",
+      "entry_price": 29767.5,
+      "exit_price": 29767.5,
+      "profit_loss": 0.0,
+      "profit_pct": 0.0,
+      "time": 1783070702.4680264,
+      "reason": "Committee consensus reached with 29.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "direction": "SHORT",
+      "entry_price": 29767.5,
+      "exit_price": 29767.5,
+      "profit_loss": -5.01,
+      "profit_pct": 0.0,
+      "time": 1783256753.0223475,
+      "reason": "Committee consensus reached with 24.5% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "direction": "SHORT",
+      "entry_price": 29484.25,
+      "exit_price": 29612.252434,
+      "profit_loss": -19.51,
+      "profit_pct": -0.43,
+      "time": 1784007932.7627075,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1197,
+      "direction": "SHORT",
+      "entry_price": 28768.75,
+      "exit_price": 28915.63753,
+      "profit_loss": -21.04,
+      "profit_pct": -0.51,
+      "time": 1784539739.8638127,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.8941,
+      "direction": "LONG",
+      "entry_price": 4018.7,
+      "exit_price": 4081.007948,
+      "profit_loss": 52.06,
+      "profit_pct": 1.55,
+      "time": 1784650521.2757618,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1169,
+      "direction": "SHORT",
+      "entry_price": 28918.0,
+      "exit_price": 29325.343147,
+      "profit_loss": -51.05,
+      "profit_pct": -1.41,
+      "time": 1784650542.4519181,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29310.75,
+      "exit_price": 29309.25,
+      "profit_loss": -1.08,
+      "profit_pct": -0.01,
+      "time": 1784650714.4238524,
+      "reason": "Committee consensus reached with 35.5% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29313.75,
+      "exit_price": 29313.25,
+      "profit_loss": -1.05,
+      "profit_pct": -0.0,
+      "time": 1784651951.8625982,
+      "reason": "Committee consensus reached with 35.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29309.75,
+      "exit_price": 29306.75,
+      "profit_loss": -1.14,
+      "profit_pct": -0.01,
+      "time": 1784652250.7112393,
+      "reason": "Committee consensus reached with 42.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29322.25,
+      "exit_price": 29335.25,
+      "profit_loss": -0.58,
+      "profit_pct": 0.04,
+      "time": 1784654516.278541,
+      "reason": "Committee consensus reached with 41.6% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29335.25,
+      "exit_price": 29346.75,
+      "profit_loss": -0.63,
+      "profit_pct": 0.04,
+      "time": 1784655765.7874227,
+      "reason": "Committee consensus reached with 35.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29346.75,
+      "exit_price": 29344.25,
+      "profit_loss": -1.12,
+      "profit_pct": -0.01,
+      "time": 1784656308.1041343,
+      "reason": "Committee consensus reached with 37.7% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29339.0,
+      "exit_price": 29336.5,
+      "profit_loss": -1.12,
+      "profit_pct": -0.01,
+      "time": 1784656421.27561,
+      "reason": "Committee consensus reached with 35.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0351,
+      "direction": "LONG",
+      "entry_price": 29361.25,
+      "exit_price": 29347.25,
+      "profit_loss": -1.52,
+      "profit_pct": -0.05,
+      "time": 1784657703.340905,
+      "reason": "Committee consensus reached with 37.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0351,
+      "direction": "SHORT",
+      "entry_price": 29354.25,
+      "exit_price": 29345.25,
+      "profit_loss": -0.71,
+      "profit_pct": 0.03,
+      "time": 1784658031.016672,
+      "reason": "Committee consensus reached with 37.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29349.0,
+      "exit_price": 29340.0,
+      "profit_loss": -1.35,
+      "profit_pct": -0.03,
+      "time": 1784658355.0683105,
+      "reason": "Committee consensus reached with 37.1% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2553,
+      "direction": "LONG",
+      "entry_price": 4081.8,
+      "exit_price": 4082.0,
+      "profit_loss": -0.99,
+      "profit_pct": 0.0,
+      "time": 1784658798.9997787,
+      "reason": "Committee consensus reached with 46.7% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2528,
+      "direction": "SHORT",
+      "entry_price": 4082.0,
+      "exit_price": 4082.0,
+      "profit_loss": -1.03,
+      "profit_pct": 0.0,
+      "time": 1784658847.9144363,
+      "reason": "Committee consensus reached with 40.0% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2527,
+      "direction": "SHORT",
+      "entry_price": 4083.5,
+      "exit_price": 4090.0,
+      "profit_loss": -2.68,
+      "profit_pct": -0.16,
+      "time": 1784658930.201095,
+      "reason": "Committee consensus reached with 53.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29341.5,
+      "exit_price": 29333.0,
+      "profit_loss": -1.33,
+      "profit_pct": -0.03,
+      "time": 1784658963.7970111,
+      "reason": "Committee consensus reached with 38.5% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2523,
+      "direction": "SHORT",
+      "entry_price": 4089.0,
+      "exit_price": 4089.0,
+      "profit_loss": -1.03,
+      "profit_pct": 0.0,
+      "time": 1784659177.449909,
+      "reason": "Committee consensus reached with 35.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0355,
+      "direction": "LONG",
+      "entry_price": 29329.0,
+      "exit_price": 29327.5,
+      "profit_loss": -1.09,
+      "profit_pct": -0.01,
+      "time": 1784659605.7499495,
+      "reason": "Committee consensus reached with 35.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29327.75,
+      "exit_price": 29350.5,
+      "profit_loss": -0.23,
+      "profit_pct": 0.08,
+      "time": 1784660210.9209912,
+      "reason": "Committee consensus reached with 35.9% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29339.75,
+      "exit_price": 29315.75,
+      "profit_loss": -1.88,
+      "profit_pct": -0.08,
+      "time": 1784662204.9783657,
+      "reason": "Committee consensus reached with 39.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29311.75,
+      "exit_price": 29297.25,
+      "profit_loss": -1.54,
+      "profit_pct": -0.05,
+      "time": 1784662781.2247634,
+      "reason": "Committee consensus reached with 35.6% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29324.0,
+      "exit_price": 29297.25,
+      "profit_loss": -1.97,
+      "profit_pct": -0.09,
+      "time": 1784665386.8405757,
+      "reason": "Committee consensus reached with 36.9% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29309.0,
+      "exit_price": 29298.5,
+      "profit_loss": -1.4,
+      "profit_pct": -0.04,
+      "time": 1784665584.3652616,
+      "reason": "Committee consensus reached with 35.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29296.5,
+      "exit_price": 29293.25,
+      "profit_loss": -1.15,
+      "profit_pct": -0.01,
+      "time": 1784666434.203253,
+      "reason": "Committee consensus reached with 39.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "SHORT",
+      "entry_price": 29293.25,
+      "exit_price": 29296.75,
+      "profit_loss": -1.15,
+      "profit_pct": -0.01,
+      "time": 1784666815.2163298,
+      "reason": "Committee consensus reached with 35.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29299.75,
+      "exit_price": 29295.0,
+      "profit_loss": -1.2,
+      "profit_pct": -0.02,
+      "time": 1784667179.8459527,
+      "reason": "Committee consensus reached with 52.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "SHORT",
+      "entry_price": 29291.75,
+      "exit_price": 29282.5,
+      "profit_loss": -0.71,
+      "profit_pct": 0.03,
+      "time": 1784667647.3165765,
+      "reason": "Committee consensus reached with 44.3% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2524,
+      "direction": "LONG",
+      "entry_price": 4087.8,
+      "exit_price": 4081.6001,
+      "profit_loss": -2.6,
+      "profit_pct": -0.15,
+      "time": 1784668425.6708164,
+      "reason": "Committee consensus reached with 38.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29290.0,
+      "exit_price": 29290.0,
+      "profit_loss": -1.03,
+      "profit_pct": 0.0,
+      "time": 1784668858.830482,
+      "reason": "Committee consensus reached with 39.9% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0352,
+      "direction": "LONG",
+      "entry_price": 29290.0,
+      "exit_price": 29293.0,
+      "profit_loss": -0.93,
+      "profit_pct": 0.01,
+      "time": 1784672117.405992,
+      "reason": "Committee consensus reached with 35.4% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2527,
+      "direction": "LONG",
+      "entry_price": 4081.6,
+      "exit_price": 4086.2,
+      "profit_loss": 0.13,
+      "profit_pct": 0.11,
+      "time": 1784676562.337006,
+      "reason": "Committee consensus reached with 37.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0358,
+      "direction": "SHORT",
+      "entry_price": 29101.25,
+      "exit_price": 28816.141728,
+      "profit_loss": 9.18,
+      "profit_pct": 0.98,
+      "time": 1784810832.4224975,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "direction": "SHORT",
+      "entry_price": 28693.25,
+      "exit_price": 28685.154202,
+      "profit_loss": -0.75,
+      "profit_pct": 0.03,
+      "time": 1784837465.2736487,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2573,
+      "direction": "SHORT",
+      "entry_price": 4044.9,
+      "exit_price": 4047.925,
+      "profit_loss": -1.82,
+      "profit_pct": -0.07,
+      "time": 1784877531.4071856,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "direction": "SHORT",
+      "entry_price": 28707.75,
+      "exit_price": 28658.01826,
+      "profit_loss": 0.76,
+      "profit_pct": 0.17,
+      "time": 1784877896.581512,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0364,
+      "direction": "SHORT",
+      "entry_price": 28636.5,
+      "exit_price": 28724.026029,
+      "profit_loss": -4.23,
+      "profit_pct": -0.31,
+      "time": 1784887851.5547478,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0364,
+      "direction": "SHORT",
+      "entry_price": 28586.0,
+      "exit_price": 28301.484562,
+      "profit_loss": 9.33,
+      "profit_pct": 1.0,
+      "time": 1784913799.8944893,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2561,
+      "direction": "LONG",
+      "entry_price": 4064.6,
+      "exit_price": 4057.157053,
+      "profit_loss": -2.95,
+      "profit_pct": -0.18,
+      "time": 1784918011.7861898,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2564,
+      "direction": "LONG",
+      "entry_price": 4060.2,
+      "exit_price": 4056.3,
+      "profit_loss": -2.04,
+      "profit_pct": -0.1,
+      "time": 1784919546.134775,
+      "reason": "Committee consensus reached with 35.4% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "direction": "SHORT",
+      "entry_price": 28508.75,
+      "exit_price": 28239.265648,
+      "profit_loss": 8.73,
+      "profit_pct": 0.95,
+      "time": 1784921201.0126524,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2566,
+      "direction": "LONG",
+      "entry_price": 4056.1,
+      "exit_price": 4055.3999,
+      "profit_loss": -1.22,
+      "profit_pct": -0.02,
+      "time": 1784942564.7018487,
+      "reason": "Committee consensus reached with 38.7% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2567,
+      "direction": "LONG",
+      "entry_price": 4055.4,
+      "exit_price": 4055.3999,
+      "profit_loss": -1.04,
+      "profit_pct": -0.0,
+      "time": 1784947161.795207,
+      "reason": "Committee consensus reached with 35.2% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2567,
+      "direction": "LONG",
+      "entry_price": 4055.4,
+      "exit_price": 4070.8,
+      "profit_loss": 2.91,
+      "profit_pct": 0.38,
+      "time": 1784955664.038706,
+      "reason": "Committee consensus reached with 37.9% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784955954.0055144,
+      "reason": "Committee consensus reached with 41.8% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956011.9033592,
+      "reason": "Committee consensus reached with 39.5% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956106.3345704,
+      "reason": "Committee consensus reached with 39.8% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956222.5393856,
+      "reason": "Committee consensus reached with 46.9% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956338.6847165,
+      "reason": "Committee consensus reached with 40.4% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956414.4375837,
+      "reason": "Committee consensus reached with 41.9% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956510.80082,
+      "reason": "Committee consensus reached with 39.0% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956586.261993,
+      "reason": "Committee consensus reached with 43.6% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956681.2045033,
+      "reason": "Committee consensus reached with 39.6% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956737.8517272,
+      "reason": "Committee consensus reached with 39.4% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956795.684437,
+      "reason": "Committee consensus reached with 37.1% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956833.920831,
+      "reason": "Committee consensus reached with 54.1% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784956911.0695722,
+      "reason": "Committee consensus reached with 38.2% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784957101.4394932,
+      "reason": "Committee consensus reached with 42.1% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784957198.6620529,
+      "reason": "Committee consensus reached with 42.1% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784957355.8006413,
+      "reason": "Committee consensus reached with 38.9% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "LONG",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784957487.732551,
+      "reason": "Committee consensus reached with 36.4% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2557,
+      "direction": "SHORT",
+      "entry_price": 4070.8,
+      "exit_price": 4070.8,
+      "profit_loss": -1.04,
+      "profit_pct": 0.0,
+      "time": 1784957571.95821,
+      "reason": "Committee consensus reached with 39.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0365,
+      "direction": "SHORT",
+      "entry_price": 28236.75,
+      "exit_price": 28608.814831,
+      "profit_loss": -14.62,
+      "profit_pct": -1.32,
+      "time": 1785104443.5401113,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2514,
+      "direction": "LONG",
+      "entry_price": 4102.6,
+      "exit_price": 4074.498694,
+      "profit_loss": -8.09,
+      "profit_pct": -0.68,
+      "time": 1785164600.0423193,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "direction": "LONG",
+      "entry_price": 28714.5,
+      "exit_price": 28093.590414,
+      "profit_loss": -23.56,
+      "profit_pct": -2.16,
+      "time": 1785164711.3937373,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2554,
+      "direction": "LONG",
+      "entry_price": 4077.9,
+      "exit_price": 4043.8542,
+      "profit_loss": -9.73,
+      "profit_pct": -0.83,
+      "time": 1785219114.058346,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "direction": "SHORT",
+      "entry_price": 27954.5,
+      "exit_price": 28036.613555,
+      "profit_loss": -4.1,
+      "profit_pct": -0.29,
+      "time": 1785228670.8081598,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "direction": "SHORT",
+      "entry_price": 28004.75,
+      "exit_price": 28011.616393,
+      "profit_loss": -1.3,
+      "profit_pct": -0.02,
+      "time": 1785240993.0663736,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "direction": "SHORT",
+      "entry_price": 27991.25,
+      "exit_price": 27721.234578,
+      "profit_loss": 9.01,
+      "profit_pct": 0.96,
+      "time": 1785246957.9570744,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "direction": "SHORT",
+      "entry_price": 27794.5,
+      "exit_price": 27966.202801,
+      "profit_loss": -7.49,
+      "profit_pct": -0.62,
+      "time": 1785311140.5552802,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.037,
+      "direction": "SHORT",
+      "entry_price": 27866.25,
+      "exit_price": 28000.537971,
+      "profit_loss": -6.0,
+      "profit_pct": -0.48,
+      "time": 1785317156.645284,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "direction": "LONG",
+      "entry_price": 4105.5,
+      "exit_price": 4082.108835,
+      "profit_loss": -6.97,
+      "profit_pct": -0.57,
+      "time": 1785323190.2285104,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0368,
+      "direction": "SHORT",
+      "entry_price": 27990.75,
+      "exit_price": 27989.5,
+      "profit_loss": -0.98,
+      "profit_pct": 0.0,
+      "time": 1785327502.8658338,
+      "reason": "Committee consensus reached with 49.6% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2546,
+      "direction": "LONG",
+      "entry_price": 4085.8,
+      "exit_price": 4070.969763,
+      "profit_loss": -4.81,
+      "profit_pct": -0.36,
+      "time": 1785328578.415041,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0369,
+      "direction": "LONG",
+      "entry_price": 27895.5,
+      "exit_price": 27910.5,
+      "profit_loss": -0.48,
+      "profit_pct": 0.05,
+      "time": 1785330601.9514701,
+      "reason": "Committee consensus reached with 38.2% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.253,
+      "direction": "LONG",
+      "entry_price": 4074.1,
+      "exit_price": 4060.028193,
+      "profit_loss": -4.59,
+      "profit_pct": -0.35,
+      "time": 1785334035.2201357,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2563,
+      "direction": "LONG",
+      "entry_price": 4062.4,
+      "exit_price": 4106.090998,
+      "profit_loss": 10.15,
+      "profit_pct": 1.08,
+      "time": 1785345825.6562984,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0376,
+      "direction": "SHORT",
+      "entry_price": 27720.75,
+      "exit_price": 27869.198903,
+      "profit_loss": -6.63,
+      "profit_pct": -0.54,
+      "time": 1785348665.0343928,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "direction": "LONG",
+      "entry_price": 4101.9,
+      "exit_price": 4140.741063,
+      "profit_loss": 8.8,
+      "profit_pct": 0.95,
+      "time": 1785348732.469867,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2521,
+      "direction": "LONG",
+      "entry_price": 4130.3,
+      "exit_price": 4113.328168,
+      "profit_loss": -5.32,
+      "profit_pct": -0.41,
+      "time": 1785350537.1030202,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0372,
+      "direction": "SHORT",
+      "entry_price": 27739.75,
+      "exit_price": 27901.834836,
+      "profit_loss": -7.07,
+      "profit_pct": -0.58,
+      "time": 1785351030.912081,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.253,
+      "direction": "LONG",
+      "entry_price": 4115.3,
+      "exit_price": 4155.648774,
+      "profit_loss": 9.16,
+      "profit_pct": 0.98,
+      "time": 1785351607.9517498,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2503,
+      "direction": "LONG",
+      "entry_price": 4159.5,
+      "exit_price": 4145.615929,
+      "profit_loss": -4.51,
+      "profit_pct": -0.33,
+      "time": 1785353567.2258468,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2511,
+      "direction": "LONG",
+      "entry_price": 4145.2,
+      "exit_price": 4121.461149,
+      "profit_loss": -7.0,
+      "profit_pct": -0.57,
+      "time": 1785354512.2239854,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2522,
+      "direction": "LONG",
+      "entry_price": 4128.1,
+      "exit_price": 4106.041298,
+      "profit_loss": -6.6,
+      "profit_pct": -0.53,
+      "time": 1785355704.1305892,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2536,
+      "direction": "LONG",
+      "entry_price": 4104.8,
+      "exit_price": 4146.493522,
+      "profit_loss": 9.52,
+      "profit_pct": 1.02,
+      "time": 1785366375.476188,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "direction": "SHORT",
+      "entry_price": 27470.5,
+      "exit_price": 27553.398854,
+      "profit_loss": -4.14,
+      "profit_pct": -0.3,
+      "time": 1785368432.7790878,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2508,
+      "direction": "LONG",
+      "entry_price": 4147.4,
+      "exit_price": 4132.517501,
+      "profit_loss": -4.77,
+      "profit_pct": -0.36,
+      "time": 1785371374.2233121,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2518,
+      "direction": "LONG",
+      "entry_price": 4133.9,
+      "exit_price": 4124.945879,
+      "profit_loss": -3.29,
+      "profit_pct": -0.22,
+      "time": 1785380694.750969,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2521,
+      "direction": "LONG",
+      "entry_price": 4128.3,
+      "exit_price": 4019.652269,
+      "profit_loss": -28.4,
+      "profit_pct": -2.63,
+      "time": 1785383999.6975534,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2528,
+      "direction": "LONG",
+      "entry_price": 4115.6,
+      "exit_price": 4092.740302,
+      "profit_loss": -6.81,
+      "profit_pct": -0.56,
+      "time": 1785390425.7781138,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0374,
+      "direction": "SHORT",
+      "entry_price": 27522.25,
+      "exit_price": 27516.895894,
+      "profit_loss": -0.83,
+      "profit_pct": 0.02,
+      "time": 1785400421.9568596,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2542,
+      "direction": "LONG",
+      "entry_price": 4089.3,
+      "exit_price": 4130.001704,
+      "profit_loss": 9.3,
+      "profit_pct": 1.0,
+      "time": 1785405690.100853,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0375,
+      "direction": "SHORT",
+      "entry_price": 27507.0,
+      "exit_price": 27620.52299,
+      "profit_loss": -5.29,
+      "profit_pct": -0.41,
+      "time": 1785407509.7363353,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0373,
+      "direction": "SHORT",
+      "entry_price": 27620.75,
+      "exit_price": 27818.113851,
+      "profit_loss": -8.4,
+      "profit_pct": -0.71,
+      "time": 1785416405.3803594,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.037,
+      "direction": "SHORT",
+      "entry_price": 27814.5,
+      "exit_price": 27846.0,
+      "profit_loss": -2.2,
+      "profit_pct": -0.11,
+      "time": 1785418338.9835646,
+      "reason": "Committee consensus reached with 39.6% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2516,
+      "direction": "LONG",
+      "entry_price": 4131.4,
+      "exit_price": 4174.419505,
+      "profit_loss": 9.77,
+      "profit_pct": 1.04,
+      "time": 1785420641.803118,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0361,
+      "direction": "LONG",
+      "entry_price": 28539.75,
+      "exit_price": 28530.75,
+      "profit_loss": -1.35,
+      "profit_pct": -0.03,
+      "time": 1785754809.7809405,
+      "reason": "Committee consensus reached with 36.6% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0361,
+      "direction": "LONG",
+      "entry_price": 28541.5,
+      "exit_price": 28494.75,
+      "profit_loss": -2.72,
+      "profit_pct": -0.16,
+      "time": 1785757666.1036277,
+      "reason": "Committee consensus reached with 37.9% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "direction": "LONG",
+      "entry_price": 28466.25,
+      "exit_price": 28459.75,
+      "profit_loss": -1.27,
+      "profit_pct": -0.02,
+      "time": 1785758028.2177339,
+      "reason": "Committee consensus reached with 48.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "direction": "LONG",
+      "entry_price": 28457.75,
+      "exit_price": 28469.25,
+      "profit_loss": -0.61,
+      "profit_pct": 0.04,
+      "time": 1785758210.055437,
+      "reason": "Committee consensus reached with 35.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0362,
+      "direction": "LONG",
+      "entry_price": 28445.5,
+      "exit_price": 28411.0,
+      "profit_loss": -2.28,
+      "profit_pct": -0.12,
+      "time": 1785758758.0930152,
+      "reason": "Committee consensus reached with 45.4% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2531,
+      "direction": "LONG",
+      "entry_price": 4110.8,
+      "exit_price": 4091.737566,
+      "profit_loss": -5.86,
+      "profit_pct": -0.46,
+      "time": 1785772912.7474334,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0363,
+      "direction": "LONG",
+      "entry_price": 28410.75,
+      "exit_price": 28763.966663,
+      "profit_loss": 11.78,
+      "profit_pct": 1.24,
+      "time": 1785772943.0527585,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0358,
+      "direction": "LONG",
+      "entry_price": 28798.75,
+      "exit_price": 28835.75,
+      "profit_loss": 0.29,
+      "profit_pct": 0.13,
+      "time": 1785774881.3286772,
+      "reason": "Committee consensus reached with 36.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "SHORT",
+      "entry_price": 28837.25,
+      "exit_price": 28833.0,
+      "profit_loss": -0.88,
+      "profit_pct": 0.01,
+      "time": 1785774999.870374,
+      "reason": "Committee consensus reached with 36.5% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "LONG",
+      "entry_price": 28833.0,
+      "exit_price": 28825.25,
+      "profit_loss": -1.31,
+      "profit_pct": -0.03,
+      "time": 1785777163.9089537,
+      "reason": "Committee consensus reached with 37.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "LONG",
+      "entry_price": 28825.25,
+      "exit_price": 28841.25,
+      "profit_loss": -0.46,
+      "profit_pct": 0.06,
+      "time": 1785777648.4521759,
+      "reason": "Committee consensus reached with 35.9% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "LONG",
+      "entry_price": 28841.25,
+      "exit_price": 28869.0,
+      "profit_loss": -0.04,
+      "profit_pct": 0.1,
+      "time": 1785778280.4714656,
+      "reason": "Committee consensus reached with 40.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "LONG",
+      "entry_price": 28877.5,
+      "exit_price": 28887.25,
+      "profit_loss": -0.68,
+      "profit_pct": 0.03,
+      "time": 1785779038.6375623,
+      "reason": "Committee consensus reached with 43.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "SHORT",
+      "entry_price": 28887.25,
+      "exit_price": 28890.75,
+      "profit_loss": -1.16,
+      "profit_pct": -0.01,
+      "time": 1785779232.1860785,
+      "reason": "Committee consensus reached with 44.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "SHORT",
+      "entry_price": 28880.25,
+      "exit_price": 28887.25,
+      "profit_loss": -1.28,
+      "profit_pct": -0.02,
+      "time": 1785779541.0320017,
+      "reason": "Committee consensus reached with 42.4% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0357,
+      "direction": "LONG",
+      "entry_price": 28887.25,
+      "exit_price": 28885.25,
+      "profit_loss": -1.1,
+      "profit_pct": -0.01,
+      "time": 1785779717.4894662,
+      "reason": "Committee consensus reached with 39.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28895.0,
+      "exit_price": 28915.5,
+      "profit_loss": -0.3,
+      "profit_pct": 0.07,
+      "time": 1785780407.4989448,
+      "reason": "Committee consensus reached with 39.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "SHORT",
+      "entry_price": 28915.5,
+      "exit_price": 28952.5,
+      "profit_loss": -2.35,
+      "profit_pct": -0.13,
+      "time": 1785780954.6268349,
+      "reason": "Committee consensus reached with 49.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28951.5,
+      "exit_price": 28928.75,
+      "profit_loss": -1.84,
+      "profit_pct": -0.08,
+      "time": 1785781821.5391078,
+      "reason": "Committee consensus reached with 36.6% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "SHORT",
+      "entry_price": 28930.0,
+      "exit_price": 28920.75,
+      "profit_loss": -0.7,
+      "profit_pct": 0.03,
+      "time": 1785782161.0149047,
+      "reason": "Committee consensus reached with 37.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28912.75,
+      "exit_price": 28902.25,
+      "profit_loss": -1.4,
+      "profit_pct": -0.04,
+      "time": 1785783147.7105153,
+      "reason": "Committee consensus reached with 36.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "SHORT",
+      "entry_price": 28902.25,
+      "exit_price": 28901.25,
+      "profit_loss": -0.99,
+      "profit_pct": 0.0,
+      "time": 1785783249.350158,
+      "reason": "Committee consensus reached with 38.2% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "SHORT",
+      "entry_price": 28909.5,
+      "exit_price": 28912.5,
+      "profit_loss": -1.14,
+      "profit_pct": -0.01,
+      "time": 1785783353.4307048,
+      "reason": "Committee consensus reached with 36.0% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28899.0,
+      "exit_price": 28918.5,
+      "profit_loss": -0.34,
+      "profit_pct": 0.07,
+      "time": 1785783652.6379554,
+      "reason": "Committee consensus reached with 40.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28918.5,
+      "exit_price": 28923.0,
+      "profit_loss": -0.87,
+      "profit_pct": 0.02,
+      "time": 1785784252.9098012,
+      "reason": "Committee consensus reached with 35.5% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28936.25,
+      "exit_price": 28912.75,
+      "profit_loss": -1.87,
+      "profit_pct": -0.08,
+      "time": 1785784844.5792696,
+      "reason": "Committee consensus reached with 41.6% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28912.75,
+      "exit_price": 28905.0,
+      "profit_loss": -1.3,
+      "profit_pct": -0.03,
+      "time": 1785785268.0839255,
+      "reason": "Committee consensus reached with 35.8% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28915.5,
+      "exit_price": 28919.0,
+      "profit_loss": -0.9,
+      "profit_pct": 0.01,
+      "time": 1785785683.7263913,
+      "reason": "Committee consensus reached with 35.6% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28919.0,
+      "exit_price": 28917.25,
+      "profit_loss": -1.09,
+      "profit_pct": -0.01,
+      "time": 1785785902.788388,
+      "reason": "Committee consensus reached with 39.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0356,
+      "direction": "LONG",
+      "entry_price": 28912.5,
+      "exit_price": 28914.5,
+      "profit_loss": -0.96,
+      "profit_pct": 0.01,
+      "time": 1785786094.9236016,
+      "reason": "Committee consensus reached with 39.3% confidence."
+    },
+    {
+      "symbol": "MGC=F",
+      "shares": 0.2541,
+      "direction": "LONG",
+      "entry_price": 4095.4,
+      "exit_price": 4117.2002,
+      "profit_loss": 4.49,
+      "profit_pct": 0.53,
+      "time": 1785802350.5283449,
+      "reason": "Committee consensus reached with 39.3% confidence."
+    }
+  ]
+}

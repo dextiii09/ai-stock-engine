@@ -1,0 +1,8 @@
+{
+    "trending_bull_threshold": 0.45,
+    "sideways_threshold": 0.52,
+    "trending_bear_threshold": 0.48,
+    "high_volatility_threshold": 0.55,
+    "learning_rate": 0.0014390769777796744,
+    "decay_factor": 0.9371959193267511
+}

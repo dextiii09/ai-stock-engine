@@ -1,0 +1,2802 @@
+[
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 116.86231616733834,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -122.21350315620336,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 213.54878175188256,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -39.21052013438217,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -91.75514826360339,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -96.0284253907565,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 31.103336365968506,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 238.42379842904614,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 22.71645524063688,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -63.902867956933775,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -75.62220944346014,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -47.826055661501776,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -33.48458509047301,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 245.14165415914522,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 139.87812487672537,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 245.65980086316023,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -53.58945998451196,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 42.026912019185886,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 143.26813920924897,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 185.69160865145525,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 203.3217045372782,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 134.05517281449875,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 35.032868111000326,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 181.62326968856186,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -35.64418786576968,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 84.76916135549388,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -102.1132910349687,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 177.90259475064576,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -82.57844360190579,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -32.34021907744031,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 113.8941698731617,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -51.49813140435734,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 107.39646904246416,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 231.6209933169634,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -67.59766365523312,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 243.94397490586977,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -105.38603975299358,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 223.56066975977484,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -142.47724958535076,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -145.48159863746432,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -50.20987813309005,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -79.93437622532186,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -149.16545127268998,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 15.903174184340187,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -88.71135328285214,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 152.7579267792995,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -40.92220377474602,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 165.704151307313,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 80.25706120683198,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -65.98226944432089,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 100.19361769248685,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 168.48707860590852,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 137.88194555117252,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -42.164555364517796,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -148.1283097811438,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 100.62613497293606,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -125.99270919922085,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 234.8015040208242,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 231.35027055785312,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -34.75545873114837,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -26.494666174311266,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 207.5035824873602,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -31.543071754718607,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -106.4756036522206,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 91.02258355303421,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -33.30338859624368,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -136.7079250931937,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -110.53810099616933,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -37.318460985683345,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -105.18266877712743,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 178.61124995335328,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -45.642373909726786,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 225.7925805988014,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 63.127593726281745,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 239.01925397374058,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 203.4112437923248,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 149.15772061293086,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -119.47287445255357,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -85.29483914265543,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 38.00632308727391,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 107.91511979497864,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -117.29984278172819,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 10.420802960800497,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -116.37106765064011,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -46.42312353280922,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -66.65365195474084,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -89.57397319428027,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 107.2700570078573,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 91.44635354483421,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -84.1015688746755,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 128.55735707087064,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 139.21261035819978,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -118.15817902217762,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 54.74687894981372,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "SELL",
+        "is_win": true,
+        "profit_loss": 15.945390495437763,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "SELL",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": true,
+        "profit_loss": 107.6353611711888,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -85.1046639286591,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MNQ=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -118.54705617564463,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "SELL",
+        "is_win": false,
+        "profit_loss": -50.62133806950342,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            }
+        ]
+    },
+    {
+        "symbol": "MGC=F",
+        "action": "BUY",
+        "is_win": false,
+        "profit_loss": -68.3304825989253,
+        "committee_breakdown": [
+            {
+                "agent": "Technical Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Fundamental Analyst",
+                "signal": "BUY",
+                "confidence": 0.8
+            },
+            {
+                "agent": "News & Sentiment AI",
+                "signal": "WAIT",
+                "confidence": 0.8
+            },
+            {
+                "agent": "Macro Economic AI",
+                "signal": "BUY",
+                "confidence": 0.8
+            }
+        ]
+    }
+]

@@ -1,0 +1,11 @@
+{
+  "daily_start_equity": 350556.01980688004,
+  "daily_reset_date": "2026-08-20",
+  "weekly_start_equity": 350605.97770687996,
+  "weekly_reset_week": [
+    2026,
+    34
+  ],
+  "global_halt": false,
+  "halt_reason": ""
+}

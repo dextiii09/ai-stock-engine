@@ -1,0 +1,837 @@
+{
+  "portfolio_balance": 78576.6544003185,
+  "active_holdings": [
+    {
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "entry_price": 77.76,
+      "current_price": 77.46,
+      "value": 4122.5916,
+      "change": -0.386,
+      "stop_loss": 77.449,
+      "take_profit": 78.5174,
+      "best_price": 77.76,
+      "sparkline": [
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.68,
+        77.51,
+        77.51,
+        77.51,
+        77.51,
+        77.51,
+        77.51,
+        77.51,
+        77.46,
+        77.46
+      ],
+      "regime": "Trending Bull",
+      "direction": "LONG"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "entry_price": 64452.3,
+      "current_price": 64452.3008,
+      "value": 4144.2829,
+      "change": 0.0,
+      "stop_loss": 64194.4916,
+      "take_profit": 65096.8238,
+      "best_price": 64452.3008,
+      "sparkline": [
+        64452.3,
+        64452.3008
+      ],
+      "regime": "Trending Bull",
+      "direction": "LONG"
+    },
+    {
+      "symbol": "META",
+      "shares": 6.7869,
+      "entry_price": 675.1,
+      "current_price": 681.245,
+      "value": 4623.5417,
+      "change": 0.91,
+      "stop_loss": 678.52,
+      "take_profit": 681.9571,
+      "best_price": 681.245,
+      "sparkline": [
+        678.88,
+        678.88,
+        678.88,
+        678.965,
+        678.965,
+        678.965,
+        678.965,
+        678.965,
+        678.965,
+        678.965,
+        678.965,
+        678.965,
+        681.245,
+        681.245,
+        681.245,
+        681.245,
+        681.245,
+        681.245,
+        681.245,
+        681.245
+      ],
+      "regime": "Trending Bear",
+      "direction": "LONG"
+    },
+    {
+      "symbol": "AMZN",
+      "shares": 17.1052,
+      "entry_price": 254.57,
+      "current_price": 254.802,
+      "value": 4358.4392,
+      "change": 0.091,
+      "stop_loss": 253.7828,
+      "take_profit": 257.0551,
+      "best_price": 254.802,
+      "sparkline": [
+        254.57,
+        254.51,
+        254.51,
+        254.51,
+        254.51,
+        254.51,
+        254.51,
+        254.57,
+        254.57,
+        254.57,
+        254.57,
+        254.57,
+        254.57,
+        254.57,
+        254.57,
+        254.57,
+        254.79,
+        254.802
+      ],
+      "regime": "Trending Bear",
+      "direction": "LONG"
+    },
+    {
+      "symbol": "MSFT",
+      "shares": 10.4637,
+      "entry_price": 395.43,
+      "current_price": 395.245,
+      "value": 4135.7251,
+      "change": -0.047,
+      "stop_loss": 393.8483,
+      "take_profit": 399.1975,
+      "best_price": 395.43,
+      "sparkline": [
+        395.43,
+        395.245
+      ],
+      "regime": "Trending Bear",
+      "direction": "LONG"
+    }
+  ],
+  "execution_logs": [
+    {
+      "time": 1783027905.3584466,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "price": 29551.75
+    },
+    {
+      "time": 1783027917.0518415,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "price": 29551.75
+    },
+    {
+      "time": 1783029361.1507902,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.1692,
+      "price": 29551.75
+    },
+    {
+      "time": 1783060971.5088573,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "price": 20000.0
+    },
+    {
+      "time": 1783060971.5314248,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "price": 19500.0
+    },
+    {
+      "time": 1783069342.602186,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "price": 29767.5
+    },
+    {
+      "time": 1783070702.1649458,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "price": 29767.5
+    },
+    {
+      "time": 1783183517.5631847,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "price": 29767.5
+    },
+    {
+      "time": 1783256752.9851682,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "price": 29767.5
+    },
+    {
+      "time": 1783957402.9304597,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "price": 207.22
+    },
+    {
+      "time": 1783957669.5600863,
+      "action": "FILLED_BUY",
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "price": 316.89
+    },
+    {
+      "time": 1783957706.1364923,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.8326,
+      "price": 661.23
+    },
+    {
+      "time": 1783957821.9613886,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "price": 390.9085
+    },
+    {
+      "time": 1783958041.7030265,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "price": 248.11
+    },
+    {
+      "time": 1783958556.1773882,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "price": 206.195735
+    },
+    {
+      "time": 1783958756.6026049,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "price": 205.94
+    },
+    {
+      "time": 1783965922.7506616,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "price": 316.092026
+    },
+    {
+      "time": 1783965938.7206337,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "price": 204.063712
+    },
+    {
+      "time": 1784005017.104214,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "price": 29484.25
+    },
+    {
+      "time": 1784007932.7627075,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "price": 29612.252434
+    },
+    {
+      "time": 1784025206.8037453,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "price": 568.64
+    },
+    {
+      "time": 1784026203.9718902,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "price": 575.779508
+    },
+    {
+      "time": 1784031499.981664,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "price": 1795.64
+    },
+    {
+      "time": 1784032151.227263,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "price": 1795.979882
+    },
+    {
+      "time": 1784056196.7935941,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "price": 77.3
+    },
+    {
+      "time": 1784057445.3330483,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "price": 77.098318
+    },
+    {
+      "time": 1784061916.4595182,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "price": 1873.98
+    },
+    {
+      "time": 1784064045.5491178,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "price": 64595.0391
+    },
+    {
+      "time": 1784066613.2688184,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "price": 64501.212353
+    },
+    {
+      "time": 1784068023.7980196,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "price": 580.8
+    },
+    {
+      "time": 1784068502.9277916,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "price": 1891.385481
+    },
+    {
+      "time": 1784072934.3870614,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "price": 77.75
+    },
+    {
+      "time": 1784075182.082117,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "price": 77.482553
+    },
+    {
+      "time": 1784075221.0542297,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "price": 1878.84
+    },
+    {
+      "time": 1784078350.8816676,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "price": 1871.804678
+    },
+    {
+      "time": 1784079627.7745533,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "price": 579.751076
+    },
+    {
+      "time": 1784095806.7243836,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "price": 581.02
+    },
+    {
+      "time": 1784098874.1901178,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "price": 578.524697
+    },
+    {
+      "time": 1784098890.3472817,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "price": 1872.9399
+    },
+    {
+      "time": 1784100117.5968974,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "price": 77.74
+    },
+    {
+      "time": 1784100469.2254682,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "price": 1864.849039
+    },
+    {
+      "time": 1784100565.101641,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "price": 64452.3008
+    },
+    {
+      "time": 1784102106.3185005,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "price": 384.784121
+    },
+    {
+      "time": 1784102119.9705439,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "price": 211.8
+    },
+    {
+      "time": 1784124591.657593,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "price": 253.554995
+    },
+    {
+      "time": 1784124605.6554596,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "META",
+      "shares": 6.8326,
+      "price": 670.236198
+    },
+    {
+      "time": 1784124813.2381494,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "price": 394.33
+    },
+    {
+      "time": 1784124856.2047815,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "price": 253.98
+    },
+    {
+      "time": 1784125869.0571957,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "price": 210.246429
+    },
+    {
+      "time": 1784126099.8889916,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "price": 210.76
+    },
+    {
+      "time": 1784126319.1815286,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "price": 209.855148
+    },
+    {
+      "time": 1784126569.5311234,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "price": 253.713015
+    },
+    {
+      "time": 1784130131.9563208,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "price": 209.18
+    },
+    {
+      "time": 1784135123.0220835,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "price": 207.609173
+    },
+    {
+      "time": 1784135126.0818071,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "price": 394.833061
+    },
+    {
+      "time": 1784135135.027214,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.7869,
+      "price": 675.205
+    },
+    {
+      "time": 1784145002.4493108,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 17.1052,
+      "price": 254.51
+    },
+    {
+      "time": 1784145521.4686213,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.4637,
+      "price": 395.245
+    }
+  ],
+  "closed_trades": [
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "entry_price": 29551.75,
+      "exit_price": 29551.75,
+      "profit_loss": -0.0,
+      "profit_pct": 0.0,
+      "time": 1783027917.075756,
+      "reason": "Committee consensus reached with 32.1% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "direction": "SHORT",
+      "entry_price": 20000.0,
+      "exit_price": 19500.0,
+      "profit_loss": 125.0,
+      "profit_pct": 2.5,
+      "time": 1783060971.5449355,
+      "reason": "Test cover profit"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "direction": "SHORT",
+      "entry_price": 29767.5,
+      "exit_price": 29767.5,
+      "profit_loss": 0.0,
+      "profit_pct": 0.0,
+      "time": 1783070702.4680264,
+      "reason": "Committee consensus reached with 29.3% confidence."
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "direction": "SHORT",
+      "entry_price": 29767.5,
+      "exit_price": 29767.5,
+      "profit_loss": -5.01,
+      "profit_pct": 0.0,
+      "time": 1783256753.0223475,
+      "reason": "Committee consensus reached with 24.5% confidence."
+    },
+    {
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "direction": "LONG",
+      "entry_price": 207.15,
+      "exit_price": 206.195735,
+      "profit_loss": -28.03,
+      "profit_pct": -0.46,
+      "time": 1783958556.1773882,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "direction": "LONG",
+      "entry_price": 317.01,
+      "exit_price": 316.092026,
+      "profit_loss": -18.52,
+      "profit_pct": -0.29,
+      "time": 1783965922.7506616,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "direction": "LONG",
+      "entry_price": 205.91,
+      "exit_price": 204.063712,
+      "profit_loss": -41.04,
+      "profit_pct": -0.9,
+      "time": 1783965938.7206337,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "direction": "SHORT",
+      "entry_price": 29484.25,
+      "exit_price": 29612.252434,
+      "profit_loss": -19.51,
+      "profit_pct": -0.43,
+      "time": 1784007932.7627075,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "direction": "LONG",
+      "entry_price": 568.58,
+      "exit_price": 575.779508,
+      "profit_loss": 50.74,
+      "profit_pct": 1.27,
+      "time": 1784026203.9718902,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "direction": "LONG",
+      "entry_price": 1795.64,
+      "exit_price": 1795.979882,
+      "profit_loss": -3.53,
+      "profit_pct": 0.02,
+      "time": 1784032151.227263,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "direction": "LONG",
+      "entry_price": 77.34,
+      "exit_price": 77.098318,
+      "profit_loss": -17.97,
+      "profit_pct": -0.31,
+      "time": 1784057445.3330483,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "direction": "LONG",
+      "entry_price": 64595.04,
+      "exit_price": 64501.212353,
+      "profit_loss": -10.15,
+      "profit_pct": -0.15,
+      "time": 1784066613.2688184,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "direction": "LONG",
+      "entry_price": 1873.98,
+      "exit_price": 1891.385481,
+      "profit_loss": 36.07,
+      "profit_pct": 0.93,
+      "time": 1784068502.9277916,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "direction": "LONG",
+      "entry_price": 77.74,
+      "exit_price": 77.482553,
+      "profit_loss": -17.89,
+      "profit_pct": -0.33,
+      "time": 1784075182.082117,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "direction": "LONG",
+      "entry_price": 1878.84,
+      "exit_price": 1871.804678,
+      "profit_loss": -19.68,
+      "profit_pct": -0.37,
+      "time": 1784078350.8816676,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "direction": "LONG",
+      "entry_price": 580.72,
+      "exit_price": 579.751076,
+      "profit_loss": -11.04,
+      "profit_pct": -0.17,
+      "time": 1784079627.7745533,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "direction": "LONG",
+      "entry_price": 581.0,
+      "exit_price": 578.524697,
+      "profit_loss": -22.9,
+      "profit_pct": -0.43,
+      "time": 1784098874.1901178,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "direction": "LONG",
+      "entry_price": 1872.94,
+      "exit_price": 1864.849039,
+      "profit_loss": -23.15,
+      "profit_pct": -0.43,
+      "time": 1784100469.2254682,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "direction": "LONG",
+      "entry_price": 391.02,
+      "exit_price": 384.784121,
+      "profit_loss": -72.69,
+      "profit_pct": -1.59,
+      "time": 1784102106.3185005,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "direction": "LONG",
+      "entry_price": 248.3,
+      "exit_price": 253.554995,
+      "profit_loss": 82.19,
+      "profit_pct": 2.12,
+      "time": 1784124591.657593,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "META",
+      "shares": 6.8326,
+      "direction": "LONG",
+      "entry_price": 661.11,
+      "exit_price": 670.236198,
+      "profit_loss": 57.78,
+      "profit_pct": 1.38,
+      "time": 1784124605.6554596,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "direction": "LONG",
+      "entry_price": 211.73,
+      "exit_price": 210.246429,
+      "profit_loss": -33.2,
+      "profit_pct": -0.7,
+      "time": 1784125869.0571957,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "direction": "LONG",
+      "entry_price": 210.92,
+      "exit_price": 209.855148,
+      "profit_loss": -25.15,
+      "profit_pct": -0.5,
+      "time": 1784126319.1815286,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "direction": "LONG",
+      "entry_price": 254.2,
+      "exit_price": 253.713015,
+      "profit_loss": -12.14,
+      "profit_pct": -0.19,
+      "time": 1784126569.5311234,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "direction": "LONG",
+      "entry_price": 209.25,
+      "exit_price": 207.609173,
+      "profit_loss": -38.58,
+      "profit_pct": -0.78,
+      "time": 1784135123.0220835,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "direction": "LONG",
+      "entry_price": 394.24,
+      "exit_price": 394.833061,
+      "profit_loss": 2.2,
+      "profit_pct": 0.15,
+      "time": 1784135126.0818071,
+      "reason": "STOP_LOSS"
+    }
+  ]
+}

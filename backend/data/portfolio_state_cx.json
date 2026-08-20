@@ -1,0 +1,3290 @@
+{
+  "portfolio_balance": 93825.49638426525,
+  "active_holdings": [],
+  "execution_logs": [
+    {
+      "time": 1783027905.3584466,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "price": 29551.75
+    },
+    {
+      "time": 1783027917.0518415,
+      "action": "FILLED_SELL",
+      "symbol": "MNQ=F",
+      "shares": 0.0677,
+      "price": 29551.75
+    },
+    {
+      "time": 1783029361.1507902,
+      "action": "FILLED_BUY",
+      "symbol": "MNQ=F",
+      "shares": 0.1692,
+      "price": 29551.75
+    },
+    {
+      "time": 1783060971.5088573,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "price": 20000.0
+    },
+    {
+      "time": 1783060971.5314248,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.25,
+      "price": 19500.0
+    },
+    {
+      "time": 1783069342.602186,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "price": 29767.5
+    },
+    {
+      "time": 1783070702.1649458,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.1177,
+      "price": 29767.5
+    },
+    {
+      "time": 1783183517.5631847,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "price": 29767.5
+    },
+    {
+      "time": 1783256752.9851682,
+      "action": "FILLED_COVER",
+      "symbol": "MNQ=F",
+      "shares": 0.1682,
+      "price": 29767.5
+    },
+    {
+      "time": 1783957402.9304597,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "price": 207.22
+    },
+    {
+      "time": 1783957669.5600863,
+      "action": "FILLED_BUY",
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "price": 316.89
+    },
+    {
+      "time": 1783957706.1364923,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.8326,
+      "price": 661.23
+    },
+    {
+      "time": 1783957821.9613886,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "price": 390.9085
+    },
+    {
+      "time": 1783958041.7030265,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "price": 248.11
+    },
+    {
+      "time": 1783958556.1773882,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 24.1579,
+      "price": 206.195735
+    },
+    {
+      "time": 1783958756.6026049,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "price": 205.94
+    },
+    {
+      "time": 1783965922.7506616,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AAPL",
+      "shares": 15.0077,
+      "price": 316.092026
+    },
+    {
+      "time": 1783965938.7206337,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.0164,
+      "price": 204.063712
+    },
+    {
+      "time": 1784005017.104214,
+      "action": "FILLED_SHORT",
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "price": 29484.25
+    },
+    {
+      "time": 1784007932.7627075,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MNQ=F",
+      "shares": 0.1238,
+      "price": 29612.252434
+    },
+    {
+      "time": 1784025206.8037453,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "price": 568.64
+    },
+    {
+      "time": 1784026203.9718902,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "price": 575.779508
+    },
+    {
+      "time": 1784031499.981664,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "price": 1795.64
+    },
+    {
+      "time": 1784032151.227263,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "price": 1795.979882
+    },
+    {
+      "time": 1784056196.7935941,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "price": 77.3
+    },
+    {
+      "time": 1784057445.3330483,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "price": 77.098318
+    },
+    {
+      "time": 1784061916.4595182,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "price": 1873.98
+    },
+    {
+      "time": 1784064045.5491178,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "price": 64595.0391
+    },
+    {
+      "time": 1784066613.2688184,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "price": 64501.212353
+    },
+    {
+      "time": 1784068023.7980196,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "price": 580.8
+    },
+    {
+      "time": 1784068502.9277916,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "price": 1891.385481
+    },
+    {
+      "time": 1784072934.3870614,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "price": 77.75
+    },
+    {
+      "time": 1784075182.082117,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "price": 77.482553
+    },
+    {
+      "time": 1784075221.0542297,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "price": 1878.84
+    },
+    {
+      "time": 1784078350.8816676,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "price": 1871.804678
+    },
+    {
+      "time": 1784079627.7745533,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "price": 579.751076
+    },
+    {
+      "time": 1784095806.7243836,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "price": 581.02
+    },
+    {
+      "time": 1784098874.1901178,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "price": 578.524697
+    },
+    {
+      "time": 1784098890.3472817,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "price": 1872.9399
+    },
+    {
+      "time": 1784100117.5968974,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "price": 77.74
+    },
+    {
+      "time": 1784100469.2254682,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "price": 1864.849039
+    },
+    {
+      "time": 1784100565.101641,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "price": 64452.3008
+    },
+    {
+      "time": 1784102106.3185005,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 10.9797,
+      "price": 384.784121
+    },
+    {
+      "time": 1784102119.9705439,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "price": 211.8
+    },
+    {
+      "time": 1784124591.657593,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "AMZN",
+      "shares": 16.4338,
+      "price": 253.554995
+    },
+    {
+      "time": 1784124605.6554596,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "META",
+      "shares": 6.8326,
+      "price": 670.236198
+    },
+    {
+      "time": 1784124813.2381494,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "price": 394.33
+    },
+    {
+      "time": 1784124856.2047815,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "price": 253.98
+    },
+    {
+      "time": 1784125869.0571957,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.5987,
+      "price": 210.246429
+    },
+    {
+      "time": 1784126099.8889916,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "price": 210.76
+    },
+    {
+      "time": 1784126319.1815286,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.7333,
+      "price": 209.855148
+    },
+    {
+      "time": 1784126569.5311234,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AMZN",
+      "shares": 16.3849,
+      "price": 253.713015
+    },
+    {
+      "time": 1784130131.9563208,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "price": 209.18
+    },
+    {
+      "time": 1784135123.0220835,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.869,
+      "price": 207.609173
+    },
+    {
+      "time": 1784135126.0818071,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 11.1085,
+      "price": 394.833061
+    },
+    {
+      "time": 1784135135.027214,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.7869,
+      "price": 675.205
+    },
+    {
+      "time": 1784145002.4493108,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 17.1052,
+      "price": 254.51
+    },
+    {
+      "time": 1784145521.4686213,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.4637,
+      "price": 395.245
+    },
+    {
+      "time": 1784267529.7990744,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "MSFT",
+      "shares": 10.4637,
+      "price": 400.810517
+    },
+    {
+      "time": 1784267572.645961,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 19.7603,
+      "price": 207.47
+    },
+    {
+      "time": 1784267575.4844828,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AMZN",
+      "shares": 17.1052,
+      "price": 249.871171
+    },
+    {
+      "time": 1784267595.4401152,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "META",
+      "shares": 6.7869,
+      "price": 664.429133
+    },
+    {
+      "time": 1784267680.6901636,
+      "action": "FILLED_BUY",
+      "symbol": "AAPL",
+      "shares": 13.0028,
+      "price": 333.27
+    },
+    {
+      "time": 1784267743.257486,
+      "action": "FILLED_BUY",
+      "symbol": "MSFT",
+      "shares": 10.2632,
+      "price": 401.12
+    },
+    {
+      "time": 1784295071.710602,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 19.7603,
+      "price": 202.160248
+    },
+    {
+      "time": 1784295073.8959465,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "MSFT",
+      "shares": 10.2632,
+      "price": 393.731305
+    },
+    {
+      "time": 1784295307.0931418,
+      "action": "FILLED_BUY",
+      "symbol": "META",
+      "shares": 6.6789,
+      "price": 645.66
+    },
+    {
+      "time": 1784295426.1275957,
+      "action": "FILLED_BUY",
+      "symbol": "NVDA",
+      "shares": 20.2724,
+      "price": 202.0817
+    },
+    {
+      "time": 1784295439.2004373,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AAPL",
+      "shares": 13.0028,
+      "price": 331.404978
+    },
+    {
+      "time": 1784295747.984558,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "NVDA",
+      "shares": 20.2724,
+      "price": 200.381028
+    },
+    {
+      "time": 1784295774.6194506,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "META",
+      "shares": 6.6789,
+      "price": 639.290832
+    },
+    {
+      "time": 1784296278.3006866,
+      "action": "FILLED_BUY",
+      "symbol": "AMZN",
+      "shares": 18.4145,
+      "price": 245.63
+    },
+    {
+      "time": 1784297415.55706,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AMZN",
+      "shares": 18.4145,
+      "price": 247.266422
+    },
+    {
+      "time": 1784539753.8935983,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "price": 64072.213124
+    },
+    {
+      "time": 1784539777.9322474,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "price": 76.418302
+    },
+    {
+      "time": 1784543082.343198,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 8.191,
+      "price": 567.0
+    },
+    {
+      "time": 1784545986.9719832,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0716,
+      "price": 64365.4297
+    },
+    {
+      "time": 1784650518.5347798,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BTC-USD",
+      "shares": 0.0716,
+      "price": 66498.803203
+    },
+    {
+      "time": 1784650558.4175026,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 8.191,
+      "price": 575.567027
+    },
+    {
+      "time": 1784669956.738375,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6395,
+      "price": 573.48
+    },
+    {
+      "time": 1784679508.8479555,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6395,
+      "price": 575.203705
+    },
+    {
+      "time": 1784695250.1221538,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6444,
+      "price": 571.74
+    },
+    {
+      "time": 1784697679.6965709,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4878,
+      "price": 1923.72
+    },
+    {
+      "time": 1784701299.0011723,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4878,
+      "price": 1912.775848
+    },
+    {
+      "time": 1784723471.6685216,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6444,
+      "price": 570.229979
+    },
+    {
+      "time": 1784741230.3441057,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6447,
+      "price": 571.6
+    },
+    {
+      "time": 1784745120.762886,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 11.994,
+      "price": 77.6
+    },
+    {
+      "time": 1784745194.8893044,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6447,
+      "price": 569.938448
+    },
+    {
+      "time": 1784747583.6945076,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 11.994,
+      "price": 77.237938
+    },
+    {
+      "time": 1784756663.9085882,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0142,
+      "price": 66085.3906
+    },
+    {
+      "time": 1784758481.959184,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.0247,
+      "price": 78.02
+    },
+    {
+      "time": 1784762083.6414838,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.483,
+      "price": 1923.13
+    },
+    {
+      "time": 1784762133.25019,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.0247,
+      "price": 77.527769
+    },
+    {
+      "time": 1784765266.957977,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0142,
+      "price": 66180.687424
+    },
+    {
+      "time": 1784767246.1554322,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6299,
+      "price": 571.0
+    },
+    {
+      "time": 1784769483.5818012,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.483,
+      "price": 1926.467553
+    },
+    {
+      "time": 1784800578.2484436,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.0998,
+      "price": 77.53
+    },
+    {
+      "time": 1784809849.409032,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.0998,
+      "price": 77.389099
+    },
+    {
+      "time": 1784819456.0845125,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.6299,
+      "price": 565.355686
+    },
+    {
+      "time": 1784822136.6126149,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.496,
+      "price": 1895.2
+    },
+    {
+      "time": 1784822776.790487,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.3503,
+      "price": 75.96
+    },
+    {
+      "time": 1784823304.9443414,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "price": 64815.4297
+    },
+    {
+      "time": 1784824150.2899868,
+      "action": "FILLED_SELL",
+      "symbol": "SOL-USD",
+      "shares": 12.3503,
+      "price": 76.01
+    },
+    {
+      "time": 1784826437.7859766,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.3437,
+      "price": 75.85
+    },
+    {
+      "time": 1784826817.565091,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.649,
+      "price": 566.64
+    },
+    {
+      "time": 1784829572.1375973,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ETH-USD",
+      "shares": 0.496,
+      "price": 1877.975614
+    },
+    {
+      "time": 1784832006.903833,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.4976,
+      "price": 1878.01
+    },
+    {
+      "time": 1784837036.6220212,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.3437,
+      "price": 75.923473
+    },
+    {
+      "time": 1784837055.0195274,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4976,
+      "price": 1879.239554
+    },
+    {
+      "time": 1784837245.0373373,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "price": 64995.665129
+    },
+    {
+      "time": 1784837715.4380298,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.649,
+      "price": 568.242866
+    },
+    {
+      "time": 1784837815.941324,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6547,
+      "price": 568.07
+    },
+    {
+      "time": 1784837850.150812,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.3385,
+      "price": 76.03
+    },
+    {
+      "time": 1784837864.5620832,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 65065.9805
+    },
+    {
+      "time": 1784837967.550091,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.4957,
+      "price": 1884.95
+    },
+    {
+      "time": 1784853220.788914,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "ETH-USD",
+      "shares": 0.4957,
+      "price": 1862.684799
+    },
+    {
+      "time": 1784855108.671099,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.3385,
+      "price": 75.94875
+    },
+    {
+      "time": 1784856392.6901352,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 65079.684762
+    },
+    {
+      "time": 1784856727.1359057,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.364,
+      "price": 75.88
+    },
+    {
+      "time": 1784862393.8957965,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.364,
+      "price": 75.731489
+    },
+    {
+      "time": 1784862543.2583516,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 65245.7383
+    },
+    {
+      "time": 1784862894.3984227,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6547,
+      "price": 569.272641
+    },
+    {
+      "time": 1784863017.6193407,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6476,
+      "price": 569.4
+    },
+    {
+      "time": 1784863588.2491574,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.3488,
+      "price": 75.82
+    },
+    {
+      "time": 1784867687.5826144,
+      "action": "FILLED_COVER",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 65353.8906
+    },
+    {
+      "time": 1784868661.0503583,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.4994,
+      "price": 1874.61
+    },
+    {
+      "time": 1784868913.2228186,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "price": 65265.0
+    },
+    {
+      "time": 1784869160.819154,
+      "action": "FILLED_COVER",
+      "symbol": "ETH-USD",
+      "shares": 0.4994,
+      "price": 1873.6
+    },
+    {
+      "time": 1784873989.1871154,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.3488,
+      "price": 76.011979
+    },
+    {
+      "time": 1784876045.4808216,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.4967,
+      "price": 1884.85
+    },
+    {
+      "time": 1784876898.1589837,
+      "action": "FILLED_COVER",
+      "symbol": "ETH-USD",
+      "shares": 0.4967,
+      "price": 1890.01
+    },
+    {
+      "time": 1784876997.3518214,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "price": 65574.242662
+    },
+    {
+      "time": 1784877094.28824,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6476,
+      "price": 570.958469
+    },
+    {
+      "time": 1784884026.8567743,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 65118.8281
+    },
+    {
+      "time": 1784884328.8002505,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4938,
+      "price": 1884.14
+    },
+    {
+      "time": 1784892756.4992,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4938,
+      "price": 1876.538436
+    },
+    {
+      "time": 1784894204.752726,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4946,
+      "price": 1881.04
+    },
+    {
+      "time": 1784897293.6915438,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4946,
+      "price": 1873.393293
+    },
+    {
+      "time": 1784897354.7432656,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 64714.016312
+    },
+    {
+      "time": 1784897951.2646532,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0145,
+      "price": 64719.5312
+    },
+    {
+      "time": 1784898512.1672957,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0145,
+      "price": 64337.538865
+    },
+    {
+      "time": 1784898691.4851046,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0146,
+      "price": 64308.9102
+    },
+    {
+      "time": 1784903936.4299428,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6806,
+      "price": 558.0
+    },
+    {
+      "time": 1784913995.9261246,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0146,
+      "price": 64083.543151
+    },
+    {
+      "time": 1784914120.3048906,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6806,
+      "price": 561.266587
+    },
+    {
+      "time": 1784914940.4972682,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6717,
+      "price": 562.07
+    },
+    {
+      "time": 1784919634.3158643,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6717,
+      "price": 564.174794
+    },
+    {
+      "time": 1784938865.02601,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "price": 64092.25
+    },
+    {
+      "time": 1784942350.4346526,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6623,
+      "price": 564.09
+    },
+    {
+      "time": 1784952875.426997,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.5033,
+      "price": 1859.15
+    },
+    {
+      "time": 1784966933.527932,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.5033,
+      "price": 1850.372018
+    },
+    {
+      "time": 1784977625.8785155,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.5036,
+      "price": 1858.13
+    },
+    {
+      "time": 1784984469.4419832,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6623,
+      "price": 566.574033
+    },
+    {
+      "time": 1784984606.4356725,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "price": 64084.873769
+    },
+    {
+      "time": 1784984628.975747,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6546,
+      "price": 566.64
+    },
+    {
+      "time": 1784987024.6652951,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.5036,
+      "price": 1866.125627
+    },
+    {
+      "time": 1784990260.9628458,
+      "action": "FILLED_COVER",
+      "symbol": "BNB-USD",
+      "shares": 1.6546,
+      "price": 566.17
+    },
+    {
+      "time": 1785155574.6991715,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.3262,
+      "price": 76.21
+    },
+    {
+      "time": 1785155666.871799,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6296,
+      "price": 570.67
+    },
+    {
+      "time": 1785158192.829983,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.3262,
+      "price": 76.549342
+    },
+    {
+      "time": 1785164606.141815,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6296,
+      "price": 566.978449
+    },
+    {
+      "time": 1785242306.5758648,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.5001,
+      "price": 1878.48
+    },
+    {
+      "time": 1785245342.899327,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.5001,
+      "price": 1880.758122
+    },
+    {
+      "time": 1785314969.896322,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6468,
+      "price": 570.39
+    },
+    {
+      "time": 1785316122.4968283,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5959,
+      "price": 73.83
+    },
+    {
+      "time": 1785322436.4013927,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5959,
+      "price": 73.737651
+    },
+    {
+      "time": 1785324612.2553027,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.582,
+      "price": 73.91
+    },
+    {
+      "time": 1785325208.5472312,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6468,
+      "price": 569.199521
+    },
+    {
+      "time": 1785326059.6397276,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 64414.9609
+    },
+    {
+      "time": 1785327418.3443794,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.582,
+      "price": 73.561827
+    },
+    {
+      "time": 1785327893.3320765,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4883,
+      "price": 1904.48
+    },
+    {
+      "time": 1785331425.3106675,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 64074.201117
+    },
+    {
+      "time": 1785333434.9927244,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4883,
+      "price": 1895.207374
+    },
+    {
+      "time": 1785351952.9312303,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6433,
+      "price": 571.48
+    },
+    {
+      "time": 1785351995.0748773,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4859,
+      "price": 1913.41
+    },
+    {
+      "time": 1785352013.953599,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "price": 64362.0586
+    },
+    {
+      "time": 1785352929.9487374,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4859,
+      "price": 1900.95504
+    },
+    {
+      "time": 1785352948.4165504,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "price": 63957.036776
+    },
+    {
+      "time": 1785353011.24096,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.489,
+      "price": 1900.86
+    },
+    {
+      "time": 1785353061.3623762,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 64049.8594
+    },
+    {
+      "time": 1785354385.7056828,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.489,
+      "price": 1891.182586
+    },
+    {
+      "time": 1785354396.0951169,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 63660.110541
+    },
+    {
+      "time": 1785354399.1896858,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6433,
+      "price": 567.723563
+    },
+    {
+      "time": 1785354665.3291845,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4977,
+      "price": 1886.28
+    },
+    {
+      "time": 1785355826.6765864,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4977,
+      "price": 1877.549564
+    },
+    {
+      "time": 1785362691.831526,
+      "action": "FILLED_SHORT",
+      "symbol": "BNB-USD",
+      "shares": 1.6475,
+      "price": 569.79
+    },
+    {
+      "time": 1785362818.842183,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.7291,
+      "price": 73.6
+    },
+    {
+      "time": 1785363519.1773126,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.4905,
+      "price": 1906.3101
+    },
+    {
+      "time": 1785366368.369044,
+      "action": "FILLED_COVER",
+      "symbol": "ETH-USD",
+      "shares": 0.4905,
+      "price": 1901.6
+    },
+    {
+      "time": 1785368968.4345775,
+      "action": "FILLED_COVER",
+      "symbol": "BNB-USD",
+      "shares": 1.6475,
+      "price": 571.83
+    },
+    {
+      "time": 1785369554.6952293,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "price": 63896.9883
+    },
+    {
+      "time": 1785370280.8243852,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.7291,
+      "price": 73.771098
+    },
+    {
+      "time": 1785372853.960238,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.642,
+      "price": 570.51
+    },
+    {
+      "time": 1785375190.8868048,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "price": 63900.408704
+    },
+    {
+      "time": 1785376913.9416282,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.642,
+      "price": 575.982473
+    },
+    {
+      "time": 1785380939.1594176,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6387,
+      "price": 572.85
+    },
+    {
+      "time": 1785386271.0766149,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.6387,
+      "price": 570.665094
+    },
+    {
+      "time": 1785394846.64205,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6374,
+      "price": 573.3
+    },
+    {
+      "time": 1785396499.2575164,
+      "action": "FILLED_SHORT",
+      "symbol": "ETH-USD",
+      "shares": 0.4884,
+      "price": 1902.9
+    },
+    {
+      "time": 1785399948.968937,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4884,
+      "price": 1909.445374
+    },
+    {
+      "time": 1785403703.9089198,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4845,
+      "price": 1917.86
+    },
+    {
+      "time": 1785405142.052595,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.6374,
+      "price": 578.895525
+    },
+    {
+      "time": 1785405703.4837053,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5636,
+      "price": 73.98
+    },
+    {
+      "time": 1785406402.379443,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5869,
+      "price": 579.84
+    },
+    {
+      "time": 1785408040.368579,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.5869,
+      "price": 585.511299
+    },
+    {
+      "time": 1785408887.9148686,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5636,
+      "price": 73.686602
+    },
+    {
+      "time": 1785411966.6425269,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5539,
+      "price": 74.04
+    },
+    {
+      "time": 1785418553.9896224,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4845,
+      "price": 1914.754735
+    },
+    {
+      "time": 1785420498.2028823,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5539,
+      "price": 74.278708
+    },
+    {
+      "time": 1785421584.920778,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.6094,
+      "price": 74.45
+    },
+    {
+      "time": 1785424607.6169171,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5786,
+      "price": 588.74
+    },
+    {
+      "time": 1785427937.701471,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4788,
+      "price": 1921.5
+    },
+    {
+      "time": 1785433209.706079,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0141,
+      "price": 64811.3516
+    },
+    {
+      "time": 1785433413.0854294,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.5786,
+      "price": 594.483946
+    },
+    {
+      "time": 1785435260.0613446,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5344,
+      "price": 593.79
+    },
+    {
+      "time": 1785437684.5654788,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.6094,
+      "price": 74.429392
+    },
+    {
+      "time": 1785437746.9239144,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4788,
+      "price": 1911.97939
+    },
+    {
+      "time": 1785437847.6803415,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4809,
+      "price": 1914.24
+    },
+    {
+      "time": 1785437850.6626465,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.244,
+      "price": 74.43
+    },
+    {
+      "time": 1785442616.164799,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.5344,
+      "price": 591.951823
+    },
+    {
+      "time": 1785443453.3991113,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5392,
+      "price": 592.04
+    },
+    {
+      "time": 1785443514.341876,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.244,
+      "price": 74.349771
+    },
+    {
+      "time": 1785443583.1724975,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.2367,
+      "price": 74.47
+    },
+    {
+      "time": 1785448352.6511862,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4809,
+      "price": 1916.613297
+    },
+    {
+      "time": 1785455492.304089,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.2367,
+      "price": 74.40438
+    },
+    {
+      "time": 1785457359.254481,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0141,
+      "price": 64634.927789
+    },
+    {
+      "time": 1785459049.1201718,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.5392,
+      "price": 590.388287
+    },
+    {
+      "time": 1785742128.086886,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.6116,
+      "price": 582.43
+    },
+    {
+      "time": 1785751202.267022,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.7872,
+      "price": 72.67
+    },
+    {
+      "time": 1785751255.5495443,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0148,
+      "price": 62777.5898
+    },
+    {
+      "time": 1785772932.3467383,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.6116,
+      "price": 591.402033
+    },
+    {
+      "time": 1785772948.1889484,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.7872,
+      "price": 73.562538
+    },
+    {
+      "time": 1785772964.0169842,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0148,
+      "price": 63725.462286
+    },
+    {
+      "time": 1785773022.3961759,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5851,
+      "price": 592.08
+    },
+    {
+      "time": 1785773109.9977949,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.6034,
+      "price": 73.72
+    },
+    {
+      "time": 1785775169.6234372,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.6034,
+      "price": 73.300023
+    },
+    {
+      "time": 1785775289.1950872,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.6747,
+      "price": 73.3
+    },
+    {
+      "time": 1785776575.5917685,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4938,
+      "price": 1862.4399
+    },
+    {
+      "time": 1785780899.9104164,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "SOL-USD",
+      "shares": 12.6747,
+      "price": 73.981711
+    },
+    {
+      "time": 1785781011.9928255,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.418,
+      "price": 74.08
+    },
+    {
+      "time": 1785787315.6321697,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.5851,
+      "price": 590.001013
+    },
+    {
+      "time": 1785787394.9704266,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5586,
+      "price": 590.31
+    },
+    {
+      "time": 1785790258.9727445,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.418,
+      "price": 73.703058
+    },
+    {
+      "time": 1785790324.0567787,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.4765,
+      "price": 73.74
+    },
+    {
+      "time": 1785791479.0478847,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4938,
+      "price": 1863.983483
+    },
+    {
+      "time": 1785791574.2610106,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4932,
+      "price": 1865.49
+    },
+    {
+      "time": 1785794604.213761,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4932,
+      "price": 1857.047561
+    },
+    {
+      "time": 1785794610.7434118,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.5586,
+      "price": 588.429895
+    },
+    {
+      "time": 1785794701.341182,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5771,
+      "price": 589.15
+    },
+    {
+      "time": 1785794721.7783494,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.4765,
+      "price": 73.399884
+    },
+    {
+      "time": 1785794729.1015158,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.5005,
+      "price": 1856.17
+    },
+    {
+      "time": 1785794789.2243228,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5453,
+      "price": 73.31
+    },
+    {
+      "time": 1785803343.388295,
+      "action": "FILLED_BUY",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 63351.7617
+    },
+    {
+      "time": 1785803467.0216742,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.5005,
+      "price": 1852.004608
+    },
+    {
+      "time": 1785803584.227288,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4914,
+      "price": 1852.95
+    },
+    {
+      "time": 1785803586.3026118,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5453,
+      "price": 73.174116
+    },
+    {
+      "time": 1785803747.594902,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.4429,
+      "price": 73.19
+    },
+    {
+      "time": 1785811123.3606317,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "SOL-USD",
+      "shares": 12.4429,
+      "price": 73.894398
+    },
+    {
+      "time": 1785811325.9091582,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.3311,
+      "price": 73.86
+    },
+    {
+      "time": 1785813215.5569985,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.3311,
+      "price": 73.492374
+    },
+    {
+      "time": 1785813308.9163446,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4914,
+      "price": 1857.372042
+    },
+    {
+      "time": 1785813351.9175904,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5199,
+      "price": 73.47
+    },
+    {
+      "time": 1785813556.3415186,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4897,
+      "price": 1859.42
+    },
+    {
+      "time": 1785818701.3938031,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "price": 63968.74562
+    },
+    {
+      "time": 1785820450.4244242,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5199,
+      "price": 73.606896
+    },
+    {
+      "time": 1785822543.7415214,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.5771,
+      "price": 588.75901
+    },
+    {
+      "time": 1785822679.5823407,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.577,
+      "price": 589.23
+    },
+    {
+      "time": 1785823239.0874252,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4897,
+      "price": 1860.263009
+    },
+    {
+      "time": 1785824656.4782326,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5969,
+      "price": 73.75
+    },
+    {
+      "time": 1785825697.991552,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5969,
+      "price": 73.354843
+    },
+    {
+      "time": 1785835137.588752,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BNB-USD",
+      "shares": 1.577,
+      "price": 587.497402
+    },
+    {
+      "time": 1785840487.5821693,
+      "action": "FILLED_SHORT",
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "price": 63678.2695
+    },
+    {
+      "time": 1785840490.0542517,
+      "action": "FILLED_SHORT",
+      "symbol": "SOL-USD",
+      "shares": 12.736,
+      "price": 73.52
+    },
+    {
+      "time": 1785842300.5841358,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.501,
+      "price": 1865.3199
+    },
+    {
+      "time": 1785844361.548752,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.736,
+      "price": 73.887385
+    },
+    {
+      "time": 1785849568.1274438,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.501,
+      "price": 1867.841587
+    },
+    {
+      "time": 1785850758.0029302,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "price": 64006.440458
+    },
+    {
+      "time": 1785851785.1750286,
+      "action": "FILLED_BUY",
+      "symbol": "BNB-USD",
+      "shares": 1.5938,
+      "price": 588.6
+    },
+    {
+      "time": 1785852773.5673542,
+      "action": "FILLED_BUY",
+      "symbol": "ETH-USD",
+      "shares": 0.4993,
+      "price": 1859.9399
+    },
+    {
+      "time": 1785853326.574223,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5368,
+      "price": 73.34
+    },
+    {
+      "time": 1785903997.8854754,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5368,
+      "price": 73.554247
+    },
+    {
+      "time": 1785904014.2640138,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "BNB-USD",
+      "shares": 1.5938,
+      "price": 597.444997
+    },
+    {
+      "time": 1785904488.3912086,
+      "action": "FILLED_BUY",
+      "symbol": "SOL-USD",
+      "shares": 12.5928,
+      "price": 73.77
+    },
+    {
+      "time": 1785913799.2289174,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "ETH-USD",
+      "shares": 0.4993,
+      "price": 1864.411338
+    },
+    {
+      "time": 1785914045.8042686,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "SOL-USD",
+      "shares": 12.5928,
+      "price": 73.760198
+    }
+  ],
+  "closed_trades": [
+    {
+      "symbol": "BNB-USD",
+      "shares": 7.6606,
+      "direction": "LONG",
+      "entry_price": 568.58,
+      "exit_price": 575.779508,
+      "profit_loss": 50.74,
+      "profit_pct": 1.27,
+      "time": 1784026203.9718902,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.4273,
+      "direction": "LONG",
+      "entry_price": 1795.64,
+      "exit_price": 1795.979882,
+      "profit_loss": -3.53,
+      "profit_pct": 0.02,
+      "time": 1784032151.227263,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 56.3837,
+      "direction": "LONG",
+      "entry_price": 77.34,
+      "exit_price": 77.098318,
+      "profit_loss": -17.97,
+      "profit_pct": -0.31,
+      "time": 1784057445.3330483,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0641,
+      "direction": "LONG",
+      "entry_price": 64595.04,
+      "exit_price": 64501.212353,
+      "profit_loss": -10.15,
+      "profit_pct": -0.15,
+      "time": 1784066613.2688184,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.3253,
+      "direction": "LONG",
+      "entry_price": 1873.98,
+      "exit_price": 1891.385481,
+      "profit_loss": 36.07,
+      "profit_pct": 0.93,
+      "time": 1784068502.9277916,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 53.4009,
+      "direction": "LONG",
+      "entry_price": 77.74,
+      "exit_price": 77.482553,
+      "profit_loss": -17.89,
+      "profit_pct": -0.33,
+      "time": 1784075182.082117,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.2093,
+      "direction": "LONG",
+      "entry_price": 1878.84,
+      "exit_price": 1871.804678,
+      "profit_loss": -19.68,
+      "profit_pct": -0.37,
+      "time": 1784078350.8816676,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 7.1267,
+      "direction": "LONG",
+      "entry_price": 580.72,
+      "exit_price": 579.751076,
+      "profit_loss": -11.04,
+      "profit_pct": -0.17,
+      "time": 1784079627.7745533,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 7.4979,
+      "direction": "LONG",
+      "entry_price": 581.0,
+      "exit_price": 578.524697,
+      "profit_loss": -22.9,
+      "profit_pct": -0.43,
+      "time": 1784098874.1901178,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 2.3254,
+      "direction": "LONG",
+      "entry_price": 1872.94,
+      "exit_price": 1864.849039,
+      "profit_loss": -23.15,
+      "profit_pct": -0.43,
+      "time": 1784100469.2254682,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0643,
+      "direction": "LONG",
+      "entry_price": 64452.3,
+      "exit_price": 64072.213124,
+      "profit_loss": -28.56,
+      "profit_pct": -0.59,
+      "time": 1784539753.8935983,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 53.2222,
+      "direction": "LONG",
+      "entry_price": 77.76,
+      "exit_price": 76.418302,
+      "profit_loss": -75.48,
+      "profit_pct": -1.73,
+      "time": 1784539777.9322474,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0716,
+      "direction": "LONG",
+      "entry_price": 64365.43,
+      "exit_price": 66498.803203,
+      "profit_loss": 147.99,
+      "profit_pct": 3.31,
+      "time": 1784650518.5347798,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 8.191,
+      "direction": "SHORT",
+      "entry_price": 566.96,
+      "exit_price": 575.567027,
+      "profit_loss": -75.21,
+      "profit_pct": -1.52,
+      "time": 1784650558.4175026,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6395,
+      "direction": "SHORT",
+      "entry_price": 573.48,
+      "exit_price": 575.203705,
+      "profit_loss": -3.77,
+      "profit_pct": -0.3,
+      "time": 1784679508.8479555,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4878,
+      "direction": "LONG",
+      "entry_price": 1923.72,
+      "exit_price": 1912.775848,
+      "profit_loss": -6.27,
+      "profit_pct": -0.57,
+      "time": 1784701299.0011723,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6444,
+      "direction": "SHORT",
+      "entry_price": 571.74,
+      "exit_price": 570.229979,
+      "profit_loss": 1.55,
+      "profit_pct": 0.26,
+      "time": 1784723471.6685216,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6447,
+      "direction": "LONG",
+      "entry_price": 571.6,
+      "exit_price": 569.938448,
+      "profit_loss": -3.67,
+      "profit_pct": -0.29,
+      "time": 1784745194.8893044,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 11.994,
+      "direction": "LONG",
+      "entry_price": 77.63,
+      "exit_price": 77.237938,
+      "profit_loss": -5.63,
+      "profit_pct": -0.51,
+      "time": 1784747583.6945076,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.0247,
+      "direction": "LONG",
+      "entry_price": 78.02,
+      "exit_price": 77.527769,
+      "profit_loss": -6.85,
+      "profit_pct": -0.63,
+      "time": 1784762133.25019,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0142,
+      "direction": "SHORT",
+      "entry_price": 66085.39,
+      "exit_price": 66180.687424,
+      "profit_loss": -2.29,
+      "profit_pct": -0.14,
+      "time": 1784765266.957977,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.483,
+      "direction": "LONG",
+      "entry_price": 1923.13,
+      "exit_price": 1926.467553,
+      "profit_loss": 0.68,
+      "profit_pct": 0.17,
+      "time": 1784769483.5818012,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.0998,
+      "direction": "LONG",
+      "entry_price": 77.55,
+      "exit_price": 77.389099,
+      "profit_loss": -2.88,
+      "profit_pct": -0.21,
+      "time": 1784809849.409032,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6299,
+      "direction": "SHORT",
+      "entry_price": 571.0,
+      "exit_price": 565.355686,
+      "profit_loss": 8.28,
+      "profit_pct": 0.99,
+      "time": 1784819456.0845125,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.3503,
+      "direction": "LONG",
+      "entry_price": 75.98,
+      "exit_price": 76.01,
+      "profit_loss": -0.57,
+      "profit_pct": 0.04,
+      "time": 1784824167.5574222,
+      "reason": "Committee consensus reached with 39.2% confidence."
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.496,
+      "direction": "SHORT",
+      "entry_price": 1895.2,
+      "exit_price": 1877.975614,
+      "profit_loss": 7.61,
+      "profit_pct": 0.91,
+      "time": 1784829572.1375973,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.3437,
+      "direction": "SHORT",
+      "entry_price": 75.84,
+      "exit_price": 75.923473,
+      "profit_loss": -1.97,
+      "profit_pct": -0.11,
+      "time": 1784837036.6220212,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4976,
+      "direction": "SHORT",
+      "entry_price": 1878.01,
+      "exit_price": 1879.239554,
+      "profit_loss": -1.55,
+      "profit_pct": -0.07,
+      "time": 1784837055.0195274,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "direction": "SHORT",
+      "entry_price": 64815.43,
+      "exit_price": 64995.665129,
+      "profit_loss": -3.51,
+      "profit_pct": -0.28,
+      "time": 1784837245.0373373,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.649,
+      "direction": "SHORT",
+      "entry_price": 566.64,
+      "exit_price": 568.242866,
+      "profit_loss": -3.58,
+      "profit_pct": -0.28,
+      "time": 1784837715.4380298,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4957,
+      "direction": "SHORT",
+      "entry_price": 1884.95,
+      "exit_price": 1862.684799,
+      "profit_loss": 10.11,
+      "profit_pct": 1.18,
+      "time": 1784853220.788914,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.3385,
+      "direction": "SHORT",
+      "entry_price": 76.01,
+      "exit_price": 75.94875,
+      "profit_loss": -0.18,
+      "profit_pct": 0.08,
+      "time": 1784855108.671099,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "direction": "SHORT",
+      "entry_price": 65065.98,
+      "exit_price": 65079.684762,
+      "profit_loss": -1.13,
+      "profit_pct": -0.02,
+      "time": 1784856392.6901352,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.364,
+      "direction": "SHORT",
+      "entry_price": 75.87,
+      "exit_price": 75.731489,
+      "profit_loss": 0.78,
+      "profit_pct": 0.18,
+      "time": 1784862393.8957965,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6547,
+      "direction": "SHORT",
+      "entry_price": 568.07,
+      "exit_price": 569.272641,
+      "profit_loss": -2.93,
+      "profit_pct": -0.21,
+      "time": 1784862894.3984227,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "direction": "SHORT",
+      "entry_price": 65245.74,
+      "exit_price": 65353.8906,
+      "profit_loss": -2.5,
+      "profit_pct": -0.17,
+      "time": 1784867727.3703814,
+      "reason": "Committee consensus reached with 36.4% confidence."
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4994,
+      "direction": "SHORT",
+      "entry_price": 1874.61,
+      "exit_price": 1873.6,
+      "profit_loss": -0.43,
+      "profit_pct": 0.05,
+      "time": 1784869181.9192204,
+      "reason": "Committee consensus reached with 36.9% confidence."
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.3488,
+      "direction": "SHORT",
+      "entry_price": 75.82,
+      "exit_price": 76.011979,
+      "profit_loss": -3.31,
+      "profit_pct": -0.25,
+      "time": 1784873989.1871154,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4967,
+      "direction": "SHORT",
+      "entry_price": 1884.85,
+      "exit_price": 1890.01,
+      "profit_loss": -3.5,
+      "profit_pct": -0.27,
+      "time": 1784876938.0851533,
+      "reason": "Committee consensus reached with 35.4% confidence."
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "direction": "SHORT",
+      "entry_price": 65265.0,
+      "exit_price": 65574.242662,
+      "profit_loss": -5.36,
+      "profit_pct": -0.47,
+      "time": 1784876997.3518214,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6476,
+      "direction": "SHORT",
+      "entry_price": 569.4,
+      "exit_price": 570.958469,
+      "profit_loss": -3.51,
+      "profit_pct": -0.27,
+      "time": 1784877094.28824,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4938,
+      "direction": "LONG",
+      "entry_price": 1884.14,
+      "exit_price": 1876.538436,
+      "profit_loss": -4.68,
+      "profit_pct": -0.4,
+      "time": 1784892756.4992,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4946,
+      "direction": "LONG",
+      "entry_price": 1881.04,
+      "exit_price": 1873.393293,
+      "profit_loss": -4.71,
+      "profit_pct": -0.41,
+      "time": 1784897293.6915438,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "direction": "LONG",
+      "entry_price": 65118.83,
+      "exit_price": 64714.016312,
+      "profit_loss": -6.76,
+      "profit_pct": -0.62,
+      "time": 1784897354.7432656,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0145,
+      "direction": "LONG",
+      "entry_price": 64719.53,
+      "exit_price": 64337.538865,
+      "profit_loss": -6.47,
+      "profit_pct": -0.59,
+      "time": 1784898512.1672957,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0146,
+      "direction": "SHORT",
+      "entry_price": 64308.91,
+      "exit_price": 64083.543151,
+      "profit_loss": 2.35,
+      "profit_pct": 0.35,
+      "time": 1784913995.9261246,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6806,
+      "direction": "SHORT",
+      "entry_price": 558.0,
+      "exit_price": 561.266587,
+      "profit_loss": -6.43,
+      "profit_pct": -0.59,
+      "time": 1784914120.3048906,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6717,
+      "direction": "SHORT",
+      "entry_price": 562.07,
+      "exit_price": 564.174794,
+      "profit_loss": -4.46,
+      "profit_pct": -0.37,
+      "time": 1784919634.3158643,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.5033,
+      "direction": "LONG",
+      "entry_price": 1859.15,
+      "exit_price": 1850.372018,
+      "profit_loss": -5.35,
+      "profit_pct": -0.47,
+      "time": 1784966933.527932,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6623,
+      "direction": "SHORT",
+      "entry_price": 564.09,
+      "exit_price": 566.574033,
+      "profit_loss": -5.07,
+      "profit_pct": -0.44,
+      "time": 1784984469.4419832,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "direction": "SHORT",
+      "entry_price": 64092.25,
+      "exit_price": 64084.873769,
+      "profit_loss": -0.83,
+      "profit_pct": 0.01,
+      "time": 1784984606.4356725,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.5036,
+      "direction": "SHORT",
+      "entry_price": 1858.13,
+      "exit_price": 1866.125627,
+      "profit_loss": -4.97,
+      "profit_pct": -0.43,
+      "time": 1784987024.6652951,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6546,
+      "direction": "SHORT",
+      "entry_price": 566.64,
+      "exit_price": 566.17,
+      "profit_loss": -0.16,
+      "profit_pct": 0.08,
+      "time": 1784990286.023345,
+      "reason": "Committee consensus reached with 37.2% confidence. (Note: Fractured macro regime, GC/NQ correlation is -0.46)"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.3262,
+      "direction": "LONG",
+      "entry_price": 76.22,
+      "exit_price": 76.549342,
+      "profit_loss": 3.12,
+      "profit_pct": 0.43,
+      "time": 1785158192.829983,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6296,
+      "direction": "LONG",
+      "entry_price": 570.67,
+      "exit_price": 566.978449,
+      "profit_loss": -6.94,
+      "profit_pct": -0.65,
+      "time": 1785164606.141815,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.5001,
+      "direction": "LONG",
+      "entry_price": 1878.48,
+      "exit_price": 1880.758122,
+      "profit_loss": 0.2,
+      "profit_pct": 0.12,
+      "time": 1785245342.899327,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5959,
+      "direction": "LONG",
+      "entry_price": 73.82,
+      "exit_price": 73.737651,
+      "profit_loss": -1.97,
+      "profit_pct": -0.11,
+      "time": 1785322436.4013927,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6468,
+      "direction": "LONG",
+      "entry_price": 570.39,
+      "exit_price": 569.199521,
+      "profit_loss": -2.9,
+      "profit_pct": -0.21,
+      "time": 1785325208.5472312,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.582,
+      "direction": "LONG",
+      "entry_price": 73.98,
+      "exit_price": 73.561827,
+      "profit_loss": -6.19,
+      "profit_pct": -0.57,
+      "time": 1785327418.3443794,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "direction": "LONG",
+      "entry_price": 64414.96,
+      "exit_price": 64074.201117,
+      "profit_loss": -5.83,
+      "profit_pct": -0.53,
+      "time": 1785331425.3106675,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4883,
+      "direction": "LONG",
+      "entry_price": 1904.48,
+      "exit_price": 1895.207374,
+      "profit_loss": -5.45,
+      "profit_pct": -0.49,
+      "time": 1785333434.9927244,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4859,
+      "direction": "LONG",
+      "entry_price": 1913.41,
+      "exit_price": 1900.95504,
+      "profit_loss": -6.98,
+      "profit_pct": -0.65,
+      "time": 1785352929.9487374,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0143,
+      "direction": "LONG",
+      "entry_price": 64362.06,
+      "exit_price": 63957.036776,
+      "profit_loss": -6.71,
+      "profit_pct": -0.63,
+      "time": 1785352948.4165504,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.489,
+      "direction": "LONG",
+      "entry_price": 1900.86,
+      "exit_price": 1891.182586,
+      "profit_loss": -5.66,
+      "profit_pct": -0.51,
+      "time": 1785354385.7056828,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "direction": "LONG",
+      "entry_price": 64049.86,
+      "exit_price": 63660.110541,
+      "profit_loss": -6.53,
+      "profit_pct": -0.61,
+      "time": 1785354396.0951169,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6433,
+      "direction": "LONG",
+      "entry_price": 571.48,
+      "exit_price": 567.723563,
+      "profit_loss": -7.11,
+      "profit_pct": -0.66,
+      "time": 1785354399.1896858,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4977,
+      "direction": "LONG",
+      "entry_price": 1886.28,
+      "exit_price": 1877.549564,
+      "profit_loss": -5.28,
+      "profit_pct": -0.46,
+      "time": 1785355826.6765864,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4905,
+      "direction": "SHORT",
+      "entry_price": 1906.31,
+      "exit_price": 1901.6,
+      "profit_loss": 1.38,
+      "profit_pct": 0.25,
+      "time": 1785366372.1139543,
+      "reason": "Committee consensus reached with 36.5% confidence."
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6475,
+      "direction": "SHORT",
+      "entry_price": 569.79,
+      "exit_price": 571.83,
+      "profit_loss": -4.3,
+      "profit_pct": -0.36,
+      "time": 1785368970.1276832,
+      "reason": "Committee consensus reached with 37.1% confidence."
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.7291,
+      "direction": "SHORT",
+      "entry_price": 73.63,
+      "exit_price": 73.771098,
+      "profit_loss": -2.74,
+      "profit_pct": -0.19,
+      "time": 1785370280.8243852,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "direction": "SHORT",
+      "entry_price": 63896.99,
+      "exit_price": 63900.408704,
+      "profit_loss": -0.99,
+      "profit_pct": -0.01,
+      "time": 1785375190.8868048,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.642,
+      "direction": "LONG",
+      "entry_price": 570.51,
+      "exit_price": 575.982473,
+      "profit_loss": 8.04,
+      "profit_pct": 0.96,
+      "time": 1785376913.9416282,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6387,
+      "direction": "LONG",
+      "entry_price": 572.85,
+      "exit_price": 570.665094,
+      "profit_loss": -4.52,
+      "profit_pct": -0.38,
+      "time": 1785386271.0766149,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4884,
+      "direction": "SHORT",
+      "entry_price": 1902.9,
+      "exit_price": 1909.445374,
+      "profit_loss": -4.13,
+      "profit_pct": -0.34,
+      "time": 1785399948.968937,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6374,
+      "direction": "LONG",
+      "entry_price": 573.3,
+      "exit_price": 578.895525,
+      "profit_loss": 8.21,
+      "profit_pct": 0.98,
+      "time": 1785405142.052595,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5869,
+      "direction": "LONG",
+      "entry_price": 579.84,
+      "exit_price": 585.511299,
+      "profit_loss": 8.07,
+      "profit_pct": 0.98,
+      "time": 1785408040.368579,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5636,
+      "direction": "LONG",
+      "entry_price": 73.98,
+      "exit_price": 73.686602,
+      "profit_loss": -4.61,
+      "profit_pct": -0.4,
+      "time": 1785408887.9148686,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4845,
+      "direction": "LONG",
+      "entry_price": 1917.86,
+      "exit_price": 1914.754735,
+      "profit_loss": -2.43,
+      "profit_pct": -0.16,
+      "time": 1785418553.9896224,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5539,
+      "direction": "LONG",
+      "entry_price": 74.1,
+      "exit_price": 74.278708,
+      "profit_loss": 1.31,
+      "profit_pct": 0.24,
+      "time": 1785420498.2028823,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5786,
+      "direction": "LONG",
+      "entry_price": 588.74,
+      "exit_price": 594.483946,
+      "profit_loss": 8.13,
+      "profit_pct": 0.98,
+      "time": 1785433413.0854294,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.6094,
+      "direction": "LONG",
+      "entry_price": 74.51,
+      "exit_price": 74.429392,
+      "profit_loss": -1.95,
+      "profit_pct": -0.11,
+      "time": 1785437684.5654788,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4788,
+      "direction": "LONG",
+      "entry_price": 1921.5,
+      "exit_price": 1911.97939,
+      "profit_loss": -5.47,
+      "profit_pct": -0.5,
+      "time": 1785437746.9239144,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5344,
+      "direction": "LONG",
+      "entry_price": 593.79,
+      "exit_price": 591.951823,
+      "profit_loss": -3.73,
+      "profit_pct": -0.31,
+      "time": 1785442616.164799,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.244,
+      "direction": "LONG",
+      "entry_price": 74.43,
+      "exit_price": 74.349771,
+      "profit_loss": -1.89,
+      "profit_pct": -0.11,
+      "time": 1785443514.341876,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4809,
+      "direction": "LONG",
+      "entry_price": 1914.24,
+      "exit_price": 1916.613297,
+      "profit_loss": 0.22,
+      "profit_pct": 0.12,
+      "time": 1785448352.6511862,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.2367,
+      "direction": "LONG",
+      "entry_price": 74.51,
+      "exit_price": 74.40438,
+      "profit_loss": -2.2,
+      "profit_pct": -0.14,
+      "time": 1785455492.304089,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0141,
+      "direction": "LONG",
+      "entry_price": 64811.35,
+      "exit_price": 64634.927789,
+      "profit_loss": -3.4,
+      "profit_pct": -0.27,
+      "time": 1785457359.254481,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5392,
+      "direction": "LONG",
+      "entry_price": 592.04,
+      "exit_price": 590.388287,
+      "profit_loss": -3.45,
+      "profit_pct": -0.28,
+      "time": 1785459049.1201718,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.6116,
+      "direction": "LONG",
+      "entry_price": 582.43,
+      "exit_price": 591.402033,
+      "profit_loss": 13.51,
+      "profit_pct": 1.54,
+      "time": 1785772932.3467383,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.7872,
+      "direction": "SHORT",
+      "entry_price": 72.73,
+      "exit_price": 73.562538,
+      "profit_loss": -11.59,
+      "profit_pct": -1.14,
+      "time": 1785772948.1889484,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0148,
+      "direction": "SHORT",
+      "entry_price": 62777.59,
+      "exit_price": 63725.462286,
+      "profit_loss": -14.97,
+      "profit_pct": -1.51,
+      "time": 1785772964.0169842,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.6034,
+      "direction": "LONG",
+      "entry_price": 73.73,
+      "exit_price": 73.300023,
+      "profit_loss": -6.34,
+      "profit_pct": -0.58,
+      "time": 1785775169.6234372,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.6747,
+      "direction": "LONG",
+      "entry_price": 73.36,
+      "exit_price": 73.981711,
+      "profit_loss": 6.94,
+      "profit_pct": 0.85,
+      "time": 1785780899.9034135,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5851,
+      "direction": "LONG",
+      "entry_price": 592.08,
+      "exit_price": 590.001013,
+      "profit_loss": -4.23,
+      "profit_pct": -0.35,
+      "time": 1785787315.6321697,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.418,
+      "direction": "LONG",
+      "entry_price": 74.06,
+      "exit_price": 73.703058,
+      "profit_loss": -5.35,
+      "profit_pct": -0.48,
+      "time": 1785790258.9727445,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4938,
+      "direction": "LONG",
+      "entry_price": 1862.44,
+      "exit_price": 1863.983483,
+      "profit_loss": -0.16,
+      "profit_pct": 0.08,
+      "time": 1785791479.0478847,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4932,
+      "direction": "LONG",
+      "entry_price": 1865.49,
+      "exit_price": 1857.047561,
+      "profit_loss": -5.08,
+      "profit_pct": -0.45,
+      "time": 1785794604.213761,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5586,
+      "direction": "LONG",
+      "entry_price": 590.31,
+      "exit_price": 588.429895,
+      "profit_loss": -3.85,
+      "profit_pct": -0.32,
+      "time": 1785794610.7434118,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.4765,
+      "direction": "LONG",
+      "entry_price": 73.71,
+      "exit_price": 73.399884,
+      "profit_loss": -4.78,
+      "profit_pct": -0.42,
+      "time": 1785794721.7783494,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.5005,
+      "direction": "LONG",
+      "entry_price": 1856.17,
+      "exit_price": 1852.004608,
+      "profit_loss": -3.01,
+      "profit_pct": -0.22,
+      "time": 1785803467.0216742,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5453,
+      "direction": "LONG",
+      "entry_price": 73.33,
+      "exit_price": 73.174116,
+      "profit_loss": -2.87,
+      "profit_pct": -0.21,
+      "time": 1785803586.3026118,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.4429,
+      "direction": "LONG",
+      "entry_price": 73.18,
+      "exit_price": 73.894398,
+      "profit_loss": 7.97,
+      "profit_pct": 0.98,
+      "time": 1785811123.3606317,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.3311,
+      "direction": "LONG",
+      "entry_price": 73.88,
+      "exit_price": 73.492374,
+      "profit_loss": -5.69,
+      "profit_pct": -0.52,
+      "time": 1785813215.5569985,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4914,
+      "direction": "LONG",
+      "entry_price": 1852.95,
+      "exit_price": 1857.372042,
+      "profit_loss": 1.26,
+      "profit_pct": 0.24,
+      "time": 1785813308.9163446,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0144,
+      "direction": "LONG",
+      "entry_price": 63351.76,
+      "exit_price": 63968.74562,
+      "profit_loss": 7.96,
+      "profit_pct": 0.97,
+      "time": 1785818701.3938031,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5199,
+      "direction": "LONG",
+      "entry_price": 73.51,
+      "exit_price": 73.606896,
+      "profit_loss": 0.29,
+      "profit_pct": 0.13,
+      "time": 1785820450.4244242,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5771,
+      "direction": "LONG",
+      "entry_price": 589.15,
+      "exit_price": 588.75901,
+      "profit_loss": -1.55,
+      "profit_pct": -0.07,
+      "time": 1785822543.7415214,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4897,
+      "direction": "LONG",
+      "entry_price": 1859.42,
+      "exit_price": 1860.263009,
+      "profit_loss": -0.5,
+      "profit_pct": 0.05,
+      "time": 1785823239.0874252,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5969,
+      "direction": "LONG",
+      "entry_price": 73.72,
+      "exit_price": 73.354843,
+      "profit_loss": -5.52,
+      "profit_pct": -0.5,
+      "time": 1785825697.991552,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.577,
+      "direction": "LONG",
+      "entry_price": 589.23,
+      "exit_price": 587.497402,
+      "profit_loss": -3.66,
+      "profit_pct": -0.29,
+      "time": 1785835137.588752,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.736,
+      "direction": "SHORT",
+      "entry_price": 73.54,
+      "exit_price": 73.887385,
+      "profit_loss": -5.37,
+      "profit_pct": -0.47,
+      "time": 1785844361.548752,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.501,
+      "direction": "LONG",
+      "entry_price": 1865.32,
+      "exit_price": 1867.841587,
+      "profit_loss": 0.33,
+      "profit_pct": 0.14,
+      "time": 1785849568.1274438,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BTC-USD",
+      "shares": 0.0147,
+      "direction": "SHORT",
+      "entry_price": 63678.27,
+      "exit_price": 64006.440458,
+      "profit_loss": -5.77,
+      "profit_pct": -0.52,
+      "time": 1785850758.0029302,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5368,
+      "direction": "LONG",
+      "entry_price": 73.39,
+      "exit_price": 73.554247,
+      "profit_loss": 1.14,
+      "profit_pct": 0.22,
+      "time": 1785903997.8854754,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "BNB-USD",
+      "shares": 1.5938,
+      "direction": "LONG",
+      "entry_price": 588.6,
+      "exit_price": 597.444997,
+      "profit_loss": 13.14,
+      "profit_pct": 1.5,
+      "time": 1785904014.2640138,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "ETH-USD",
+      "shares": 0.4993,
+      "direction": "LONG",
+      "entry_price": 1859.94,
+      "exit_price": 1864.411338,
+      "profit_loss": 1.3,
+      "profit_pct": 0.24,
+      "time": 1785913799.2289174,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "SOL-USD",
+      "shares": 12.5928,
+      "direction": "LONG",
+      "entry_price": 73.8,
+      "exit_price": 73.760198,
+      "profit_loss": -1.43,
+      "profit_pct": -0.05,
+      "time": 1785914045.8042686,
+      "reason": "STOP_LOSS"
+    }
+  ]
+}

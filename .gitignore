@@ -1,0 +1,58 @@
+# Environment & Secret variables
+.env
+.env.*
+*.env
+!.env.example
+*.pem
+*.key
+*.id_rsa
+*.pub
+
+# Databases & SQLite WAL
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Temporary & Journal files
+*.journal
+*.json.journal
+tmp*
+backend/data/tmp*
+audit_state_*.json
+backend/data/audit_state_*.json
+journal*.json
+test_journal_temp.json
+performance_log.json
+bot_logs.json
+bot_state.json
+
+
+# Logs
+logs/
+backend/logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+
+# Frontend / Node.js
+node_modules/
+dist/
+build/
+.oxlintrc.json
+.DS_Store
+Thumbs.db
+

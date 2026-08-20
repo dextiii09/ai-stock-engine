@@ -1,0 +1,2 @@
+torch>=2.1.0
+lightgbm>=4.1.0

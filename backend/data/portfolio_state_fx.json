@@ -1,0 +1,765 @@
+{
+  "portfolio_balance": 48521.22011387293,
+  "active_holdings": [
+    {
+      "symbol": "GBPUSD=X",
+      "shares": 361.5206,
+      "entry_price": 1.36,
+      "current_price": 1.3633,
+      "value": 492.861,
+      "change": 0.243,
+      "stop_loss": 1.3565,
+      "take_profit": 1.3693,
+      "best_price": 1.3633,
+      "sparkline": [
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3631,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633,
+        1.3633
+      ],
+      "regime": "Sideways",
+      "direction": "LONG",
+      "committee_breakdown": [
+        {
+          "agent": "Technical Analyst",
+          "signal": "WAIT",
+          "confidence": 0.3,
+          "reason": "RSI 30.8 \u2014 no clear price action signal. Waiting for setup.",
+          "weight": 0.158,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Fundamental Analyst",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "COT positioning is neutral",
+          "weight": 0.269,
+          "contribution": 0.0
+        },
+        {
+          "agent": "News & Sentiment AI",
+          "signal": "WAIT",
+          "confidence": 0.4,
+          "reason": "Neutral sentiment (+0.00). No directional institutional signal.",
+          "weight": 0.0,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Macro Economic AI",
+          "signal": "BUY",
+          "confidence": 0.7,
+          "reason": "DXY falling (-0.31) \u2014 bullish GBPUSD.",
+          "weight": 0.971,
+          "contribution": 0.68
+        },
+        {
+          "agent": "Volatility Regime",
+          "signal": "BUY",
+          "confidence": 0.62,
+          "reason": "Low volatility regime (ATR 0.01% < 0.3%, HV 0.00). Favorable for trend entries.",
+          "weight": 2.079,
+          "contribution": 1.289
+        },
+        {
+          "agent": "Liquidity Agent",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "Volume neutral (Z=0.00). Liquidity is normal.",
+          "weight": 0.235,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Correlation Agent",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "Correlation Agent: non-futures symbol \u2014 GC/NQ correlation not applicable.",
+          "weight": 0.0,
+          "contribution": 0.0
+        }
+      ]
+    },
+    {
+      "symbol": "AUDUSD=X",
+      "shares": 687.8962,
+      "entry_price": 0.71,
+      "current_price": 0.7129,
+      "value": 490.4012,
+      "change": 0.408,
+      "stop_loss": 0.7093,
+      "take_profit": 0.7195,
+      "best_price": 0.7129,
+      "sparkline": [
+        0.7127,
+        0.7127,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129,
+        0.7129
+      ],
+      "regime": "Sideways",
+      "direction": "LONG",
+      "committee_breakdown": [
+        {
+          "agent": "Technical Analyst",
+          "signal": "WAIT",
+          "confidence": 0.3,
+          "reason": "RSI 68.7 \u2014 no clear price action signal. Waiting for setup.",
+          "weight": 0.264,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Fundamental Analyst",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "COT positioning is neutral",
+          "weight": 0.602,
+          "contribution": 0.0
+        },
+        {
+          "agent": "News & Sentiment AI",
+          "signal": "WAIT",
+          "confidence": 0.4,
+          "reason": "Neutral sentiment (+0.00). No directional institutional signal.",
+          "weight": 0.0,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Macro Economic AI",
+          "signal": "BUY",
+          "confidence": 0.72,
+          "reason": "Risk-on (VIX 14.9) + DXY falling (-0.83). Bullish AUDUSD.",
+          "weight": 1.39,
+          "contribution": 1.001
+        },
+        {
+          "agent": "Volatility Regime",
+          "signal": "BUY",
+          "confidence": 0.62,
+          "reason": "Low volatility regime (ATR 0.01% < 0.3%, HV 0.00). Favorable for trend entries.",
+          "weight": 2.066,
+          "contribution": 1.281
+        },
+        {
+          "agent": "Liquidity Agent",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "Volume neutral (Z=0.00). Liquidity is normal.",
+          "weight": 0.744,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Correlation Agent",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "Correlation Agent: non-futures symbol \u2014 GC/NQ correlation not applicable.",
+          "weight": 0.0,
+          "contribution": 0.0
+        }
+      ]
+    },
+    {
+      "symbol": "EURUSD=X",
+      "shares": 419.0088,
+      "entry_price": 1.17,
+      "current_price": 1.17,
+      "value": 490.24,
+      "change": 0.0,
+      "stop_loss": 1.1639,
+      "take_profit": 1.1814,
+      "best_price": 1.17,
+      "sparkline": [
+        1.17
+      ],
+      "regime": "Sideways",
+      "direction": "LONG",
+      "committee_breakdown": [
+        {
+          "agent": "Technical Analyst",
+          "signal": "WAIT",
+          "confidence": 0.3,
+          "reason": "RSI 58.3 \u2014 no clear price action signal. Waiting for setup.",
+          "weight": 0.743,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Fundamental Analyst",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "COT positioning is neutral",
+          "weight": 0.12,
+          "contribution": 0.0
+        },
+        {
+          "agent": "News & Sentiment AI",
+          "signal": "WAIT",
+          "confidence": 0.4,
+          "reason": "Neutral sentiment (+0.00). No directional institutional signal.",
+          "weight": 0.0,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Macro Economic AI",
+          "signal": "BUY",
+          "confidence": 0.72,
+          "reason": "DXY falling (-0.88) \u2014 bullish EURUSD.",
+          "weight": 1.978,
+          "contribution": 1.424
+        },
+        {
+          "agent": "Volatility Regime",
+          "signal": "BUY",
+          "confidence": 0.62,
+          "reason": "Low volatility regime (ATR 0.01% < 0.3%, HV 0.00). Favorable for trend entries.",
+          "weight": 1.842,
+          "contribution": 1.142
+        },
+        {
+          "agent": "Liquidity Agent",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "Volume neutral (Z=0.00). Liquidity is normal.",
+          "weight": 0.205,
+          "contribution": 0.0
+        },
+        {
+          "agent": "Correlation Agent",
+          "signal": "WAIT",
+          "confidence": 0.5,
+          "reason": "Correlation Agent: non-futures symbol \u2014 GC/NQ correlation not applicable.",
+          "weight": 0.0,
+          "contribution": 0.0
+        }
+      ]
+    }
+  ],
+  "execution_logs": [
+    {
+      "time": 1785351647.8606358,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0615,
+      "price": 163.317
+    },
+    {
+      "time": 1785352016.2996418,
+      "action": "FILLED_BUY",
+      "symbol": "GBPUSD=X",
+      "shares": 370.4259,
+      "price": 1.3363
+    },
+    {
+      "time": 1785352116.1282048,
+      "action": "FILLED_BUY",
+      "symbol": "EURUSD=X",
+      "shares": 427.9794,
+      "price": 1.145
+    },
+    {
+      "time": 1785406590.4145825,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0615,
+      "price": 162.721654
+    },
+    {
+      "time": 1785406689.0276508,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0146,
+      "price": 162.587
+    },
+    {
+      "time": 1785418689.5874226,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0146,
+      "price": 161.302495
+    },
+    {
+      "time": 1785418766.7943504,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0446,
+      "price": 160.972
+    },
+    {
+      "time": 1785419758.26037,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0446,
+      "price": 160.024394
+    },
+    {
+      "time": 1785419906.465206,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0607,
+      "price": 160.112
+    },
+    {
+      "time": 1785420317.0469904,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0607,
+      "price": 159.115513
+    },
+    {
+      "time": 1785420385.018466,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0804,
+      "price": 159.078
+    },
+    {
+      "time": 1785420694.6724148,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0804,
+      "price": 158.933611
+    },
+    {
+      "time": 1785420765.064121,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0846,
+      "price": 158.858
+    },
+    {
+      "time": 1785421260.4347093,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0846,
+      "price": 158.160776
+    },
+    {
+      "time": 1785425336.725771,
+      "action": "FILLED_SHORT",
+      "symbol": "USDJPY=X",
+      "shares": 3.0732,
+      "price": 159.437
+    },
+    {
+      "time": 1785433161.5146713,
+      "action": "FILLED_COVER",
+      "symbol": "USDJPY=X",
+      "shares": 3.0732,
+      "price": 159.043
+    },
+    {
+      "time": 1785433229.7359538,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0821,
+      "price": 158.979
+    },
+    {
+      "time": 1785440701.3654027,
+      "action": "FILLED_SELL",
+      "symbol": "USDJPY=X",
+      "shares": 3.0821,
+      "price": 159.396
+    },
+    {
+      "time": 1785445456.0201457,
+      "action": "FILLED_BUY",
+      "symbol": "AUDUSD=X",
+      "shares": 697.8085,
+      "price": 0.7022
+    },
+    {
+      "time": 1785446004.402913,
+      "action": "FILLED_SHORT",
+      "symbol": "USDJPY=X",
+      "shares": 3.0422,
+      "price": 159.462
+    },
+    {
+      "time": 1785456417.5257452,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0422,
+      "price": 160.469278
+    },
+    {
+      "time": 1785505095.2220187,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "EURUSD=X",
+      "shares": 427.9794,
+      "price": 1.14695
+    },
+    {
+      "time": 1785505222.214135,
+      "action": "FILLED_BUY",
+      "symbol": "EURUSD=X",
+      "shares": 427.2625,
+      "price": 1.1468
+    },
+    {
+      "time": 1785505227.4309058,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "GBPUSD=X",
+      "shares": 370.4259,
+      "price": 1.339868
+    },
+    {
+      "time": 1785505433.991311,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AUDUSD=X",
+      "shares": 697.8085,
+      "price": 0.700887
+    },
+    {
+      "time": 1785517429.4524763,
+      "action": "FILLED_BUY",
+      "symbol": "GBPUSD=X",
+      "shares": 367.475,
+      "price": 1.3468
+    },
+    {
+      "time": 1785534209.7762153,
+      "action": "FILLED_BUY",
+      "symbol": "AUDUSD=X",
+      "shares": 697.444,
+      "price": 0.7025
+    },
+    {
+      "time": 1785534448.6667292,
+      "action": "FILLED_SHORT",
+      "symbol": "USDJPY=X",
+      "shares": 3.0818,
+      "price": 157.4
+    },
+    {
+      "time": 1785773297.9389155,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "GBPUSD=X",
+      "shares": 367.475,
+      "price": 1.342528
+    },
+    {
+      "time": 1785774511.1461844,
+      "action": "FILLED_BUY",
+      "symbol": "GBPUSD=X",
+      "shares": 364.702,
+      "price": 1.3429
+    },
+    {
+      "time": 1785794666.7871594,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0818,
+      "price": 157.388582
+    },
+    {
+      "time": 1787060819.8995981,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "EURUSD=X",
+      "shares": 427.2625,
+      "price": 1.15775
+    },
+    {
+      "time": 1787060851.0778487,
+      "action": "FILLED_BUY",
+      "symbol": "EURUSD=X",
+      "shares": 423.0778,
+      "price": 1.1583
+    },
+    {
+      "time": 1787097736.5140085,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "AUDUSD=X",
+      "shares": 697.444,
+      "price": 0.707856
+    },
+    {
+      "time": 1787097956.5814598,
+      "action": "FILLED_BUY",
+      "symbol": "USDJPY=X",
+      "shares": 3.0729,
+      "price": 159.485
+    },
+    {
+      "time": 1787127104.4570074,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "GBPUSD=X",
+      "shares": 364.702,
+      "price": 1.355607
+    },
+    {
+      "time": 1787137247.8171608,
+      "action": "FILLED_BUY",
+      "symbol": "GBPUSD=X",
+      "shares": 361.5206,
+      "price": 1.3557
+    },
+    {
+      "time": 1787208610.753281,
+      "action": "FORCE_STOP_LOSS",
+      "symbol": "USDJPY=X",
+      "shares": 3.0729,
+      "price": 158.330936
+    },
+    {
+      "time": 1787208711.8798761,
+      "action": "FILLED_BUY",
+      "symbol": "AUDUSD=X",
+      "shares": 687.8962,
+      "price": 0.7124
+    },
+    {
+      "time": 1787213502.0811238,
+      "action": "FORCE_TAKE_PROFIT",
+      "symbol": "EURUSD=X",
+      "shares": 423.0778,
+      "price": 1.169142
+    },
+    {
+      "time": 1787214035.558973,
+      "action": "FILLED_BUY",
+      "symbol": "EURUSD=X",
+      "shares": 419.0088,
+      "price": 1.1697
+    }
+  ],
+  "closed_trades": [
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0615,
+      "direction": "LONG",
+      "entry_price": 163.32,
+      "exit_price": 162.721654,
+      "profit_loss": -2.33,
+      "profit_pct": -0.37,
+      "time": 1785406590.4145825,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0146,
+      "direction": "LONG",
+      "entry_price": 162.59,
+      "exit_price": 161.302495,
+      "profit_loss": -4.37,
+      "profit_pct": -0.79,
+      "time": 1785418689.5874226,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0446,
+      "direction": "LONG",
+      "entry_price": 160.97,
+      "exit_price": 160.024394,
+      "profit_loss": -3.37,
+      "profit_pct": -0.59,
+      "time": 1785419758.26037,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0607,
+      "direction": "LONG",
+      "entry_price": 160.11,
+      "exit_price": 159.115513,
+      "profit_loss": -3.53,
+      "profit_pct": -0.62,
+      "time": 1785420317.0469904,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0804,
+      "direction": "LONG",
+      "entry_price": 159.08,
+      "exit_price": 158.933611,
+      "profit_loss": -0.94,
+      "profit_pct": -0.09,
+      "time": 1785420694.6724148,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0846,
+      "direction": "LONG",
+      "entry_price": 158.86,
+      "exit_price": 158.160776,
+      "profit_loss": -2.64,
+      "profit_pct": -0.44,
+      "time": 1785421260.4347093,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0732,
+      "direction": "SHORT",
+      "entry_price": 159.44,
+      "exit_price": 159.043,
+      "profit_loss": 0.73,
+      "profit_pct": 0.25,
+      "time": 1785433172.4391606,
+      "reason": "Committee consensus reached with 51.2% confidence."
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0821,
+      "direction": "LONG",
+      "entry_price": 158.98,
+      "exit_price": 159.396,
+      "profit_loss": 0.79,
+      "profit_pct": 0.26,
+      "time": 1785440712.3382359,
+      "reason": "Committee consensus reached with 38.4% confidence."
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0422,
+      "direction": "SHORT",
+      "entry_price": 159.46,
+      "exit_price": 160.469278,
+      "profit_loss": -3.56,
+      "profit_pct": -0.63,
+      "time": 1785456417.5257452,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "EURUSD=X",
+      "shares": 427.9794,
+      "direction": "LONG",
+      "entry_price": 1.14,
+      "exit_price": 1.14695,
+      "profit_loss": 2.48,
+      "profit_pct": 0.61,
+      "time": 1785505095.2220187,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "GBPUSD=X",
+      "shares": 370.4259,
+      "direction": "LONG",
+      "entry_price": 1.34,
+      "exit_price": 1.339868,
+      "profit_loss": -0.55,
+      "profit_pct": -0.01,
+      "time": 1785505227.4309058,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "AUDUSD=X",
+      "shares": 697.8085,
+      "direction": "LONG",
+      "entry_price": 0.7,
+      "exit_price": 0.700887,
+      "profit_loss": 0.13,
+      "profit_pct": 0.13,
+      "time": 1785505433.991311,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "GBPUSD=X",
+      "shares": 367.475,
+      "direction": "LONG",
+      "entry_price": 1.35,
+      "exit_price": 1.342528,
+      "profit_loss": -3.24,
+      "profit_pct": -0.55,
+      "time": 1785773297.9389155,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0818,
+      "direction": "SHORT",
+      "entry_price": 157.4,
+      "exit_price": 157.388582,
+      "profit_loss": -0.45,
+      "profit_pct": 0.01,
+      "time": 1785794666.7871594,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "EURUSD=X",
+      "shares": 427.2625,
+      "direction": "LONG",
+      "entry_price": 1.15,
+      "exit_price": 1.15775,
+      "profit_loss": 2.82,
+      "profit_pct": 0.67,
+      "time": 1787060819.8995981,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "AUDUSD=X",
+      "shares": 697.444,
+      "direction": "LONG",
+      "entry_price": 0.7,
+      "exit_price": 0.707856,
+      "profit_loss": 4.99,
+      "profit_pct": 1.12,
+      "time": 1787097736.5140085,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "GBPUSD=X",
+      "shares": 364.702,
+      "direction": "LONG",
+      "entry_price": 1.34,
+      "exit_price": 1.355607,
+      "profit_loss": 5.2,
+      "profit_pct": 1.16,
+      "time": 1787127104.4570074,
+      "reason": "TAKE_PROFIT"
+    },
+    {
+      "symbol": "USDJPY=X",
+      "shares": 3.0729,
+      "direction": "LONG",
+      "entry_price": 159.49,
+      "exit_price": 158.330936,
+      "profit_loss": -4.05,
+      "profit_pct": -0.73,
+      "time": 1787208610.753281,
+      "reason": "STOP_LOSS"
+    },
+    {
+      "symbol": "EURUSD=X",
+      "shares": 423.0778,
+      "direction": "LONG",
+      "entry_price": 1.16,
+      "exit_price": 1.169142,
+      "profit_loss": 3.37,
+      "profit_pct": 0.79,
+      "time": 1787213502.0811238,
+      "reason": "TAKE_PROFIT"
+    }
+  ]
+}
