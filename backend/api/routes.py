@@ -2324,7 +2324,56 @@ async def trigger_retrain_all_models():
 
 
 
+
+@router.get("/shadow/missed-opportunities")
+async def get_shadow_missed_opportunities():
+    """Returns missed opportunities and avoided loss trades across all market engines."""
+    all_opps = (
+        shadow_engine.get_missed_opportunities() +
+        shadow_engine_in.get_missed_opportunities() +
+        shadow_engine_st.get_missed_opportunities() +
+        shadow_engine_cx.get_missed_opportunities() +
+        shadow_engine_fx.get_missed_opportunities()
+    )
+    # Sort newest first
+    all_opps.sort(key=lambda x: x.get("timestamp", 0), reverse=True)
+    return {"missed_opportunities": all_opps[:100], "total_count": len(all_opps)}
+
+@router.get("/shadow/stats")
+async def get_shadow_trading_stats():
+    """Returns aggregated shadow trading accuracy, avoided losses, and missed profits."""
+    all_opps = (
+        shadow_engine.get_missed_opportunities() +
+        shadow_engine_in.get_missed_opportunities() +
+        shadow_engine_st.get_missed_opportunities() +
+        shadow_engine_cx.get_missed_opportunities() +
+        shadow_engine_fx.get_missed_opportunities()
+    )
+    missed_profits = [o for o in all_opps if o.get("outcome") == "Missed Profit"]
+    avoided_losses = [o for o in all_opps if o.get("outcome") == "Avoided Loss"]
+    
+    active_shadows_cnt = (
+        len(shadow_engine.shadow_portfolio) +
+        len(shadow_engine_in.shadow_portfolio) +
+        len(shadow_engine_st.shadow_portfolio) +
+        len(shadow_engine_cx.shadow_portfolio) +
+        len(shadow_engine_fx.shadow_portfolio)
+    )
+    
+    total_evaluated = len(missed_profits) + len(avoided_losses)
+    veto_accuracy_pct = round((len(avoided_losses) / total_evaluated * 100), 1) if total_evaluated > 0 else 100.0
+
+    return {
+        "active_shadow_trades": active_shadows_cnt,
+        "total_evaluated_vetoes": total_evaluated,
+        "avoided_losses_count": len(avoided_losses),
+        "missed_profits_count": len(missed_profits),
+        "veto_accuracy_pct": veto_accuracy_pct,
+        "summary": f"AI Gates correctly avoided {len(avoided_losses)} losing trades ({veto_accuracy_pct}% veto accuracy)."
+    }
+
 @router.get("/data/live/{symbol}")
+
 async def get_live_tick(symbol: str):
     # SEC-2: sanitize symbol — only allow alphanumerics, dots, hyphens, carets
     import re as _re

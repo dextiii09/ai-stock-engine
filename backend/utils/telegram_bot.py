@@ -161,13 +161,16 @@ class TelegramBotController:
                 "📊 /status — 5-Market live engine status & tick latency\n"
                 "💰 /pnl — Overall & 30d PnL, Win Rate, Sharpe, Drawdown\n"
                 "📈 /positions — List all open holdings across markets\n"
+                "👻 /shadow — Shadow Trading accuracy & avoided losses\n"
                 "🌐 /regime — Current HMM market regime detections\n"
+                "🧪 /backtest `<symbol>` — Run instant 1y backtest\n"
                 "🚨 /halt — *EMERGENCY KILL-SWITCH* (Halts & liquidates)\n"
                 "▶️ /resume — Resume trading loops & reset baselines\n"
                 "🔄 /retrain — Trigger background MetaGate AutoML retrain\n"
                 "ℹ️ /help — Show this help message"
             )
             await self.send_message(reply)
+
 
         elif cmd == "/status":
             import time
@@ -295,13 +298,72 @@ class TelegramBotController:
                 f"Autonomous trading loops across all 5 markets are active."
             )
 
-        elif cmd == "/retrain":
-            await self.send_message("⏳ *Launching background AutoML retrain for all MetaGate models...*")
-            res = await trigger_retrain_all_models()
-            await self.send_message(f"✅ *Retrain Triggered*: {res.get('message', 'Active in background')}")
+        elif cmd == "/shadow":
+            from api.routes import (
+                shadow_engine, shadow_engine_in, shadow_engine_st,
+                shadow_engine_cx, shadow_engine_fx
+            )
+            all_opps = (
+                shadow_engine.get_missed_opportunities() +
+                shadow_engine_in.get_missed_opportunities() +
+                shadow_engine_st.get_missed_opportunities() +
+                shadow_engine_cx.get_missed_opportunities() +
+                shadow_engine_fx.get_missed_opportunities()
+            )
+            missed_profits = [o for o in all_opps if o.get("outcome") == "Missed Profit"]
+            avoided_losses = [o for o in all_opps if o.get("outcome") == "Avoided Loss"]
+            active_cnt = (
+                len(shadow_engine.shadow_portfolio) +
+                len(shadow_engine_in.shadow_portfolio) +
+                len(shadow_engine_st.shadow_portfolio) +
+                len(shadow_engine_cx.shadow_portfolio) +
+                len(shadow_engine_fx.shadow_portfolio)
+            )
+            total = len(missed_profits) + len(avoided_losses)
+            acc = round(len(avoided_losses) / total * 100, 1) if total > 0 else 100.0
+
+            reply = (
+                "👻 *Shadow Trading & AI Veto Intelligence:*\n\n"
+                f"• *Active Virtual Tracking*: `{active_cnt}` trades\n"
+                f"• *🛡️ Avoided Losing Trades*: `{len(avoided_losses)}` (Saved Capital)\n"
+                f"• *⚠️ Missed Winning Trades*: `{len(missed_profits)}`\n"
+                f"• *Veto Accuracy Score*: `{acc}%`\n\n"
+                f"_{ 'AI Gates correctly prevented losing trades.' if acc >= 70 else 'RL engine adapting strictness.' }_"
+            )
+            await self.send_message(reply)
+
+        elif cmd.startswith("/backtest"):
+            parts = text.split()
+            sym = parts[1].upper() if len(parts) > 1 else "AAPL"
+            await self.send_message(f"⏳ *Running Walk-Forward Backtest for {sym} (1y, AI Committee)...*")
+            from backtesting.engine import BacktestEngine
+            def _run_bt():
+                eng = BacktestEngine(symbol=sym, strategy="AI Committee", period="1y", initial_capital=100000.0)
+                return eng.run()
+            try:
+                res = await asyncio.to_thread(_run_bt)
+                if "error" in res:
+                    await self.send_message(f"❌ *Backtest Error*: {res['error']}")
+                else:
+                    curr = res.get("currency", "USD")
+                    pfx = "₹" if curr == "INR" else "$"
+                    reply = (
+                        f"🧪 *Backtest Results: {sym}*\n\n"
+                        f"• *Strategy*: `{res.get('strategy')}` (1 Year)\n"
+                        f"• *Total Trades*: `{res.get('total_trades', 0)}` (Wins: `{res.get('winning_trades', 0)}` | Losses: `{res.get('losing_trades', 0)}`)\n"
+                        f"• *Win Rate*: `{res.get('win_rate_pct', 0.0)}%`\n"
+                        f"• *Total Return*: `{res.get('total_return_pct', 0.0)}%`\n"
+                        f"• *Profit Factor*: `{res.get('profit_factor', 0.0)}`\n"
+                        f"• *Sharpe Ratio*: `{res.get('sharpe_ratio', 0.0)}`\n"
+                        f"• *Max Drawdown*: `{res.get('max_drawdown_pct', 0.0)}%`"
+                    )
+                    await self.send_message(reply)
+            except Exception as e:
+                await self.send_message(f"❌ *Backtest Failed*: {str(e)}")
 
         else:
             await self.send_message(f"❓ Unknown command `{text}`. Type /help for available commands.")
+
 
 
 # Global instance
