@@ -1,6 +1,10 @@
-import uvicorn
+import os as _os
 import socket
 import sys
+from dotenv import load_dotenv
+load_dotenv()
+
+import uvicorn
 from api.server import app
 
 def is_port_in_use(port: int) -> bool:
@@ -8,7 +12,7 @@ def is_port_in_use(port: int) -> bool:
         return s.connect_ex(('127.0.0.1', port)) == 0
 
 if __name__ == "__main__":
-    PORT = 8080
+    PORT = int(_os.getenv("PORT", "8080"))
     
     if is_port_in_use(PORT):
         print(f"\n[WARNING] Port {PORT} is already in use!")
@@ -16,10 +20,7 @@ if __name__ == "__main__":
         print("Skipping duplicate server startup to prevent conflicts.\n")
         sys.exit(0)
         
-    # Run the server on port 8080.
-    # IV&V C1: bind loopback by default; override with APP_HOST if remote access
-    # is genuinely needed (behind a tunnel/VPN, never raw on the LAN).
-    import os as _os
-    _host = _os.getenv("APP_HOST", "127.0.0.1")
-    uvicorn.run("api.server:app", host=_host, port=PORT, reload=True)
+    _host = _os.getenv("APP_HOST", "0.0.0.0")
+    uvicorn.run("api.server:app", host=_host, port=PORT, reload=False)
+
 
