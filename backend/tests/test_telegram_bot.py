@@ -46,3 +46,25 @@ def test_telegram_bot_authorized_help():
             assert "/halt" in args[0]
 
     asyncio.run(_run())
+
+
+def test_telegram_bot_system_command():
+    async def _run():
+        bot = TelegramBotController()
+        bot.bot_token = "mock_token"
+        bot.allowed_chat_id = "12345678"
+
+        with patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
+            fake_msg = {
+                "chat": {"id": 12345678},
+                "text": "/system"
+            }
+            await bot._handle_message(fake_msg)
+            mock_send.assert_called_once()
+            args = mock_send.call_args[0]
+            assert "CPU Usage" in args[0]
+            assert "RAM Memory" in args[0]
+            assert "Disk Storage" in args[0]
+
+    asyncio.run(_run())
+

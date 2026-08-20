@@ -159,6 +159,7 @@ class TelegramBotController:
                 "🤖 *AI Stock Engine Control Panel*\n\n"
                 "*Available Commands:*\n"
                 "📊 /status — 5-Market live engine status & tick latency\n"
+                "🖥️ /system — Real-time CPU, RAM, Disk & Server health\n"
                 "💰 /pnl — Overall & 30d PnL, Win Rate, Sharpe, Drawdown\n"
                 "📈 /positions — List all open holdings across markets\n"
                 "👻 /shadow — Shadow Trading accuracy & avoided losses\n"
@@ -170,6 +171,7 @@ class TelegramBotController:
                 "ℹ️ /help — Show this help message"
             )
             await self.send_message(reply)
+
 
 
         elif cmd == "/status":
@@ -361,8 +363,68 @@ class TelegramBotController:
             except Exception as e:
                 await self.send_message(f"❌ *Backtest Failed*: {str(e)}")
 
+        elif cmd in ("/system", "/cpu", "/ram", "/server", "/vps"):
+            try:
+                import psutil
+                import platform
+                import os
+                import time
+
+                cpu_pct = psutil.cpu_percent(interval=0.2)
+                cpu_count = psutil.cpu_count(logical=True)
+                
+                vmem = psutil.virtual_memory()
+                ram_total_gb = vmem.total / (1024 ** 3)
+                ram_used_gb = vmem.used / (1024 ** 3)
+                ram_free_gb = vmem.available / (1024 ** 3)
+                ram_pct = vmem.percent
+                
+                disk = psutil.disk_usage('/')
+                disk_total_gb = disk.total / (1024 ** 3)
+                disk_used_gb = disk.used / (1024 ** 3)
+                disk_free_gb = disk.free / (1024 ** 3)
+                disk_pct = disk.percent
+                
+                # Current python process stats
+                proc = psutil.Process(os.getpid())
+                proc_mem_mb = proc.memory_info().rss / (1024 ** 2)
+                proc_cpu = proc.cpu_percent(interval=0.1)
+                proc_threads = proc.num_threads()
+                
+                # Process uptime
+                proc_create_time = proc.create_time()
+                uptime_secs = int(time.time() - proc_create_time)
+                days, rem = divmod(uptime_secs, 86400)
+                hours, rem = divmod(rem, 3600)
+                mins, secs = divmod(rem, 60)
+                uptime_str = f"{days}d {hours}h {mins}m" if days > 0 else f"{hours}h {mins}m {secs}s"
+                
+                cpu_bar = "🟢" if cpu_pct < 60 else "🟡" if cpu_pct < 85 else "🔴"
+                ram_bar = "🟢" if ram_pct < 70 else "🟡" if ram_pct < 90 else "🔴"
+                disk_bar = "🟢" if disk_pct < 75 else "🟡" if disk_pct < 90 else "🔴"
+
+                reply = (
+                    "🖥️ *VPS & Trading Engine System Health*\n\n"
+                    f"*{cpu_bar} CPU Usage*: `{cpu_pct:.1f}%` ({cpu_count} Cores)\n"
+                    f"*{ram_bar} RAM Memory*: `{ram_pct:.1f}%`\n"
+                    f"   • Used: `{ram_used_gb:.2f} GB` / `{ram_total_gb:.2f} GB`\n"
+                    f"   • Free: `{ram_free_gb:.2f} GB`\n\n"
+                    f"*{disk_bar} Disk Storage*: `{disk_pct:.1f}%`\n"
+                    f"   • Used: `{disk_used_gb:.1f} GB` / `{disk_total_gb:.1f} GB` (Free: `{disk_free_gb:.1f} GB`)\n\n"
+                    f"⚡ *Python Trading Process:*\n"
+                    f"   • RAM Consumption: `{proc_mem_mb:.1f} MB`\n"
+                    f"   • Process CPU: `{proc_cpu:.1f}%`\n"
+                    f"   • Active Threads: `{proc_threads}`\n"
+                    f"   • Process Uptime: `{uptime_str}`\n"
+                    f"   • Host OS: `{platform.system()} {platform.release()}`"
+                )
+                await self.send_message(reply)
+            except Exception as e:
+                await self.send_message(f"❌ *Failed to fetch system metrics*: {str(e)}")
+
         else:
             await self.send_message(f"❓ Unknown command `{text}`. Type /help for available commands.")
+
 
 
 
