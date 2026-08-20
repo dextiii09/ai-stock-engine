@@ -12,13 +12,13 @@ class Notifier:
         self.telegram_chat = os.getenv("TELEGRAM_CHAT_ID", "")
         self.ssl_context = ssl._create_unverified_context()
 
-    async def send_alert(self, message: str):
+    async def send_alert(self, message: str, parse_mode: str = "Markdown"):
         """Asynchronously send an alert to configured webhooks."""
         tasks = []
         if self.discord_url:
             tasks.append(self._send_discord(message))
         if self.telegram_bot and self.telegram_chat:
-            tasks.append(self._send_telegram(message))
+            tasks.append(self._send_telegram(message, parse_mode=parse_mode))
         
         if tasks:
             await asyncio.gather(*tasks, return_exceptions=True)
@@ -37,9 +37,14 @@ class Notifier:
         except Exception as e:
             print(f"[Notifier] Discord Error: {e}")
 
-    async def _send_telegram(self, message: str):
+    async def _send_telegram(self, message: str, parse_mode: str = "Markdown"):
         url = f"https://api.telegram.org/bot{self.telegram_bot}/sendMessage"
-        payload = {"chat_id": self.telegram_chat, "text": message}
+        payload = {
+            "chat_id": self.telegram_chat,
+            "text": message,
+            "parse_mode": parse_mode,
+            "disable_web_page_preview": True
+        }
         data = json.dumps(payload).encode('utf-8')
         req = urllib.request.Request(
             url, 
@@ -54,3 +59,4 @@ class Notifier:
 
 # Global instance
 notifier = Notifier()
+

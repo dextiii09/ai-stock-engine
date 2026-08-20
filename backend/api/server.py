@@ -87,16 +87,19 @@ async def lifespan(app: FastAPI):
 
     loop.set_exception_handler(_quiet_connection_reset)
 
-    # Startup: launch background schedulers
+    # Startup: launch background schedulers & Telegram Bot controller
     from analytics.hyperopt_loop import start_scheduler
     start_scheduler()   # re-optimizes hyperparams every 30 days
     from ai_bug_finder import start_bug_finder
     start_bug_finder()  # continuous bug scanner (file watcher + runtime monitor)
+    from utils.telegram_bot import telegram_bot
+    await telegram_bot.start()  # two-way interactive Telegram Bot listener
     await auto_resume_bots()  # restart bots if they were running before laptop sleep
-    logger.info("[Server] All schedulers started. AI Bug Finder active.")
+    logger.info("[Server] All schedulers started. AI Bug Finder & Telegram Bot active.")
     yield
     # Graceful shutdown: flush state to disk before process exits
     logger.info("[Server] Shutdown signal received. Saving all market states...")
+    await telegram_bot.stop()
     for label, eng in [
         ("US",     execution_engine),
         ("Indian", execution_engine_in),
@@ -110,6 +113,7 @@ async def lifespan(app: FastAPI):
         except Exception as e:
             logger.error(f"[Server] Failed to save {label} engine state: {e}")
     logger.info("[Server] Shutdown complete.")
+
 
 
 app = FastAPI(

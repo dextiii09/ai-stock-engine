@@ -22,7 +22,7 @@ import yfinance as yf
 from typing import Dict, Any, List
 
 
-def _safe_get(ticker: yf.Ticker, attr: str, default=None):
+def _safe_get(ticker: Any, attr: str, default=None):
     try:
         return getattr(ticker, attr)
     except Exception:
