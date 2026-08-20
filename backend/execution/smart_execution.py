@@ -572,11 +572,17 @@ class SmartExecutionEngine:
             # save silently never happened. Fire-and-forget on the running
             # loop instead: same loop as the DB pool, no deadlock.
             task = loop.create_task(coro)
-            task.add_done_callback(
-                lambda t: t.exception() and print(f"[_run_async] task failed: {t.exception()}"))
+            def _on_done(t):
+                if not t.cancelled():
+                    exc = t.exception()
+                    if exc:
+                        print(f"[_run_async] task failed: {exc}")
+            task.add_done_callback(_on_done)
             return None
+
         else:
             return loop.run_until_complete(coro)
+
 
     # ------------------------------------------------------------------ #
     # State load / save (sync paths — startup and graceful shutdown)      #

@@ -555,11 +555,17 @@ class ReinforcementLearningEngine:
                 # running loop instead; JSON fallback below still saves
                 # synchronously either way.
                 task = loop.create_task(coro)
-                task.add_done_callback(
-                    lambda t: t.exception() and print(f"[RL Engine] async save failed: {t.exception()}"))
+                def _on_done(t):
+                    if not t.cancelled():
+                        exc = t.exception()
+                        if exc:
+                            print(f"[RL Engine] async save failed: {exc}")
+                task.add_done_callback(_on_done)
                 return None
+
             else:
                 return loop.run_until_complete(coro)
+
 
         if DB_ENABLED:
             try:
