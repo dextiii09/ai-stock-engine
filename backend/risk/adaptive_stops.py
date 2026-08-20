@@ -17,10 +17,10 @@ MIN_STOP_PCT    = 0.005
 
 # Regime-specific multiplier profiles for 2-stage execution
 REGIME_STOP_CONFIG: Dict[str, Dict[str, float]] = {
-    "Trending Bull":   {"stop_mult": 2.5, "trail_mult": 2.8, "tp1_rr": 1.5, "tp2_rr": 3.5, "ratchet_thresh": 0.8},
-    "Trending Bear":   {"stop_mult": 2.5, "trail_mult": 2.8, "tp1_rr": 1.5, "tp2_rr": 3.5, "ratchet_thresh": 0.8},
-    "Sideways":        {"stop_mult": 2.0, "trail_mult": 1.8, "tp1_rr": 1.2, "tp2_rr": 2.0, "ratchet_thresh": 0.6},
-    "High Volatility": {"stop_mult": 2.2, "trail_mult": 1.6, "tp1_rr": 1.2, "tp2_rr": 2.0, "ratchet_thresh": 0.5},
+    "Trending Bull":   {"stop_mult": 1.2, "trail_mult": 1.5, "tp1_rr": 1.5, "tp2_rr": 3.5, "ratchet_thresh": 0.7},
+    "Trending Bear":   {"stop_mult": 1.3, "trail_mult": 1.6, "tp1_rr": 1.5, "tp2_rr": 3.5, "ratchet_thresh": 0.7},
+    "Sideways":        {"stop_mult": 1.5, "trail_mult": 1.8, "tp1_rr": 1.2, "tp2_rr": 2.0, "ratchet_thresh": 0.6},
+    "High Volatility": {"stop_mult": 2.2, "trail_mult": 2.5, "tp1_rr": 1.5, "tp2_rr": 3.0, "ratchet_thresh": 0.5},
 }
 _DEFAULT_CONFIG = {
     "stop_mult": STOP_ATR_MULT,
@@ -29,6 +29,8 @@ _DEFAULT_CONFIG = {
     "tp2_rr": TP2_RISK_REWARD,
     "ratchet_thresh": 0.8,
 }
+
+
 
 
 class AdaptiveStopLoss:

@@ -1,7 +1,7 @@
 """
 Interactive Telegram Bot for AI Stock Engine.
-Provides real-time notifications and two-way remote commands:
-/status, /pnl, /positions, /regime, /halt, /resume, /retrain, /help
+Provides real-time notifications, 1-tap quick action keyboard,
+two-way remote commands, automated EOD digest, and macro blackout alerts.
 """
 import os
 import json
@@ -10,17 +10,30 @@ import logging
 import urllib.request
 import urllib.parse
 import ssl
-from typing import Optional, Dict, Any
+import time
+from datetime import datetime, date
+from typing import Optional, Dict, Any, List
 
 logger = logging.getLogger("uvicorn.error")
 
 _ssl_ctx = ssl._create_unverified_context()
 
+DEFAULT_KEYBOARD = {
+    "keyboard": [
+        [{"text": "📊 Status"}, {"text": "💰 PnL"}, {"text": "📈 Positions"}],
+        [{"text": "🖥️ System"}, {"text": "👻 Shadow"}, {"text": "🌐 Regime"}],
+        [{"text": "📬 EOD Digest"}, {"text": "🔄 Retrain"}, {"text": "🚨 Halt"}]
+    ],
+    "resize_keyboard": True,
+    "persistent": True
+}
+
 
 class TelegramBotController:
     """
     Two-way interactive Telegram Bot polling engine.
-    Listens for authorized user commands and executes engine actions.
+    Listens for authorized user commands, handles 1-tap buttons,
+    schedules daily EOD digests, and delivers real-time trading alerts.
     """
 
     def __init__(self):
@@ -28,14 +41,23 @@ class TelegramBotController:
         self.allowed_chat_id = os.getenv("TELEGRAM_CHAT_ID", "").strip()
         self.is_running = False
         self._poll_task: Optional[asyncio.Task] = None
+        self._eod_task: Optional[asyncio.Task] = None
+        self._macro_task: Optional[asyncio.Task] = None
         self._last_update_id = 0
+        self._last_notified_blackout: Optional[str] = None
 
     @property
     def is_configured(self) -> bool:
         return bool(self.bot_token and self.allowed_chat_id)
 
-    async def send_message(self, text: str, parse_mode: str = "Markdown", chat_id: Optional[str] = None) -> bool:
-        """Sends a message to the authorized Telegram chat."""
+    async def send_message(
+        self,
+        text: str,
+        parse_mode: str = "Markdown",
+        chat_id: Optional[str] = None,
+        with_keyboard: bool = True
+    ) -> bool:
+        """Sends a message to the authorized Telegram chat with optional 1-tap keyboard."""
         target_chat = chat_id or self.allowed_chat_id
         if not self.bot_token or not target_chat:
             return False
@@ -47,6 +69,9 @@ class TelegramBotController:
             "parse_mode": parse_mode,
             "disable_web_page_preview": True,
         }
+        if with_keyboard:
+            payload["reply_markup"] = DEFAULT_KEYBOARD
+
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(
             url,
@@ -66,25 +91,33 @@ class TelegramBotController:
         return await asyncio.to_thread(_do_send)
 
     async def start(self):
-        """Starts the long-polling loop if configured."""
+        """Starts the long-polling loop and scheduled background monitors."""
         if not self.is_configured:
             logger.info("[TelegramBot] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set. Bot polling idle.")
             return
 
         self.is_running = True
         self._poll_task = asyncio.create_task(self._polling_loop())
-        logger.info("[TelegramBot] Interactive Telegram Bot listener started successfully.")
-        await self.send_message("🤖 *AI Stock Engine Online*\nTelegram Bot initialized and connected to 5 market loops. Type /help for commands.")
+        self._eod_task = asyncio.create_task(self._daily_eod_loop())
+        self._macro_task = asyncio.create_task(self._macro_blackout_monitor())
+        logger.info("[TelegramBot] Interactive Telegram Bot listener & schedulers started.")
+        await self.send_message(
+            "🤖 *AI Stock Engine Online*\n"
+            "Interactive Telegram Control Panel active across 5 market loops.\n"
+            "Use the quick action buttons below or type /help for commands.",
+            with_keyboard=True
+        )
 
     async def stop(self):
-        """Stops the polling loop."""
+        """Stops the polling loop and scheduled tasks."""
         self.is_running = False
-        if self._poll_task:
-            self._poll_task.cancel()
-            try:
-                await self._poll_task
-            except asyncio.CancelledError:
-                pass
+        for task in (self._poll_task, self._eod_task, self._macro_task):
+            if task:
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
         logger.info("[TelegramBot] Interactive Telegram Bot stopped.")
 
     async def _polling_loop(self):
@@ -124,22 +157,179 @@ class TelegramBotController:
 
         return await asyncio.to_thread(_do_get)
 
+    async def _daily_eod_loop(self):
+        """Runs daily at 18:00 UTC (23:30 IST) to auto-push the EOD PnL digest."""
+        while self.is_running:
+            try:
+                now = datetime.utcnow()
+                # Target: 18:00 UTC (23:30 IST market close)
+                target = now.replace(hour=18, minute=0, second=0, microsecond=0)
+                if now >= target:
+                    # Move to tomorrow's 18:00 UTC
+                    target = target.replace(day=target.day + 1)
+                wait_secs = (target - now).total_seconds()
+                await asyncio.sleep(wait_secs)
+                
+                # Deliver digest
+                report = await self.generate_eod_digest()
+                await self.send_message(report, with_keyboard=True)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"[TelegramBot] EOD loop error: {e}")
+                await asyncio.sleep(60)
+
+    async def _macro_blackout_monitor(self):
+        """Monitors upcoming high-impact economic events and sends alerts."""
+        while self.is_running:
+            try:
+                from data.event_awareness import EventAwarenessEngine, IndianEventAwarenessEngine
+                us_event = EventAwarenessEngine().check_today()
+                in_event = IndianEventAwarenessEngine().check_today()
+                
+                blackout_active = us_event.get("trading_blackout") or in_event.get("trading_blackout")
+                reason = us_event.get("blackout_reason") or in_event.get("blackout_reason") or "High Impact Macro Release"
+
+                if blackout_active and self._last_notified_blackout != reason:
+                    self._last_notified_blackout = reason
+                    await self.send_message(
+                        f"⚠️ *MACRO EVENT BLACKOUT ACTIVATED*\n\n"
+                        f"• Reason: `{reason}`\n"
+                        f"• Action: *New trade entries paused* to avoid high-volatility slippage.\n"
+                        f"• Active stops & targets remain fully protected.",
+                        with_keyboard=True
+                    )
+                elif not blackout_active and self._last_notified_blackout is not None:
+                    self._last_notified_blackout = None
+                    await self.send_message(
+                        "✅ *MACRO EVENT BLACKOUT CLEARED*\n"
+                        "Normal autonomous trading loops have resumed across all markets.",
+                        with_keyboard=True
+                    )
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"[TelegramBot] Macro monitor error: {e}")
+            await asyncio.sleep(300)  # check every 5 minutes
+
+    async def generate_eod_digest(self) -> str:
+        """Generates a comprehensive End-of-Day PnL recap across all 5 markets."""
+        from api.routes import (
+            execution_engine, execution_engine_in, execution_engine_st,
+            execution_engine_cx, execution_engine_fx, global_risk
+        )
+        engines = [
+            ("US", execution_engine, "$"),
+            ("INDIA", execution_engine_in, "₹"),
+            ("STOCKS", execution_engine_st, "$"),
+            ("CRYPTO", execution_engine_cx, "$"),
+            ("FOREX", execution_engine_fx, "$"),
+        ]
+
+        today_date = date.today()
+        today_trades: List[Dict[str, Any]] = []
+        total_open_count = 0
+        total_unrealized_pnl = 0.0
+
+        for mkt, eng, sym_pfx in engines:
+            # Closed trades
+            for t in getattr(eng, "closed_trades", []):
+                # Try parsing timestamp
+                t_time = t.get("exit_time") or t.get("timestamp") or 0
+                if isinstance(t_time, (int, float)):
+                    if date.fromtimestamp(t_time) == today_date:
+                        today_trades.append({**t, "market": mkt, "currency": sym_pfx})
+                elif isinstance(t_time, str):
+                    if str(today_date) in t_time:
+                        today_trades.append({**t, "market": mkt, "currency": sym_pfx})
+
+            # Open holdings
+            for h in getattr(eng, "active_holdings", []):
+                total_open_count += 1
+                entry = h.get("entry_price", 0.0)
+                curr = h.get("current_price", entry)
+                shares = h.get("shares", 0.0)
+                pnl = (curr - entry) * shares if h.get("direction") == "LONG" else (entry - curr) * shares
+                total_unrealized_pnl += pnl
+
+        wins = [t for t in today_trades if t.get("profit", 0) > 0 or t.get("pnl", 0) > 0]
+        losses = [t for t in today_trades if t.get("profit", 0) <= 0 and t.get("pnl", 0) < 0]
+        
+        tot_closed = len(today_trades)
+        win_rate = round(len(wins) / tot_closed * 100, 1) if tot_closed > 0 else 0.0
+        
+        net_pnl_usd = sum(t.get("profit", t.get("pnl", 0.0)) for t in today_trades if t.get("currency") != "₹")
+        net_pnl_inr = sum(t.get("profit", t.get("pnl", 0.0)) for t in today_trades if t.get("currency") == "₹")
+
+        best_t = max(today_trades, key=lambda x: x.get("profit", x.get("pnl", 0)), default=None)
+        worst_t = min(today_trades, key=lambda x: x.get("profit", x.get("pnl", 0)), default=None)
+
+        lines = [
+            "📬 *DAILY END-OF-DAY PERFORMANCE RECAP*",
+            f"📅 Date: `{today_date.strftime('%d %B %Y')}`\n",
+            f"• *Closed Trades Today*: `{tot_closed}` (Wins: `{len(wins)}` | Losses: `{len(losses)}`)",
+            f"• *Today's Win Rate*: `{win_rate}%`",
+            f"• *Realized USD PnL*: `${net_pnl_usd:+,.2f}`",
+        ]
+        if net_pnl_inr != 0:
+            lines.append(f"• *Realized INR PnL*: `₹{net_pnl_inr:+,.2f}`")
+
+        if best_t:
+            lines.append(f"• *🌟 Best Trade*: {best_t.get('symbol')} (`{best_t.get('currency')}{best_t.get('profit', best_t.get('pnl', 0)):+,.2f}`)")
+        if worst_t and worst_t != best_t:
+            lines.append(f"• *⚠️ Worst Trade*: {worst_t.get('symbol')} (`{worst_t.get('currency')}{worst_t.get('profit', worst_t.get('pnl', 0)):+,.2f}`)")
+
+        lines.append(f"\n🌙 *Overnight Position Book:*")
+        lines.append(f"• Open Holdings: `{total_open_count}` positions")
+        lines.append(f"• Unrealized Float: `${total_unrealized_pnl:+,.2f}`")
+        lines.append(f"• Combined Safe Equity: `${global_risk.total_equity():,.2f}`")
+        lines.append(f"• Global Halt: `{'HALTED ⛔' if global_risk.global_halt else 'ACTIVE ✅'}`")
+
+        return "\n".join(lines)
+
     async def _handle_message(self, message: dict):
-        """Handles incoming user message with authorization check."""
+        """Handles incoming user message with authorization check and 1-tap normalization."""
         chat = message.get("chat", {})
         chat_id = str(chat.get("id", ""))
-        text = message.get("text", "").strip()
+        raw_text = message.get("text", "").strip()
 
-        if not text:
+        if not raw_text:
             return
 
         # Security check: only authorized chat_id can issue commands
         if str(chat_id) != str(self.allowed_chat_id):
             logger.warning(f"[TelegramBot] Unauthorized message attempt from chat_id: {chat_id}")
-            await self.send_message(f"⛔ *Unauthorized Access Denied*\nYour Chat ID: `{chat_id}`", chat_id=chat_id)
+            await self.send_message(f"⛔ *Unauthorized Access Denied*\nYour Chat ID: `{chat_id}`", chat_id=chat_id, with_keyboard=False)
             return
 
-        cmd = text.split()[0].lower() if text else ""
+        # Normalize 1-tap button labels to commands
+        text_lower = raw_text.lower()
+        if "status" in text_lower:
+            cmd = "/status"
+        elif "system" in text_lower or "cpu" in text_lower or "ram" in text_lower or "server" in text_lower or "vps" in text_lower:
+            cmd = "/system"
+        elif "pnl" in text_lower or "performance" in text_lower:
+            cmd = "/pnl"
+        elif "position" in text_lower or "holding" in text_lower:
+            cmd = "/positions"
+        elif "shadow" in text_lower:
+            cmd = "/shadow"
+        elif "regime" in text_lower:
+            cmd = "/regime"
+        elif "digest" in text_lower or "eod" in text_lower or "recap" in text_lower:
+            cmd = "/digest"
+        elif "retrain" in text_lower:
+            cmd = "/retrain"
+        elif "halt" in text_lower or "stop" in text_lower or "kill" in text_lower:
+            cmd = "/halt"
+        elif "resume" in text_lower:
+            cmd = "/resume"
+        elif "help" in text_lower or "start" in text_lower:
+            cmd = "/help"
+        elif raw_text.startswith("/backtest"):
+            cmd = "/backtest"
+        else:
+            cmd = raw_text.split()[0].lower()
 
         # Import system components dynamically to avoid circular dependencies
         from api.routes import (
@@ -157,25 +347,22 @@ class TelegramBotController:
         if cmd in ("/start", "/help"):
             reply = (
                 "🤖 *AI Stock Engine Control Panel*\n\n"
-                "*Available Commands:*\n"
-                "📊 /status — 5-Market live engine status & tick latency\n"
-                "🖥️ /system — Real-time CPU, RAM, Disk & Server health\n"
-                "💰 /pnl — Overall & 30d PnL, Win Rate, Sharpe, Drawdown\n"
-                "📈 /positions — List all open holdings across markets\n"
-                "👻 /shadow — Shadow Trading accuracy & avoided losses\n"
-                "🌐 /regime — Current HMM market regime detections\n"
-                "🧪 /backtest `<symbol>` — Run instant 1y backtest\n"
-                "🚨 /halt — *EMERGENCY KILL-SWITCH* (Halts & liquidates)\n"
-                "▶️ /resume — Resume trading loops & reset baselines\n"
-                "🔄 /retrain — Trigger background MetaGate AutoML retrain\n"
-                "ℹ️ /help — Show this help message"
+                "*Tap any button below or type a command:*\n\n"
+                "📊 `/status` — 5-Market live engine status & tick latency\n"
+                "🖥️ `/system` — Real-time CPU, RAM, Disk & Process health\n"
+                "💰 `/pnl` — Overall & 30d PnL, Win Rate, Sharpe, Drawdown\n"
+                "📈 `/positions` — List all open holdings across markets\n"
+                "👻 `/shadow` — Shadow Trading accuracy & avoided losses\n"
+                "🌐 `/regime` — Current HMM market regime detections\n"
+                "📬 `/digest` — Today's End-of-Day PnL & Trade Recap\n"
+                "🧪 `/backtest <symbol>` — Run instant 1y walk-forward backtest\n"
+                "🚨 `/halt` — *EMERGENCY KILL-SWITCH* (Halts & liquidates)\n"
+                "▶️ `/resume` — Resume trading loops & reset baselines\n"
+                "🔄 `/retrain` — Trigger background MetaGate AutoML retrain"
             )
             await self.send_message(reply)
 
-
-
         elif cmd == "/status":
-            import time
             now = time.time()
             engines = [
                 ("US (Core)", engine_state, execution_engine, "US"),
@@ -197,6 +384,61 @@ class TelegramBotController:
                 lines.append(f"Reason: _{global_risk.halt_reason}_")
             lines.append(f"💵 *Combined Equity*: `${global_risk.total_equity():,.2f}`")
             await self.send_message("\n".join(lines))
+
+        elif cmd == "/system":
+            try:
+                import psutil
+                import platform
+
+                cpu_pct = psutil.cpu_percent(interval=0.2)
+                cpu_count = psutil.cpu_count(logical=True)
+                
+                vmem = psutil.virtual_memory()
+                ram_total_gb = vmem.total / (1024 ** 3)
+                ram_used_gb = vmem.used / (1024 ** 3)
+                ram_free_gb = vmem.available / (1024 ** 3)
+                ram_pct = vmem.percent
+                
+                disk = psutil.disk_usage('/')
+                disk_total_gb = disk.total / (1024 ** 3)
+                disk_used_gb = disk.used / (1024 ** 3)
+                disk_free_gb = disk.free / (1024 ** 3)
+                disk_pct = disk.percent
+                
+                proc = psutil.Process(os.getpid())
+                proc_mem_mb = proc.memory_info().rss / (1024 ** 2)
+                proc_cpu = proc.cpu_percent(interval=0.1)
+                proc_threads = proc.num_threads()
+                
+                proc_create_time = proc.create_time()
+                uptime_secs = int(time.time() - proc_create_time)
+                days, rem = divmod(uptime_secs, 86400)
+                hours, rem = divmod(rem, 3600)
+                mins, secs = divmod(rem, 60)
+                uptime_str = f"{days}d {hours}h {mins}m" if days > 0 else f"{hours}h {mins}m {secs}s"
+                
+                cpu_bar = "🟢" if cpu_pct < 60 else "🟡" if cpu_pct < 85 else "🔴"
+                ram_bar = "🟢" if ram_pct < 70 else "🟡" if ram_pct < 90 else "🔴"
+                disk_bar = "🟢" if disk_pct < 75 else "🟡" if disk_pct < 90 else "🔴"
+
+                reply = (
+                    "🖥️ *VPS & Trading Engine System Health*\n\n"
+                    f"*{cpu_bar} CPU Usage*: `{cpu_pct:.1f}%` ({cpu_count} Cores)\n"
+                    f"*{ram_bar} RAM Memory*: `{ram_pct:.1f}%`\n"
+                    f"   • Used: `{ram_used_gb:.2f} GB` / `{ram_total_gb:.2f} GB`\n"
+                    f"   • Free: `{ram_free_gb:.2f} GB`\n\n"
+                    f"*{disk_bar} Disk Storage*: `{disk_pct:.1f}%`\n"
+                    f"   • Used: `{disk_used_gb:.1f} GB` / `{disk_total_gb:.1f} GB` (Free: `{disk_free_gb:.1f} GB`)\n\n"
+                    f"⚡ *Python Trading Process:*\n"
+                    f"   • RAM Consumption: `{proc_mem_mb:.1f} MB`\n"
+                    f"   • Process CPU: `{proc_cpu:.1f}%`\n"
+                    f"   • Active Threads: `{proc_threads}`\n"
+                    f"   • Process Uptime: `{uptime_str}`\n"
+                    f"   • Host OS: `{platform.system()} {platform.release()}`"
+                )
+                await self.send_message(reply)
+            except Exception as e:
+                await self.send_message(f"❌ *Failed to fetch system metrics*: {str(e)}")
 
         elif cmd in ("/pnl", "/performance"):
             all_closed = (
@@ -267,38 +509,9 @@ class TelegramBotController:
                 lines.append("No active open positions. Capital is 100% in safe cash.")
             await self.send_message("\n".join(lines))
 
-        elif cmd == "/regime":
-            detectors = [
-                ("US Index (SPY)", regime_detector),
-                ("India (NIFTYBEES)", regime_detector_in),
-                ("US Tech (QQQ)", regime_detector_st),
-                ("Crypto (BTC-USD)", regime_detector_cx),
-                ("Forex (EURUSD=X)", regime_detector_fx),
-            ]
-            lines = ["🌐 *Market HMM Volatility Regimes:*\n"]
-            for name, det in detectors:
-                reg = getattr(det, "current_regime", "Unknown")
-                lines.append(f"• *{name}*: `{reg}`")
-            await self.send_message("\n".join(lines))
-
-        elif cmd in ("/halt", "/stop", "/kill"):
-            res = await global_risk.trigger_emergency_kill_switch(reason="Operator Remote Telegram Command")
-            await self.send_message(
-                f"🚨 *EMERGENCY KILL-SWITCH EXECUTED*\n\n"
-                f"• Status: `HALTED`\n"
-                f"• Liquidated Positions: `{res.get('liquidated_positions_count', 0)}`\n"
-                f"• Total Safe Equity: `${res.get('total_equity', 0.0):,.2f}`\n"
-                f"All market trading loops are now locked. Use /resume to restart."
-            )
-
-        elif cmd == "/resume":
-            res = global_risk.resume_trading(reason="Operator Remote Telegram Command")
-            await self.send_message(
-                f"✅ *Trading Resumed Successfully*\n\n"
-                f"• Global Halt Cleared: `{res.get('halt_cleared', False)}`\n"
-                f"• New Baseline Equity: `${res.get('new_baseline', 0.0):,.2f}`\n"
-                f"Autonomous trading loops across all 5 markets are active."
-            )
+        elif cmd in ("/digest", "/eod", "/recap"):
+            digest_msg = await self.generate_eod_digest()
+            await self.send_message(digest_msg)
 
         elif cmd == "/shadow":
             from api.routes import (
@@ -334,8 +547,22 @@ class TelegramBotController:
             )
             await self.send_message(reply)
 
+        elif cmd == "/regime":
+            detectors = [
+                ("US Index (SPY)", regime_detector),
+                ("India (NIFTYBEES)", regime_detector_in),
+                ("US Tech (QQQ)", regime_detector_st),
+                ("Crypto (BTC-USD)", regime_detector_cx),
+                ("Forex (EURUSD=X)", regime_detector_fx),
+            ]
+            lines = ["🌐 *Market HMM Volatility Regimes:*\n"]
+            for name, det in detectors:
+                reg = getattr(det, "current_regime", "Unknown")
+                lines.append(f"• *{name}*: `{reg}`")
+            await self.send_message("\n".join(lines))
+
         elif cmd.startswith("/backtest"):
-            parts = text.split()
+            parts = raw_text.split()
             sym = parts[1].upper() if len(parts) > 1 else "AAPL"
             await self.send_message(f"⏳ *Running Walk-Forward Backtest for {sym} (1y, AI Committee)...*")
             from backtesting.engine import BacktestEngine
@@ -347,8 +574,6 @@ class TelegramBotController:
                 if "error" in res:
                     await self.send_message(f"❌ *Backtest Error*: {res['error']}")
                 else:
-                    curr = res.get("currency", "USD")
-                    pfx = "₹" if curr == "INR" else "$"
                     reply = (
                         f"🧪 *Backtest Results: {sym}*\n\n"
                         f"• *Strategy*: `{res.get('strategy')}` (1 Year)\n"
@@ -363,69 +588,32 @@ class TelegramBotController:
             except Exception as e:
                 await self.send_message(f"❌ *Backtest Failed*: {str(e)}")
 
-        elif cmd in ("/system", "/cpu", "/ram", "/server", "/vps"):
-            try:
-                import psutil
-                import platform
-                import os
-                import time
+        elif cmd in ("/halt", "/stop", "/kill"):
+            res = await global_risk.trigger_emergency_kill_switch(reason="Operator Remote Telegram Command")
+            await self.send_message(
+                f"🚨 *EMERGENCY KILL-SWITCH EXECUTED*\n\n"
+                f"• Status: `HALTED`\n"
+                f"• Liquidated Positions: `{res.get('liquidated_positions_count', 0)}`\n"
+                f"• Total Safe Equity: `${res.get('total_equity', 0.0):,.2f}`\n"
+                f"All market trading loops are now locked. Tap /resume to restart."
+            )
 
-                cpu_pct = psutil.cpu_percent(interval=0.2)
-                cpu_count = psutil.cpu_count(logical=True)
-                
-                vmem = psutil.virtual_memory()
-                ram_total_gb = vmem.total / (1024 ** 3)
-                ram_used_gb = vmem.used / (1024 ** 3)
-                ram_free_gb = vmem.available / (1024 ** 3)
-                ram_pct = vmem.percent
-                
-                disk = psutil.disk_usage('/')
-                disk_total_gb = disk.total / (1024 ** 3)
-                disk_used_gb = disk.used / (1024 ** 3)
-                disk_free_gb = disk.free / (1024 ** 3)
-                disk_pct = disk.percent
-                
-                # Current python process stats
-                proc = psutil.Process(os.getpid())
-                proc_mem_mb = proc.memory_info().rss / (1024 ** 2)
-                proc_cpu = proc.cpu_percent(interval=0.1)
-                proc_threads = proc.num_threads()
-                
-                # Process uptime
-                proc_create_time = proc.create_time()
-                uptime_secs = int(time.time() - proc_create_time)
-                days, rem = divmod(uptime_secs, 86400)
-                hours, rem = divmod(rem, 3600)
-                mins, secs = divmod(rem, 60)
-                uptime_str = f"{days}d {hours}h {mins}m" if days > 0 else f"{hours}h {mins}m {secs}s"
-                
-                cpu_bar = "🟢" if cpu_pct < 60 else "🟡" if cpu_pct < 85 else "🔴"
-                ram_bar = "🟢" if ram_pct < 70 else "🟡" if ram_pct < 90 else "🔴"
-                disk_bar = "🟢" if disk_pct < 75 else "🟡" if disk_pct < 90 else "🔴"
+        elif cmd == "/resume":
+            res = global_risk.resume_trading(reason="Operator Remote Telegram Command")
+            await self.send_message(
+                f"✅ *Trading Resumed Successfully*\n\n"
+                f"• Global Halt Cleared: `{res.get('halt_cleared', False)}`\n"
+                f"• New Baseline Equity: `${res.get('new_baseline', 0.0):,.2f}`\n"
+                f"Autonomous trading loops across all 5 markets are active."
+            )
 
-                reply = (
-                    "🖥️ *VPS & Trading Engine System Health*\n\n"
-                    f"*{cpu_bar} CPU Usage*: `{cpu_pct:.1f}%` ({cpu_count} Cores)\n"
-                    f"*{ram_bar} RAM Memory*: `{ram_pct:.1f}%`\n"
-                    f"   • Used: `{ram_used_gb:.2f} GB` / `{ram_total_gb:.2f} GB`\n"
-                    f"   • Free: `{ram_free_gb:.2f} GB`\n\n"
-                    f"*{disk_bar} Disk Storage*: `{disk_pct:.1f}%`\n"
-                    f"   • Used: `{disk_used_gb:.1f} GB` / `{disk_total_gb:.1f} GB` (Free: `{disk_free_gb:.1f} GB`)\n\n"
-                    f"⚡ *Python Trading Process:*\n"
-                    f"   • RAM Consumption: `{proc_mem_mb:.1f} MB`\n"
-                    f"   • Process CPU: `{proc_cpu:.1f}%`\n"
-                    f"   • Active Threads: `{proc_threads}`\n"
-                    f"   • Process Uptime: `{uptime_str}`\n"
-                    f"   • Host OS: `{platform.system()} {platform.release()}`"
-                )
-                await self.send_message(reply)
-            except Exception as e:
-                await self.send_message(f"❌ *Failed to fetch system metrics*: {str(e)}")
+        elif cmd == "/retrain":
+            await self.send_message("⏳ *Launching background AutoML retrain for all MetaGate models...*")
+            res = await trigger_retrain_all_models()
+            await self.send_message(f"✅ *Retrain Triggered*: {res.get('message', 'Active in background')}")
 
         else:
-            await self.send_message(f"❓ Unknown command `{text}`. Type /help for available commands.")
-
-
+            await self.send_message(f"❓ Unknown command `{raw_text}`. Type /help for available commands.")
 
 
 # Global instance

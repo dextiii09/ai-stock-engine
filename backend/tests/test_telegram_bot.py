@@ -68,3 +68,44 @@ def test_telegram_bot_system_command():
 
     asyncio.run(_run())
 
+
+def test_telegram_bot_button_normalization():
+    async def _run():
+        bot = TelegramBotController()
+        bot.bot_token = "mock_token"
+        bot.allowed_chat_id = "12345678"
+
+        with patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
+            # User tapped "📊 Status" button
+            fake_msg = {
+                "chat": {"id": 12345678},
+                "text": "📊 Status"
+            }
+            await bot._handle_message(fake_msg)
+            mock_send.assert_called_once()
+            args = mock_send.call_args[0]
+            assert "Engine Health Snapshot" in args[0]
+
+    asyncio.run(_run())
+
+
+def test_telegram_bot_eod_digest():
+    async def _run():
+        bot = TelegramBotController()
+        bot.bot_token = "mock_token"
+        bot.allowed_chat_id = "12345678"
+
+        with patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
+            fake_msg = {
+                "chat": {"id": 12345678},
+                "text": "📬 EOD Digest"
+            }
+            await bot._handle_message(fake_msg)
+            mock_send.assert_called_once()
+            args = mock_send.call_args[0]
+            assert "PERFORMANCE RECAP" in args[0]
+            assert "Closed Trades Today" in args[0]
+
+    asyncio.run(_run())
+
+
