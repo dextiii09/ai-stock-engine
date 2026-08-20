@@ -1226,3 +1226,66 @@ if p_win_frac is not None and not sim_result["is_viable"]:
 10. **Backtest weights are deterministic**: All `get_current_weights()` calls inside `BacktestEngine` must pass `deterministic=True`.
 11. **Single regime vocabulary everywhere**: `MarketRegimeDetector.detect()` always returns one of 4 RL names (`"Trending Bull"`, `"Sideways"`, `"Trending Bear"`, `"High Volatility"`) via `HMM_TO_RL`. Every downstream consumer — `position_sizing.regime_scalars`, `regime_win_rate`, `get_current_weights`, `_trade_history` stamps — must be keyed on this 4-name vocab. Do NOT key any dict on the 10-name HMM strings (`"Strong Trend Bull"`, `"News Shock"`, etc.) — `detect()` has already collapsed them and those strings will never arrive. To recover sub-regime granularity at the sizer (e.g. High Liquidity 1.1 vs News Shock 0.2), the raw HMM name would need to be carried alongside the RL name into `calculate_size` — not possible at the current 4-name boundary.
 12. **Evaluation baseline reset (Session 5)**: All paper-trading P&L and risk-adjusted numbers collected before Session 5 were generated with `regime_scalar` silently fixed at `1.0` (dead 10-name dict). Post-fix, High Volatility trades size at 0.4×, Sideways at 0.5×. Do not compare pre-fix and post-fix results — treat the first 30+ trades per regime after this session as the new clean baseline.
+
+---
+
+## 16. Telegram Bot, Scheduled Multi-Universe Automation & Real-Time Monitoring
+
+### 16.1 Interactive Telegram Bot Controller (`backend/utils/telegram_bot.py`)
+The engine features a native asynchronous Telegram Bot controller running directly on the production VPS, communicating over the official Telegram Bot REST API without heavy external dependencies.
+
+* **Security & Authorization**: Inbound updates are strictly validated against `TELEGRAM_CHAT_ID` (`7016835190`). Any unauthorized access attempts receive instant rejection alerts.
+* **Persistent 1-Tap Quick Action Keyboard**:
+  ```text
+  ┌───────────────┬───────────────┬────────────────┐
+  │   📊 Status   │    💰 PnL     │  📈 Positions  │
+  ├───────────────┼───────────────┼────────────────┤
+  │   🖥️ System   │   👻 Shadow   │    🌐 Regime   │
+  ├───────────────┼───────────────┼────────────────┤
+  │ 📬 EOD Digest │  🔄 Retrain   │    🚨 Halt     │
+  └───────────────┴───────────────┴────────────────┘
+  ```
+* **Supported Commands**:
+  - `/status`: Real-time health, open positions count, and tick latencies across all 5 market loops.
+  - `/system` (or `/cpu`, `/ram`, `/server`): Real-time VPS CPU %, RAM Memory (Used/Free GB), Disk (Used/Free GB), and Python process RSS memory & uptime.
+  - `/pnl`: Complete quantitative performance breakdown (Win Rate %, Net Realized PnL, Profit Factor, Expectancy, Sharpe, Sortino, Max Drawdown).
+  - `/positions`: Live open holdings across US, India, Stocks, Crypto, and Forex markets with entry price, current price, unrealized PnL, and TP1 ratchet status.
+  - `/shadow`: Real-time Shadow Trading intelligence, active virtual setups, avoided losses count, and AI gate veto accuracy %.
+  - `/regime`: Current HMM volatility regimes across SPY, Nifty, QQQ, BTC, and EUR/USD.
+  - `/digest` (or `/eod`): Today's End-of-Day PnL recap, wins vs losses, best trade, worst trade, and overnight open book.
+  - `/backtest <symbol>`: Instant 1-Year walk-forward backtest on historical Yahoo Finance data (e.g. `/backtest AAPL` or `/backtest RELIANCE.NS`).
+  - `/halt`: Emergency Kill-Switch that halts all 5 trading loops and liquidates all open positions.
+  - `/resume`: Re-activates trading loops and recalibrates portfolio equity baselines.
+  - `/retrain`: Launches background AutoML retraining of all MetaGate classifiers.
+
+### 16.2 Automated Background Automation Schedule (Oracle VPS)
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. DAILY 18:00 UTC (23:30 IST): Automated EOD Performance Recap              │
+│    • Module: TelegramBotController._daily_eod_loop()                        │
+│    • Pushes complete daily PnL, win/loss breakdown, and overnight holdings   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 2. SATURDAY 02:00 UTC (07:30 IST): Multi-Universe Walk-Forward Backtesting   │
+│    • Script: backend/scripts/scheduled_universe_backtest.py                 │
+│    • Tests 15 core assets across 3 strategies                               │
+│    • Generates 'data/backtest_leaderboard.json' & sends Telegram report      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 3. SUNDAY 00:00 UTC (05:30 IST): MetaGate Model AutoML Retraining            │
+│    • Script: backend/scripts/train_all_metagate.py                          │
+│    • Re-fits classifiers on newly closed trade samples                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 16.3 Macroeconomic Event Auto-Blackout Scanner
+`EventAwarenessEngine` continuously monitors economic calendars:
+- High-impact events (FOMC, CPI, NFP, RBI MPC, US/Indian market holidays) trigger automatic trade entry blackout 15 minutes before the event.
+- Delivers instant high-priority Telegram push alerts upon blackout entry and clear.
+- Existing open positions maintain active mathematical Stop-Loss and Trailing Breakeven protection.
+
+### 16.4 Dynamic Regime-Adaptive ATR Multipliers (`backend/risk/adaptive_stops.py`)
+ATR multipliers are calibrated to HMM volatility regimes:
+- **Trending Bull**: SL = $1.2 \times ATR$, Trailing = $1.5 \times ATR$ (tight stops, strong directional momentum, higher Kelly position sizing).
+- **Trending Bear**: SL = $1.3 \times ATR$, Trailing = $1.6 \times ATR$ (disciplined trailing on short trades).
+- **Sideways**: SL = $1.5 \times ATR$, Trailing = $1.8 \times ATR$ (standard mean-reversion buffer).
+- **High Volatility**: SL = $2.2 \times ATR$, Trailing = $2.5 \times ATR$ (wide buffer to absorb noise and prevent premature whipsaws).
+
