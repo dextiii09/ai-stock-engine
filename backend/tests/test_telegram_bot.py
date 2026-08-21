@@ -134,4 +134,43 @@ def test_telegram_bot_chart_command():
     asyncio.run(_run())
 
 
+def test_telegram_bot_var_command():
+    async def _run():
+        bot = TelegramBotController()
+        bot.bot_token = "mock_token"
+        bot.allowed_chat_id = "12345678"
+
+        with patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
+            fake_msg = {
+                "chat": {"id": 12345678},
+                "text": "🎲 VaR"
+            }
+            await bot._handle_message(fake_msg)
+            mock_send.assert_called_once()
+            args = mock_send.call_args[0]
+            assert "Monte Carlo" in args[0]
+
+    asyncio.run(_run())
+
+
+def test_telegram_bot_backup_command():
+    async def _run():
+        bot = TelegramBotController()
+        bot.bot_token = "mock_token"
+        bot.allowed_chat_id = "12345678"
+
+        with patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
+            fake_msg = {
+                "chat": {"id": 12345678},
+                "text": "/backup"
+            }
+            await bot._handle_message(fake_msg)
+            mock_send.assert_called_once()
+            args = mock_send.call_args[0]
+            assert "Backup" in args[0]
+
+    asyncio.run(_run())
+
+
+
 

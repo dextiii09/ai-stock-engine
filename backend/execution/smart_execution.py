@@ -414,15 +414,25 @@ class SmartExecutionEngine:
             if "margin_reserved" in holding:
                 holding["margin_reserved"] = max(0.0, holding["margin_reserved"] - _margin_rel)
 
-            # Mark TP1 hit and ratchet remaining stop to Breakeven
-            holding["tp1_hit"] = True
-            be_buffer = entry_p * 0.001  # cover round-trip commission
-            if direction == "LONG":
-                holding["stop_loss"] = max(holding.get("stop_loss", 0.0), round(entry_p + be_buffer, 4))
+            if "TP2" in reason:
+                holding["tp2_hit"] = True
+                holding["chandelier_active"] = True
+                _dist = abs(entry_p - holding.get("initial_stop_loss", entry_p * 0.98))
+                if direction == "LONG":
+                    holding["stop_loss"] = max(holding.get("stop_loss", 0.0), round(entry_p + (_dist * 1.5), 4))
+                else:
+                    holding["stop_loss"] = min(holding.get("stop_loss", 999999.0), round(entry_p - (_dist * 1.5), 4))
             else:
-                holding["stop_loss"] = min(holding.get("stop_loss", 999999.0), round(entry_p - be_buffer, 4))
+                # Mark TP1 hit and ratchet remaining stop to Breakeven
+                holding["tp1_hit"] = True
+                be_buffer = entry_p * 0.001  # cover round-trip commission
+                if direction == "LONG":
+                    holding["stop_loss"] = max(holding.get("stop_loss", 0.0), round(entry_p + be_buffer, 4))
+                else:
+                    holding["stop_loss"] = min(holding.get("stop_loss", 999999.0), round(entry_p - be_buffer, 4))
 
             self.portfolio_balance += revenue
+
 
         self.closed_trades.append({
             "symbol":      symbol,

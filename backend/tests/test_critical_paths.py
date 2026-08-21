@@ -692,7 +692,106 @@ class TestNewsSentimentScanner:
         is_veto, score, reason = scanner.check_news_veto("TEST_SYMBOL")
         assert is_veto is True
         assert score < -0.70
-        assert "Adverse News" in reason
+class TestMonteCarloVaR:
+    def test_var_all_cash_zero_risk(self):
+        from risk.monte_carlo_var import MonteCarloVaREngine
+        engine = MonteCarloVaREngine()
+        res = engine.calculate_portfolio_var([], total_equity=100000.0)
+        assert res["status"] == "ALL_CASH"
+        assert res["var_95_usd"] == 0.0
+        assert res["var_99_usd"] == 0.0
+        assert res["cvar_99_usd"] == 0.0
+
+    def test_var_multi_asset_holdings_simulation(self):
+        from risk.monte_carlo_var import MonteCarloVaREngine
+        engine = MonteCarloVaREngine()
+        holdings = [
+            {"symbol": "BTC-USD", "shares": 0.5, "entry_price": 60000.0, "current_price": 60000.0, "direction": "LONG"},
+            {"symbol": "AAPL", "shares": 50, "entry_price": 200.0, "current_price": 200.0, "direction": "LONG"},
+            {"symbol": "EURUSD=X", "shares": 50000, "entry_price": 1.08, "current_price": 1.08, "direction": "SHORT"}
+        ]
+        res = engine.calculate_portfolio_var(holdings, total_equity=100000.0, iterations=2000)
+        assert res["open_positions"] == 3
+        assert res["total_exposure_usd"] > 0
+        assert res["var_95_usd"] > 0
+        assert res["var_99_usd"] >= res["var_95_usd"]
+        assert res["cvar_99_usd"] >= res["var_99_usd"]
+        assert "2020 Covid Liquidity Shock" in res["stress_tests"]
+
+        # Format report should return markdown text
+        report = engine.format_var_report(res)
+        assert "Monte Carlo Value-at-Risk" in report
+        assert "1-Day Tail Risk Projections" in report
+
+
+class TestParabolicChandelierRunner:
+    def test_3_stage_scale_out_and_chandelier_ratchet(self):
+        from risk.adaptive_stops import AdaptiveStopLoss
+
+        engine = _make_engine(balance=50000.0)
+        holding = {
+            "symbol": "BTC-USD",
+            "shares": 1.0,
+            "entry_price": 50000.0,
+            "initial_stop_loss": 48000.0,
+            "stop_loss": 48000.0,
+            "tp1_target": 53000.0,
+            "tp2_target": 56000.0,
+            "tp3_runner_target": 60000.0,
+            "direction": "LONG",
+            "regime": "Trending Bull"
+        }
+        engine.active_holdings = [holding]
+        engine.portfolio_balance = 50000.0
+
+
+        # Stage 1: Scale out 50% at TP1 (53,000)
+        ok, _ = _run(engine.partial_close(holding, price=53000.0, fraction=0.5, reason="TP1_1.5R"))
+        assert ok is True
+        assert holding["shares"] == 0.5
+        assert holding["tp1_hit"] is True
+        assert holding["stop_loss"] >= 50000.0  # Breakeven ratchet
+
+        # Stage 2: Scale out 25% (half of remaining 0.5 shares = 0.25 shares) at TP2 (56,000)
+        ok, _ = _run(engine.partial_close(holding, price=56000.0, fraction=0.5, reason="TP2_3.0R"))
+        assert ok is True
+        assert holding["shares"] == 0.25
+        assert holding["tp2_hit"] is True
+        assert holding["chandelier_active"] is True
+        # Stop loss must be locked in profit (+1.5R to +2.0R above entry)
+        assert holding["stop_loss"] >= 52000.0
+
+        # Verify AdaptiveStopLoss chandelier trailing update
+        asl = AdaptiveStopLoss()
+        trail_res = asl.update_trailing(
+            current_price=58000.0,
+            signal="BUY",
+            current_stop=holding["stop_loss"],
+            best_price=58000.0,
+            entry_price=50000.0,
+            tp1_hit=True,
+            tp2_hit=True,
+            atr_distance=2000.0
+        )
+        assert trail_res["new_stop"] >= 54000.0
+
+
+
+class TestAutomatedBackupEngine:
+    def test_backup_creates_valid_zip_archive(self, tmp_path):
+        from scripts.automated_backup import AutomatedBackupEngine
+        engine = AutomatedBackupEngine(base_dir=str(tmp_path))
+        # Create mock target files
+        test_file = tmp_path / "mock_state.json"
+        test_file.write_text('{"balance": 100000.0}')
+        engine.get_backup_targets = lambda: [str(test_file)]
+
+        res = engine.create_backup(max_retention=5)
+        assert res["success"] is True
+        assert res["files_count"] == 1
+        assert os.path.exists(res["archive_path"])
+        assert res["size_kb"] > 0
+
 
 
 

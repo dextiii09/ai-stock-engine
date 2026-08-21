@@ -525,22 +525,29 @@ async def trading_loop():
                     _sl      = _h.get("stop_loss")
                     _tp1     = _h.get("tp1_target")
                     _tp2     = _h.get("tp2_target") or _h.get("take_profit")
+                    _tp3     = _h.get("tp3_runner_target")
                     _tp1_hit = _h.get("tp1_hit", False)
+                    _tp2_hit = _h.get("tp2_hit", False)
 
                     if _dir == "LONG":
                         if _sl and _cur <= _sl:
                             _sl_tp_triggers.append((_h, "STOP_LOSS", "FULL"))
                         elif not _tp1_hit and _tp1 and _cur >= _tp1:
                             _sl_tp_triggers.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
-                        elif _tp2 and _cur >= _tp2:
-                            _sl_tp_triggers.append((_h, "TAKE_PROFIT", "FULL"))
+                        elif _tp1_hit and not _tp2_hit and _tp2 and _cur >= _tp2:
+                            _sl_tp_triggers.append((_h, "TP2_3.0R_SCALEOUT", "PARTIAL"))
+                        elif _tp2_hit and _tp3 and _cur >= _tp3:
+                            _sl_tp_triggers.append((_h, "TP3_CHANDELIER_RUNNER", "FULL"))
                     else:  # SHORT
                         if _sl and _cur >= _sl:
                             _sl_tp_triggers.append((_h, "STOP_LOSS", "FULL"))
                         elif not _tp1_hit and _tp1 and _cur <= _tp1:
                             _sl_tp_triggers.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
-                        elif _tp2 and _cur <= _tp2:
-                            _sl_tp_triggers.append((_h, "TAKE_PROFIT", "FULL"))
+                        elif _tp1_hit and not _tp2_hit and _tp2 and _cur <= _tp2:
+                            _sl_tp_triggers.append((_h, "TP2_3.0R_SCALEOUT", "PARTIAL"))
+                        elif _tp2_hit and _tp3 and _cur <= _tp3:
+                            _sl_tp_triggers.append((_h, "TP3_CHANDELIER_RUNNER", "FULL"))
+
 
                 for _h, _close_reason, _close_type in _sl_tp_triggers:
                     if _close_type == "PARTIAL":
@@ -1003,22 +1010,29 @@ async def indian_trading_loop():
                     _sl      = _h.get("stop_loss")
                     _tp1     = _h.get("tp1_target")
                     _tp2     = _h.get("tp2_target") or _h.get("take_profit")
+                    _tp3     = _h.get("tp3_runner_target")
                     _tp1_hit = _h.get("tp1_hit", False)
+                    _tp2_hit = _h.get("tp2_hit", False)
 
                     if _dir == "LONG":
                         if _sl and _cur <= _sl:
                             _sl_tp_triggers_in.append((_h, "STOP_LOSS", "FULL"))
                         elif not _tp1_hit and _tp1 and _cur >= _tp1:
                             _sl_tp_triggers_in.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
-                        elif _tp2 and _cur >= _tp2:
-                            _sl_tp_triggers_in.append((_h, "TAKE_PROFIT", "FULL"))
+                        elif _tp1_hit and not _tp2_hit and _tp2 and _cur >= _tp2:
+                            _sl_tp_triggers_in.append((_h, "TP2_3.0R_SCALEOUT", "PARTIAL"))
+                        elif _tp2_hit and _tp3 and _cur >= _tp3:
+                            _sl_tp_triggers_in.append((_h, "TP3_CHANDELIER_RUNNER", "FULL"))
                     else:  # SHORT
                         if _sl and _cur >= _sl:
                             _sl_tp_triggers_in.append((_h, "STOP_LOSS", "FULL"))
                         elif not _tp1_hit and _tp1 and _cur <= _tp1:
                             _sl_tp_triggers_in.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
-                        elif _tp2 and _cur <= _tp2:
-                            _sl_tp_triggers_in.append((_h, "TAKE_PROFIT", "FULL"))
+                        elif _tp1_hit and not _tp2_hit and _tp2 and _cur <= _tp2:
+                            _sl_tp_triggers_in.append((_h, "TP2_3.0R_SCALEOUT", "PARTIAL"))
+                        elif _tp2_hit and _tp3 and _cur <= _tp3:
+                            _sl_tp_triggers_in.append((_h, "TP3_CHANDELIER_RUNNER", "FULL"))
+
 
                 for _h, _close_reason, _close_type in _sl_tp_triggers_in:
                     if _close_type == "PARTIAL":
@@ -1450,22 +1464,29 @@ async def _run_market_loop(
                     _sl      = _h.get("stop_loss")
                     _tp1     = _h.get("tp1_target")
                     _tp2     = _h.get("tp2_target") or _h.get("take_profit")
+                    _tp3     = _h.get("tp3_runner_target")
                     _tp1_hit = _h.get("tp1_hit", False)
+                    _tp2_hit = _h.get("tp2_hit", False)
 
                     if _dir == "LONG":
                         if _sl and _cur <= _sl:
                             _sl_tp_triggers.append((_h, "STOP_LOSS", "FULL"))
                         elif not _tp1_hit and _tp1 and _cur >= _tp1:
                             _sl_tp_triggers.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
-                        elif _tp2 and _cur >= _tp2:
-                            _sl_tp_triggers.append((_h, "TAKE_PROFIT", "FULL"))
+                        elif _tp1_hit and not _tp2_hit and _tp2 and _cur >= _tp2:
+                            _sl_tp_triggers.append((_h, "TP2_3.0R_SCALEOUT", "PARTIAL"))
+                        elif _tp2_hit and _tp3 and _cur >= _tp3:
+                            _sl_tp_triggers.append((_h, "TP3_CHANDELIER_RUNNER", "FULL"))
                     else:
                         if _sl and _cur >= _sl:
                             _sl_tp_triggers.append((_h, "STOP_LOSS", "FULL"))
                         elif not _tp1_hit and _tp1 and _cur <= _tp1:
                             _sl_tp_triggers.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
-                        elif _tp2 and _cur <= _tp2:
-                            _sl_tp_triggers.append((_h, "TAKE_PROFIT", "FULL"))
+                        elif _tp1_hit and not _tp2_hit and _tp2 and _cur <= _tp2:
+                            _sl_tp_triggers.append((_h, "TP2_3.0R_SCALEOUT", "PARTIAL"))
+                        elif _tp2_hit and _tp3 and _cur <= _tp3:
+                            _sl_tp_triggers.append((_h, "TP3_CHANDELIER_RUNNER", "FULL"))
+
 
                 for _h, _close_reason, _close_type in _sl_tp_triggers:
                     if _close_type == "PARTIAL":
@@ -3587,3 +3608,100 @@ async def auto_resume_bots():
     if not _log_flush_started:
         asyncio.create_task(_log_flush_loop())
         _log_flush_started = True
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Institutional Risk, Candlestick & Backup Endpoints
+# ─────────────────────────────────────────────────────────────────────────────
+
+@router.get("/api/v1/risk/var")
+async def get_portfolio_var():
+    """Returns 10,000-path Monte Carlo Value at Risk and Macro Stress-Test Analysis."""
+    from risk.monte_carlo_var import MonteCarloVaREngine
+    all_holdings = (
+        execution_engine.active_holdings +
+        execution_engine_in.active_holdings +
+        execution_engine_st.active_holdings +
+        execution_engine_cx.active_holdings +
+        execution_engine_fx.active_holdings
+    )
+    tot_eq = global_risk.total_equity()
+    var_res = await asyncio.to_thread(
+        MonteCarloVaREngine.instance().calculate_portfolio_var,
+        all_holdings,
+        tot_eq
+    )
+    return var_res
+
+
+@router.get("/api/v1/market/candles/{symbol}")
+async def get_market_candles(symbol: str, timeframe: str = "1d", limit: int = 100):
+    """
+    Returns OHLCV candle stream formatted for TradingView Lightweight Charts,
+    along with active trade overlays (Entry, Stop Loss, TP1, TP2, TP3 runner).
+    """
+    import yfinance as yf
+    sym_clean = symbol.upper().strip()
+    
+    def _fetch_yf():
+        period = "3mo" if timeframe in ("1d", "1D") else "5d"
+        interval = "1d" if timeframe in ("1d", "1D") else "5m"
+        ticker = yf.Ticker(sym_clean)
+        df = ticker.history(period=period, interval=interval)
+        candles = []
+        if df is not None and not df.empty:
+            for idx, row in df.tail(limit).iterrows():
+                ts = int(idx.timestamp())
+                candles.append({
+                    "time": ts,
+                    "open": round(float(row["Open"]), 4),
+                    "high": round(float(row["High"]), 4),
+                    "low": round(float(row["Low"]), 4),
+                    "close": round(float(row["Close"]), 4),
+                    "volume": float(row.get("Volume", 0.0))
+                })
+        return candles
+
+    candles = await asyncio.to_thread(_fetch_yf)
+
+    # Check for active holding overlay
+    all_holdings = (
+        execution_engine.active_holdings +
+        execution_engine_in.active_holdings +
+        execution_engine_st.active_holdings +
+        execution_engine_cx.active_holdings +
+        execution_engine_fx.active_holdings
+    )
+    active_trade = next((h for h in all_holdings if h.get("symbol") == sym_clean), None)
+
+    overlays = None
+    if active_trade:
+        overlays = {
+            "has_active_trade": True,
+            "direction": active_trade.get("direction", "LONG"),
+            "entry_price": active_trade.get("entry_price"),
+            "stop_loss": active_trade.get("stop_loss"),
+            "tp1_target": active_trade.get("tp1_target"),
+            "tp2_target": active_trade.get("tp2_target") or active_trade.get("take_profit"),
+            "tp3_runner_target": active_trade.get("tp3_runner_target"),
+            "tp1_hit": active_trade.get("tp1_hit", False),
+            "tp2_hit": active_trade.get("tp2_hit", False),
+            "chandelier_active": active_trade.get("chandelier_active", False)
+        }
+
+    return {
+        "symbol": sym_clean,
+        "timeframe": timeframe,
+        "candles_count": len(candles),
+        "candles": candles,
+        "trade_overlays": overlays
+    }
+
+
+@router.post("/api/v1/system/backup")
+async def trigger_system_backup():
+    """Triggers an immediate disaster recovery state and database backup."""
+    from scripts.automated_backup import AutomatedBackupEngine
+    res = await asyncio.to_thread(AutomatedBackupEngine.instance().create_backup)
+    return res
+

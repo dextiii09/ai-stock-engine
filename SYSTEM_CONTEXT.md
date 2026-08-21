@@ -1322,4 +1322,24 @@ ATR multipliers are calibrated to HMM volatility regimes:
 - Evaluates breaking news sentiment via fast keyword heuristics + NVIDIA NIM reasoning.
 - Automatically vetoes LONG trade entries when catastrophic adverse breaking news breaks.
 
+### 16.9 Monte Carlo Value-at-Risk (VaR) & Macro Stress-Testing (`backend/risk/monte_carlo_var.py`)
+- Simulates **10,000 forward P&L paths** across active multi-market holdings.
+- Computes **95% & 99% 1-Day VaR**, **99% Expected Shortfall (CVaR)**, and historical macro stress-tests (2020 Covid Crash, 2022 Tech Selloff, Crypto Flash Crash).
+- Wired directly to `/var` and `/risk` commands and 1-tap Telegram keyboard button.
+
+### 16.10 Parabolic Chandelier Momentum Runner (3-Stage Asymmetric Scale-Out)
+- Extends the scale-out architecture to 3 targets:
+  - **TP1 (1.5R):** 50% scale-out, lock stop at Breakeven.
+  - **TP2 (3.0R):** 25% scale-out, lock stop at +1.5R to +2.0R profit floor.
+  - **TP3 (Chandelier Runner 25%):** Dynamic Parabolic Chandelier trailing stop ($2.0 \times ATR$ below highest high) to capture runaway $5R - 10R$ trend expansions in Trending Bull/Bear regimes.
+
+### 16.11 Automated Disaster Recovery Backup Engine (`backend/scripts/automated_backup.py`)
+- Creates timestamped compressed `.zip` snapshots of `trade_journal.json`, `bot_state.json`, `rl_state.json`, `hyperparams.json`, and `ai_stock.db`.
+- Features 30-day automatic rotating retention and `/backup` command on Telegram.
+
+### 16.12 Real-Time TradingView Candlestick & Trade Marker API (`/api/v1/market/candles/{symbol}`)
+- Serves OHLCV candlestick streams for TradingView Lightweight Charts.
+- Embeds live active trade markers (Green Entry Arrow, Red Stop-Loss, Cyan TP1/TP2/TP3 targets).
+
+
 

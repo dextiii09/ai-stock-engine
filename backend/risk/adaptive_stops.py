@@ -57,11 +57,13 @@ class AdaptiveStopLoss:
             stop_loss          = current_price - distance
             tp1_target         = current_price + (distance * tp1_rr)
             tp2_target         = current_price + (distance * tp2_rr)
+            tp3_runner_target  = current_price + (distance * 5.0)
             breakeven_trigger  = current_price + (distance * 1.0)
         else:
             stop_loss          = current_price + distance
             tp1_target         = current_price - (distance * tp1_rr)
             tp2_target         = current_price - (distance * tp2_rr)
+            tp3_runner_target  = current_price - (distance * 5.0)
             breakeven_trigger  = current_price - (distance * 1.0)
 
         return {
@@ -69,6 +71,7 @@ class AdaptiveStopLoss:
             "take_profit":        round(tp2_target, 4),
             "tp1_target":         round(tp1_target, 4),
             "tp2_target":         round(tp2_target, 4),
+            "tp3_runner_target":  round(tp3_runner_target, 4),
             "breakeven_trigger":  round(breakeven_trigger, 4),
             "atr_distance":       round(distance, 4),
             "regime_used":        regime or "Default",
@@ -80,29 +83,40 @@ class AdaptiveStopLoss:
                         volatility_proxy: float = 0.02,
                         entry_price: float = None,
                         regime: str = None,
-                        tp1_hit: bool = False) -> Dict[str, Any]:
+                        tp1_hit: bool = False,
+                        tp2_hit: bool = False,
+                        atr_distance: float = None) -> Dict[str, Any]:
         """
-        Advances a trailing stop when price moves favourably and ratchets
-        to breakeven once price moves into profit or TP1 is reached.
+        Advances a trailing stop when price moves favourably:
+        - Ratchets to Breakeven once TP1 (1.5R) is hit.
+        - Locks in profit floor (+2.0R) once TP2 (3.0R) is hit.
+        - Activates Parabolic Chandelier trailing for remaining 25% runner.
         """
         cfg = REGIME_STOP_CONFIG.get(regime, _DEFAULT_CONFIG)
         trail_mult     = cfg["trail_mult"]
         ratchet_thresh = cfg["ratchet_thresh"]
 
         _trail_frac = max(volatility_proxy * trail_mult, MIN_STOP_PCT)
+        _dist = atr_distance or (entry_price * _trail_frac if entry_price else current_price * 0.02)
+
         if signal == "BUY":
             best_price = max(best_price, current_price)
             proposed   = best_price - (best_price * _trail_frac)
             if entry_price is not None and entry_price > 0:
-                # If TP1 was hit or price passed ratchet threshold, guarantee Breakeven stop floor
-                if tp1_hit or best_price >= entry_price + (entry_price * _trail_frac * ratchet_thresh):
+                if tp2_hit:
+                    # Lock in +2.0R profit floor for runner
+                    proposed = max(proposed, entry_price + (_dist * 2.0))
+                elif tp1_hit or best_price >= entry_price + (entry_price * _trail_frac * ratchet_thresh):
                     proposed = max(proposed, entry_price)
             new_stop = max(current_stop, proposed)   # Only move stop UP
         else:
             best_price = min(best_price, current_price)
             proposed   = best_price + (best_price * _trail_frac)
             if entry_price is not None and entry_price > 0:
-                if tp1_hit or best_price <= entry_price - (entry_price * _trail_frac * ratchet_thresh):
+                if tp2_hit:
+                    # Lock in +2.0R profit floor for runner
+                    proposed = min(proposed, entry_price - (_dist * 2.0))
+                elif tp1_hit or best_price <= entry_price - (entry_price * _trail_frac * ratchet_thresh):
                     proposed = min(proposed, entry_price)
             new_stop = min(current_stop, proposed)   # Only move stop DOWN
 
@@ -141,4 +155,5 @@ class AdaptiveStopLoss:
         if signal == "BUY":
             return current_price >= tp2_target
         return current_price <= tp2_target
+
 

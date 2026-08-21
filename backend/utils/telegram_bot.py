@@ -21,12 +21,13 @@ _ssl_ctx = ssl._create_unverified_context()
 DEFAULT_KEYBOARD = {
     "keyboard": [
         [{"text": "📊 Status"}, {"text": "💰 PnL"}, {"text": "📈 Positions"}],
-        [{"text": "🖥️ System"}, {"text": "📉 Chart"}, {"text": "🌐 Regime"}],
-        [{"text": "📬 EOD Digest"}, {"text": "👻 Shadow"}, {"text": "🚨 Halt"}]
+        [{"text": "🖥️ System"}, {"text": "📉 Chart"}, {"text": "🎲 VaR"}],
+        [{"text": "🌐 Regime"}, {"text": "📬 EOD Digest"}, {"text": "🚨 Halt"}]
     ],
     "resize_keyboard": True,
     "persistent": True
 }
+
 
 
 
@@ -655,6 +656,10 @@ INSTRUCTIONS:
             cmd = "/regime"
         elif "digest" in text_lower or "eod" in text_lower or "recap" in text_lower:
             cmd = "/digest"
+        elif "var" in text_lower or "risk" in text_lower or "cvar" in text_lower:
+            cmd = "/var"
+        elif "backup" in text_lower or "snapshot" in text_lower:
+            cmd = "/backup"
         elif "retrain" in text_lower:
             cmd = "/retrain"
         elif "halt" in text_lower or "stop" in text_lower or "kill" in text_lower:
@@ -670,6 +675,7 @@ INSTRUCTIONS:
             cmd = "/copilot"
         else:
             cmd = raw_text.split()[0].lower()
+
 
         # Import system components dynamically to avoid circular dependencies
         from api.routes import (
@@ -929,13 +935,44 @@ INSTRUCTIONS:
                 f"Autonomous trading loops across all 5 markets are active."
             )
 
-        elif cmd == "/retrain":
-            await self.send_message("⏳ *Launching background AutoML retrain for all MetaGate models...*")
-            res = await trigger_retrain_all_models()
-            await self.send_message(f"✅ *Retrain Triggered*: {res.get('message', 'Active in background')}")
+        elif cmd in ("/var", "/risk"):
+            from risk.monte_carlo_var import MonteCarloVaREngine
+            all_holdings = (
+                execution_engine.active_holdings +
+                execution_engine_in.active_holdings +
+                execution_engine_st.active_holdings +
+                execution_engine_cx.active_holdings +
+                execution_engine_fx.active_holdings
+            )
+            tot_eq = global_risk.total_equity()
+            var_res = await asyncio.to_thread(
+                MonteCarloVaREngine.instance().calculate_portfolio_var,
+                all_holdings,
+                tot_eq
+            )
+            report = MonteCarloVaREngine.instance().format_var_report(var_res)
+            await self.send_message(report)
+
+        elif cmd == "/backup":
+            from scripts.automated_backup import AutomatedBackupEngine
+            res = await asyncio.to_thread(AutomatedBackupEngine.instance().create_backup)
+            if res.get("success"):
+                files_str = ", ".join([f"`{f}`" for f in res.get("files_included", [])])
+                await self.send_message(
+                    f"💾 *Disaster Recovery Backup Created!*\n\n"
+                    f"• *Archive*: `{res['archive_name']}`\n"
+                    f"• *Size*: `{res['size_kb']} KB`\n"
+                    f"• *Files Packaged*: `{res['files_count']}`\n"
+                    f"• *Included*: {files_str}\n"
+                    f"• *Timestamp*: `{res.get('time_str')}`\n\n"
+                    f"✅ System state and SQLite ledger safely snapshotted."
+                )
+            else:
+                await self.send_message(f"⚠️ *Backup Failed*: {res.get('error')}")
 
         elif cmd == "/copilot":
             await self._handle_conversational_copilot(raw_text, chat_id)
+
 
         else:
             await self.send_message(f"❓ Unknown command `{raw_text}`. Type /help for available commands.")
