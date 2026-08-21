@@ -7,6 +7,10 @@
 *.key
 *.id_rsa
 *.pub
+sync_*.py
+*sync*.py
+*deploy*.py
+
 
 # Databases & SQLite WAL
 *.db
