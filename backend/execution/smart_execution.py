@@ -913,7 +913,7 @@ class SmartExecutionEngine:
                     ev = sim_result.get("expected_value", 0.0)
                     return False, f"AI Trade Simulator veto (Monte Carlo EV={ev*100:.3f}%)"
 
-                fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000))
+                fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000), direction="LONG")
                 avg_fill_price = fill_result["avg_fill_price"]
                 cost           = fill_result["total_cost"]
 
@@ -924,11 +924,13 @@ class SmartExecutionEngine:
                     if not _ok:
                         return False, f"Broker rejected BUY: {_msg}"
 
+                _entry_prec = 5 if "=X" in symbol else 4
                 holding = {
                     "symbol":        symbol,
                     "shares":        shares,
-                    "entry_price":   round(avg_fill_price, 4),
-                    "current_price": round(avg_fill_price, 4),
+                    "entry_price":   round(avg_fill_price, _entry_prec),
+                    "current_price": round(avg_fill_price, _entry_prec),
+
                     "value":         round(cost, 4),
                     "change":        0.0,
                     "stop_loss":     round(stop_data["stop_loss"], 4),
@@ -1112,7 +1114,7 @@ class SmartExecutionEngine:
                     ev = sim_result.get("expected_value", 0.0)
                     return False, f"AI Trade Simulator veto (Monte Carlo EV={ev*100:.3f}%)"
 
-                fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000))
+                fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000), direction="SHORT")
                 avg_fill_price = fill_result["avg_fill_price"]
                 cost           = fill_result["total_cost"]
 
@@ -1127,11 +1129,13 @@ class SmartExecutionEngine:
                     if not _ok:
                         return False, f"Broker rejected SHORT: {_msg}"
 
+                _entry_prec = 5 if "=X" in symbol else 4
                 holding = {
                     "symbol":          symbol,
                     "shares":          shares,
-                    "entry_price":     round(avg_fill_price, 4),
-                    "current_price":   round(avg_fill_price, 4),
+                    "entry_price":     round(avg_fill_price, _entry_prec),
+                    "current_price":   round(avg_fill_price, _entry_prec),
+
                     "value":           round(cost, 4),
                     "change":          0.0,
                     "stop_loss":       round(stop_data["stop_loss"], 4),

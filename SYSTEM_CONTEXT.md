@@ -1234,6 +1234,10 @@ if p_win_frac is not None and not sim_result["is_viable"]:
    - `Normal` (Default): Strict enforcement of all institutional pillars, including the High Volatility Shock $\ge 70\%$ consensus gate and 15m pre-event macro blackout guards.
    - `Safe`: Heightens base threshold by $+0.07$ across all regimes for conservative capital preservation.
    - `Aggressive` (Operator Override Mode): Lowers base threshold floor to $0.42$, bypasses the High Volatility $\ge 70\%$ requirement, and emits warning logs while allowing execution during macro blackout windows. Hard circuit breakers (3.5% Daily / 7.0% Weekly) and broker safety locks remain 100% active and unbypassable.
+18. **Forex Price Precision & Directional Adverse Slippage**:
+   - `SmartOrderRouter` enforces 5-decimal pip precision for Forex (`=X`), 4-decimal precision for Crypto (`-USD`) & Futures (`=F`), and 2-decimal precision for Equities.
+   - Adverse slippage calculation is directionally aware: `price + slippage` for BUY (LONG entries) and `price - slippage` for SELL (SHORT entries).
+
 
 
 

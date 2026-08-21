@@ -602,3 +602,29 @@ class TestQuantPerfectionPillars:
         assert "Regime VETO" in res["reason"]
 
 
+class TestSmartOrderRouterPrecision:
+    def test_forex_fill_preserves_5_decimal_precision(self):
+        from execution.broker import SmartOrderRouter
+        router = SmartOrderRouter(strategy="VWAP")
+        forex_price = 1.08425
+        fill = router.execute("EURUSD=X", total_shares=10000, current_price=forex_price, volume=50000, direction="LONG")
+        # Must retain 5 decimal places, never truncated to 1.08
+        fill_px_str = f"{fill['avg_fill_price']:.5f}"
+        assert len(fill_px_str.split(".")[1]) == 5
+        assert fill["avg_fill_price"] > 1.08000
+        assert abs(fill["avg_fill_price"] - forex_price) < 0.005
+
+    def test_directional_slippage_long_vs_short(self):
+        from execution.broker import SmartOrderRouter
+        router_mkt = SmartOrderRouter(strategy="MARKET")
+        base_price = 100.0
+        # LONG adverse fill must be >= base_price
+        fill_long = router_mkt.execute("SPY", total_shares=10, current_price=base_price, direction="LONG")
+        assert fill_long["avg_fill_price"] >= base_price
+
+        # SHORT adverse fill must be <= base_price
+        fill_short = router_mkt.execute("SPY", total_shares=10, current_price=base_price, direction="SHORT")
+        assert fill_short["avg_fill_price"] <= base_price
+
+
+
