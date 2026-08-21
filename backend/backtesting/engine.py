@@ -32,7 +32,7 @@ from analytics.rl_engine import ReinforcementLearningEngine
 from data.regime_detector import MarketRegimeDetector
 from analytics.performance_metrics import from_equity_curve
 from risk.adaptive_stops import AdaptiveStopLoss
-from analytics.meta_gate import MetaGate, GATE_THRESHOLD as _MG_TH
+
 
 data_provider = DataProviderFactory.get_provider()
 
@@ -767,13 +767,15 @@ class BacktestEngine:
                     regime    = "Sideways"
 
                 if sig in ("BUY", "SELL"):
-                    if self.use_metagate and sig == "BUY":
+                    if self.use_metagate and sig == "BUY" and self.symbol.upper() == "BTC-USD":
                         try:
+                            from analytics.meta_gate import MetaGate, GATE_THRESHOLD as _MG_TH
                             _p_win = MetaGate.instance().p_win(self.symbol)
                             if _p_win is not None and _p_win < _MG_TH:
                                 sig = "HOLD"
                         except Exception:
                             pass
+
 
                 if sig in ("BUY", "SELL"):
                     pending_signal    = sig

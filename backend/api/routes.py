@@ -660,24 +660,8 @@ async def trading_loop():
                 
                 # Execute the trade via Execution Engine
                 if signal in ["BUY", "SELL"]:
-                    if signal == "BUY":
-                        try:
-                            from analytics.meta_gate import MetaGate, GATE_THRESHOLD as _MG_TH
-                            _mg_p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
-                            if _mg_p is not None:
-                                decision["metagate_score"] = round(_mg_p, 4)
-                                if _mg_p < _MG_TH:
-                                    _mg_reason = f"MetaGate VETO: P(win) {_mg_p:.2f} < {_MG_TH:.2f}"
-                                    await write_log("warning", f"🚫 {_mg_reason}")
-                                    execution_engine.journal.log_veto(
-                                        symbol, signal, "META_GATE", _mg_reason,
-                                        {"confidence": decision.get("confidence", 0.0), "p_win": _mg_p}
-                                    )
-                                    continue
-                        except Exception:
-                            pass
-
                     decision["session_quality"] = tick_data.get("session_quality", "NORMAL")
+
                     decision["regime"] = current_regime   # stored in journal.log_trade for self-diagnosis
                     # Store entry features for causal attribution
                     decision["entry_features"] = {
@@ -1186,24 +1170,8 @@ async def indian_trading_loop():
                 
                 # Execute the trade via Execution Engine
                 if signal in ["BUY", "SELL"]:
-                    if signal == "BUY":
-                        try:
-                            from analytics.meta_gate import MetaGate, GATE_THRESHOLD as _MG_TH
-                            _mg_p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
-                            if _mg_p is not None:
-                                decision["metagate_score"] = round(_mg_p, 4)
-                                if _mg_p < _MG_TH:
-                                    _mg_reason = f"MetaGate VETO: P(win) {_mg_p:.2f} < {_MG_TH:.2f}"
-                                    await write_log_in("warning", f"🚫 {_mg_reason}")
-                                    execution_engine_in.journal.log_veto(
-                                        symbol, signal, "META_GATE", _mg_reason,
-                                        {"confidence": decision.get("confidence", 0.0), "p_win": _mg_p}
-                                    )
-                                    continue
-                        except Exception:
-                            pass
-
                     decision["session_quality"] = tick_data.get("session_quality", "NORMAL")
+
                     decision["regime"] = current_regime
                     # Store entry features for causal attribution
                     decision["entry_features"] = {
@@ -1594,8 +1562,8 @@ async def _run_market_loop(
                     log_msg = f"[{signal}] {symbol} (Conf: {conf:.1f}%): {decision['reason']}"
 
                 if signal in ["BUY", "SELL"]:
-                    # Meta-Labeling Gate (Multi-Asset Veto: BTC-USD, NIFTYBEES.NS, RELIANCE.NS, NVDA, SPY, etc.)
-                    if signal == "BUY":
+                    # Phase 3 CONFIRMED Meta-Labeling Gate (BTC-USD LONG entries only in Crypto)
+                    if signal == "BUY" and market_name == "CRYPTO" and symbol.upper() == "BTC-USD":
                         try:
                             from analytics.meta_gate import MetaGate, GATE_THRESHOLD as _MG_TH
                             _mg_p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
@@ -1611,6 +1579,7 @@ async def _run_market_loop(
                                     continue
                         except Exception as _mg_err:
                             pass  # fail-open per design
+
 
                     decision["session_quality"] = tick_data.get("session_quality", "NORMAL")
                     decision["regime"] = current_regime
