@@ -627,4 +627,22 @@ class TestSmartOrderRouterPrecision:
         assert fill_short["avg_fill_price"] <= base_price
 
 
+class TestNvidiaMacroAgent:
+    def test_prompt_customization_per_market(self):
+        from agents.gemini_agent import NvidiaMacroAgent
+        agent = NvidiaMacroAgent()
+        prompt_in = agent._build_prompt("RELIANCE.NS", {"price": 2900, "regime": "Trending Bull"})
+        assert "Indian Stock Market" in prompt_in
+
+        prompt_crypto = agent._build_prompt("BTC-USD", {"price": 95000, "regime": "Trending Bull"})
+        assert "Cryptocurrency Markets" in prompt_crypto
+
+        prompt_fx = agent._build_prompt("EURUSD=X", {"price": 1.0850, "regime": "Sideways"})
+        assert "Foreign Exchange" in prompt_fx
+
+        prompt_us = agent._build_prompt("MNQ=F", {"price": 21500, "regime": "Trending Bear"})
+        assert "US Equities and Index Futures" in prompt_us
+
+
+
 

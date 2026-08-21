@@ -2,7 +2,7 @@ import os
 import json
 import time
 import threading
-from typing import Dict, Any
+from typing import Dict, Any, List
 import requests
 from .base_agent import BaseAgent
 
@@ -10,32 +10,27 @@ from .base_agent import BaseAgent
 NVIDIA_ENDPOINT = "https://integrate.api.nvidia.com/v1/chat/completions"
 
 
-class IndianGeminiAgent(BaseAgent):
+class NvidiaMacroAgent(BaseAgent):
     """
-    Indian Market specialized LLM agent.
-
-    Backed by NVIDIA's OpenAI-compatible API (integrate.api.nvidia.com) instead
-    of Google Gemini — the Gemini free-tier keys returned quota `limit: 0`.
-    Runs asynchronously in a background thread so it never blocks the trading
-    tick loop, caches per symbol for `cache_ttl` seconds, and rotates keys on
-    rate-limit / quota errors.
-
-    NOTE: the class name and committee identity ("Indian Gemini AI") are kept
-    unchanged for backward compatibility with master.py wiring and the RL
-    weight bookkeeping — only the backend provider changed.
+    Multi-Market Institutional Quantitative Macro LLM Agent.
+    
+    Backed by NVIDIA NIM (integrate.api.nvidia.com) with high-parameter reasoning
+    models (Nemotron-3-120B, Llama-3.3-70B, Llama-3.1-8B).
+    
+    Architecture & Safety:
+    - Runs asynchronously in background daemon threads (zero block on tick loops).
+    - Caches per-symbol structured reasoning for `cache_ttl` seconds (default 300s).
+    - Automatically rotates API keys on 429/quota limits.
+    - Tailors macroeconomic prompts dynamically for Indian Equities, US Futures,
+      Tech Stocks, 24/7 Crypto, and Global Forex.
     """
 
-    def __init__(self, cache_ttl: int = 300):
-        super().__init__("Indian Gemini AI")
+    def __init__(self, name: str = "Nvidia Macro AI", cache_ttl: int = 300):
+        super().__init__(name)
         self.cache_ttl = cache_ttl
-
-        # Cache: symbol -> { "result": dict, "last_fetch_time": float, "is_fetching": bool }
         self._cache: Dict[str, Dict[str, Any]] = {}
 
-        # API keys (rotation supported). Prefer NVIDIA_* env vars; fall back to
-        # NVIDIA keys ONLY. Do NOT fall back to GEMINI_ROTATING_KEYS — those are
-        # Gemini keys and sending them to the NVIDIA endpoint just yields 401s
-        # and pollutes the log (observed on first run).
+        # API keys rotation
         rotating = os.getenv("NVIDIA_ROTATING_KEYS", "")
         self._api_keys = [k.strip() for k in rotating.split(",") if k.strip()] if rotating else []
         base_key = (os.getenv("NVIDIA_API_KEY") or "").strip()
@@ -43,20 +38,18 @@ class IndianGeminiAgent(BaseAgent):
             self._api_keys.insert(0, base_key)
 
         self._current_key_idx = 0
-
-        # If ALL keys are exhausted, lock the agent for 1 hour (avoids spamming).
         self._global_quota_lock_until = 0.0
 
-        # NVIDIA model candidates (fast instruct models). Override via NVIDIA_MODEL.
+        # Model candidates (prioritize Nemotron 3 120B and Llama 3.3 70B)
         env_model = os.getenv("NVIDIA_MODEL", "").strip()
         self._model_candidates = ([env_model] if env_model else []) + [
+            "nvidia/nemotron-3-super-120b-a12b",
             "meta/llama-3.1-8b-instruct",
             "meta/llama-3.3-70b-instruct",
             "nvidia/llama-3.1-nemotron-70b-instruct",
         ]
         self._model_idx = 0
 
-    # ── key helpers ──────────────────────────────────────────────────────────
     def _current_key(self):
         return self._api_keys[self._current_key_idx] if self._api_keys else None
 
@@ -75,7 +68,7 @@ class IndianGeminiAgent(BaseAgent):
             "model":       self._model_candidates[self._model_idx],
             "messages":    [{"role": "user", "content": prompt}],
             "temperature": 0.2,
-            "max_tokens":  160,
+            "max_tokens":  200,
         }
         resp = requests.post(
             NVIDIA_ENDPOINT,
@@ -91,39 +84,50 @@ class IndianGeminiAgent(BaseAgent):
             raise RuntimeError(f"HTTP {resp.status_code}: {resp.text[:200]}")
         return resp.json()["choices"][0]["message"]["content"]
 
-    # ── background fetch ─────────────────────────────────────────────────────
+    def _build_prompt(self, symbol: str, data: Dict[str, Any]) -> str:
+        price  = data.get("price", "Unknown")
+        regime = data.get("regime", "Unknown")
+        rsi    = data.get("rsi_14", data.get("rsi", "Unknown"))
+        macd   = data.get("macd_hist", data.get("macd", "Unknown"))
+        macro  = data.get("macro_regime", "Unknown")
+        sym_up = symbol.upper()
+
+        if sym_up.endswith(".NS") or sym_up.endswith(".BO"):
+            specialization = "Indian Stock Market (NSE/BSE). Focus on FII/DII institutional flows, India VIX, and USD/INR dynamics."
+        elif "-USD" in sym_up or "BTC" in sym_up or "ETH" in sym_up:
+            specialization = "Global 24/7 Cryptocurrency Markets. Focus on macro liquidity, Bitcoin dominance, funding rates, and risk-on/risk-off sentiment."
+        elif "=X" in sym_up or "/" in sym_up:
+            specialization = "Global Foreign Exchange (Forex). Focus on central bank rate divergence, DXY Dollar momentum, and macro yield spreads."
+        else:
+            specialization = "US Equities and Index Futures (CME/Nasdaq). Focus on VIX term structure, US 10-Year Treasury Yields, and macro sector momentum."
+
+        return f"""You are a quantitative macro hedge-fund trading analyst specializing in {specialization}
+Evaluate the current asset setup and provide a high-conviction decision.
+
+Symbol: {symbol}
+Current Price: {price}
+Market Regime: {regime}
+Global Macro Regime: {macro}
+Technical Signals: RSI={rsi}, MACD_Hist={macd}
+
+Respond ONLY with a valid JSON object:
+{{"signal": "BUY" | "SELL" | "WAIT", "confidence": float (0.0 to 1.0), "reason": "Concise quantitative justification"}}
+"""
+
     def _fetch_llm(self, symbol: str, data: Dict[str, Any]):
-        """Runs in a background thread; tries each key on rate-limit/quota."""
         sym_cache = self._cache.get(symbol)
         if not sym_cache or not self._api_keys:
             if sym_cache:
                 sym_cache["is_fetching"] = False
             return
 
-        price  = data.get("price", "Unknown")
-        regime = data.get("regime", "Unknown")
-        rsi    = data.get("rsi", "Unknown")
-        macd   = data.get("macd", "Unknown")
-        macro  = data.get("macro_regime", "Unknown")
-        prompt = f"""You are an expert AI Trading Assistant specializing in the Indian Stock Market (NSE/BSE).
-Your goal is to provide a trading signal based on the current market context.
-Focus on FII/DII dynamics, India VIX implications, USD/INR effects, and RBI monetary policy context where applicable.
-
-Symbol: {symbol}
-Current Price: {price}
-Market Regime: {regime}
-Global Macro Regime: {macro}
-Technical Data: RSI={rsi}, MACD={macd}
-
-Respond ONLY with a valid JSON object in the following format:
-{{"signal": "BUY" | "SELL" | "WAIT", "confidence": float (0.0 to 1.0), "reason": "Brief explanation focused on Indian market dynamics"}}
-"""
+        prompt = self._build_prompt(symbol, data)
         try:
             for attempt in range(len(self._api_keys)):
                 try:
                     text = self._call_nvidia(prompt).strip()
 
-                    # Strip markdown code fences if present.
+                    # Strip markdown code fences
                     if text.startswith("```json"):
                         text = text[7:]
                     elif text.startswith("```"):
@@ -132,7 +136,7 @@ Respond ONLY with a valid JSON object in the following format:
                         text = text[:-3]
                     text = text.strip()
 
-                    # Some models prepend prose — extract the first {...} block.
+                    # Extract the first valid JSON block
                     if not text.startswith("{"):
                         _s, _e = text.find("{"), text.rfind("}")
                         if _s != -1 and _e != -1 and _e > _s:
@@ -147,7 +151,7 @@ Respond ONLY with a valid JSON object in the following format:
                     sym_cache["result"] = {
                         "signal":     result["signal"],
                         "confidence": float(result["confidence"]),
-                        "reason":     result.get("reason", "NVIDIA LLM analysis complete."),
+                        "reason":     result.get("reason", "NVIDIA LLM quantitative analysis complete."),
                     }
                     sym_cache["last_fetch_time"] = time.time()
                     return
@@ -156,7 +160,7 @@ Respond ONLY with a valid JSON object in the following format:
                     _msg = str(e).lower()
                     print(f"[NvidiaAgent] Error with key index {self._current_key_idx} for {symbol}: {e}")
 
-                    # Rate-limited / quota / auth → rotate to the next key.
+                    # Rate-limited / quota / auth -> rotate key
                     if any(t in _msg for t in ("429", "quota", "rate limit", "too many", "401", "403")):
                         if attempt == len(self._api_keys) - 1:
                             print("[NvidiaAgent] All API keys exhausted. Locking LLM calls for 1 hour.")
@@ -164,17 +168,13 @@ Respond ONLY with a valid JSON object in the following format:
                         self._rotate_api_key()
                         continue
 
-                    # Model unavailable → advance to the next candidate model.
+                    # Model unavailable -> advance to next model
                     if ("not found" in _msg or "404" in _msg or "model" in _msg) \
                             and self._model_idx < len(self._model_candidates) - 1:
                         self._model_idx += 1
                         print(f"[NvidiaAgent] Switching model -> {self._model_candidates[self._model_idx]}")
                         continue
 
-                    # Truncated / malformed JSON (e.g. "Unterminated string") — the
-                    # model response was cut off, usually a transient network/stream
-                    # issue. Retry with the next key instead of a full 60s back-off;
-                    # only fall through to WAIT once every key has been tried.
                     if (isinstance(e, json.JSONDecodeError)
                             or "unterminated" in _msg or "expecting value" in _msg
                             or "extra data" in _msg) \
@@ -183,7 +183,6 @@ Respond ONLY with a valid JSON object in the following format:
                         self._rotate_api_key()
                         continue
 
-                    # Other non-retryable error — back off ~60s.
                     sym_cache["result"] = {
                         "signal": "WAIT", "confidence": 0.5,
                         "reason": f"NVIDIA API error: {str(e)[:120]}",
@@ -191,7 +190,6 @@ Respond ONLY with a valid JSON object in the following format:
                     sym_cache["last_fetch_time"] = time.time() - self.cache_ttl + 60
                     return
 
-            # Fell through the loop: every key failed.
             sym_cache["result"] = {
                 "signal": "WAIT", "confidence": 0.5,
                 "reason": "All NVIDIA API keys exhausted or rate-limited.",
@@ -200,7 +198,6 @@ Respond ONLY with a valid JSON object in the following format:
         finally:
             sym_cache["is_fetching"] = False
 
-    # ── public API (unchanged contract) ──────────────────────────────────────
     def evaluate(self, symbol: str, data: Dict[str, Any]) -> Dict[str, Any]:
         if symbol not in self._cache:
             self._cache[symbol] = {
@@ -216,14 +213,18 @@ Respond ONLY with a valid JSON object in the following format:
         sym_cache = self._cache[symbol]
         now = time.time()
 
-        # Global cooldown active — serve cached vote.
         if now < self._global_quota_lock_until:
             sym_cache["result"]["reason"] = "NVIDIA LLM keys rate-limited (cooling down)."
             return sym_cache["result"]
 
-        # Trigger a background refresh if the cache is stale.
         if now - sym_cache["last_fetch_time"] > self.cache_ttl and not sym_cache["is_fetching"]:
             sym_cache["is_fetching"] = True
             threading.Thread(target=self._fetch_llm, args=(symbol, data), daemon=True).start()
 
         return sym_cache["result"]
+
+
+class IndianGeminiAgent(NvidiaMacroAgent):
+    """Backward compatibility alias for IndianMasterAgent."""
+    def __init__(self, cache_ttl: int = 300):
+        super().__init__(name="Indian Gemini AI", cache_ttl=cache_ttl)
