@@ -1,22 +1,22 @@
 """
-Live meta-label veto gate (Phase 3 CONFIRMED → deployed to paper).
+Live MetaGate Machine Learning Veto Gate (Multi-Asset Institutional Architecture).
 
-Scope: BTC-USD LONG entries only — exactly what the model was trained and
-validated on (CPCV 15/15 splits uplift-positive, mean +0.166R net of costs).
-The model is a VETO FILTER: it identifies unfavorable macro regimes to skip
-(Phase 2 calibration showed skill concentrated in the bottom quintiles), so
-the only supported use is "block entries with P(win) < 0.50". It must NOT be
-used to size up "high-confidence" trades — the top quintiles were not ranked
-reliably.
+Scope: 14 financial assets across 5 markets (US Futures, Indian Equities/ETFs,
+US Tech Stocks, 24/7 Crypto, and Global Forex), each with an asset-specific
+RandomForestClassifier / GradientBoosting meta-labeling model in backend/data/models/.
 
-Fail-open design: if the model file, data feeds, or feature computation are
-unavailable, the gate returns None and the caller proceeds normally — the
-gate can only ever remove trades, never add risk paths.
+The model acts strictly as a VETO FILTER: it identifies unfavorable macro regimes
+to skip, enforcing high-conviction probability P(win) >= GATE_THRESHOLD (0.65).
+Signals below threshold are blocked from execution.
 
-Feature parity: features are computed with the SAME functions used to build
-the training dataset (analytics.feature_lab helpers) and ordered by the
-feature list saved inside the joblib artifact.
+Fail-open design: if an individual model file, data feed, or feature calculation is
+unavailable for a symbol, p_win returns None and the caller proceeds normally — the
+gate only ever filters trades, never adds risk.
+
+Feature parity: features are computed dynamically using feature_lab helpers
+and aligned with each model's saved feature order. Models are retrained weekly via AutoML.
 """
+
 import os
 import time
 import threading

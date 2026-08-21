@@ -74,10 +74,18 @@ class UpstoxBroker(BrokerBase):
         order_type: str = "MARKET",
         product: str = "D"
     ) -> Tuple[bool, str, Optional[str]]:
+        # Ironclad safety lock: prevent real-money execution unless explicitly enabled in .env
+        live_enabled = os.getenv("ENABLE_LIVE_REAL_MONEY_TRADING", "false").lower() == "true"
+        if not live_enabled:
+            msg = "[SAFETY LOCK] Real money trading is disabled (ENABLE_LIVE_REAL_MONEY_TRADING != true). Order blocked."
+            print(f"[UpstoxBroker] {msg}")
+            return False, msg, None
+
         if not self._connected:
             return False, "Upstox not connected. Missing token.", None
             
         instrument_key = self._get_instrument_key(symbol)
+
         
         payload = {
             "quantity": qty,

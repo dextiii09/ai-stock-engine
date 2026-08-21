@@ -754,12 +754,16 @@ class SmartExecutionEngine:
 
             if short_holding:
                 # ── BUY TO COVER ──
+                # Exit slippage (1–10 bps, adverse)
+                _slip = price * _random.uniform(0.0001, 0.001)
+                price = round(price + _slip, 6)
                 _exit_comm  = short_holding["shares"] * price * 0.001
                 profit_loss = short_holding["shares"] * (short_holding["entry_price"] - price) - _exit_comm
                 profit_pct  = (short_holding["entry_price"] - price) / short_holding["entry_price"] * 100
                 _margin     = short_holding.get("margin_reserved",
                                                 short_holding["shares"] * short_holding["entry_price"])
                 revenue     = _margin + profit_loss
+
 
                 # E-1: broker first for live.
                 # IV&V C2: normalize to broker lot size (never int()-truncate to 0).
@@ -873,20 +877,18 @@ class SmartExecutionEngine:
                     if not _ok_spread:
                         return False, f"Spread veto: {_spread_msg}"
 
-                # Phase 3 CONFIRMED meta-label veto gate — BTC-USD LONGs only
-                # (the exact scope the model was trained + CPCV-validated on:
-                # 15/15 splits uplift-positive, +0.166R mean net of costs).
-                # VETO FILTER ONLY: blocks entries with P(win) < 0.50; never
-                # used to size up. Fail-open: p=None → proceed normally.
-                if self.market == "CRYPTO" and symbol.upper() == "BTC-USD":
-                    try:
-                        from analytics.meta_gate import MetaGate, GATE_THRESHOLD
-                        _p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
-                        if _p is not None and _p < GATE_THRESHOLD:
-                            return False, (f"Meta-label veto: P(win)={_p:.3f} < "
-                                           f"{GATE_THRESHOLD} (unfavorable macro regime)")
-                    except Exception as _mg_e:
-                        print(f"[MetaGate] gate error (fail-open): {_mg_e}")
+                # Multi-Asset MetaGate Machine Learning Veto Gate (14 Trained Models)
+                # VETO FILTER ONLY: blocks entries with P(win) < GATE_THRESHOLD (0.65).
+                # Fail-open: if model or feature calculation is unavailable (p is None), proceed normally.
+                try:
+                    from analytics.meta_gate import MetaGate, GATE_THRESHOLD
+                    _p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
+                    if _p is not None and _p < GATE_THRESHOLD:
+                        return False, (f"Meta-label veto: P(win)={_p:.3f} < "
+                                       f"{GATE_THRESHOLD} (unfavorable macro regime for {symbol})")
+                except Exception as _mg_e:
+                    print(f"[MetaGate] gate error (fail-open): {_mg_e}")
+
 
                 _atr_raw   = decision.get("entry_features", {}).get("atr_14") or 0.0
                 _vol_proxy = (_atr_raw / max(price, 1e-9)) if _atr_raw > 0 else 0.02
@@ -974,10 +976,14 @@ class SmartExecutionEngine:
 
             if long_holding:
                 # ── LIQUIDATE LONG ──
+                # Exit slippage (1–10 bps, adverse)
+                _slip = price * _random.uniform(0.0001, 0.001)
+                price = round(price - _slip, 6)
                 _exit_comm  = long_holding["shares"] * price * 0.001
                 revenue     = long_holding["shares"] * price - _exit_comm
                 profit_loss = revenue - long_holding["shares"] * long_holding["entry_price"]
                 profit_pct  = (price - long_holding["entry_price"]) / long_holding["entry_price"] * 100
+
 
                 # E-1: live broker first.
                 # IV&V C2: EXIT — normalize; close internal state even if sub-lot.

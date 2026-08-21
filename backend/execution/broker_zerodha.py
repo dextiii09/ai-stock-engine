@@ -88,8 +88,16 @@ class ZerodhaBroker(BrokerBase):
         transaction_type: str,
         order_type: str = "MARKET",
     ) -> Tuple[bool, str, Optional[str]]:
+        # Ironclad safety lock: prevent real-money execution unless explicitly enabled in .env
+        live_enabled = os.getenv("ENABLE_LIVE_REAL_MONEY_TRADING", "false").lower() == "true"
+        if not live_enabled:
+            msg = "[SAFETY LOCK] Real money trading is disabled (ENABLE_LIVE_REAL_MONEY_TRADING != true). Order blocked."
+            print(f"[ZerodhaBroker] {msg}")
+            return False, msg, None
+
         if not self._connected or self._kite is None:
             return False, "Zerodha not connected. Check credentials.", None
+
         clean, exchange = _strip_suffix(symbol)
         try:
             from kiteconnect import KiteConnect

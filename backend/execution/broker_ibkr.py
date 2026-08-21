@@ -111,8 +111,16 @@ class IBKRBroker(BrokerBase):
         order_type: str = "MARKET",
         price: float = 0.0,
     ) -> Tuple[bool, str, Optional[str]]:
+        # Ironclad safety lock: prevent real-money execution unless explicitly enabled in .env
+        live_enabled = os.getenv("ENABLE_LIVE_REAL_MONEY_TRADING", "false").lower() == "true"
+        if not live_enabled:
+            msg = "[SAFETY LOCK] Real money trading is disabled (ENABLE_LIVE_REAL_MONEY_TRADING != true). Order blocked."
+            print(f"[IBKRBroker] {msg}")
+            return False, msg, None
+
         if not self._connected or self._ib is None:
             return False, "IBKR not connected. Ensure TWS/Gateway is running.", None
+
         try:
             from ib_insync import MarketOrder, LimitOrder
             contract  = _make_contract(symbol)
