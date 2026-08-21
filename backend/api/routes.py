@@ -3614,7 +3614,7 @@ async def auto_resume_bots():
 # Institutional Risk, Candlestick & Backup Endpoints
 # ─────────────────────────────────────────────────────────────────────────────
 
-@router.get("/api/v1/risk/var")
+@router.get("/risk/var")
 async def get_portfolio_var():
     """Returns 10,000-path Monte Carlo Value at Risk and Macro Stress-Test Analysis."""
     from risk.monte_carlo_var import MonteCarloVaREngine
@@ -3634,7 +3634,7 @@ async def get_portfolio_var():
     return var_res
 
 
-@router.get("/api/v1/market/candles/{symbol}")
+@router.get("/market/candles/{symbol}")
 async def get_market_candles(symbol: str, timeframe: str = "1d", limit: int = 100):
     """
     Returns OHLCV candle stream formatted for TradingView Lightweight Charts,
@@ -3698,10 +3698,11 @@ async def get_market_candles(symbol: str, timeframe: str = "1d", limit: int = 10
     }
 
 
-@router.post("/api/v1/system/backup")
+@router.post("/system/backup")
 async def trigger_system_backup():
     """Triggers an immediate disaster recovery state and database backup."""
     from scripts.automated_backup import AutomatedBackupEngine
     res = await asyncio.to_thread(AutomatedBackupEngine.instance().create_backup)
     return res
+
 
