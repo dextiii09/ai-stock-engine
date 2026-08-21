@@ -135,6 +135,27 @@ class SmartExecutionEngine:
         self.closed_trades:   List[Dict] = []
         self.latest_sim_result = None
 
+        # IV&V finding 2026-08-21 (audit Finding #20): closed_trades was
+        # never capped (unlike execution_logs, which is), so it grew
+        # unbounded for the life of a 24/7 deployment and was re-serialized
+        # to JSON in full on every single trade close. The naive fix (cap
+        # the list) would have silently corrupted the lifetime PnL/win-rate
+        # totals that /portfolio/money-tracker and other endpoints compute
+        # by summing over the full closed_trades list. Fix: maintain these
+        # totals as O(1) running counters, updated incrementally in
+        # _record_closed_trade() alongside every append, and persist them
+        # independently of how much detail history is retained. closed_trades
+        # itself is now capped to the most recent _MAX_CLOSED_TRADES entries
+        # (matching the execution_logs[-500:] pattern) — recent-trade display
+        # stays correct, lifetime aggregates stay correct and cheap to read,
+        # and the JSON write cost stops growing without bound. The DB `trades`
+        # table (when DB_ENABLED) remains the true unbounded audit trail.
+        self.lifetime_stats: Dict[str, float] = {
+            "total_trades": 0, "winning_trades": 0,
+            "total_pnl": 0.0, "gross_profit": 0.0, "gross_loss": 0.0,
+        }
+        self._lifetime_stats_backfilled = False
+
         # CRITICAL FIX 2026-07-20: was `"_st" in state_filename` etc. —
         # but "portfolio_state.json", "portfolio_state_cx.json" and
         # "portfolio_state_fx.json" ALL contain "_st" (inside "_state"!),
@@ -193,6 +214,62 @@ class SmartExecutionEngine:
         if wins and losses:
             return round((sum(wins) / len(wins)) / (sum(losses) / len(losses)), 3)
         return 2.0
+
+    _MAX_CLOSED_TRADES = 2000   # cap for the in-memory/persisted detail list; see Finding #20
+
+    def _record_closed_trade(self, trade_record: dict):
+        """
+        Single entry point for appending to closed_trades — replaces the 4
+        previously-separate `self.closed_trades.append({...})` call sites.
+        Updates the O(1) lifetime_stats counters (which are what
+        /portfolio/money-tracker and other aggregate endpoints should read)
+        BEFORE capping the detail list, so no trade's contribution to the
+        lifetime totals is ever lost even once it ages out of the capped list.
+        """
+        pnl = float(trade_record.get("profit_loss", 0.0) or 0.0)
+        self.lifetime_stats["total_trades"] += 1
+        self.lifetime_stats["total_pnl"] += pnl
+        if pnl > 0:
+            self.lifetime_stats["winning_trades"] += 1
+            self.lifetime_stats["gross_profit"] += pnl
+        elif pnl < 0:
+            self.lifetime_stats["gross_loss"] += abs(pnl)
+
+        self.closed_trades.append(trade_record)
+        if len(self.closed_trades) > self._MAX_CLOSED_TRADES:
+            self.closed_trades = self.closed_trades[-self._MAX_CLOSED_TRADES:]
+
+    def _backfill_lifetime_stats_if_needed(self):
+        """
+        One-time migration: state files saved before this fix (audit Finding
+        #20) don't have lifetime_stats yet. Reconstruct it from whatever
+        closed_trades currently holds — this is the ONLY point where we sum
+        the full historical list; after this, lifetime_stats is maintained
+        incrementally and closed_trades is capped going forward.
+        """
+        if self._lifetime_stats_backfilled:
+            return
+        if self.closed_trades:
+            total_pnl = gross_profit = gross_loss = 0.0
+            winning = 0
+            for t in self.closed_trades:
+                pnl = float(t.get("profit_loss", 0.0) or 0.0)
+                total_pnl += pnl
+                if pnl > 0:
+                    winning += 1
+                    gross_profit += pnl
+                elif pnl < 0:
+                    gross_loss += abs(pnl)
+            self.lifetime_stats = {
+                "total_trades": len(self.closed_trades),
+                "winning_trades": winning,
+                "total_pnl": round(total_pnl, 2),
+                "gross_profit": round(gross_profit, 2),
+                "gross_loss": round(gross_loss, 2),
+            }
+            if len(self.closed_trades) > self._MAX_CLOSED_TRADES:
+                self.closed_trades = self.closed_trades[-self._MAX_CLOSED_TRADES:]
+        self._lifetime_stats_backfilled = True
 
     def _apply_risk_caps(self, symbol: str, side: str, shares: float, price: float):
         """
@@ -288,7 +365,7 @@ class SmartExecutionEngine:
             self.portfolio_balance += revenue   # atomic: remove confirmed, now safe to credit
 
         # The rest of the accounting is outside the lock (appends to separate lists)
-        self.closed_trades.append({
+        self._record_closed_trade({
             "symbol":      symbol,
             "shares":      shares,
             "direction":   direction,
@@ -442,7 +519,7 @@ class SmartExecutionEngine:
             self.portfolio_balance += revenue
 
 
-        self.closed_trades.append({
+        self._record_closed_trade({
             "symbol":      symbol,
             "shares":      close_shares,
             "direction":   direction,
@@ -517,7 +594,8 @@ class SmartExecutionEngine:
                 "portfolio_balance": self.portfolio_balance,
                 "active_holdings":   self.active_holdings,
                 "execution_logs":    self.execution_logs[-500:],  # cap log size
-                "closed_trades":     self.closed_trades,
+                "closed_trades":     self.closed_trades,  # capped to _MAX_CLOSED_TRADES — see Finding #20
+                "lifetime_stats":    self.lifetime_stats,
             }
             tmp = self.state_file + ".tmp"
             with open(tmp, "w") as f:
@@ -544,6 +622,7 @@ class SmartExecutionEngine:
                         "active_holdings": self.active_holdings,
                         "execution_logs":  self.execution_logs[-500:],
                         "closed_trades":   self.closed_trades,
+                        "lifetime_stats":  self.lifetime_stats,
                     }
                     result = await session.execute(
                         select(Portfolio).where(Portfolio.market == self.market)
@@ -653,6 +732,9 @@ class SmartExecutionEngine:
                             self.active_holdings = state_data.get("active_holdings", [])
                             self.execution_logs  = state_data.get("execution_logs", [])
                             self.closed_trades   = state_data.get("closed_trades", [])
+                            if "lifetime_stats" in state_data:
+                                self.lifetime_stats = state_data["lifetime_stats"]
+                                self._lifetime_stats_backfilled = True
                             return True
                         return False
                 loaded_from_db = self._run_async(_load_db())
@@ -667,6 +749,12 @@ class SmartExecutionEngine:
                 self.active_holdings   = state.get("active_holdings", [])
                 self.execution_logs    = state.get("execution_logs", [])
                 self.closed_trades     = state.get("closed_trades", [])
+                if "lifetime_stats" in state and not self._lifetime_stats_backfilled:
+                    # JSON is preferred over a possibly-stale DB value only
+                    # when DB didn't already supply one (loaded_from_db=False
+                    # is the only way this branch runs at all).
+                    self.lifetime_stats = state["lifetime_stats"]
+                    self._lifetime_stats_backfilled = True
 
                 if DB_ENABLED:
                     # IV&V: reuse the lock-protected, upsert-safe save path
@@ -690,6 +778,12 @@ class SmartExecutionEngine:
 
         # 4. Cross-market cleanup (always, regardless of load source)
         self._sanitize_cross_market()
+
+        # 5. Backfill lifetime_stats from closed_trades if this state predates
+        # the counter (Finding #20) — must run after cross-market cleanup so
+        # foreign-market trades dropped above aren't counted into this
+        # engine's lifetime totals. No-ops if already loaded from saved state.
+        self._backfill_lifetime_stats_if_needed()
 
     @staticmethod
     def _symbol_market(symbol: str) -> str:
@@ -897,7 +991,7 @@ class SmartExecutionEngine:
                     "regime":            short_holding.get("regime", "Sideways"),
                     "stop_distance_pct": round(_sh_stop_dist, 4),
                 }
-                self.closed_trades.append({
+                self._record_closed_trade({
                     "symbol": symbol, "shares": _final_qty_covered,
                     "direction": "SHORT",
                     "entry_price": short_holding["entry_price"], "exit_price": price,
@@ -1197,7 +1291,7 @@ class SmartExecutionEngine:
                     "regime":            long_holding.get("regime", "Sideways"),
                     "stop_distance_pct": round(_lg_stop_dist, 4),
                 }
-                self.closed_trades.append({
+                self._record_closed_trade({
                     "symbol": symbol, "shares": _final_qty_sold,
                     "direction": "LONG",
                     "entry_price": long_holding["entry_price"], "exit_price": price,

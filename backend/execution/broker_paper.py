@@ -3,6 +3,7 @@ Paper Broker — simulates order execution with no real money.
 This is the default broker. All orders are accepted instantly at the
 given price (same behaviour as before broker abstraction was added).
 """
+import time
 from typing import Optional, Tuple
 from .broker_base import BrokerBase
 

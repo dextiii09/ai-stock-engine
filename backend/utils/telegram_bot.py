@@ -16,7 +16,12 @@ from typing import Optional, Dict, Any, List
 
 logger = logging.getLogger("uvicorn.error")
 
-_ssl_ctx = ssl._create_unverified_context()
+# IV&V finding 2026-08-21: was ssl._create_unverified_context() (TLS
+# certificate validation disabled) — every Telegram API call, including
+# receiving bot commands and sending trade alerts, was vulnerable to MITM
+# interception/spoofing. create_default_context() restores the system's
+# proper certificate trust chain (Python's secure default).
+_ssl_ctx = ssl.create_default_context()
 
 DEFAULT_KEYBOARD = {
     "keyboard": [
@@ -456,7 +461,7 @@ class TelegramBotController:
                 f"   • Host OS: `{os_name}`"
             )
         except Exception as e:
-            return f"🖥️ *System Health Check*\nCPU & RAM operational. Diagnostics: {str(e)[:100]}"
+            return f"🖥️ *System Health Check*\n⚠️ Metrics UNAVAILABLE — {str(e)[:150]}"
 
     def generate_equity_chart_bytes(self) -> Optional[bytes]:
         """Generates an institutional dark-themed Equity Curve & Performance Chart in memory."""

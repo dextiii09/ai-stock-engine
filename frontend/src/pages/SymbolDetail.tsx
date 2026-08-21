@@ -1,25 +1,75 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useOutletContext } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, TrendingUp, Activity, Info, Lock } from 'lucide-react';
+import { ArrowLeft, TrendingUp, TrendingDown, Info, AlertTriangle } from 'lucide-react';
 import TradingViewWidget from '../components/TradingViewWidget';
 import { TradeModal } from '../components/TradeModal';
+import { API_BASE } from '../config';
 
 interface ShellContext {
   isBeginnerMode: boolean;
 }
 
+interface LiveTick {
+  symbol: string;
+  price: number;
+  open: number;
+  high: number;
+  low: number;
+  volume: number;
+  vwap: number;
+  rsi_14: number;
+  atr_14: number;
+  macd_hist: number;
+  institutional_flow: string;
+  daily_change_pct: number;
+  data_source: string;
+  is_stale_data: boolean;
+  data_age_seconds: number;
+}
+
+// IV&V finding 2026-08-21 (audit Finding #10): this page previously showed
+// entirely fabricated numbers — a hardcoded $189.45 price, a hardcoded
+// "BUY, 88% confidence" AI recommendation, hardcoded SMC order-block/FVG
+// levels, a hardcoded RSI of 58.4 and a "Bullish Cross" MACD, and a
+// hardcoded $191.20 price target — none of it computed from the real
+// `ticker`. It looked identical for every symbol. Fixed to fetch the real
+// `/data/live/{symbol}` endpoint (real Yahoo Finance OHLCV → real RSI-14,
+// MACD histogram, VWAP, daily change), and honestly show "Not available"
+// for the sections that have no real backing (per-symbol SMC/AI-prediction
+// analysis is only ever produced by the live committee for symbols inside
+// an active market loop, not for an arbitrary ad-hoc URL lookup) instead of
+// inventing plausible-looking numbers.
 export const SymbolDetail = () => {
   const { ticker } = useParams<{ ticker: string }>();
   const { isBeginnerMode } = useOutletContext<ShellContext>();
+  const [tick, setTick] = useState<LiveTick | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isTradeModalOpen, setTradeModalOpen] = useState(false);
 
-  // Mock data simulation
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
-    return () => clearTimeout(timer);
+  const fetchTick = useCallback(async () => {
+    if (!ticker) return;
+    try {
+      const res = await fetch(`${API_BASE}/data/live/${encodeURIComponent(ticker.toUpperCase())}`);
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      const data = await res.json();
+      if (data?.error) throw new Error(data.error);
+      setTick(data);
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Market data unavailable for this symbol.');
+    } finally {
+      setLoading(false);
+    }
   }, [ticker]);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchTick();
+    const interval = setInterval(fetchTick, 15000);
+    return () => clearInterval(interval);
+  }, [fetchTick]);
 
   if (loading) {
     return (
@@ -29,9 +79,11 @@ export const SymbolDetail = () => {
     );
   }
 
+  const isUp = (tick?.daily_change_pct ?? 0) >= 0;
+
   return (
     <div className="max-w-7xl mx-auto space-y-6 pb-20">
-      
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border pb-6">
         <div>
@@ -40,17 +92,28 @@ export const SymbolDetail = () => {
           </Link>
           <div className="flex items-center gap-4">
             <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight">{ticker}</h1>
-            <span className="px-3 py-1 bg-card border border-border rounded-lg text-sm font-medium text-muted-foreground">NASDAQ</span>
           </div>
-          <div className="flex flex-col mt-2">
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-bold">$189.45</span>
-              <span className="text-theme_green font-medium flex items-center">
-                <TrendingUp className="w-4 h-4 mr-1" /> +1.24 (0.65%)
+          {tick ? (
+            <div className="flex flex-col mt-2">
+              <div className="flex items-baseline gap-3">
+                <span className="text-3xl font-bold">${tick.price.toFixed(2)}</span>
+                <span className={`font-medium flex items-center ${isUp ? 'text-theme_green' : 'text-theme_red'}`}>
+                  {isUp ? <TrendingUp className="w-4 h-4 mr-1" /> : <TrendingDown className="w-4 h-4 mr-1" />}
+                  {isUp ? '+' : ''}{tick.daily_change_pct.toFixed(2)}%
+                </span>
+              </div>
+              <span className={`text-xs mt-1 ${tick.is_stale_data ? 'text-theme_yellow' : 'text-muted-foreground'}`}>
+                {tick.is_stale_data
+                  ? `⚠ Stale data — ${tick.data_age_seconds.toFixed(0)}s old`
+                  : tick.data_source}
               </span>
             </div>
-            <span className="text-xs text-muted-foreground mt-1">Market Open • Data delayed by 15 mins</span>
-          </div>
+          ) : (
+            <div className="flex items-center gap-2 mt-3 text-theme_red text-sm">
+              <AlertTriangle className="w-4 h-4" />
+              {error || 'Market data unavailable.'}
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-3">
@@ -58,7 +121,11 @@ export const SymbolDetail = () => {
             <Info className="w-4 h-4" />
             <span className="text-sm font-bold">{isBeginnerMode ? 'Beginner Mode Active' : 'Pro Mode Active'}</span>
           </div>
-          <button onClick={() => setTradeModalOpen(true)} className="bg-theme_blue text-white px-8 py-3 rounded-xl font-bold hover:bg-theme_blue/90 transition-colors shadow-lg hover:shadow-theme_blue/20">
+          <button
+            onClick={() => setTradeModalOpen(true)}
+            disabled={!tick}
+            className="bg-theme_blue text-white px-8 py-3 rounded-xl font-bold hover:bg-theme_blue/90 transition-colors shadow-lg hover:shadow-theme_blue/20 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
             Trade {ticker}
           </button>
         </div>
@@ -70,21 +137,15 @@ export const SymbolDetail = () => {
         // ==========================================
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="grid md:grid-cols-3 gap-6">
-            
-            {/* Simple AI Summary */}
-            <div className="md:col-span-1 bg-gradient-to-br from-theme_blue/10 to-transparent border border-theme_blue/20 rounded-3xl p-6">
-              <h3 className="font-display text-lg font-bold mb-4 flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-theme_blue animate-pulse"></div>
-                AI Recommendation
-              </h3>
-              <div className="text-4xl font-display font-bold text-theme_green mb-2">BUY</div>
-              <p className="text-sm text-foreground/80 leading-relaxed mb-4">
-                The AI models indicate a strong upward trend for <strong>{ticker}</strong> over the next 7 days, driven by positive earnings sentiment and high institutional buying.
+
+            <div className="md:col-span-1 bg-card border border-border rounded-3xl p-6">
+              <h3 className="font-display text-lg font-bold mb-4">Not Available</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                AI trade recommendations are generated live by the trading committee for symbols
+                inside an active market loop. Ad-hoc symbol lookups like this one don't run the
+                committee, so there is no real recommendation to show — showing one anyway would
+                be fabricated.
               </p>
-              <div className="bg-background rounded-xl p-3 flex justify-between items-center text-sm border border-border">
-                <span className="text-muted-foreground">Confidence Score</span>
-                <span className="font-bold text-theme_blue">88%</span>
-              </div>
             </div>
 
             {/* Simple Chart */}
@@ -93,33 +154,38 @@ export const SymbolDetail = () => {
                  <h3 className="font-display font-bold">Price History (1 Month)</h3>
                </div>
                <div className="h-[300px] rounded-xl overflow-hidden pointer-events-none">
-                 {/* Re-use TradingView widget but in a basic line mode (mocking simple UI here) */}
                  <TradingViewWidget symbol={ticker || 'AAPL'} />
                </div>
             </div>
-            
+
           </div>
-          
+
           <div className="bg-card border border-border rounded-3xl p-6">
-            <h3 className="font-display font-bold mb-4">What you need to know</h3>
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-background border border-border rounded-2xl">
-                <div className="text-xs text-muted-foreground mb-1">Company Size (Market Cap)</div>
-                <div className="font-bold text-lg">Massive</div>
+            <h3 className="font-display font-bold mb-4">Live Market Data</h3>
+            {tick ? (
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="p-4 bg-background border border-border rounded-2xl">
+                  <div className="text-xs text-muted-foreground mb-1">Day's Range</div>
+                  <div className="font-bold text-lg">${tick.low.toFixed(2)} – ${tick.high.toFixed(2)}</div>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-2xl">
+                  <div className="text-xs text-muted-foreground mb-1">Volume</div>
+                  <div className="font-bold text-lg">{tick.volume.toLocaleString()}</div>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-2xl">
+                  <div className="text-xs text-muted-foreground mb-1">VWAP</div>
+                  <div className="font-bold text-lg">${tick.vwap.toFixed(2)}</div>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-2xl">
+                  <div className="text-xs text-muted-foreground mb-1">Institutional Flow</div>
+                  <div className={`font-bold text-lg ${tick.institutional_flow === 'BULLISH' ? 'text-theme_green' : tick.institutional_flow === 'BEARISH' ? 'text-theme_red' : ''}`}>
+                    {tick.institutional_flow}
+                  </div>
+                </div>
               </div>
-              <div className="p-4 bg-background border border-border rounded-2xl">
-                <div className="text-xs text-muted-foreground mb-1">Risk Level</div>
-                <div className="font-bold text-lg text-theme_green">Low Risk</div>
-              </div>
-              <div className="p-4 bg-background border border-border rounded-2xl">
-                <div className="text-xs text-muted-foreground mb-1">Dividend Yield</div>
-                <div className="font-bold text-lg">0.53% (Pays cash)</div>
-              </div>
-              <div className="p-4 bg-background border border-border rounded-2xl">
-                <div className="text-xs text-muted-foreground mb-1">News Sentiment</div>
-                <div className="font-bold text-lg text-theme_green flex items-center gap-1"><TrendingUp className="w-4 h-4" /> Positive</div>
-              </div>
-            </div>
+            ) : (
+              <div className="text-sm text-muted-foreground">{error || 'No live data available.'}</div>
+            )}
           </div>
         </motion.div>
 
@@ -129,95 +195,67 @@ export const SymbolDetail = () => {
         // ==========================================
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="grid xl:grid-cols-4 gap-6">
-            
+
             {/* Advanced Chart */}
             <div className="xl:col-span-3 bg-card border border-border rounded-3xl overflow-hidden h-[600px] flex flex-col">
-              <div className="p-4 border-b border-border flex justify-between items-center bg-background/50">
-                <div className="flex gap-2 text-xs font-medium">
-                  <button className="px-3 py-1.5 bg-card border border-border rounded-md hover:bg-theme_blue hover:text-white hover:border-theme_blue transition-colors">1m</button>
-                  <button className="px-3 py-1.5 bg-card border border-border rounded-md hover:bg-theme_blue hover:text-white hover:border-theme_blue transition-colors">5m</button>
-                  <button className="px-3 py-1.5 bg-card border border-border rounded-md hover:bg-theme_blue hover:text-white hover:border-theme_blue transition-colors">15m</button>
-                  <button className="px-3 py-1.5 bg-theme_blue text-white border-theme_blue rounded-md">1H</button>
-                  <button className="px-3 py-1.5 bg-card border border-border rounded-md hover:bg-theme_blue hover:text-white hover:border-theme_blue transition-colors">4H</button>
-                  <button className="px-3 py-1.5 bg-card border border-border rounded-md hover:bg-theme_blue hover:text-white hover:border-theme_blue transition-colors">D</button>
-                </div>
-                <div className="flex gap-2">
-                  <button className="px-3 py-1.5 text-xs font-medium bg-card border border-border rounded-md flex items-center gap-1"><Activity className="w-3 h-3" /> Indicators</button>
-                </div>
-              </div>
               <div className="flex-1 w-full">
                 <TradingViewWidget symbol={ticker || 'AAPL'} />
               </div>
             </div>
 
-            {/* Smart Money Concepts & Order Book */}
+            {/* Real technical indicators + honest gaps */}
             <div className="xl:col-span-1 space-y-6">
-              
-              <div className="bg-card border border-border rounded-3xl p-5">
-                <h3 className="font-display font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4">SMC Analysis</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Market Structure</span>
-                    <span className="text-sm font-bold text-theme_green">Bullish CHoCH</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Order Block (Bullish)</span>
-                    <span className="text-sm font-bold text-foreground">$184.50 - $185.10</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Fair Value Gap</span>
-                    <span className="text-sm font-bold text-foreground">$186.20 - $187.00</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Liquidity Sweep</span>
-                    <span className="text-sm font-bold text-theme_blue">Confirmed (Sell-side)</span>
-                  </div>
-                </div>
-              </div>
 
               <div className="bg-card border border-border rounded-3xl p-5">
                 <h3 className="font-display font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4">Technical Indicators</h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="font-medium">RSI (14)</span>
-                      <span className="font-bold text-theme_yellow">58.4 (Neutral)</span>
+                {tick ? (
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="font-medium">RSI (14)</span>
+                        <span className={`font-bold ${tick.rsi_14 >= 70 ? 'text-theme_red' : tick.rsi_14 <= 30 ? 'text-theme_green' : 'text-theme_yellow'}`}>
+                          {tick.rsi_14.toFixed(1)} {tick.rsi_14 >= 70 ? '(Overbought)' : tick.rsi_14 <= 30 ? '(Oversold)' : '(Neutral)'}
+                        </span>
+                      </div>
+                      <div className="w-full bg-background rounded-full h-1.5">
+                        <div className="bg-theme_yellow h-1.5 rounded-full" style={{ width: `${Math.min(100, Math.max(0, tick.rsi_14))}%` }}></div>
+                      </div>
                     </div>
-                    <div className="w-full bg-background rounded-full h-1.5"><div className="bg-theme_yellow h-1.5 rounded-full" style={{ width: '58.4%' }}></div></div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="font-medium">MACD (12, 26)</span>
-                      <span className="font-bold text-theme_green">Bullish Cross</span>
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="font-medium">MACD Histogram</span>
+                        <span className={`font-bold ${tick.macd_hist >= 0 ? 'text-theme_green' : 'text-theme_red'}`}>
+                          {tick.macd_hist >= 0 ? 'Bullish' : 'Bearish'} ({tick.macd_hist.toFixed(4)})
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="font-medium">ATR (14)</span>
+                        <span className="font-bold text-foreground">${tick.atr_14.toFixed(4)}</span>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="font-medium">Volume Profile</span>
-                      <span className="font-bold text-foreground">POC @ $185.30</span>
-                    </div>
-                  </div>
-                </div>
+                ) : (
+                  <div className="text-sm text-muted-foreground">{error || 'No live data available.'}</div>
+                )}
               </div>
 
               <div className="bg-card border border-border rounded-3xl p-5">
-                <h3 className="font-display font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4 flex items-center justify-between">
-                  AI Prediction Engine <Lock className="w-3 h-3 text-theme_blue" />
-                </h3>
-                <div className="p-3 bg-theme_blue/5 border border-theme_blue/20 rounded-xl space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Next 4H Target</span>
-                    <span className="font-bold text-theme_green">$191.20</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Stop Loss Idea</span>
-                    <span className="font-bold text-theme_red">$183.50</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Win Prob (XGBoost)</span>
-                    <span className="font-bold text-theme_blue">76.4%</span>
-                  </div>
-                </div>
+                <h3 className="font-display font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4">Smart Money Concepts</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Not available for ad-hoc symbol lookups. Order-block, FVG, and liquidity-sweep
+                  analysis is only computed for symbols inside an active market loop's SMC engine.
+                </p>
+              </div>
+
+              <div className="bg-card border border-border rounded-3xl p-5">
+                <h3 className="font-display font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4">AI Prediction Engine</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Not available for ad-hoc symbol lookups. Price targets and win-probability
+                  estimates are only produced by the live trading committee for symbols inside an
+                  active market loop — showing a number here would be fabricated.
+                </p>
               </div>
 
             </div>
@@ -226,11 +264,11 @@ export const SymbolDetail = () => {
         </motion.div>
       )}
 
-      <TradeModal 
-        isOpen={isTradeModalOpen} 
-        onClose={() => setTradeModalOpen(false)} 
-        symbol={ticker || 'AAPL'} 
-        price={189.45} 
+      <TradeModal
+        isOpen={isTradeModalOpen}
+        onClose={() => setTradeModalOpen(false)}
+        symbol={ticker || 'AAPL'}
+        price={tick?.price ?? 0}
       />
     </div>
   );

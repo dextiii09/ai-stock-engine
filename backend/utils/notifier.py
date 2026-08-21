@@ -10,7 +10,14 @@ class Notifier:
         self.discord_url = os.getenv("DISCORD_WEBHOOK_URL", "")
         self.telegram_bot = os.getenv("TELEGRAM_BOT_TOKEN", "")
         self.telegram_chat = os.getenv("TELEGRAM_CHAT_ID", "")
-        self.ssl_context = ssl._create_unverified_context()
+        # IV&V finding 2026-08-21: was ssl._create_unverified_context(), which
+        # disables TLS certificate validation entirely — every alert sent to
+        # Discord/Telegram was vulnerable to MITM interception or spoofing.
+        # create_default_context() is Python's proper secure default (uses
+        # the system trust store), matching what a bare urlopen() call
+        # without an explicit context already does correctly elsewhere in
+        # this codebase.
+        self.ssl_context = ssl.create_default_context()
 
     async def send_alert(self, message: str, parse_mode: str = "Markdown"):
         """Asynchronously send an alert to configured webhooks."""

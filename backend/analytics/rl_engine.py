@@ -499,7 +499,14 @@ class ReinforcementLearningEngine:
         if isinstance(committee, list):
             committee = {v.get("agent", ""): v for v in committee if "agent" in v}
 
-        _GHOST_AGENTS = {"News & Sentiment AI"}
+        # IV&V finding 2026-08-21 (audit Finding #13): this set was missing
+        # "Correlation Agent", which IS excluded in process_trade_outcome()
+        # above (both are forced to weight 0.0 in the live loop since neither
+        # can be point-in-time backtested). Shadow learning was updating
+        # Correlation Agent's alpha/beta from simulated outcomes even though
+        # its live weight never moves — wasted cycles and misleading stale
+        # state, same class of bug as Finding #2.
+        _GHOST_AGENTS = {"News & Sentiment AI", "Correlation Agent"}
         action = trade_result.get("action", "BUY" if pnl_pct > 0 else "SELL")
 
         self._batch_weight_deltas.setdefault(regime, {})
@@ -661,11 +668,26 @@ class ReinforcementLearningEngine:
     def load_state(self, filepath: str):
         """
         Reloads RL engine state from SQLite if enabled, falling back to JSON.
+
+        IV&V finding 2026-08-21 (audit Finding #18): the DB-load path below
+        is synchronous and internally bridges to async DB calls via a
+        second thread + its own event loop, then blocks the CALLING thread
+        with `t.join()` until that finishes. This is safe and correct ONLY
+        when called before the FastAPI event loop starts serving requests
+        (i.e. once, at application boot) — confirmed that is the only
+        current call site. If this is ever called synchronously from
+        *inside* a running request handler on the event loop's own thread,
+        `t.join()` blocks that thread for the DB round-trip, stalling the
+        entire single-threaded event loop (every other in-flight request)
+        for the duration — a real landmine for any future "reload weights
+        from DB" admin/API feature. Confirmed not needed right now; if that
+        feature is ever added, call `await` an async version instead of
+        this synchronous method from within a running loop.
         """
         market = _infer_market_from_filepath(filepath)
         import os
         DB_ENABLED = os.getenv("DB_ENABLED", "false").lower() == "true"
-        
+
         def run_async(coro):
             import asyncio
             import threading
@@ -676,6 +698,13 @@ class ReinforcementLearningEngine:
                 loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(loop)
             if loop.is_running():
+                _rl_logger.warning(
+                    "[RL Engine] load_state() called while the event loop is "
+                    "already running — this will block the ENTIRE server "
+                    "(all in-flight requests) until the DB round-trip "
+                    "completes. Only call load_state() before the event loop "
+                    "starts serving requests. See Finding #18."
+                )
                 fut = Future()
                 def run_in_thread():
                     new_loop = asyncio.new_event_loop()

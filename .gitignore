@@ -10,6 +10,13 @@
 sync_*.py
 *sync*.py
 *deploy*.py
+# IV&V finding 2026-08-21: kite_auth.py writes a real, live Zerodha
+# access_token in plaintext to this file. It had no gitignore protection,
+# while sibling files in the same directory (portfolio_state*.json,
+# rl_state*.json, risk_state*.json) are routinely git-tracked in this repo —
+# a real risk of accidentally committing a live broker credential.
+backend/data/kite_session.json
+*kite_session*.json
 
 
 # Databases & SQLite WAL

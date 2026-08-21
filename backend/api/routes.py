@@ -1067,6 +1067,13 @@ async def indian_trading_loop():
                 # Same reasoning as US loop: zero both always-WAIT agents.
                 _live_weights_in["News & Sentiment AI"] = 0.0
                 _live_weights_in["Correlation Agent"]   = 0.0
+                # IV&V finding 2026-08-21: IndianGeminiAgent (LLM macro agent) has no
+                # point-in-time backtest — same reason SentimentAgent is zeroed above —
+                # yet it was never added to the RL weight schema, so master.py's
+                # `agent_weights.get(agent.name, 1.0)` fallback gave it a permanent,
+                # un-learned, un-decaying full vote (1.0) in every committee decision.
+                # Zero it until it has a CPCV-validated backtest like the MetaGate gate.
+                _live_weights_in["Indian Gemini AI"] = 0.0
                 tick_data["agent_weights"] = _live_weights_in
 
                 # Multi-Timeframe Confluence (Indian)
@@ -1605,7 +1612,7 @@ async def _run_market_loop(
 
                 if signal in ["BUY", "SELL"]:
                     # Phase 3 CONFIRMED Meta-Labeling Gate (BTC-USD LONG entries only in Crypto)
-                    if signal == "BUY" and market_name == "CRYPTO" and symbol.upper() == "BTC-USD":
+                    if signal == "BUY" and market_label.upper() == "CRYPTO" and symbol.upper() == "BTC-USD":
                         try:
                             from analytics.meta_gate import MetaGate, GATE_THRESHOLD as _MG_TH
                             _mg_p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
@@ -2107,8 +2114,18 @@ async def get_macro_context():
 
 @router.get("/analytics/agent-weights")
 async def get_agent_weights():
-    """Returns the live RL-adjusted weights for each AI committee member."""
-    return {"weights": execution_engine.rl_engine.get_current_weights()}
+    """Returns the live RL-adjusted weights for each AI committee member.
+
+    IV&V finding 2026-08-21 (audit Finding #13): the live trading loop
+    forces Sentiment/Correlation Agent weights to 0.0 before every real
+    decision (see _run_market_loop / the US loop above); this display
+    endpoint previously returned the raw, un-masked learned weights,
+    misleadingly implying those agents still vote.
+    """
+    w = execution_engine.rl_engine.get_current_weights()
+    w["News & Sentiment AI"] = 0.0
+    w["Correlation Agent"]   = 0.0
+    return {"weights": w}
 
 @router.get("/analytics/rl-stats")
 async def get_rl_stats():
@@ -2227,23 +2244,27 @@ async def get_pattern_analysis(symbol: str):
 
 @router.get("/portfolio/money-tracker")
 async def get_money_tracker():
-    """Returns all closed trades with their profit/loss breakdown for the Money Tracker UI."""
+    """Returns all closed trades with their profit/loss breakdown for the Money Tracker UI.
+
+    IV&V finding 2026-08-21 (audit Finding #20): summary totals now read
+    execution_engine.lifetime_stats (O(1) running counters) instead of
+    re-summing closed_trades on every request. closed_trades itself is now
+    capped (see SmartExecutionEngine._MAX_CLOSED_TRADES) to bound JSON-save
+    cost, so summing it directly would have under-counted lifetime totals
+    once the cap was reached — lifetime_stats is unaffected by the cap.
+    """
     trades = execution_engine.closed_trades
-    
-    total_pnl = sum(t["profit_loss"] for t in trades)
-    gross_profit = sum(t["profit_loss"] for t in trades if t["profit_loss"] > 0)
-    gross_loss = sum(t["profit_loss"] for t in trades if t["profit_loss"] < 0)
-    wins = sum(1 for t in trades if t["profit_loss"] > 0)
-    win_rate = (wins / len(trades) * 100) if trades else 0.0
+    stats  = execution_engine.lifetime_stats
+    win_rate = (stats["winning_trades"] / stats["total_trades"] * 100) if stats["total_trades"] else 0.0
 
     return {
         "closed_trades": trades,
         "summary": {
-            "total_pnl": round(total_pnl, 2),
-            "gross_profit": round(gross_profit, 2),
-            "gross_loss": round(gross_loss, 2),
+            "total_pnl": round(stats["total_pnl"], 2),
+            "gross_profit": round(stats["gross_profit"], 2),
+            "gross_loss": round(stats["gross_loss"], 2),
             "win_rate": round(win_rate, 2),
-            "total_trades": len(trades),
+            "total_trades": stats["total_trades"],
             "current_balance": round(execution_engine.portfolio_balance, 2)
         },
         "active_holdings": execution_engine.active_holdings
@@ -2714,22 +2735,23 @@ async def stream_bot_logs_in(request: Request):
 
 @router.get("/indian/portfolio/money-tracker")
 async def get_money_tracker_in():
-    """Returns all closed trades for the Indian portfolio."""
+    """Returns all closed trades for the Indian portfolio.
+
+    See Finding #20: summary totals read lifetime_stats, not a re-sum of
+    (now-capped) closed_trades.
+    """
     trades = execution_engine_in.closed_trades
-    total_pnl = sum(t["profit_loss"] for t in trades)
-    gross_profit = sum(t["profit_loss"] for t in trades if t["profit_loss"] > 0)
-    gross_loss = sum(t["profit_loss"] for t in trades if t["profit_loss"] < 0)
-    wins = sum(1 for t in trades if t["profit_loss"] > 0)
-    win_rate = (wins / len(trades) * 100) if trades else 0.0
+    stats  = execution_engine_in.lifetime_stats
+    win_rate = (stats["winning_trades"] / stats["total_trades"] * 100) if stats["total_trades"] else 0.0
 
     return {
         "closed_trades": trades,
         "summary": {
-            "total_pnl": round(total_pnl, 2),
-            "gross_profit": round(gross_profit, 2),
-            "gross_loss": round(gross_loss, 2),
+            "total_pnl": round(stats["total_pnl"], 2),
+            "gross_profit": round(stats["gross_profit"], 2),
+            "gross_loss": round(stats["gross_loss"], 2),
             "win_rate": round(win_rate, 2),
-            "total_trades": len(trades),
+            "total_trades": stats["total_trades"],
             "current_balance": round(execution_engine_in.portfolio_balance, 2)
         },
         "active_holdings": execution_engine_in.active_holdings
@@ -2803,7 +2825,11 @@ async def get_rl_stats_in():
 
 @router.get("/indian/analytics/agent-weights")
 async def get_agent_weights_in():
-    return {"weights": execution_engine_in.rl_engine.get_current_weights()}
+    w = execution_engine_in.rl_engine.get_current_weights()
+    w["News & Sentiment AI"] = 0.0
+    w["Correlation Agent"]   = 0.0
+    w["Indian Gemini AI"]    = 0.0
+    return {"weights": w}
 
 @router.get("/indian/analytics/journal")
 async def get_journal_in():
@@ -2986,7 +3012,10 @@ async def get_rl_stats_st():
 
 @router.get("/stocks/analytics/agent-weights")
 async def get_agent_weights_st():
-    return {"weights": execution_engine_st.rl_engine.get_current_weights()}
+    w = execution_engine_st.rl_engine.get_current_weights()
+    w["News & Sentiment AI"] = 0.0
+    w["Correlation Agent"]   = 0.0
+    return {"weights": w}
 
 @router.get("/stocks/analytics/journal")
 async def get_journal_st():
@@ -3038,19 +3067,16 @@ async def get_holdings_st():
 @router.get("/stocks/portfolio/money-tracker")
 async def get_money_tracker_st():
     trades = execution_engine_st.closed_trades
-    total_pnl = sum(t["profit_loss"] for t in trades)
-    gross_profit = sum(t["profit_loss"] for t in trades if t["profit_loss"] > 0)
-    gross_loss   = sum(t["profit_loss"] for t in trades if t["profit_loss"] < 0)
-    wins = sum(1 for t in trades if t["profit_loss"] > 0)
-    win_rate = (wins / len(trades) * 100) if trades else 0.0
+    stats  = execution_engine_st.lifetime_stats
+    win_rate = (stats["winning_trades"] / stats["total_trades"] * 100) if stats["total_trades"] else 0.0
     return {
         "closed_trades": trades,
         "summary": {
-            "total_pnl": round(total_pnl, 2),
-            "gross_profit": round(gross_profit, 2),
-            "gross_loss": round(gross_loss, 2),
+            "total_pnl": round(stats["total_pnl"], 2),
+            "gross_profit": round(stats["gross_profit"], 2),
+            "gross_loss": round(stats["gross_loss"], 2),
             "win_rate": round(win_rate, 2),
-            "total_trades": len(trades),
+            "total_trades": stats["total_trades"],
             "current_balance": round(execution_engine_st.portfolio_balance, 2)
         },
         "active_holdings": execution_engine_st.active_holdings
@@ -3209,7 +3235,10 @@ async def get_rl_stats_cx():
 
 @router.get("/crypto/analytics/agent-weights")
 async def get_agent_weights_cx():
-    return {"weights": execution_engine_cx.rl_engine.get_current_weights()}
+    w = execution_engine_cx.rl_engine.get_current_weights()
+    w["News & Sentiment AI"] = 0.0
+    w["Correlation Agent"]   = 0.0
+    return {"weights": w}
 
 @router.get("/crypto/analytics/journal")
 async def get_journal_cx():
@@ -3261,19 +3290,16 @@ async def get_holdings_cx():
 @router.get("/crypto/portfolio/money-tracker")
 async def get_money_tracker_cx():
     trades = execution_engine_cx.closed_trades
-    total_pnl = sum(t["profit_loss"] for t in trades)
-    gross_profit = sum(t["profit_loss"] for t in trades if t["profit_loss"] > 0)
-    gross_loss   = sum(t["profit_loss"] for t in trades if t["profit_loss"] < 0)
-    wins = sum(1 for t in trades if t["profit_loss"] > 0)
-    win_rate = (wins / len(trades) * 100) if trades else 0.0
+    stats  = execution_engine_cx.lifetime_stats
+    win_rate = (stats["winning_trades"] / stats["total_trades"] * 100) if stats["total_trades"] else 0.0
     return {
         "closed_trades": trades,
         "summary": {
-            "total_pnl": round(total_pnl, 2),
-            "gross_profit": round(gross_profit, 2),
-            "gross_loss": round(gross_loss, 2),
+            "total_pnl": round(stats["total_pnl"], 2),
+            "gross_profit": round(stats["gross_profit"], 2),
+            "gross_loss": round(stats["gross_loss"], 2),
             "win_rate": round(win_rate, 2),
-            "total_trades": len(trades),
+            "total_trades": stats["total_trades"],
             "current_balance": round(execution_engine_cx.portfolio_balance, 2)
         },
         "active_holdings": execution_engine_cx.active_holdings
@@ -3432,7 +3458,10 @@ async def get_rl_stats_fx():
 
 @router.get("/forex/analytics/agent-weights")
 async def get_agent_weights_fx():
-    return {"weights": execution_engine_fx.rl_engine.get_current_weights()}
+    w = execution_engine_fx.rl_engine.get_current_weights()
+    w["News & Sentiment AI"] = 0.0
+    w["Correlation Agent"]   = 0.0
+    return {"weights": w}
 
 @router.get("/forex/analytics/journal")
 async def get_journal_fx():
@@ -3484,19 +3513,16 @@ async def get_holdings_fx():
 @router.get("/forex/portfolio/money-tracker")
 async def get_money_tracker_fx():
     trades = execution_engine_fx.closed_trades
-    total_pnl = sum(t["profit_loss"] for t in trades)
-    gross_profit = sum(t["profit_loss"] for t in trades if t["profit_loss"] > 0)
-    gross_loss   = sum(t["profit_loss"] for t in trades if t["profit_loss"] < 0)
-    wins = sum(1 for t in trades if t["profit_loss"] > 0)
-    win_rate = (wins / len(trades) * 100) if trades else 0.0
+    stats  = execution_engine_fx.lifetime_stats
+    win_rate = (stats["winning_trades"] / stats["total_trades"] * 100) if stats["total_trades"] else 0.0
     return {
         "closed_trades": trades,
         "summary": {
-            "total_pnl": round(total_pnl, 2),
-            "gross_profit": round(gross_profit, 2),
-            "gross_loss": round(gross_loss, 2),
+            "total_pnl": round(stats["total_pnl"], 2),
+            "gross_profit": round(stats["gross_profit"], 2),
+            "gross_loss": round(stats["gross_loss"], 2),
             "win_rate": round(win_rate, 2),
-            "total_trades": len(trades),
+            "total_trades": stats["total_trades"],
             "current_balance": round(execution_engine_fx.portfolio_balance, 2)
         },
         "active_holdings": execution_engine_fx.active_holdings

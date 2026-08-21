@@ -598,16 +598,25 @@ class IndianInstitutionalFlowAgent(BaseAgent):
 class RiskAgent(BaseAgent):
     """
     Risk Manager — acts as a final veto before any trade is executed.
-    Monitors portfolio risk metrics and halts trading if limits are breached.
+    Monitors cash reserves and position concentration.
+
+    IV&V finding 2026-08-21 (audit Finding #17): this agent previously also
+    vetoed on `daily_pnl_pct < -3.0` and `max_drawdown_pct < -8.0`, but
+    routes.py never populates either key in tick_data for any of the 5
+    markets — those branches were permanently dead code, misleadingly
+    implying this agent enforced a daily/drawdown circuit breaker. The real,
+    working daily (3.0%) and weekly (6.0%) drawdown circuit breakers are
+    enforced separately by GlobalRiskAggregator / portfolio_risk.analyze()
+    at the loop level. Removed the dead branches rather than wiring in
+    unused inputs — this agent's real job is cash/concentration, not
+    duplicating the global circuit breaker.
     """
     def __init__(self):
         super().__init__("Risk Manager")
 
     def evaluate(self, symbol: str, data: Dict[str, Any]) -> Dict[str, Any]:
-        cash_pct      = data.get("cash_pct", 100.0)
-        open_trades   = data.get("open_trade_count", 0)
-        daily_pnl_pct = data.get("daily_pnl_pct", 0.0)
-        max_dd_pct    = data.get("max_drawdown_pct", 0.0)
+        cash_pct    = data.get("cash_pct", 100.0)
+        open_trades = data.get("open_trade_count", 0)
 
         if cash_pct < 20.0:
             return {
@@ -621,21 +630,9 @@ class RiskAgent(BaseAgent):
                 "reason": f"Maximum concurrent positions reached ({open_trades}). Risk concentration too high."
             }
 
-        if daily_pnl_pct < -3.0:
-            return {
-                "signal": "VETO", "confidence": 0.97,
-                "reason": f"Daily PnL limit breached ({daily_pnl_pct:.1f}%). Circuit breaker active — no new trades today."
-            }
-
-        if max_dd_pct < -8.0:
-            return {
-                "signal": "VETO", "confidence": 0.98,
-                "reason": f"Portfolio drawdown at {max_dd_pct:.1f}%. Capital preservation mode — no new entries."
-            }
-
         return {
             "signal": "OK", "confidence": 0.90,
-            "reason": f"Risk metrics within acceptable range. Cash: {cash_pct:.1f}%, Trades: {open_trades}, Daily PnL: {daily_pnl_pct:.1f}%."
+            "reason": f"Risk metrics within acceptable range. Cash: {cash_pct:.1f}%, Trades: {open_trades}."
         }
 
 

@@ -6,9 +6,37 @@ Only modules that cannot be installed in a minimal test environment
 (yfinance, hmmlearn, pandas, ta, etc.) are stubbed.
 """
 
+import os
 import sys
+import tempfile
 import types
 from unittest.mock import MagicMock
+
+# IV&V finding 2026-08-21 (audit Finding #8): TradePostMortemEngine wrote
+# every closed-trade post-mortem to the real, git-tracked
+# backend/data/trade_journal.json — any test that exercises force_close()/
+# execute_trade()'s SELL/COVER branches (which fire this asynchronously in a
+# background thread) polluted real production data on every test run,
+# requiring a manual `git checkout` after every single suite run this
+# session. Point it at an isolated per-session temp file instead; production
+# is unaffected since TRADE_JOURNAL_PATH is unset there.
+os.environ["TRADE_JOURNAL_PATH"] = os.path.join(
+    tempfile.gettempdir(), "ai_stock_test_trade_journal.json"
+)
+
+# IV&V finding 2026-08-21: app code logs emoji characters (e.g. the
+# GlobalRiskAggregator circuit-breaker halt message). On a plain Windows
+# console, sys.stdout defaults to a legacy codepage (cp1252) that can't
+# encode them, which raises UnicodeEncodeError deep inside pytest's own
+# capture layer and corrupts it — the whole test run then dies at teardown
+# with an unrelated-looking `ValueError: I/O operation on closed file`,
+# silently hiding whether the tests actually passed. Mirrors the same fix
+# applied to backend/main.py for the production process.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 
 def _stub(name: str, **attrs):

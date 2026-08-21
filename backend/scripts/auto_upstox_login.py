@@ -93,7 +93,11 @@ def exchange_code_for_token(code: str, api_key: str, api_secret: str, redirect_u
         },
         method='POST'
     )
-    ctx = ssl._create_unverified_context()
+    # IV&V finding 2026-08-21: was ssl._create_unverified_context() — the
+    # OAuth code-for-token exchange (carrying api_key/api_secret and the
+    # authorization code) was sent with TLS certificate validation disabled,
+    # exposing real broker credentials to interception. Use the secure default.
+    ctx = ssl.create_default_context()
     try:
         with urllib.request.urlopen(req, context=ctx) as response:
             res_data = json.loads(response.read().decode('utf-8'))

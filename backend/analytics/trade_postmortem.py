@@ -5,7 +5,9 @@ import threading
 from typing import Dict, Any, List, Optional
 
 
-JOURNAL_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "trade_journal.json")
+JOURNAL_FILE = os.environ.get("TRADE_JOURNAL_PATH") or os.path.join(
+    os.path.dirname(os.path.dirname(__file__)), "data", "trade_journal.json"
+)
 
 
 class TradePostMortemEngine:

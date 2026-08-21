@@ -32,6 +32,7 @@ from analytics.rl_engine import ReinforcementLearningEngine
 from data.regime_detector import MarketRegimeDetector
 from analytics.performance_metrics import from_equity_curve
 from risk.adaptive_stops import AdaptiveStopLoss
+from risk.position_sizing import PositionSizer
 
 
 data_provider = DataProviderFactory.get_provider()
@@ -362,6 +363,11 @@ class BacktestEngine:
         }
         self.strategy          = strategy_map.get(strategy, strategy)
         self.initial_capital   = float(initial_capital)
+        # DEPRECATED (2026-08-21, audit Finding #11 fix): no longer used for
+        # sizing — every trade is now sized via self.sizer (Half-Kelly),
+        # matching live. Kept only so any external caller still passing
+        # position_size_pct= doesn't break on an unexpected-kwarg TypeError;
+        # nothing in this codebase currently passes it explicitly.
         self.position_size_pct = position_size_pct / 100
         self.stop_loss_atr     = stop_loss_atr
         self.take_profit_atr   = take_profit_atr
@@ -378,6 +384,21 @@ class BacktestEngine:
         self.rl_engine       = ReinforcementLearningEngine()
         self.regime_detector = MarketRegimeDetector()
         self.stops           = AdaptiveStopLoss()
+        # IV&V finding 2026-08-21 (audit Finding #11): every backtested trade was
+        # previously sized as a flat position_size_pct (default 10%) of capital,
+        # never Half-Kelly — live trading always sizes through PositionSizer
+        # (1% fixed-fractional under 30 closed trades, hard-capped at 5% max
+        # risk). A flat-10% backtest measures a different risk/return profile
+        # than what live trading actually risks, so every reported Sharpe/
+        # drawdown/VaR number was not representative of live risk. Now sized
+        # identically to live via the same PositionSizer. `self.rl_engine` is a
+        # FRESH instance per backtest run (see above) that only accumulates
+        # trade history/win-rate during the 60% train split (process_trade_outcome
+        # is gated by `in_train_split` below) — so recent_win_rate/n_closed_trades
+        # fed to Kelly here automatically inherit the same point-in-time,
+        # leakage-free discipline already enforced for RL weight updates,
+        # with no additional bookkeeping needed.
+        self.sizer           = PositionSizer()
 
     # ── Download ──────────────────────────────────────────────────────────────
 
@@ -476,6 +497,18 @@ class BacktestEngine:
 
     # -- Commission helper -------------------------------------------------
 
+    def _get_realized_b(self) -> float:
+        """Realized R:R from this backtest's own RL trade history (train-split
+        only — see the leakage-discipline note in __init__). Falls back to 2.0
+        when thin. Mirrors SmartExecutionEngine._get_realized_b() exactly, so
+        live and backtest use the identical Half-Kelly `b` calibration."""
+        history = self.rl_engine._trade_history
+        wins    = [t["pnl"] for t in history if t.get("is_win") and t["pnl"] > 0]
+        losses  = [abs(t["pnl"]) for t in history if not t.get("is_win") and t["pnl"] < 0]
+        if wins and losses:
+            return round((sum(wins) / len(wins)) / (sum(losses) / len(losses)), 3)
+        return 2.0
+
     def _commission(self, price: float, shares: float, is_sell: bool) -> float:
         """Percentage-of-notional commission (+ Indian STT on sell-side).
 
@@ -544,11 +577,28 @@ class BacktestEngine:
 
             # Execute pending entry on this bar's open
             if pending_signal in ("BUY", "SELL") and position is None:
-                alloc    = capital * self.position_size_pct
                 is_long  = (pending_signal == "BUY")
                 slip     = atr * 0.05 * vol_slip_mult
                 entry_price = (open_price + slip) if is_long else (open_price - slip)
-                shares      = round(alloc / max(entry_price, 0.01), 4)
+
+                # Half-Kelly sizing — identical to live (SmartExecutionEngine),
+                # replacing the old flat position_size_pct. `confidence` is
+                # accepted but unused inside calculate_size (sizing is
+                # win-rate-calibrated, not confidence-based — see its
+                # docstring), so a placeholder is fine here.
+                _atr_pct    = (atr / max(entry_price, 1e-9)) * 100 if atr > 0 else 0.0
+                _realized_b = self._get_realized_b()
+                size_data = self.sizer.calculate_size(
+                    confidence=0.0,
+                    current_capital=capital,
+                    current_price=entry_price,
+                    regime=pending_regime,
+                    recent_win_rate=self.rl_engine.win_rate / 100.0,
+                    atr_pct=_atr_pct,
+                    n_closed_trades=self.rl_engine.total_closed_trades,
+                    realized_b=_realized_b,
+                )
+                shares = size_data["shares"]
 
                 if shares > 0:
                     c_entry = self._commission(entry_price, shares, is_sell=not is_long)

@@ -71,6 +71,8 @@ class YFinanceDataProvider(BaseDataProvider):
         with self._lock:
             if hist is not None and not hist.empty and not hist["Close"].isna().all():
                 self._cache[cache_key] = (hist, time.time())
+                hist.attrs["is_stale"] = False
+                hist.attrs["data_age_seconds"] = 0.0
                 return hist
 
             # ── Stale fallback: use expired cache if yfinance failed ──────────
@@ -80,6 +82,15 @@ class YFinanceDataProvider(BaseDataProvider):
                 if age <= self._STALE_FALLBACK_TTL:
                     print(f"[YFinanceDataProvider] WARNING: yfinance failed. Serving stale cache for "
                           f"{symbol} ({period}/{interval}), age {age:.0f}s.")
+                    # IV&V finding 2026-08-21: this fallback was previously
+                    # indistinguishable from a fresh fetch to every caller —
+                    # ingestion.py labeled every tick "Yahoo Finance (real)"
+                    # regardless, so the committee/risk/sizing layers could
+                    # trade on data up to _STALE_FALLBACK_TTL (10 min) old
+                    # believing it was live. Tag it honestly; callers decide
+                    # what to do with the flag.
+                    stale_df.attrs["is_stale"] = True
+                    stale_df.attrs["data_age_seconds"] = age
                     return stale_df
                 else:
                     print(f"[YFinanceDataProvider] Cache EXPIRED for {symbol} ({period}/{interval}), "

@@ -29,7 +29,13 @@ class UpstoxBroker(BrokerBase):
     def __init__(self, access_token: Optional[str] = None):
         self._access_token = access_token or os.getenv("UPSTOX_ACCESS_TOKEN", "")
         self.instruments = {}
-        self.ssl_context = ssl._create_unverified_context()
+        # IV&V finding 2026-08-21: was ssl._create_unverified_context() — the
+        # REAL order-placement call (buy/sell/short/cover, carrying the
+        # Bearer access token) was sent with TLS certificate validation
+        # completely disabled, making it vulnerable to interception or
+        # tampering by anyone on the network path. create_default_context()
+        # restores proper certificate validation.
+        self.ssl_context = ssl.create_default_context()
         self._connected = bool(self._access_token)
         if self._connected:
             self._load_instruments()

@@ -87,8 +87,18 @@ class ZerodhaBroker(BrokerBase):
         qty: int,
         transaction_type: str,
         order_type: str = "MARKET",
+        product: Optional[str] = None,
     ) -> Tuple[bool, str, Optional[str]]:
         # Ironclad safety lock: prevent real-money execution unless explicitly enabled in .env
+        #
+        # IV&V finding 2026-08-21: short() and cover() previously reimplemented
+        # order placement inline instead of calling this method, which silently
+        # dropped this exact safety check — a SHORT or COVER signal would place
+        # a real order on the live exchange even with
+        # ENABLE_LIVE_REAL_MONEY_TRADING left at its safe default, while BUY/SELL
+        # stayed correctly blocked. UpstoxBroker and IBKRBroker were already
+        # correct (all 4 methods route through their _place_order). All 4
+        # Zerodha methods now do too, so the lock covers every order type.
         live_enabled = os.getenv("ENABLE_LIVE_REAL_MONEY_TRADING", "false").lower() == "true"
         if not live_enabled:
             msg = "[SAFETY LOCK] Real money trading is disabled (ENABLE_LIVE_REAL_MONEY_TRADING != true). Order blocked."
@@ -107,6 +117,7 @@ class ZerodhaBroker(BrokerBase):
                 if transaction_type == "BUY"
                 else KiteConnect.TRANSACTION_TYPE_SELL
             )
+            ptype = product or KiteConnect.PRODUCT_CNC   # CNC (delivery) unless caller requests MIS (intraday)
             order_id = self._kite.place_order(
                 variety=KiteConnect.VARIETY_REGULAR,
                 exchange=exchange,
@@ -114,7 +125,7 @@ class ZerodhaBroker(BrokerBase):
                 transaction_type=ttype,
                 quantity=qty,
                 order_type=otype,
-                product=KiteConnect.PRODUCT_CNC,
+                product=ptype,
             )
             msg = f"[ZERODHA] {transaction_type} {qty} {clean} order placed. ID={order_id}"
             print(msg)
@@ -131,45 +142,15 @@ class ZerodhaBroker(BrokerBase):
         return self._place_order(symbol, qty, "SELL", order_type)
 
     def short(self, symbol, qty, price, order_type="MARKET"):
-        # Zerodha supports intraday shorts via MIS product
-        if not self._connected or self._kite is None:
-            return False, "Zerodha not connected.", None
-        clean, exchange = _strip_suffix(symbol)
-        try:
-            from kiteconnect import KiteConnect
-            order_id = self._kite.place_order(
-                variety=KiteConnect.VARIETY_REGULAR,
-                exchange=exchange,
-                tradingsymbol=clean,
-                transaction_type=KiteConnect.TRANSACTION_TYPE_SELL,
-                quantity=qty,
-                order_type=KiteConnect.ORDER_TYPE_MARKET,
-                product=KiteConnect.PRODUCT_MIS,  # Intraday
-            )
-            msg = f"[ZERODHA] SHORT {qty} {clean} (MIS). ID={order_id}"
-            return True, msg, str(order_id)
-        except Exception as e:
-            return False, f"[ZERODHA] Short failed: {e}", None
+        # Zerodha supports intraday shorts via MIS product. "MIS" is passed as
+        # a literal (not KiteConnect.PRODUCT_MIS) so this doesn't require
+        # importing kiteconnect before _place_order's own connected-check —
+        # if the package isn't installed, _place_order still fails gracefully
+        # with (False, msg, None) instead of an uncaught ImportError.
+        return self._place_order(symbol, qty, "SELL", order_type, product="MIS")
 
     def cover(self, symbol, qty, price, order_type="MARKET"):
-        if not self._connected or self._kite is None:
-            return False, "Zerodha not connected.", None
-        clean, exchange = _strip_suffix(symbol)
-        try:
-            from kiteconnect import KiteConnect
-            order_id = self._kite.place_order(
-                variety=KiteConnect.VARIETY_REGULAR,
-                exchange=exchange,
-                tradingsymbol=clean,
-                transaction_type=KiteConnect.TRANSACTION_TYPE_BUY,
-                quantity=qty,
-                order_type=KiteConnect.ORDER_TYPE_MARKET,
-                product=KiteConnect.PRODUCT_MIS,
-            )
-            msg = f"[ZERODHA] COVER {qty} {clean}. ID={order_id}"
-            return True, msg, str(order_id)
-        except Exception as e:
-            return False, f"Zerodha order failed: {str(e)}", None
+        return self._place_order(symbol, qty, "BUY", order_type, product="MIS")
 
     def cancel_order(self, order_id: str) -> Tuple[bool, str]:
         if not self._connected or self._kite is None:

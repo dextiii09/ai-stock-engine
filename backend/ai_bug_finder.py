@@ -500,34 +500,47 @@ class AIBugFinder:
                 "Start: cd backend && python -m uvicorn api.server:app --port 8080",
                 fid=fid))
 
+    # IV&V finding 2026-08-21: both runtime checks below previously only
+    # covered US (and, for balance, India) — Stocks/Crypto/Forex had ZERO
+    # runtime monitoring from this tool, the same 3-market blind spot as the
+    # market_name bug (Finding #1 in the audit). A negative balance or
+    # NaN/Inf RL weight in those 3 markets would have gone completely
+    # undetected by the "AI Bug Finder" that's supposed to catch exactly
+    # this. Read-only diagnostic checks — low risk to extend.
+    _MARKET_PREFIXES = [
+        ("", "US", ""), ("/indian", "India", "_in"), ("/stocks", "Stocks", "_st"),
+        ("/crypto", "Crypto", "_cx"), ("/forex", "Forex", "_fx"),
+    ]  # (url_prefix, label, rl_state_file_suffix) — suffixes match SmartExecutionEngine's actual filenames
+
     def _rt_rl_weights(self, req):
-        try:
-            r = req.get(f"{self.base_url}/analytics/rl-stats", timeout=5, proxies=self._NO_PROXY)
-            if r.status_code != 200:
-                return
-            weights = r.json().get("weights", {})
-            for regime, agent_map in weights.items():
-                if not isinstance(agent_map, dict):
+        for prefix, label, suffix in self._MARKET_PREFIXES:
+            try:
+                r = req.get(f"{self.base_url}{prefix}/analytics/rl-stats", timeout=5, proxies=self._NO_PROXY)
+                if r.status_code != 200:
                     continue
-                for agent, w in agent_map.items():
-                    fid = self._fid("runtime", "rl_weight", regime, agent)
-                    bad = (w is None
-                           or (isinstance(w, float) and (w != w or abs(w) == float("inf"))))
-                    if bad:
-                        self._add(Finding("HIGH", "RL",
-                            "analytics/rl_engine.py", f"weights[{regime}][{agent}]",
-                            f"RL weight NaN/Inf for agent '{agent}' in regime '{regime}'.",
-                            "Delete rl_weights.json to reset weights to uniform.", fid=fid))
-                    else:
-                        self._resolve(fid)
-        except Exception:
-            pass
+                weights = r.json().get("weights", {})
+                for regime, agent_map in weights.items():
+                    if not isinstance(agent_map, dict):
+                        continue
+                    for agent, w in agent_map.items():
+                        fid = self._fid("runtime", "rl_weight", label, regime, agent)
+                        bad = (w is None
+                               or (isinstance(w, float) and (w != w or abs(w) == float("inf"))))
+                        if bad:
+                            self._add(Finding("HIGH", "RL",
+                                "analytics/rl_engine.py", f"{label} weights[{regime}][{agent}]",
+                                f"RL weight NaN/Inf for agent '{agent}' in regime '{regime}' ({label}).",
+                                f"Delete rl_state{suffix}.json to reset weights to uniform.", fid=fid))
+                        else:
+                            self._resolve(fid)
+            except Exception:
+                pass
 
     def _rt_portfolio_balance(self, req):
-        for endpoint, label in [("/portfolio/holdings", "US"), ("/indian/portfolio/holdings", "India")]:
+        for prefix, label, _suffix in self._MARKET_PREFIXES:
             fid = self._fid("runtime", "balance", label)
             try:
-                r = req.get(f"{self.base_url}{endpoint}", timeout=5, proxies=self._NO_PROXY)
+                r = req.get(f"{self.base_url}{prefix}/portfolio/holdings", timeout=5, proxies=self._NO_PROXY)
                 if r.status_code != 200:
                     continue
                 balance = r.json().get("balance", 1)

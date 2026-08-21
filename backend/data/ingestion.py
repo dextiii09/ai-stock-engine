@@ -320,6 +320,14 @@ def fetch_real_tick(symbol: str) -> Dict[str, Any]:
     except Exception:
         daily_change_pct = 0.0
 
+    # IV&V finding 2026-08-21: the provider silently serves cached data up to
+    # 10 minutes old when live fetches fail 3x, but every tick was previously
+    # labeled "Yahoo Finance (real)" regardless — no signal anywhere let the
+    # committee/risk/sizing layers know a decision might be based on a stale
+    # price. Surface it honestly (provider.py now tags this via df.attrs).
+    _is_stale = bool(getattr(hist, "attrs", {}).get("is_stale", False))
+    _data_age = float(getattr(hist, "attrs", {}).get("data_age_seconds", 0.0))
+
     tick_data = {
         "symbol": symbol,
         "timestamp": time.time(),
@@ -334,7 +342,10 @@ def fetch_real_tick(symbol: str) -> Dict[str, Any]:
         "macd_hist": macd_hist,
         "institutional_flow": institutional_flow,
         "daily_change_pct": daily_change_pct,
-        "data_source": "Yahoo Finance (real)",
+        "data_source": (f"Yahoo Finance (STALE, {_data_age:.0f}s old)" if _is_stale
+                         else "Yahoo Finance (real)"),
+        "is_stale_data": _is_stale,
+        "data_age_seconds": round(_data_age, 1),
         "is_london_fix_window": in_london_fix,   # EC-6: wired so agents can check session window
     }
 
