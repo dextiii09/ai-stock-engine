@@ -1,7 +1,7 @@
 # AI Stock Engine: System Verification & Live Diagnostic Report
 
 > **Prepared For:** Independent AI / Quant Auditor Verification (Claude / OpenAI / Quant Reviewer)  
-> **Report Timestamp:** 2026-08-21 02:16:01 UTC  
+> **Report Timestamp:** 2026-08-21 02:36:57 UTC  
 > **System Version:** 3.0.0 (Institutional Multi-Asset Quantitative Engine)  
 > **Production VPS Host:** `http://140.245.210.188:8080` | **Web UI:** `http://140.245.210.188:5173`  
 > **Official Git Repository:** [https://github.com/dextiii09/ai-stock-engine](https://github.com/dextiii09/ai-stock-engine) (Branch: `main`)
@@ -27,31 +27,31 @@ The **AI Stock Engine** is a 24/7 institutional autonomous trading, algorithmic 
     "US": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 27.1,
+      "last_tick_secs_ago": 1.6,
       "status": "ok"
     },
     "INDIA": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 27.1,
+      "last_tick_secs_ago": 7.5,
       "status": "ok"
     },
     "STOCKS": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 27.1,
+      "last_tick_secs_ago": 7.5,
       "status": "ok"
     },
     "CRYPTO": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 17.0,
+      "last_tick_secs_ago": 7.5,
       "status": "ok"
     },
     "FOREX": {
       "running": true,
       "open_positions": 3,
-      "last_tick_secs_ago": 16.9,
+      "last_tick_secs_ago": 0.5,
       "status": "ok"
     }
   },
@@ -92,7 +92,7 @@ The **AI Stock Engine** is a 24/7 institutional autonomous trading, algorithmic 
 
 ### Pillar 5: Market Regime Directional Gating
 * **Source Code:** [`backend/agents/master.py`](file:///backend/agents/master.py)
-* **Current Live Market Regime:** `Trending Bear` (Active Strategy: `{'id': 'short_ema_cross', 'name': 'EMA Bearish Cross Short', 'timeframe': '1H', 'leverage': 1.0}`)
+* **Current Live Market Regime:** `High Volatility` (Active Strategy: `{'id': 'vol_breakout', 'name': 'Volatility Breakout (ATR)', 'timeframe': '15m', 'leverage': 0.5}`)
 * **Rules:**
   * **Trending Bear:** Vetoes Long entries (zero falling-knife buying).
   * **Trending Bull:** Vetoes Short entries (zero counter-trend fading).

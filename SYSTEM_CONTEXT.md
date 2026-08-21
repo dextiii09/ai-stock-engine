@@ -1228,6 +1228,9 @@ if p_win_frac is not None and not sim_result["is_viable"]:
 12. **Evaluation baseline reset (Session 5)**: All paper-trading P&L and risk-adjusted numbers collected before Session 5 were generated with `regime_scalar` silently fixed at `1.0` (dead 10-name dict). Post-fix, High Volatility trades size at 0.4×, Sideways at 0.5×. Do not compare pre-fix and post-fix results — treat the first 30+ trades per regime after this session as the new clean baseline.
 13. **Dynamic Initial Capital Invariant**: Never pass arbitrary hardcoded `initial_capital` magic numbers into performance metrics or risk endpoints. Individual engines must pass their true configured `engine._initial_balance`, and combined cross-market breakdown must pass `GlobalRiskAggregator.total_initial_capital()`.
 14. **Exact Boundary Test Verification**: Global and per-market circuit breakers must always be validated against precise sub-threshold and super-threshold boundary conditions (Daily: 3.4% -> NO halt, 3.6% -> HALT; Weekly: 6.9% -> NO halt, 7.1% -> HALT).
+15. **MetaGate Scope is BTC-USD Long Only (Phase 3 CPCV CONFIRMED)**: MetaGate veto filter is active strictly for `market == "CRYPTO"` and `symbol == "BTC-USD"` (the single asset that passed 15/15 CPCV splits with +0.166R uplift and Deflated Sharpe Ratio 1.0). Never expand live gating to unvalidated assets (MNQ, MGC, Equities, Forex) whose Phase 1 AUC was <= 0.50 without prior formal Phase 1 -> Phase 2 -> Phase 3 CPCV validation.
+16. **Live Broker Hardware Safety Lock**: All real-money order execution in `broker_upstox.py`, `broker_zerodha.py`, and `broker_ibkr.py` is guarded by an explicit master safety check: `ENABLE_LIVE_REAL_MONEY_TRADING=true` in `.env`. By default, orders are unconditionally blocked from reaching exchange endpoints.
+
 
 
 ---
