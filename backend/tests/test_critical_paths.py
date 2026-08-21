@@ -644,5 +644,57 @@ class TestNvidiaMacroAgent:
         assert "US Equities and Index Futures" in prompt_us
 
 
+class TestChartGeneration:
+    def test_chart_bytes_png_signature(self):
+        from utils.telegram_bot import telegram_bot
+        chart_bytes = telegram_bot.generate_equity_chart_bytes()
+        assert chart_bytes is not None
+        assert isinstance(chart_bytes, bytes)
+        assert len(chart_bytes) > 1000
+        # Check standard PNG header signature (\x89PNG\r\n\x1a\n)
+        assert chart_bytes[:8] == b"\x89PNG\r\n\x1a\n"
+
+
+class TestTradePostMortem:
+    def test_record_closed_trade_saves_to_journal(self, tmp_path):
+        import tempfile
+        from analytics.trade_postmortem import TradePostMortemEngine
+        engine = TradePostMortemEngine()
+        engine.journal_path = str(tmp_path / "test_journal.json")
+        engine._ensure_journal_exists()
+
+        mock_trade = {
+            "symbol": "NVDA",
+            "entry_price": 120.0,
+            "exit_price": 135.0,
+            "profit": 1500.0,
+            "direction": "LONG",
+            "exit_reason": "TP2_RUNNER",
+            "regime_at_entry": "Trending Bull"
+        }
+        engine._process_trade_postmortem(mock_trade, market="STOCKS")
+        records = engine.get_recent_postmortems(limit=5)
+        assert len(records) == 1
+        assert records[0]["symbol"] == "NVDA"
+        assert records[0]["profit"] == 1500.0
+        assert "postmortem" in records[0]
+
+
+class TestNewsSentimentScanner:
+    def test_news_scanner_adverse_keyword_veto(self):
+        from data.news_sentiment_scanner import NewsSentimentScanner
+        scanner = NewsSentimentScanner()
+        # Mock headlines with adverse keyword
+        scanner.fetch_headlines = lambda sym, limit=4: [
+            "SEC launches fraud investigation into accounting irregularities",
+            "Company files bankruptcy petition in Delaware"
+        ]
+        is_veto, score, reason = scanner.check_news_veto("TEST_SYMBOL")
+        assert is_veto is True
+        assert score < -0.70
+        assert "Adverse News" in reason
+
+
+
 
 

@@ -317,7 +317,24 @@ class SmartExecutionEngine:
             trade_result, holding.get("committee_breakdown", {}) or {})
         self.journal.log_trade(symbol, f"FORCE_{reason}", price, {"reason": reason})
 
+        # Asynchronous AI Post-Mortem Journaling
+        try:
+            from analytics.trade_postmortem import TradePostMortemEngine
+            TradePostMortemEngine.instance().record_closed_trade_async({
+                "symbol": symbol,
+                "shares": shares,
+                "direction": direction,
+                "entry_price": entry_p,
+                "exit_price": price,
+                "profit": profit_loss,
+                "exit_reason": f"FORCE_{reason}",
+                "regime_at_entry": holding.get("regime", "Unknown"),
+            }, market=self.market)
+        except Exception:
+            pass
+
         if DB_ENABLED:
+
             try:
                 async with AsyncSessionLocal() as session:
                     side = "SELL" if direction == "LONG" else "BUY"
@@ -1052,8 +1069,26 @@ class SmartExecutionEngine:
                 })
                 if "committee_breakdown" in decision:
                     self.rl_engine.process_trade_outcome(trade_result, decision["committee_breakdown"])
+
+                # Asynchronous AI Post-Mortem Journaling
+                try:
+                    from analytics.trade_postmortem import TradePostMortemEngine
+                    TradePostMortemEngine.instance().record_closed_trade_async({
+                        "symbol": symbol,
+                        "shares": long_holding["shares"],
+                        "direction": "LONG",
+                        "entry_price": long_holding["entry_price"],
+                        "exit_price": price,
+                        "profit": profit_loss,
+                        "exit_reason": decision.get("reason", "Committee SELL"),
+                        "regime_at_entry": long_holding.get("regime", "Unknown"),
+                    }, market=self.market)
+                except Exception:
+                    pass
+
                 await self._save_state_async()
                 return True, f"FILLED SELL {long_holding['shares']:.4g} @ ${price:.2f} (PnL: ${profit_loss:.2f})"
+
 
             else:
                 # ── OPEN SHORT ──

@@ -250,8 +250,24 @@ class MasterAgent(BaseAgent):
                     "committee_breakdown": results
                 }
 
-        
+        # 4.2 Real-Time News Headline Sentiment Veto
+        if final_signal == "BUY" and mode != "Aggressive":
+            try:
+                from data.news_sentiment_scanner import NewsSentimentScanner
+                is_news_veto, news_score, news_reason = NewsSentimentScanner.instance().check_news_veto(symbol)
+                if is_news_veto:
+                    return {
+                        "signal": "WAIT",
+                        "confidence": final_confidence,
+                        "reason": f"News Sentiment VETO: {news_reason} (Score: {news_score:+.2f})",
+                        "recommendation": "Capital preservation active. High-risk adverse breaking news in progress.",
+                        "committee_breakdown": results
+                    }
+            except Exception:
+                pass
+
         # 5. Correlation Gate
+
         correlation = self._update_history_and_get_correlation(symbol, data.get("price", 0))
         active_holdings = data.get("active_holdings", [])
         

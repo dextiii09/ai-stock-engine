@@ -28,19 +28,19 @@
       "Correlation Agent": 1.0
     },
     "High Volatility": {
-      "Technical Analyst": 1.0469574727762934,
-      "Fundamental Analyst": 0.9809517303930388,
+      "Technical Analyst": 1.0392329161394402,
+      "Fundamental Analyst": 0.98786317580496,
       "News & Sentiment AI": 1.0,
-      "Macro Economic AI": 0.9575405582549567,
+      "Macro Economic AI": 0.962825781217014,
       "Volatility Agent": 1.0,
-      "Liquidity Agent": 1.1007942417761507,
+      "Liquidity Agent": 1.0967286856514913,
       "Correlation Agent": 1.0
     }
   },
-  "total_closed_trades": 32,
-  "winning_trades": 4,
-  "retrain_count": 6,
-  "_trades_since_last_retrain": 2,
+  "total_closed_trades": 35,
+  "winning_trades": 7,
+  "retrain_count": 7,
+  "_trades_since_last_retrain": 0,
   "_trade_history": [
     {
       "pnl_pct": -0.13150342942738083,
@@ -233,6 +233,24 @@
       "pnl": 47.23803318,
       "is_win": true,
       "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 3.134651443999989,
+      "pnl": 47.01977165999983,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 3.165604460000001,
+      "pnl": 47.484066900000016,
+      "is_win": true,
+      "regime": "Sideways"
+    },
+    {
+      "pnl_pct": 3.1321459520000037,
+      "pnl": 46.98218928000006,
+      "is_win": true,
+      "regime": "Sideways"
     }
   ],
   "_batch_weight_deltas": {
@@ -264,12 +282,12 @@
       "Correlation Agent": 0.0
     },
     "High Volatility": {
-      "Technical Analyst": -0.007724556636853009,
-      "Fundamental Analyst": 0.006911445411921113,
+      "Technical Analyst": 0.0,
+      "Fundamental Analyst": 0.0,
       "News & Sentiment AI": 0.0,
-      "Macro Economic AI": 0.005285222962057323,
+      "Macro Economic AI": 0.0,
       "Volatility Agent": 0.0,
-      "Liquidity Agent": -0.004065556124659479,
+      "Liquidity Agent": 0.0,
       "Correlation Agent": 0.0
     }
   },
@@ -303,9 +321,9 @@
     },
     "High Volatility": {
       "Technical Analyst": 1.234787363881465,
-      "Fundamental Analyst": 1.2798055746961516,
+      "Fundamental Analyst": 1.3143628017557571,
       "News & Sentiment AI": 1.0,
-      "Macro Economic AI": 1.0334379642883007,
+      "Macro Economic AI": 1.0598640790985874,
       "Volatility Agent": 1.0,
       "Liquidity Agent": 1.5355604108528165,
       "Correlation Agent": 1.0
@@ -340,12 +358,12 @@
       "Correlation Agent": 1.0
     },
     "High Volatility": {
-      "Technical Analyst": 1.0,
+      "Technical Analyst": 1.0386227831842652,
       "Fundamental Analyst": 1.375046922730959,
       "News & Sentiment AI": 1.0,
       "Macro Economic AI": 1.245735173013517,
       "Volatility Agent": 1.0,
-      "Liquidity Agent": 1.0315892019720634,
+      "Liquidity Agent": 1.0519169825953607,
       "Correlation Agent": 1.0
     }
   },

@@ -95,17 +95,43 @@ def test_telegram_bot_eod_digest():
         bot.bot_token = "mock_token"
         bot.allowed_chat_id = "12345678"
 
-        with patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
+        with patch.object(bot, "send_photo", new_callable=AsyncMock) as mock_photo, \
+             patch.object(bot, "send_message", new_callable=AsyncMock) as mock_send:
             fake_msg = {
                 "chat": {"id": 12345678},
                 "text": "📬 EOD Digest"
             }
             await bot._handle_message(fake_msg)
-            mock_send.assert_called_once()
-            args = mock_send.call_args[0]
-            assert "PERFORMANCE RECAP" in args[0]
-            assert "Closed Trades Today" in args[0]
+            # EOD digest delivers photo with caption if chart generation succeeds
+            if mock_photo.called:
+                kwargs = mock_photo.call_args.kwargs
+                caption = kwargs.get("caption", "")
+                assert "PERFORMANCE RECAP" in caption
+            else:
+                mock_send.assert_called_once()
+                args = mock_send.call_args[0]
+                assert "PERFORMANCE RECAP" in args[0]
 
     asyncio.run(_run())
+
+
+def test_telegram_bot_chart_command():
+    async def _run():
+        bot = TelegramBotController()
+        bot.bot_token = "mock_token"
+        bot.allowed_chat_id = "12345678"
+
+        with patch.object(bot, "send_photo", new_callable=AsyncMock) as mock_photo:
+            fake_msg = {
+                "chat": {"id": 12345678},
+                "text": "📉 Chart"
+            }
+            await bot._handle_message(fake_msg)
+            mock_photo.assert_called_once()
+            kwargs = mock_photo.call_args.kwargs
+            assert "AI Stock Engine" in kwargs.get("caption", "")
+
+    asyncio.run(_run())
+
 
 

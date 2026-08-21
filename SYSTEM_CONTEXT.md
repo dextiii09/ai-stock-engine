@@ -1304,3 +1304,22 @@ ATR multipliers are calibrated to HMM volatility regimes:
 - **Sideways**: SL = $1.5 \times ATR$, Trailing = $1.8 \times ATR$ (standard mean-reversion buffer).
 - **High Volatility**: SL = $2.2 \times ATR$, Trailing = $2.5 \times ATR$ (wide buffer to absorb noise and prevent premature whipsaws).
 
+### 16.5 Telegram Conversational AI Copilot (`backend/utils/telegram_bot.py`)
+- Freeform natural language inquiries in Hindi, Hinglish, or English are routed directly to **NVIDIA Nemotron 3 120B**.
+- Contextually injects live 5-market engine health, open holdings, unrealized float, today's PnL, and recent post-mortem learnings into the prompt.
+- Responds concisely with authoritative quantitative hedge-fund grade analysis.
+
+### 16.6 Headless Visual Equity Curve & Drawdown Charts (`sendPhoto` via `matplotlib`)
+- `generate_equity_chart_bytes()` produces dark-themed institutional PNG charts (`#0b0f19` canvas, `#00f5ff` equity line, `#ef4444` drawdown fill).
+- Automatically attached to `/chart`, `/pnl`, and the Daily 18:00 UTC (23:30 IST) EOD digest via Telegram `sendPhoto` multipart dispatch.
+
+### 16.7 AI Trade Post-Mortem & Continuous Journaling (`backend/analytics/trade_postmortem.py`)
+- Upon position closure (Take Profit 1, Take Profit 2, Stop Loss, Force Close), an asynchronous background daemon thread triggers Nemotron 120B.
+- Analyzes entry vs exit price, slippage, and regime shifts to produce structured JSON post-mortems stored in `backend/data/trade_journal.json`.
+
+### 16.8 Real-Time News Headline Sentiment Gating (`backend/data/news_sentiment_scanner.py`)
+- Scans live financial RSS headline feeds for US Tech, Crypto, and Indian equities.
+- Evaluates breaking news sentiment via fast keyword heuristics + NVIDIA NIM reasoning.
+- Automatically vetoes LONG trade entries when catastrophic adverse breaking news breaks.
+
+

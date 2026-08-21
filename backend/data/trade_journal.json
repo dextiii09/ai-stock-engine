@@ -1,0 +1,19 @@
+[
+  {
+    "timestamp": 1787287441.0446954,
+    "time_str": "2026-08-21 04:44:01 UTC",
+    "market": "US",
+    "symbol": "AAPL",
+    "direction": "LONG",
+    "entry_price": 100.0,
+    "exit_price": 94.913315,
+    "profit": -51.816,
+    "exit_reason": "FORCE_STOP_LOSS",
+    "postmortem": {
+      "outcome_driver": "Trade closed with -51.82 (loss).",
+      "regime_harmony": "Transition",
+      "lesson": "Preserve strict stop-loss discipline."
+    }
+  }
+]
+]

@@ -21,3 +21,4 @@ optuna>=3.5.0
 google-generativeai>=0.4.0
 aiohttp>=3.9.0
 psutil>=5.9.0
+matplotlib>=3.8.0
