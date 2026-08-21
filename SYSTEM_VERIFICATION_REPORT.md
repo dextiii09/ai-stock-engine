@@ -1,7 +1,7 @@
 # AI Stock Engine: System Verification & Live Diagnostic Report
 
 > **Prepared For:** Independent AI / Quant Auditor Verification (Claude / OpenAI / Quant Reviewer)  
-> **Report Timestamp:** 2026-08-21 02:36:57 UTC  
+> **Report Timestamp:** 2026-08-21 02:52:22 UTC  
 > **System Version:** 3.0.0 (Institutional Multi-Asset Quantitative Engine)  
 > **Production VPS Host:** `http://140.245.210.188:8080` | **Web UI:** `http://140.245.210.188:5173`  
 > **Official Git Repository:** [https://github.com/dextiii09/ai-stock-engine](https://github.com/dextiii09/ai-stock-engine) (Branch: `main`)
@@ -27,31 +27,31 @@ The **AI Stock Engine** is a 24/7 institutional autonomous trading, algorithmic 
     "US": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 1.6,
+      "last_tick_secs_ago": 4.8,
       "status": "ok"
     },
     "INDIA": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 7.5,
+      "last_tick_secs_ago": 6.8,
       "status": "ok"
     },
     "STOCKS": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 7.5,
+      "last_tick_secs_ago": 6.8,
       "status": "ok"
     },
     "CRYPTO": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 7.5,
+      "last_tick_secs_ago": 4.0,
       "status": "ok"
     },
     "FOREX": {
       "running": true,
       "open_positions": 3,
-      "last_tick_secs_ago": 0.5,
+      "last_tick_secs_ago": 4.0,
       "status": "ok"
     }
   },
@@ -76,13 +76,14 @@ The **AI Stock Engine** is a 24/7 institutional autonomous trading, algorithmic 
 ### Pillar 2: Institutional MetaGate Machine Learning Gating
 * **Source Code:** [`backend/analytics/meta_gate.py`](file:///backend/analytics/meta_gate.py) & [`backend/analytics/meta_label.py`](file:///backend/analytics/meta_label.py)
 * **Mechanism:** Secondary machine learning filter trained on macro indicators (VIX Term Structure `VIX/VIX3M`, DXY momentum, yield curve spread, Relative Volume RVOL, and ATR).
+* **Live Execution Scope:** Strictly locked to `BTC-USD` LONG entries (the single asset empirically validated in Phase 3 with 15/15 CPCV positive splits, +0.166R mean uplift, and Deflated Sharpe Ratio 1.0). Multi-asset models remain in research/pipeline.
 * **Threshold:** Conviction threshold strictly set to $\ge 0.65$. Only signals with $\ge 65\%$ model probability pass to execution.
 
 ### Pillar 3: 2-Stage Asymmetric Scale-Out Engine
 * **Source Code:** [`backend/risk/adaptive_stops.py`](file:///backend/risk/adaptive_stops.py) & [`backend/execution/smart_execution.py`](file:///backend/execution/smart_execution.py)
 * **Mathematical Formulas:**
-  $$\text{Distance} = \text{Price}_{\text{entry}} \times \max(\text{ATR}_{\text{proxy}} \times \text{StopMult},\; 0.5\%)$$
-  * **Target 1 (TP1 at 1.5R):** Automatically scales out **50% of position size**, locks realized profit, and instantly ratchets remaining stop loss to **Breakeven** ($Entry + \text{fee buffer}$).
+  $$	ext{Distance} = 	ext{Price}_{	ext{entry}} 	imes \max(	ext{ATR}_{	ext{proxy}} 	imes 	ext{StopMult},\; 0.5\%)$$
+  * **Target 1 (TP1 at 1.5R):** Automatically scales out **50% of position size**, locks realized profit, and instantly ratchets remaining stop loss to **Breakeven** ($Entry + 	ext{fee buffer}$).
   * **Target 2 (TP2 at 3.0R+):** Trailing runner capturing macroeconomic trends.
 * **Margin & Cash Accounting:** Tested and verified for Longs (cash equity credited) and Shorts (margin released + realized PnL credited).
 
@@ -90,13 +91,14 @@ The **AI Stock Engine** is a 24/7 institutional autonomous trading, algorithmic 
 * **Source Code:** [`backend/data/websocket_streamer.py`](file:///backend/data/websocket_streamer.py)
 * **Mechanism:** Non-blocking async WebSocket listener streaming live ticker ticks (`<100ms` latency) for `BTC-USD`, `ETH-USD`, `SOL-USD`, and `BNB-USD` with automatic failover to REST polling if connection drops.
 
-### Pillar 5: Market Regime Directional Gating
+### Pillar 5: Market Regime Directional Gating & Risk Modes
 * **Source Code:** [`backend/agents/master.py`](file:///backend/agents/master.py)
 * **Current Live Market Regime:** `High Volatility` (Active Strategy: `{'id': 'vol_breakout', 'name': 'Volatility Breakout (ATR)', 'timeframe': '15m', 'leverage': 0.5}`)
-* **Rules:**
+* **Rules & Mode Behavioral Semantics:**
   * **Trending Bear:** Vetoes Long entries (zero falling-knife buying).
   * **Trending Bull:** Vetoes Short entries (zero counter-trend fading).
-  * **High Volatility Shock:** Requires $\ge 70\%$ consensus confidence to trade.
+  * **High Volatility Shock:** Requires $\ge 70\%$ consensus confidence in `Normal` and `Safe` modes to preserve capital.
+  * **Operator Overrides (`risk_mode`):** Default is `Normal` (all gates active). In operator `Aggressive` mode, threshold floor drops to $0.42$, High Volatility $\ge 70\%$ requirement is relaxed, and macro event blackouts log warnings while permitting entries. Hard circuit breakers (3.5% Daily / 7.0% Weekly) remain 100% invariant.
 
 ---
 

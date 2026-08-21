@@ -1230,6 +1230,11 @@ if p_win_frac is not None and not sim_result["is_viable"]:
 14. **Exact Boundary Test Verification**: Global and per-market circuit breakers must always be validated against precise sub-threshold and super-threshold boundary conditions (Daily: 3.4% -> NO halt, 3.6% -> HALT; Weekly: 6.9% -> NO halt, 7.1% -> HALT).
 15. **MetaGate Scope is BTC-USD Long Only (Phase 3 CPCV CONFIRMED)**: MetaGate veto filter is active strictly for `market == "CRYPTO"` and `symbol == "BTC-USD"` (the single asset that passed 15/15 CPCV splits with +0.166R uplift and Deflated Sharpe Ratio 1.0). Never expand live gating to unvalidated assets (MNQ, MGC, Equities, Forex) whose Phase 1 AUC was <= 0.50 without prior formal Phase 1 -> Phase 2 -> Phase 3 CPCV validation.
 16. **Live Broker Hardware Safety Lock**: All real-money order execution in `broker_upstox.py`, `broker_zerodha.py`, and `broker_ibkr.py` is guarded by an explicit master safety check: `ENABLE_LIVE_REAL_MONEY_TRADING=true` in `.env`. By default, orders are unconditionally blocked from reaching exchange endpoints.
+17. **Risk Mode Behavioral Semantics & Operator Overrides**:
+   - `Normal` (Default): Strict enforcement of all institutional pillars, including the High Volatility Shock $\ge 70\%$ consensus gate and 15m pre-event macro blackout guards.
+   - `Safe`: Heightens base threshold by $+0.07$ across all regimes for conservative capital preservation.
+   - `Aggressive` (Operator Override Mode): Lowers base threshold floor to $0.42$, bypasses the High Volatility $\ge 70\%$ requirement, and emits warning logs while allowing execution during macro blackout windows. Hard circuit breakers (3.5% Daily / 7.0% Weekly) and broker safety locks remain 100% active and unbypassable.
+
 
 
 
