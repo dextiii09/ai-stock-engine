@@ -153,28 +153,29 @@ class MonteCarloVaREngine:
                 pos_pnl = exposures_arr[i] * dirs_arr[i] * shock
                 scenario_loss += pos_pnl
             
-            loss_usd = max(0.0, -scenario_loss)
-            loss_pct = round(loss_usd / total_equity * 100, 2)
+            loss_usd = max(0.0, float(-scenario_loss))
+            loss_pct = round(float(loss_usd / total_equity * 100), 2)
             stress_results[scenario_name] = {
-                "loss_usd": round(loss_usd, 2),
-                "loss_pct": loss_pct,
-                "survives_circuit_breaker": loss_pct < 3.5
+                "loss_usd": round(float(loss_usd), 2),
+                "loss_pct": float(loss_pct),
+                "survives_circuit_breaker": bool(loss_pct < 3.5)
             }
 
         return {
-            "total_equity": round(total_equity, 2),
-            "open_positions": n_pos,
-            "total_exposure_usd": round(total_exposure, 2),
-            "exposure_ratio_pct": round(total_exposure / max(total_equity, 1.0) * 100, 1),
-            "var_95_usd": round(var_95_usd, 2),
-            "var_99_usd": round(var_99_usd, 2),
-            "cvar_99_usd": round(cvar_99_usd, 2),
-            "var_95_pct": var_95_pct,
-            "var_99_pct": var_99_pct,
-            "cvar_99_pct": cvar_99_pct,
+            "total_equity": float(round(total_equity, 2)),
+            "open_positions": int(n_pos),
+            "total_exposure_usd": float(round(total_exposure, 2)),
+            "exposure_ratio_pct": float(round(total_exposure / max(total_equity, 1.0) * 100, 1)),
+            "var_95_usd": float(round(var_95_usd, 2)),
+            "var_99_usd": float(round(var_99_usd, 2)),
+            "cvar_99_usd": float(round(cvar_99_usd, 2)),
+            "var_95_pct": float(var_95_pct),
+            "var_99_pct": float(var_99_pct),
+            "cvar_99_pct": float(cvar_99_pct),
             "status": "OPTIMAL" if var_99_pct < 2.0 else "ELEVATED" if var_99_pct < 3.5 else "CRITICAL",
             "stress_tests": stress_results
         }
+
 
     def format_var_report(self, res: Dict[str, Any]) -> str:
         """Formats the VaR calculation results into a sleek Telegram message."""
