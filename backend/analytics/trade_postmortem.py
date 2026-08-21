@@ -132,13 +132,21 @@ Respond ONLY with a valid JSON object:
     def _save_record(self, record: Dict[str, Any]):
         try:
             self._ensure_journal_exists()
-            with open(self.journal_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                if not isinstance(data, list):
-                    data = []
+            data = []
+            try:
+                with open(self.journal_path, "r", encoding="utf-8") as f:
+                    content = f.read().strip()
+                    if content:
+                        data = json.loads(content)
+                        if not isinstance(data, list):
+                            data = []
+            except Exception:
+                data = []
+
             data.append(record)
             with open(self.journal_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
             print(f"[PostMortem] Saved post-mortem for {record.get('symbol')} ({record.get('profit'):+.2f})")
         except Exception as e:
             print(f"[PostMortem] Failed to save record: {e}")
+

@@ -614,10 +614,11 @@ INSTRUCTIONS:
         try:
             from agents.gemini_agent import NvidiaMacroAgent
             agent = NvidiaMacroAgent()
-            answer = await asyncio.to_thread(agent._call_nvidia, prompt)
+            answer = await asyncio.to_thread(agent._call_nvidia, prompt, 1024)
             await self.send_message(answer, chat_id=chat_id)
         except Exception as e:
             await self.send_message(f"🤖 *AI Copilot*: Could not process request: {str(e)[:100]}", chat_id=chat_id)
+
 
     async def _handle_message(self, message: dict):
 

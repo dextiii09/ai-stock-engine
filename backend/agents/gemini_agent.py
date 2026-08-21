@@ -40,14 +40,15 @@ class NvidiaMacroAgent(BaseAgent):
         self._current_key_idx = 0
         self._global_quota_lock_until = 0.0
 
-        # Model candidates (prioritize Nemotron 3 120B and Llama 3.3 70B)
+        # Model candidates (prioritize ultra-fast, stable llama-3.1-8b and llama-3.3-70b)
         env_model = os.getenv("NVIDIA_MODEL", "").strip()
-        self._model_candidates = ([env_model] if env_model else []) + [
-            "nvidia/nemotron-3-super-120b-a12b",
-            "meta/llama-3.1-8b-instruct",
-            "meta/llama-3.3-70b-instruct",
-            "nvidia/llama-3.1-nemotron-70b-instruct",
-        ]
+        seen = set()
+        candidates = []
+        for m in (["meta/llama-3.1-8b-instruct", "meta/llama-3.3-70b-instruct", env_model, "nvidia/nemotron-3-super-120b-a12b"]):
+            if m and m not in seen:
+                seen.add(m)
+                candidates.append(m)
+        self._model_candidates = candidates
         self._model_idx = 0
 
     def _current_key(self):
@@ -59,30 +60,53 @@ class NvidiaMacroAgent(BaseAgent):
         self._current_key_idx = (self._current_key_idx + 1) % len(self._api_keys)
         print(f"[NvidiaAgent] Rotating API key to index {self._current_key_idx}...")
 
-    def _call_nvidia(self, prompt: str) -> str:
-        """One synchronous NVIDIA chat-completion call. Raises on non-200."""
+    def _call_nvidia(self, prompt: str, max_tokens: int = 1024) -> str:
+        """Robust LLM call with candidate model rotation and Gemini API fallback."""
         key = self._current_key()
-        if not key:
-            raise RuntimeError("No NVIDIA API key configured")
-        payload = {
-            "model":       self._model_candidates[self._model_idx],
-            "messages":    [{"role": "user", "content": prompt}],
-            "temperature": 0.2,
-            "max_tokens":  200,
-        }
-        resp = requests.post(
-            NVIDIA_ENDPOINT,
-            headers={
-                "Authorization": f"Bearer {key}",
-                "Content-Type":  "application/json",
-                "Accept":        "application/json",
-            },
-            json=payload,
-            timeout=30,
-        )
-        if resp.status_code != 200:
-            raise RuntimeError(f"HTTP {resp.status_code}: {resp.text[:200]}")
-        return resp.json()["choices"][0]["message"]["content"]
+        last_err = None
+
+        if key:
+            for model_name in self._model_candidates:
+                payload = {
+                    "model":       model_name,
+                    "messages":    [{"role": "user", "content": prompt}],
+                    "temperature": 0.3,
+                    "max_tokens":  max_tokens,
+                }
+                try:
+                    resp = requests.post(
+                        NVIDIA_ENDPOINT,
+                        headers={
+                            "Authorization": f"Bearer {key}",
+                            "Content-Type":  "application/json",
+                            "Accept":        "application/json",
+                        },
+                        json=payload,
+                        timeout=25,
+                    )
+                    if resp.status_code == 200:
+                        res_json = resp.json()
+                        return res_json["choices"][0]["message"]["content"].strip()
+                    else:
+                        last_err = f"HTTP {resp.status_code} ({model_name})"
+                except Exception as e:
+                    last_err = f"Exception {e} ({model_name})"
+
+        # Fallback to Google Gemini if NVIDIA NIM endpoints encounter issues
+        gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
+        if gemini_key:
+            try:
+                import google.generativeai as genai
+                genai.configure(api_key=gemini_key)
+                g_model = genai.GenerativeModel("gemini-1.5-flash")
+                g_resp = g_model.generate_content(prompt)
+                if g_resp and g_resp.text:
+                    return g_resp.text.strip()
+            except Exception as ge:
+                last_err = f"Gemini fallback error: {ge}"
+
+        raise RuntimeError(f"All LLM candidate models failed. Last error: {last_err}")
+
 
     def _build_prompt(self, symbol: str, data: Dict[str, Any]) -> str:
         price  = data.get("price", "Unknown")
