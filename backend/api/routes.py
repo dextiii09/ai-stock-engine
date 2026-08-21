@@ -523,6 +523,12 @@ async def trading_loop():
                     _cur     = tick_data['price']
                     _dir     = _h.get("direction", "LONG")
                     _sl      = _h.get("stop_loss")
+                    if not _sl or _sl <= 0:
+                        _entry_p = float(_h.get("entry_price", _cur) or _cur)
+                        _sl = round(_entry_p * 0.98, 4) if _dir == "LONG" else round(_entry_p * 1.02, 4)
+                        _h["stop_loss"] = _sl
+                        await write_log("warning", f"🚨 [Emergency Stop Guard] Missing/corrupt stop-loss detected for {symbol}. Initialized fallback stop at ${_sl:.4f} (Entry: ${_entry_p:.4f}, Cur: ${_cur:.4f}).")
+
                     _tp1     = _h.get("tp1_target")
                     _tp2     = _h.get("tp2_target") or _h.get("take_profit")
                     _tp3     = _h.get("tp3_runner_target")
@@ -530,8 +536,9 @@ async def trading_loop():
                     _tp2_hit = _h.get("tp2_hit", False)
 
                     if _dir == "LONG":
-                        if _sl and _cur <= _sl:
+                        if _cur <= _sl:
                             _sl_tp_triggers.append((_h, "STOP_LOSS", "FULL"))
+
                         elif not _tp1_hit and _tp1 and _cur >= _tp1:
                             _sl_tp_triggers.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
                         elif _tp1_hit and not _tp2_hit and _tp2 and _cur >= _tp2:
@@ -1008,6 +1015,12 @@ async def indian_trading_loop():
                     _cur     = tick_data['price']
                     _dir     = _h.get("direction", "LONG")
                     _sl      = _h.get("stop_loss")
+                    if not _sl or _sl <= 0:
+                        _entry_p = float(_h.get("entry_price", _cur) or _cur)
+                        _sl = round(_entry_p * 0.98, 4) if _dir == "LONG" else round(_entry_p * 1.02, 4)
+                        _h["stop_loss"] = _sl
+                        await write_log_in("warning", f"🚨 [Emergency Stop Guard] Missing/corrupt stop-loss detected for {symbol}. Initialized fallback stop at ₹{_sl:.4f} (Entry: ₹{_entry_p:.4f}, Cur: ₹{_cur:.4f}).")
+
                     _tp1     = _h.get("tp1_target")
                     _tp2     = _h.get("tp2_target") or _h.get("take_profit")
                     _tp3     = _h.get("tp3_runner_target")
@@ -1015,8 +1028,9 @@ async def indian_trading_loop():
                     _tp2_hit = _h.get("tp2_hit", False)
 
                     if _dir == "LONG":
-                        if _sl and _cur <= _sl:
+                        if _cur <= _sl:
                             _sl_tp_triggers_in.append((_h, "STOP_LOSS", "FULL"))
+
                         elif not _tp1_hit and _tp1 and _cur >= _tp1:
                             _sl_tp_triggers_in.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
                         elif _tp1_hit and not _tp2_hit and _tp2 and _cur >= _tp2:
@@ -1462,6 +1476,12 @@ async def _run_market_loop(
                     _cur     = tick_data['price']
                     _dir     = _h.get("direction", "LONG")
                     _sl      = _h.get("stop_loss")
+                    if not _sl or _sl <= 0:
+                        _entry_p = float(_h.get("entry_price", _cur) or _cur)
+                        _sl = round(_entry_p * 0.98, 4) if _dir == "LONG" else round(_entry_p * 1.02, 4)
+                        _h["stop_loss"] = _sl
+                        await write_log_fn("warning", f"🚨 [Emergency Stop Guard] Missing/corrupt stop-loss detected for {symbol}. Initialized fallback stop at {currency_prefix}{_sl:.4f} (Entry: {currency_prefix}{_entry_p:.4f}, Cur: {currency_prefix}{_cur:.4f}).")
+
                     _tp1     = _h.get("tp1_target")
                     _tp2     = _h.get("tp2_target") or _h.get("take_profit")
                     _tp3     = _h.get("tp3_runner_target")
@@ -1469,8 +1489,9 @@ async def _run_market_loop(
                     _tp2_hit = _h.get("tp2_hit", False)
 
                     if _dir == "LONG":
-                        if _sl and _cur <= _sl:
+                        if _cur <= _sl:
                             _sl_tp_triggers.append((_h, "STOP_LOSS", "FULL"))
+
                         elif not _tp1_hit and _tp1 and _cur >= _tp1:
                             _sl_tp_triggers.append((_h, "TP1_1.5R_SCALEOUT", "PARTIAL"))
                         elif _tp1_hit and not _tp2_hit and _tp2 and _cur >= _tp2:
@@ -2108,11 +2129,65 @@ async def get_global_risk():
 @router.post("/risk/reset-baselines")
 async def reset_global_risk_baselines():
     """
-    Re-anchor global drawdown baselines to current equity and clear any halt.
-    Use ONLY after accounting changes (migrations, currency fixes, book
-    cleanups) that moved equity without real trading losses.
+    Re-anchor global and per-market drawdown baselines to current equity and clear any halt.
+    Use after intentional accounting operations (balance migrations, currency fixes, book cleanups).
     """
-    return global_risk.reset_baselines(reason="API request")
+    res = global_risk.reset_baselines(reason="API reset-baselines")
+    market_sync = {}
+    pairs = [
+        ("US", portfolio_risk, execution_engine),
+        ("India", portfolio_risk_in, execution_engine_in),
+        ("Stocks", portfolio_risk_st, execution_engine_st),
+        ("Crypto", portfolio_risk_cx, execution_engine_cx),
+        ("Forex", portfolio_risk_fx, execution_engine_fx),
+    ]
+    for name, p_risk, eng in pairs:
+        try:
+            eq = eng.get_total_equity()
+            p_risk.reset_baselines(eq)
+            market_sync[name] = {"status": "SUCCESS", "new_baseline": round(eq, 2)}
+        except Exception as e:
+            _srv_logger.warning(f"[Routes] Error resetting {name} risk baseline: {e}")
+            market_sync[name] = {"status": "FAILED", "error": str(e)}
+    res["markets_synced"] = market_sync
+    return res
+
+
+@router.post("/risk/resume")
+async def resume_risk_trading():
+    """
+    Authorized resume: clears global/local halts and re-anchors baselines across all 5 engines.
+    """
+    res = global_risk.resume_trading(reason="Operator Authorized Resume")
+    market_sync = {}
+    pairs = [
+        ("US", portfolio_risk, execution_engine),
+        ("India", portfolio_risk_in, execution_engine_in),
+        ("Stocks", portfolio_risk_st, execution_engine_st),
+        ("Crypto", portfolio_risk_cx, execution_engine_cx),
+        ("Forex", portfolio_risk_fx, execution_engine_fx),
+    ]
+    for name, p_risk, eng in pairs:
+        try:
+            eq = eng.get_total_equity()
+            p_risk.reset_baselines(eq)
+            market_sync[name] = {"status": "SUCCESS", "new_baseline": round(eq, 2)}
+        except Exception as e:
+            _srv_logger.warning(f"[Routes] Error syncing {name} risk baseline on resume: {e}")
+            market_sync[name] = {"status": "FAILED", "error": str(e)}
+    res["markets_synced"] = market_sync
+    return res
+
+
+@router.post("/risk/kill-switch")
+async def emergency_kill_switch():
+    """
+    EMERGENCY KILL SWITCH: Immediately halts all market engines and liquidates
+    all open active holdings across every market book.
+    """
+    return await global_risk.trigger_emergency_kill_switch(reason="Operator API Kill Switch")
+
+
 
 
 

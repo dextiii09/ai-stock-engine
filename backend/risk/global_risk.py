@@ -62,14 +62,17 @@ class GlobalRiskAggregator:
     # Equity aggregation                                                   #
     # ------------------------------------------------------------------ #
 
+    def _to_usd(self, engine: Any, amount: float) -> float:
+        """Normalizes engine currency (e.g. INR for India market) into USD."""
+        if getattr(engine, "market", "US") == "INDIA":
+            return amount * INR_USD_RATE
+        return amount
+
     def total_equity(self) -> float:
         """Sum mark-to-market equity across all markets, normalized to USD."""
         total = 0.0
         for e in self._engines:
-            eq = e.get_total_equity()
-            if getattr(e, "market", "US") == "INDIA":
-                eq *= INR_USD_RATE
-            total += eq
+            total += self._to_usd(e, e.get_total_equity())
         return total
 
     def total_initial_capital(self) -> float:
@@ -77,13 +80,12 @@ class GlobalRiskAggregator:
         total = 0.0
         for e in self._engines:
             init_bal = getattr(e, "_initial_balance", getattr(e, "portfolio_balance", 10000.0))
-            if getattr(e, "market", "US") == "INDIA":
-                init_bal *= INR_USD_RATE
-            total += init_bal
+            total += self._to_usd(e, init_bal)
         return total
 
     def equity_by_market(self) -> Dict[str, float]:
-        return {e.market: round(e.get_total_equity(), 2) for e in self._engines}
+        """Returns mark-to-market equity for each market engine, normalized to USD."""
+        return {e.market: round(self._to_usd(e, e.get_total_equity()), 2) for e in self._engines}
 
 
     # ------------------------------------------------------------------ #
@@ -114,7 +116,12 @@ class GlobalRiskAggregator:
         if self._last_reset_week != iso_week:
             self.weekly_start_equity = total
             self._last_reset_week    = iso_week
+            # New week: clear the weekly-triggered halt so trading can resume
+            if self.global_halt and "weekly" in self.halt_reason.lower():
+                self.global_halt = False
+                self.halt_reason = ""
             self._save_state()
+
 
         daily_dd  = 0.0
         weekly_dd = 0.0

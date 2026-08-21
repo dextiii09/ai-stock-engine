@@ -1,7 +1,9 @@
 from typing import Dict, Any, List
 import json
 import os
+import logging as _logging
 
+_rl_logger = _logging.getLogger("ai_stock.rl_engine")
 
 RETRAIN_INTERVAL = 5  # Retrain every N closed trades
 
@@ -110,9 +112,9 @@ class ReinforcementLearningEngine:
                     self.learning_rate = params["learning_rate"]
                 if "decay_factor" in params:
                     self.decay_factor = params["decay_factor"]
-                print(f"[RL_Engine] Loaded optimized params from hyperparams.json: LR={self.learning_rate}, decay={self.decay_factor}")
+                _rl_logger.info(f"[RL_Engine] Loaded optimized params from hyperparams.json: LR={self.learning_rate}, decay={self.decay_factor}")
             except Exception as e:
-                print(f"[RL_Engine] Error loading hyperparams.json: {e}")
+                _rl_logger.error(f"[RL_Engine] Error loading hyperparams.json: {e}")
 
     def _match_regime(self, regime: str) -> str:
         # Standardize matching to the exact 4 regimes
@@ -275,10 +277,18 @@ class ReinforcementLearningEngine:
         for agent_name, agent_data in committee_breakdown.items():
             if agent_name in _GHOST_AGENTS:
                 continue
-            agreed     = (agent_data.get("signal") == action)
+            
+            signal = agent_data.get("signal", "WAIT")
+            if signal == "WAIT":
+                mult = 0.0
+            elif signal == action:
+                mult = 1.0
+            else:
+                mult = -1.0
+
             # Confidence weighting: high-conviction correct → bigger reward; wrong → bigger penalty
             confidence = float(agent_data.get("confidence", 0.5))
-            delta      = reward_base * lr * herding_mult * confidence * (1.0 if agreed else -1.0)
+            delta      = reward_base * lr * herding_mult * confidence * mult
             self._batch_weight_deltas[regime][agent_name] = \
                 self._batch_weight_deltas[regime].get(agent_name, 0.0) + delta
             # UCB1 bookkeeping: track participation count per agent per regime
@@ -559,7 +569,7 @@ class ReinforcementLearningEngine:
                     if not t.cancelled():
                         exc = t.exception()
                         if exc:
-                            print(f"[RL Engine] async save failed: {exc}")
+                            _rl_logger.error(f"[RL Engine] async save failed: {exc}")
                 task.add_done_callback(_on_done)
                 return None
 
@@ -624,7 +634,7 @@ class ReinforcementLearningEngine:
                         await session.commit()
                 run_async(save_db())
             except Exception as e:
-                print(f"[RL Engine] Failed to save state to SQLite: {e}")
+                _rl_logger.error(f"[RL Engine] Failed to save state to SQLite: {e}")
 
         # Always fallback to JSON as well
         try:
@@ -646,7 +656,7 @@ class ReinforcementLearningEngine:
                 json.dump(state, f, indent=2)
             os.replace(tmp, filepath)
         except Exception as e:
-            print(f"[RL Engine] Failed to save JSON state: {e}")
+            _rl_logger.error(f"[RL Engine] Failed to save JSON state: {e}")
 
     def load_state(self, filepath: str):
         """
@@ -724,7 +734,7 @@ class ReinforcementLearningEngine:
                         return False
                 loaded_from_db = run_async(load_db())
             except Exception as e:
-                print(f"[RL Engine] Failed to load state from SQLite: {e}")
+                _rl_logger.error(f"[RL Engine] Failed to load state from SQLite: {e}")
 
         # Fallback to JSON — ALSO used when the JSON snapshot has seen more
         # trades than the DB. FIX 2026-08-03: the shutdown DB write is
@@ -739,7 +749,7 @@ class ReinforcementLearningEngine:
                 with open(filepath, "r") as f:
                     _json_state = json.load(f)
             except Exception as e:
-                print("[RL Engine] Failed to read JSON state file: " + str(e))
+                _rl_logger.error("[RL Engine] Failed to read JSON state file: " + str(e))
         _json_is_fresher = (
             _json_state is not None
             and _json_state.get("total_closed_trades", 0) > self.total_closed_trades

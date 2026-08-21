@@ -12,7 +12,9 @@ from typing import Dict, Any, Tuple, Optional
 import time
 import threading
 from concurrent.futures import ThreadPoolExecutor
+import logging as _logging
 
+_regime_logger = _logging.getLogger("ai_stock.regime_detector")
 
 def _rsi(closes: list, period: int = 14) -> float:
     """Wilder's RSI via pandas EWM — vectorized, matches ingestion.py."""
@@ -129,16 +131,24 @@ class MarketRegimeDetector:
                 trend_bear: "Trending Bear",
                 sideways:   "Sideways",
             }
+            
+            # Sanity check the heuristic labeling
+            real_bull_ret = hmm_means[trend_bull][0] * stds_[0] + means_[0]
+            real_bear_ret = hmm_means[trend_bear][0] * stds_[0] + means_[0]
+            if real_bull_ret <= real_bear_ret:
+                _regime_logger.error("[RegimeDetector] HMM Sanity Check Failed: Labeled 'Bull' mean return is not greater than 'Bear'. Rejecting model.")
+                return None
+
             return model, regime_map_, means_, stds_
         except Exception as e:
-            print(f"[RegimeDetector] Training failed: {e}")
+            _regime_logger.error(f"[RegimeDetector] Training failed: {e}")
             return None
 
     def _initialize_hmm(self):
         """Train and atomically swap the model into self (startup path)."""
         result = self._train_hmm()
         if result is None:
-            print("[RegimeDetector] HMM Initialization skipped (no data or error).")
+            _regime_logger.warning("[RegimeDetector] HMM Initialization skipped (no data or error).")
             return
         new_model, new_map, new_means, new_stds = result
         with self._model_lock:
@@ -146,7 +156,7 @@ class MarketRegimeDetector:
             self.regime_map = new_map
             self.means      = new_means
             self.stds       = new_stds
-        print("[RegimeDetector] HMM Initialized successfully. 4 Regimes mapped.")
+        _regime_logger.info("[RegimeDetector] HMM Initialized successfully. 4 Regimes mapped.")
 
     def retrain(self):
         """
@@ -156,7 +166,7 @@ class MarketRegimeDetector:
         """
         result = self._train_hmm()      # train without holding the lock
         if result is None:
-            print("[RegimeDetector] Retrain skipped — training returned None.")
+            _regime_logger.warning("[RegimeDetector] Retrain skipped — training returned None.")
             return
         new_model, new_map, new_means, new_stds = result
         with self._model_lock:          # brief critical section: swap 4 refs
@@ -164,7 +174,7 @@ class MarketRegimeDetector:
             self.regime_map = new_map
             self.means      = new_means
             self.stds       = new_stds
-        print("[RegimeDetector] HMM retrained and atomically swapped.")
+        _regime_logger.info("[RegimeDetector] HMM retrained and atomically swapped.")
 
     def get_transition_matrix(self) -> Dict[str, Any]:
         """
@@ -222,6 +232,8 @@ class MarketRegimeDetector:
                 obs        = np.array([[data["return"], data["volatility"], vol_z]])
                 obs_scaled = (obs - means) / stds
                 state      = model.predict(obs_scaled)[0]
+                if state not in regime_map:
+                    _regime_logger.warning(f"[RegimeDetector] HMM state {state} not in regime_map. Falling back to Sideways.")
                 hmm_regime = regime_map.get(state, "Sideways")
             except Exception:
                 hmm_regime = self._fallback_detect(symbol, data)

@@ -164,24 +164,31 @@ class MasterAgent(BaseAgent):
         
         # Adjust by mode
         if mode == "Safe":
-            base_threshold += 0.07
+            base_threshold = min(0.75, base_threshold + 0.07)
         elif mode == "Aggressive":
-            # Drastically reduced threshold for testing weak signals
-            base_threshold -= 0.70
-        # Floor raised 0.35 → 0.42 to prevent low-conviction noise churn
-        base_threshold = max(base_threshold, 0.42)
+            # Operator Aggressive override: explicitly sets lower threshold floor to 0.42
+            base_threshold = 0.42
+        else:  # Normal
+            base_threshold = max(base_threshold, 0.48)
+
+        buy_threshold = base_threshold
+        sell_threshold = base_threshold
 
         # Adjust by High-Level Macro Regime
         macro_regime = data.get("macro_regime", "Risk-On")
         if macro_regime == "Risk-Off" and symbol == "MNQ=F":
             # Require higher confidence to long NQ in Risk-Off
-            base_threshold += 0.10
+            buy_threshold += 0.10
         elif macro_regime == "Stagflation" and symbol == "MNQ=F":
             # Very hostile for NQ
-            base_threshold += 0.15
+            buy_threshold += 0.15
         elif macro_regime == "Dislocation/Panic":
             # Hostile for almost all longs except extreme oversold
-            base_threshold += 0.20
+            buy_threshold += 0.20
+            
+        # Clamp to prevent locking out trades entirely (e.g. Safe mode + Panic)
+        buy_threshold = min(0.99, buy_threshold)
+        sell_threshold = min(0.99, sell_threshold)
             
         final_signal = "WAIT"
         # WAIT confidence = max committee conviction so the log shows meaningful %
@@ -190,10 +197,10 @@ class MasterAgent(BaseAgent):
         recommendation = "Wait for better setup."
 
         # 3. Formulate preliminary decision
-        if buy_conviction > base_threshold and buy_conviction > sell_conviction:
+        if buy_conviction > buy_threshold and buy_conviction > sell_conviction:
             final_signal = "BUY"
             final_confidence = buy_conviction
-        elif sell_conviction > base_threshold and sell_conviction > buy_conviction:
+        elif sell_conviction > sell_threshold and sell_conviction > buy_conviction:
             final_signal = "SELL"
             final_confidence = sell_conviction
         else:
@@ -250,11 +257,13 @@ class MasterAgent(BaseAgent):
                     "committee_breakdown": results
                 }
 
-        # 4.2 Real-Time News Headline Sentiment Veto
-        if final_signal == "BUY" and mode != "Aggressive":
+        # 4.2 Real-Time News Headline Sentiment Veto (direction-aware)
+        if final_signal in ("BUY", "SELL") and mode != "Aggressive":
             try:
                 from data.news_sentiment_scanner import NewsSentimentScanner
-                is_news_veto, news_score, news_reason = NewsSentimentScanner.instance().check_news_veto(symbol)
+                adverse_veto, euphoric_veto, news_score, news_reason = NewsSentimentScanner.instance().check_news_veto(symbol)
+                is_news_veto = (final_signal == "BUY" and adverse_veto) or \
+                               (final_signal == "SELL" and euphoric_veto)
                 if is_news_veto:
                     return {
                         "signal": "WAIT",
@@ -263,8 +272,10 @@ class MasterAgent(BaseAgent):
                         "recommendation": "Capital preservation active. High-risk adverse breaking news in progress.",
                         "committee_breakdown": results
                     }
-            except Exception:
-                pass
+            except Exception as _news_err:
+                import logging
+                logging.getLogger("ai_stock.master").warning(f"[NewsScanner] News sentiment scan failed for {symbol}: {_news_err}")
+
 
         # 5. Correlation Gate
 
@@ -324,14 +335,14 @@ class MasterAgent(BaseAgent):
             # Not holding the other, but if fractured macro regime, reduce confidence
             if correlation < -0.4 and not any(h.get("symbol") == other_symbol for h in active_holdings):
                 final_confidence = max(0.1, final_confidence - 0.25)
-                reason += f" (Note: Fractured macro regime, GC/NQ correlation is {correlation:.2f})"
+                reason += f" (Note: Fractured macro regime, {symbol}/{other_symbol} correlation is {correlation:.2f})"
         
         return {
             "signal": final_signal,
             "confidence": round(final_confidence, 2),
             "buy_conviction": round(buy_conviction, 3),
             "sell_conviction": round(sell_conviction, 3),
-            "threshold": round(base_threshold, 3),
+            "threshold": round(buy_threshold if final_signal == "BUY" else sell_threshold if final_signal == "SELL" else base_threshold, 3),
             "reason": reason,
             "recommendation": recommendation,
             "committee_breakdown": results,

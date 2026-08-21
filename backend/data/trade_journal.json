@@ -1,34 +1,18 @@
 [
   {
-    "timestamp": 1787291410.2262585,
-    "time_str": "2026-08-21 05:50:10 UTC",
+    "timestamp": 1787314252.8939207,
+    "time_str": "2026-08-21 12:10:52 UTC",
     "market": "US",
     "symbol": "AAPL",
     "direction": "SHORT",
     "entry_price": 100.0,
-    "exit_price": 90.040201,
-    "profit": 49.3488,
+    "exit_price": 90.06157,
+    "profit": 49.2418,
     "exit_reason": "FORCE_TAKE_PROFIT",
     "postmortem": {
-      "outcome_driver": "Trade closed with +49.35 (profit).",
+      "outcome_driver": "Trade closed with +49.24 (profit).",
       "regime_harmony": "Aligned",
       "lesson": "Preserve strict stop-loss discipline."
     }
-  },
-  {
-    "timestamp": 1787291410.2262585,
-    "time_str": "2026-08-21 05:50:10 UTC",
-    "market": "US",
-    "symbol": "AAPL",
-    "direction": "LONG",
-    "entry_price": 100.0,
-    "exit_price": 94.933714,
-    "profit": -51.6122,
-    "exit_reason": "FORCE_STOP_LOSS",
-    "postmortem": {
-      "outcome_driver": "Trade closed with -51.61 (loss).",
-      "regime_harmony": "Transition",
-      "lesson": "Preserve strict stop-loss discipline."
-    }
   }
-]
+]]

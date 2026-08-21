@@ -138,8 +138,11 @@ def compute_indicators(df: pd.DataFrame) -> pd.DataFrame:
     # standard ADX construction, instead of simple rolling sums/means.
     dm_p = (df["High"] - df["High"].shift()).clip(lower=0)
     dm_m = (df["Low"].shift()  - df["Low"]).clip(lower=0)
+    
+    # Save original for correct simultaneous comparison
+    dm_p_orig = dm_p.copy()
     dm_p = dm_p.where(dm_p > dm_m, 0)
-    dm_m = dm_m.where(dm_m > dm_p, 0)
+    dm_m = dm_m.where(dm_m > dm_p_orig, 0)
     tr_w    = tr.ewm(alpha=1 / 14, adjust=False).mean()
     di_p    = 100 * dm_p.ewm(alpha=1 / 14, adjust=False).mean() / tr_w.replace(0, np.nan)
     di_m    = 100 * dm_m.ewm(alpha=1 / 14, adjust=False).mean() / tr_w.replace(0, np.nan)
@@ -347,8 +350,10 @@ class BacktestEngine:
                  period: str = "1y",
                  interval: str = "1d",
                  use_adaptive_stops: bool = True,
-                 use_metagate: bool = True):
+                 use_metagate: bool = True,
+                 strict_macro: bool = True):
         self.symbol = symbol.upper()
+        self.strict_macro = strict_macro
         # Back-compat: legacy strategy names from old frontend cache
         strategy_map = {
             "Trend Following": "EMA Trend Follow",
@@ -382,7 +387,7 @@ class BacktestEngine:
                 symbol=self.symbol, period=self.period, interval=self.interval
             )
         except Exception as ex:
-            raise RuntimeError("Backtest download failed for %s: %s" % (self.symbol, ex))
+            raise RuntimeError("Backtest download failed for %s: %s" % (self.symbol, ex)) from ex
 
     def _download_macro_series(self):
         """Historical ^VIX level and DX-Y.NYB 5-day momentum, keyed by date str.
@@ -419,14 +424,25 @@ class BacktestEngine:
                         ("dxy", lambda: _mom_map("DX-Y.NYB"))):
             try:
                 maps[key] = fn()
-            except Exception:
-                maps[key] = {}
+            except Exception as ex:
+                if self.strict_macro:
+                    raise RuntimeError(f"Macro fetch failed for '{key}': {ex}") from ex
+                else:
+                    import logging
+                    logging.getLogger("ai_stock.backtest").warning(f"Macro fetch failed for '{key}' (strict_macro=False, returning {{}}): {ex}")
+                    maps[key] = {}
 
         if self.is_indian:
             try:
                 maps["india_vix"] = _level_map("^INDIAVIX")
-            except Exception:
-                maps["india_vix"] = {}
+            except Exception as ex:
+                if self.strict_macro:
+                    raise RuntimeError(f"Macro fetch failed for 'india_vix': {ex}") from ex
+                else:
+                    import logging
+                    logging.getLogger("ai_stock.backtest").warning(f"Macro fetch failed for 'india_vix' (strict_macro=False, returning {{}}): {ex}")
+                    maps["india_vix"] = {}
+                    
             try:
                 # Nifty 50: 3-day % return (FII flow proxy) + above-20EMA trend flag
                 n3d, nema = {}, {}
@@ -439,12 +455,23 @@ class BacktestEngine:
                     n3d[d]  = (float(closes.iloc[i]) - prev) / max(prev, 1e-9) * 100
                     nema[d] = bool(float(closes.iloc[i]) > float(ema20.iloc[i]))
                 maps["nifty_3d"], maps["nifty_ema"] = n3d, nema
-            except Exception:
-                maps["nifty_3d"], maps["nifty_ema"] = {}, {}
+            except Exception as ex:
+                if self.strict_macro:
+                    raise RuntimeError(f"Macro fetch failed for 'nifty_3d/nifty_ema': {ex}") from ex
+                else:
+                    import logging
+                    logging.getLogger("ai_stock.backtest").warning(f"Macro fetch failed for 'nifty_3d/nifty_ema' (strict_macro=False, returning {{}}): {ex}")
+                    maps["nifty_3d"], maps["nifty_ema"] = {}, {}
+                    
             try:
                 maps["usdinr"] = _mom_map("INR=X")
-            except Exception:
-                maps["usdinr"] = {}
+            except Exception as ex:
+                if self.strict_macro:
+                    raise RuntimeError(f"Macro fetch failed for 'usdinr': {ex}") from ex
+                else:
+                    import logging
+                    logging.getLogger("ai_stock.backtest").warning(f"Macro fetch failed for 'usdinr' (strict_macro=False, returning {{}}): {ex}")
+                    maps["usdinr"] = {}
         return maps
 
     # -- Commission helper -------------------------------------------------
@@ -558,7 +585,9 @@ class BacktestEngine:
                         "entry_bar":   i,
                         "committee":   pending_committee,
                         "regime":      pending_regime,
-                        "c_entry":     c_entry,   # stored so net_pnl can deduct it at exit
+                        "c_entry":     c_entry,
+                        "initial_shares": shares,
+                        "realized_pnl": 0.0,
                     }
 
             pending_signal    = None
@@ -624,6 +653,7 @@ class BacktestEngine:
                         })
                         position["shares"] = rem_shares
                         position["tp1_hit"] = True
+                        position["realized_pnl"] += p_net
                         # Ratchet Stop Loss to Breakeven
                         if is_long:
                             position["stop_loss"] = max(position["stop_loss"], round(position["entry_price"] * 1.001, 4))
@@ -686,12 +716,14 @@ class BacktestEngine:
                     # Feed RL ONLY in train split (first 60%). Val/test are out-of-sample.
                     in_train_split = (i < rl_train_cutoff)
                     if self.strategy == "AI Committee" and position.get("committee") and in_train_split:
+                        _stop_dist = abs(position["entry_price"] - position["initial_stop"])
+                        _stop_dist_pct = (_stop_dist / max(position["entry_price"], 1e-9)) * 100
                         self.rl_engine.process_trade_outcome({
-                            "profit_loss":       net_pnl,
-                            "capital_allocated": position["entry_price"] * position["shares"],
+                            "profit_loss":       net_pnl + position.get("realized_pnl", 0.0),
+                            "capital_allocated": position["entry_price"] * position.get("initial_shares", position["shares"]),
                             "action":            position["side"],
-
                             "regime":            position.get("regime", "Sideways"),
+                            "stop_distance_pct": _stop_dist_pct,
                         }, position["committee"])
 
                     position = None

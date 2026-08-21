@@ -113,14 +113,8 @@ class PortfolioRiskManager:
     # Baseline reset (calendar-aware)                                      #
     # ------------------------------------------------------------------ #
 
-    # A persisted baseline this far above live equity cannot be a genuine loss
-    # (the daily/weekly breakers fire at 3%/6% and would have halted long before
-    # a 25% gap opened). Such a gap means the baseline is stale — e.g. left over
-    # from a book reset that zeroed live equity but not this file — and left alone
-    # it produces a permanent phantom halt. Clamp it to live equity instead.
-    STALE_BASELINE_DD = 0.25
-
     def _maybe_reset_daily(self, total_capital: float):
+
         """Reset daily/weekly baselines on calendar boundaries."""
         today    = datetime.date.today()
         iso_week = tuple(today.isocalendar()[:2])
@@ -134,24 +128,18 @@ class PortfolioRiskManager:
             self._last_reset_week     = iso_week
             changed = True
 
-        # Stale-baseline guard (defends against reset-then-restart within a week)
-        if (self.daily_start_capital > 0 and
-                total_capital < self.daily_start_capital * (1 - self.STALE_BASELINE_DD)):
-            print(f"[PortfolioRisk] Stale daily baseline {self.daily_start_capital:.2f} "
-                  f">> live equity {total_capital:.2f}; clamping to live.")
-            self.daily_start_capital = total_capital
-            self._last_reset_date    = today
-            changed = True
-        if (self.weekly_start_capital > 0 and
-                total_capital < self.weekly_start_capital * (1 - self.STALE_BASELINE_DD)):
-            print(f"[PortfolioRisk] Stale weekly baseline {self.weekly_start_capital:.2f} "
-                  f">> live equity {total_capital:.2f}; clamping to live.")
-            self.weekly_start_capital = total_capital
-            self._last_reset_week     = iso_week
-            changed = True
-
         if changed:
             self._save_risk_state()   # R-1: persist immediately on reset
+
+    def reset_baselines(self, total_capital: float) -> None:
+        """Explicitly re-anchor baselines to current capital after intentional account operations."""
+        today    = datetime.date.today()
+        iso_week = tuple(today.isocalendar()[:2])
+        self.daily_start_capital  = total_capital
+        self.weekly_start_capital = total_capital
+        self._last_reset_date     = today
+        self._last_reset_week     = iso_week
+        self._save_risk_state()
 
     def analyze(self, holdings: List[Dict[str, Any]], total_capital: float, correlation: float = 0.0) -> Dict[str, Any]:
         # C-5: Reset baseline on new calendar day, not on restart
@@ -165,10 +153,11 @@ class PortfolioRiskManager:
         cash_pct = (cash_value / total_capital * 100) if total_capital > 0 else 100.0
 
         current_daily_drawdown_pct = 0.0
-        if total_capital < self.daily_start_capital:
+        if self.daily_start_capital > 0 and total_capital < self.daily_start_capital:
             current_daily_drawdown_pct = (
                 (self.daily_start_capital - total_capital) / self.daily_start_capital * 100
             )
+
 
         position_pcts = {}
         instrument_counts = {}

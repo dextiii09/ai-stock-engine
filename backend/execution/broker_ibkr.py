@@ -92,7 +92,8 @@ class IBKRBroker(BrokerBase):
 
     @property
     def is_live(self) -> bool:
-        return True
+        # TODO: Return True only when get_fill_status polling is properly implemented
+        return False
 
     def normalize_quantity(self, symbol: str, qty: float) -> float:
         """IBKR supports fractional US equities/crypto but futures trade in
@@ -146,6 +147,13 @@ class IBKRBroker(BrokerBase):
 
     def cover(self, symbol, qty, price, order_type="MARKET"):
         return self._place_order(symbol, qty, "BUY", order_type)
+
+    def get_fill_status(self, order_id: str, requested_qty: float, fallback_price: float):
+        from .broker_base import FillResult
+        # TODO: Implement robust ib_insync trade polling
+        import logging
+        logging.getLogger("ai_stock.execution").warning(f"[IBKR] get_fill_status not implemented for {order_id}, returning TIMEOUT")
+        return FillResult("TIMEOUT", fallback_price, 0.0, True, "Not implemented")
 
     def get_account_info(self) -> Dict[str, Any]:
         if not self._connected or self._ib is None:

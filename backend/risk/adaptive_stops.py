@@ -46,12 +46,32 @@ class AdaptiveStopLoss:
         Returns initial stop_loss and 2-stage take_profit targets (TP1=1.5R, TP2=3.0R)
         for a new trade, modulating distances based on market regime.
         """
-        cfg = REGIME_STOP_CONFIG.get(regime, _DEFAULT_CONFIG)
+        if current_price <= 0:
+            return {
+                "stop_loss": 0.0,
+                "take_profit": 0.0,
+                "tp1_target": 0.0,
+                "tp2_target": 0.0,
+                "tp3_runner_target": 0.0,
+                "breakeven_trigger": 0.0,
+                "atr_distance": 0.0,
+                "regime_used": "Invalid_Price",
+            }
+
+        _HMM_FALLBACK = {
+            "Strong Bull": "Trending Bull", "Weak Bull": "Trending Bull", "Bull Expansion": "Trending Bull",
+            "Strong Bear": "Trending Bear", "Weak Bear": "Trending Bear",
+            "Compression": "Sideways", "Low Liquidity": "Sideways",
+            "Gap Day": "High Volatility", "News Shock": "High Volatility", "High Liquidity": "High Volatility"
+        }
+        canonical_regime = _HMM_FALLBACK.get(regime, regime)
+        cfg = REGIME_STOP_CONFIG.get(canonical_regime, _DEFAULT_CONFIG)
         stop_mult = cfg["stop_mult"]
         tp1_rr    = cfg.get("tp1_rr", TP1_RISK_REWARD)
         tp2_rr    = cfg.get("tp2_rr", TP2_RISK_REWARD)
 
         distance = current_price * max(volatility_proxy * stop_mult, MIN_STOP_PCT)
+
 
         if signal == "BUY":
             stop_loss          = current_price - distance

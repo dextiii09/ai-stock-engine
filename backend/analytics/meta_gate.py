@@ -22,9 +22,12 @@ feature list saved inside the joblib artifact.
 import os
 import time
 import threading
+import logging as _logging
 from typing import Optional
 
 import numpy as np
+
+_meta_logger = _logging.getLogger("ai_stock.meta_gate")
 
 from analytics.feature_lab import (
     _daily, _close_series, _wilder_rsi, _macd_hist, _atr_pct,
@@ -43,7 +46,7 @@ class MetaGate:
 
     def __init__(self):
         self._models = {}           # symbol -> (model, features)
-        self._load_failed = set()   # symbols that failed loading
+        self._load_failed = {}      # symbol -> failure_timestamp
         self._p_cache = {}          # symbol -> (p, fetched_at)
 
     @classmethod
@@ -58,7 +61,8 @@ class MetaGate:
         if sym_key in self._models:
             return True
         if sym_key in self._load_failed:
-            return False
+            if time.time() - self._load_failed[sym_key] < 300.0:
+                return False
 
         # Attempt to load symbol-specific model, with fallback to meta_btc if BTC
         candidate_paths = [get_model_path(symbol)]
@@ -71,14 +75,14 @@ class MetaGate:
                     import joblib
                     art = joblib.load(path)
                     self._models[sym_key] = (art["model"], art["features"])
-                    print(f"[MetaGate] Loaded {os.path.basename(path)} for {symbol} "
-                          f"({len(art['features'])} features, trained rows {art.get('trained_rows')})")
+                    _meta_logger.info(f"[MetaGate] Loaded {os.path.basename(path)} for {symbol} "
+                                      f"({len(art['features'])} features, trained rows {art.get('trained_rows')})")
                     return True
                 except Exception as e:
-                    print(f"[MetaGate] Error loading {path}: {e}")
+                    _meta_logger.warning(f"[MetaGate] Error loading {path}: {e}")
 
         # Model not available — fail-open
-        self._load_failed.add(sym_key)
+        self._load_failed[sym_key] = time.time()
         return False
 
     def _current_features(self, symbol: str) -> Optional[dict]:
@@ -105,24 +109,29 @@ class MetaGate:
                 if vix3m is not None and len(vix3m) >= 5:
                     feats["vix_ts"] = float(vix3m.iloc[-1] - vix.iloc[-1])
                 else:
-                    feats["vix_ts"] = 0.0
+                    _meta_logger.warning(f"[MetaGate] Missing VIX3M data for {symbol}. Failing open.")
+                    return None
             else:
-                feats["vix_lvl"] = 18.0
-                feats["vix_ts"] = 0.0
+                _meta_logger.warning(f"[MetaGate] Missing VIX data for {symbol}. Failing open.")
+                return None
 
             tnx = _close_series("^TNX", "6mo")
             irx = _close_series("^IRX", "6mo")
             if tnx is not None and irx is not None and len(tnx) >= 6 and len(irx) >= 6:
                 ys = (tnx - irx).dropna()
                 feats["yield_spread"]      = float(ys.iloc[-1])
-                feats["yield_spread_mom5"] = float(ys.iloc[-1] - ys.iloc[-6]) if len(ys) > 6 else 0.0
+                if len(ys) > 6:
+                    feats["yield_spread_mom5"] = float(ys.iloc[-1] - ys.iloc[-6])
+                else:
+                    _meta_logger.warning(f"[MetaGate] Insufficient yield history for mom5, {symbol}. Failing open.")
+                    return None
             else:
-                feats["yield_spread"] = 0.5
-                feats["yield_spread_mom5"] = 0.0
+                _meta_logger.warning(f"[MetaGate] Missing yield curve data for {symbol}. Failing open.")
+                return None
 
             return feats
         except Exception as e:
-            print(f"[MetaGate] Feature computation failed for {symbol}: {e}")
+            _meta_logger.warning(f"[MetaGate] Feature computation failed for {symbol}: {e}")
             return None
 
     def p_win(self, symbol: str = "BTC-USD") -> Optional[float]:
@@ -144,12 +153,17 @@ class MetaGate:
 
         try:
             model, features = self._models[sym_key]
-            row = [feats.get(f, 0.0) for f in features]
+            missing = [f for f in features if f not in feats]
+            if missing:
+                _meta_logger.warning(f"[MetaGate] missing features for {symbol}: {missing}")
+                return None
+            
+            row = [feats[f] for f in features]
             if any(v is None or not np.isfinite(v) for v in row):
                 return None
             p = float(model.predict_proba(np.array([row]))[0, 1])
             self._p_cache[sym_key] = (p, now)
             return p
         except Exception as e:
-            print(f"[MetaGate] predict failed for {symbol}: {e}")
+            _meta_logger.warning(f"[MetaGate] predict failed for {symbol}: {e}")
             return None

@@ -3,8 +3,20 @@ Real Macro Event Awareness using Yahoo Finance earnings calendar + FRED.
 No hardcoded day-of-month patterns.
 """
 import datetime
+import zoneinfo
+import logging
 import yfinance as yf
 from typing import Dict, Any, List
+
+_event_logger = logging.getLogger("event_awareness")
+
+def _check_calendar_expiry(today: datetime.date, last_date_str: str, calendar_name: str = "MACRO"):
+    try:
+        last_date = datetime.date.fromisoformat(last_date_str)
+        if (last_date - today).days < 30:
+            _event_logger.critical(f"{calendar_name} CALENDAR EXPIRING IN <30 DAYS. SYSTEM WILL FAIL OPEN IN 2027. UPDATE event_awareness.py IMMEDIATELY.")
+    except Exception:
+        pass
 
 # Real FOMC 2024-2025 meeting dates (published by Federal Reserve)
 FOMC_DATES_2025 = [
@@ -101,6 +113,10 @@ class EventAwarenessEngine:
     Fetches real earnings dates from Yahoo Finance for active symbols.
     """
 
+    def __init__(self):
+        self._earnings_cache_date = None
+        self._earnings_cache_data = []
+
     def _is_near(self, date_str: str, today: datetime.date, window: int = BLACKOUT_WINDOW_DAYS) -> bool:
         try:
             event_date = datetime.date.fromisoformat(date_str)
@@ -113,7 +129,8 @@ class EventAwarenessEngine:
             return False
 
     def check_today(self, tick_data: Dict[str, Any] = None) -> Dict[str, Any]:
-        today = datetime.date.today()
+        today = datetime.datetime.now(zoneinfo.ZoneInfo("America/New_York")).date()
+        _check_calendar_expiry(today, FOMC_DATES_2025[-1], "MACRO")
         upcoming: List[Dict[str, Any]] = []
 
         # US Market Holiday check (CME/NYSE closed)
@@ -132,7 +149,7 @@ class EventAwarenessEngine:
              upcoming.append({
                  "name": "NQ Quarterly Rollover Week",
                  "type": "rollover",
-                 "date": str(datetime.date.today()),
+                 "date": str(today),
                  "impact": "CRITICAL",
                  "action": "HALT_TRADING",
                  "description": "Front-month volume drops and spreads widen.",
@@ -260,6 +277,9 @@ class EventAwarenessEngine:
 
     def _fetch_real_earnings(self, today: datetime.date) -> List[Dict]:
         """Checks Yahoo Finance earnings calendar for major symbols."""
+        if getattr(self, "_earnings_cache_date", None) == today:
+            return self._earnings_cache_data
+
         symbols = ["AAPL", "NVDA", "MSFT", "META", "GOOGL", "TSLA", "AMZN"]
         events = []
         for sym in symbols[:4]:  # Limit API calls
@@ -277,12 +297,15 @@ class EventAwarenessEngine:
                                     "date": str(ed_date),
                                     "symbol": sym,
                                     "event": "Earnings",
-                                    "impact": "HIGH"
+                                    "impact": "HIGH",
+                                    "blackout": True
                                 })
                         except Exception:
                             continue
             except Exception:
                 continue
+        self._earnings_cache_date = today
+        self._earnings_cache_data = events
         return events
 
     def _get_next_events(self, today: datetime.date) -> List[Dict]:
@@ -331,6 +354,10 @@ class IndianEventAwarenessEngine:
     Also enforces Indian market trading hours (9:15 AM - 3:30 PM IST).
     """
 
+    def __init__(self):
+        self._earnings_cache_date = None
+        self._earnings_cache_data = []
+
     def _is_near(self, date_str: str, today: datetime.date, window: int = 0) -> bool:
         try:
             event_date = datetime.date.fromisoformat(date_str)
@@ -340,7 +367,8 @@ class IndianEventAwarenessEngine:
             return False
 
     def check_today(self, tick_data: Dict[str, Any] = None) -> Dict[str, Any]:
-        today = datetime.date.today()
+        today = datetime.datetime.now(zoneinfo.ZoneInfo("Asia/Kolkata")).date()
+        _check_calendar_expiry(today, RBI_MPC_DATES_2025_2026[-1], "INDIAN MACRO")
         today_str = str(today)
         upcoming = []
 
@@ -425,6 +453,9 @@ class IndianEventAwarenessEngine:
 
     def _fetch_real_earnings(self, today: datetime.date) -> List[Dict]:
         """Checks Yahoo Finance earnings for Indian stocks."""
+        if getattr(self, "_earnings_cache_date", None) == today:
+            return self._earnings_cache_data
+
         symbols = ["RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS",
                    "BAJFINANCE.NS", "SUNPHARMA.NS", "MARUTI.NS"]
         events = []
@@ -451,6 +482,8 @@ class IndianEventAwarenessEngine:
                             continue
             except Exception:
                 pass
+        self._earnings_cache_date = today
+        self._earnings_cache_data = events
         return events
 
 
@@ -470,12 +503,13 @@ class CryptoEventAwarenessEngine:
             return False
 
     def check_today(self, tick_data=None) -> dict:
-        today = datetime.date.today()
+        today = datetime.datetime.now(zoneinfo.ZoneInfo("America/New_York")).date()
+        _check_calendar_expiry(today, FOMC_DATES_2025[-1], "MACRO")
         today_str = str(today)
         upcoming = []
 
         for d in FOMC_DATES_2025:
-            if self._is_near(d, today, window=1):
+            if self._is_near(d, today, window=0):
                 upcoming.append({"name": f"FOMC Meeting ({d})", "type": "fed",
                                   "date": d, "risk": "HIGH", "blackout": True})
                 break
@@ -534,7 +568,8 @@ class ForexEventAwarenessEngine:
             return False
 
     def check_today(self, tick_data=None) -> dict:
-        today = datetime.date.today()
+        today = datetime.datetime.now(zoneinfo.ZoneInfo("America/New_York")).date()
+        _check_calendar_expiry(today, FOMC_DATES_2025[-1], "MACRO")
         today_str = str(today)
         now_utc = datetime.datetime.utcnow()
         weekday = now_utc.weekday()          # 0=Mon … 6=Sun
@@ -561,7 +596,7 @@ class ForexEventAwarenessEngine:
 
         upcoming = []
         for d in FOMC_DATES_2025:
-            if self._is_near(d, today, window=1):
+            if self._is_near(d, today, window=0):
                 upcoming.append({"name": f"FOMC Meeting ({d})", "type": "fed",
                                   "date": d, "risk": "HIGH", "blackout": True})
                 break

@@ -2,8 +2,12 @@ import time
 import os
 import asyncio
 import json
+import logging as _logging
 import random as _random   # IV&V Low: hoisted from force_close (was a per-call import)
 from typing import Dict, Any, List
+
+_exec_logger = _logging.getLogger("ai_stock.execution")
+
 
 from sqlalchemy import select
 try:
@@ -148,8 +152,10 @@ class SmartExecutionEngine:
             "US"
         )
         self._stop_cooldown: dict = {}   # symbol -> timestamp of last stop-out
+        self._in_flight_entries: set = set()   # symbol -> in-flight entry reservation to prevent TOCTOU races
 
         # A-3: All mutations of active_holdings are serialized through this lock.
+
         # Lazy-init so it is created inside the running event loop.
         self._holdings_lock: asyncio.Lock = None
 
@@ -387,10 +393,12 @@ class SmartExecutionEngine:
         _exit_comm = close_shares * effective_p * 0.001
 
         if direction == "LONG":
+            _margin_rel = 0.0
             revenue     = close_shares * effective_p - _exit_comm
             profit_loss = revenue - close_shares * entry_p
             profit_pct  = (effective_p - entry_p) / entry_p * 100
         else:  # SHORT
+
             profit_loss = close_shares * (entry_p - effective_p) - _exit_comm
             profit_pct  = (entry_p - effective_p) / entry_p * 100
             _margin_rel = (holding.get("margin_reserved", total_shares * entry_p) / max(total_shares, 1e-9)) * close_shares
@@ -781,7 +789,7 @@ class SmartExecutionEngine:
 
             if short_holding:
                 # ── BUY TO COVER ──
-                # Exit slippage (1–10 bps, adverse)
+                # Default Paper Math fallback
                 _slip = price * _random.uniform(0.0001, 0.001)
                 price = round(price + _slip, 6)
                 _exit_comm  = short_holding["shares"] * price * 0.001
@@ -791,6 +799,8 @@ class SmartExecutionEngine:
                                                 short_holding["shares"] * short_holding["entry_price"])
                 revenue     = _margin + profit_loss
 
+                _final_qty_covered = short_holding["shares"]
+                _is_synthetic_price = False
 
                 # E-1: broker first for live.
                 # IV&V C2: normalize to broker lot size (never int()-truncate to 0).
@@ -804,7 +814,40 @@ class SmartExecutionEngine:
                         _ok, _msg, _oid = self.broker.cover(symbol, _cover_qty, price)
                         if not _ok:
                             return False, f"Broker rejected COVER: {_msg}"
+                        if _oid:
+                            fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, _cover_qty, price)
+                            if fr.status == "REJECTED":
+                                return False, f"Order {_oid} rejected/cancelled with zero fill: {fr.message}"
+                            if fr.status == "TIMEOUT":
+                                _cancel_ok, _cancel_msg = False, "not attempted"
+                                try:
+                                    _cancel_ok, _cancel_msg = self.broker.cancel_order(_oid)
+                                except Exception as _cancel_err:
+                                    _cancel_msg = str(_cancel_err)
+
+                                # Always verify post-cancel terminal status with one final poll
+                                fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, _cover_qty, price)
+                                if fr.status in ("FILLED", "PARTIAL"):
+                                    pass  # Filled during race, fall through and book real fill
+                                elif fr.status == "REJECTED":
+                                    return False, f"Order {_oid} confirmed cancelled/rejected with zero fill: {fr.message}"
+                                else:
+                                    return False, (f"Order {_oid} status unresolved post-cancel ({_cancel_msg}). "
+                                                   f"MANUAL RECONCILIATION REQUIRED for order {_oid}.")
+
+                            price = fr.fill_price
+                            _final_qty_covered = fr.filled_qty
+                            _exit_comm  = _final_qty_covered * price * 0.001
+                            profit_loss = _final_qty_covered * (short_holding["entry_price"] - price) - _exit_comm
+                            profit_pct  = (short_holding["entry_price"] - price) / short_holding["entry_price"] * 100
+                            _margin_fraction = _final_qty_covered / short_holding["shares"] if short_holding["shares"] > 0 else 1.0
+                            _margin = short_holding.get("margin_reserved", short_holding["shares"] * short_holding["entry_price"]) * _margin_fraction
+                            revenue     = _margin + profit_loss
+                            _is_synthetic_price = fr.is_synthetic
+                        else:
+                            _is_synthetic_price = True
                     else:
+                        _is_synthetic_price = True
                         print(f"[COVER] Sub-lot live qty for {symbol} "
                               f"({short_holding['shares']}) — closing internal state only.")
 
@@ -812,12 +855,18 @@ class SmartExecutionEngine:
                 async with self._get_lock():
                     if short_holding not in self.active_holdings:
                         return False, f"[A-3] SHORT on {symbol} already closed (concurrent)."
-                    self.active_holdings.remove(short_holding)
+                    
                     self.portfolio_balance += revenue
+                    
+                    if _final_qty_covered < short_holding["shares"]:
+                        short_holding["shares"] -= _final_qty_covered
+                    else:
+                        self.active_holdings.remove(short_holding)
 
                 self.execution_logs.append({
                     "time": time.time(), "action": "FILLED_COVER",
-                    "symbol": symbol, "shares": short_holding["shares"], "price": price,
+                    "symbol": symbol, "shares": _final_qty_covered, "price": price,
+                    "is_synthetic_price": _is_synthetic_price,
                 })
                 self.journal.log_trade(symbol, "BUY", price, decision)
 
@@ -825,7 +874,7 @@ class SmartExecutionEngine:
                     try:
                         async with AsyncSessionLocal() as session:
                             await _persist_fill(session, symbol, "BUY",
-                                                short_holding["shares"], price, trade={
+                                                _final_qty_covered, price, trade={
                                 "entry":      short_holding.get("entry_price"),
                                 "exit":       price,
                                 "stop_loss":  short_holding.get("stop_loss"),
@@ -843,17 +892,18 @@ class SmartExecutionEngine:
                 _sh_stop_dist    = abs(_sh_entry - _sh_stop) / max(_sh_entry, 1e-9) * 100
                 trade_result     = {
                     "profit_loss":       profit_loss,
-                    "capital_allocated": short_holding["shares"] * _sh_entry,
+                    "capital_allocated": _final_qty_covered * _sh_entry,
                     "action":            "SELL",
                     "regime":            short_holding.get("regime", "Sideways"),
                     "stop_distance_pct": round(_sh_stop_dist, 4),
                 }
                 self.closed_trades.append({
-                    "symbol": symbol, "shares": short_holding["shares"],
+                    "symbol": symbol, "shares": _final_qty_covered,
                     "direction": "SHORT",
                     "entry_price": short_holding["entry_price"], "exit_price": price,
                     "profit_loss": round(profit_loss, 2), "profit_pct": round(profit_pct, 2),
                     "time": time.time(), "reason": decision.get("reason", "Unknown"),
+                    "is_synthetic_price": _is_synthetic_price,
                 })
                 if "committee_breakdown" in decision:
                     self.rl_engine.process_trade_outcome(trade_result, decision["committee_breakdown"])
@@ -862,142 +912,180 @@ class SmartExecutionEngine:
 
             else:
                 # ── OPEN LONG ──
-                # Prevent duplicate
+                # Prevent duplicate entries and concurrent in-flight races
                 async with self._get_lock():
+                    if symbol in self._in_flight_entries:
+                        return False, f"Entry order for {symbol} is already in-flight."
                     if any(h["symbol"] == symbol and h.get("direction", "LONG") == "LONG"
                            for h in self.active_holdings):
                         return False, f"Already in LONG on {symbol}."
+                    self._in_flight_entries.add(symbol)
 
-                regime     = decision.get("regime", "Sideways")
-                realized_b = self._get_realized_b()
-                _atr       = decision.get("entry_features", {}).get("atr_14") or decision.get("atr_14", 0.0)
-                _atr_pct   = float(_atr) / max(float(price), 1.0) * 100 if _atr else 0.0
-                size_data  = self.sizer.calculate_size(
-                    confidence, self.portfolio_balance, price,
-                    regime=regime,
-                    recent_win_rate=self.rl_engine.win_rate / 100.0,
-                    n_closed_trades=self.rl_engine.total_closed_trades,
-                    realized_b=realized_b, atr_pct=_atr_pct,
-                )
-                shares = size_data["shares"]
-                if shares <= 0:
-                    return False, f"Kelly sizer returned 0 shares (conf={confidence:.2f})"
+                try:
+                    regime     = decision.get("regime", "Sideways")
+                    realized_b = self._get_realized_b()
+                    _atr       = decision.get("entry_features", {}).get("atr_14") or decision.get("atr_14", 0.0)
+                    _atr_pct   = float(_atr) / max(float(price), 1.0) * 100 if _atr else 0.0
+                    size_data  = self.sizer.calculate_size(
+                        confidence, self.portfolio_balance, price,
+                        regime=regime,
+                        recent_win_rate=self.rl_engine.win_rate / 100.0,
+                        n_closed_trades=self.rl_engine.total_closed_trades,
+                        realized_b=realized_b, atr_pct=_atr_pct,
+                    )
+                    shares = size_data["shares"]
+                    if shares <= 0:
+                        return False, f"Kelly sizer returned 0 shares (conf={confidence:.2f})"
 
-                # IV&V C2: normalize to broker lot size UP FRONT so fill/cost/
-                # margin are all computed on the tradeable quantity. Paper/crypto
-                # keep fractional; integer-lot brokers round (sub-lot → reject).
-                shares = self.broker.normalize_quantity(symbol, shares)
-                if shares <= 0:
-                    return False, (f"Sub-lot BUY suppressed for {symbol}: sized quantity "
-                                   f"rounds to 0 tradeable units.")
+                    # IV&V C2: normalize to broker lot size UP FRONT so fill/cost/
+                    # margin are all computed on the tradeable quantity. Paper/crypto
+                    # keep fractional; integer-lot brokers round (sub-lot → reject).
+                    shares = self.broker.normalize_quantity(symbol, shares)
+                    if shares <= 0:
+                        return False, (f"Sub-lot BUY suppressed for {symbol}: sized quantity "
+                                       f"rounds to 0 tradeable units.")
 
-                # IV&V H4: enforce single-position + cash-reserve caps as a gate.
-                shares, _cap_reject = self._apply_risk_caps(symbol, "BUY", shares, price)
-                if shares <= 0:
-                    return False, _cap_reject
+                    # IV&V H4: enforce single-position + cash-reserve caps as a gate.
+                    shares, _cap_reject = self._apply_risk_caps(symbol, "BUY", shares, price)
+                    if shares <= 0:
+                        return False, _cap_reject
 
-                # Spread & Slippage Guard
-                _bid = float(decision.get("bid") or decision.get("entry_features", {}).get("bid") or 0.0)
-                _ask = float(decision.get("ask") or decision.get("entry_features", {}).get("ask") or 0.0)
-                if _bid > 0 and _ask > 0:
-                    _ok_spread, _spread_pct, _spread_msg = self.router.check_spread(_bid, _ask)
-                    if not _ok_spread:
-                        return False, f"Spread veto: {_spread_msg}"
+                    # Spread & Slippage Guard
+                    _bid = float(decision.get("bid") or decision.get("entry_features", {}).get("bid") or 0.0)
+                    _ask = float(decision.get("ask") or decision.get("entry_features", {}).get("ask") or 0.0)
+                    if _bid > 0 and _ask > 0:
+                        _ok_spread, _spread_pct, _spread_msg = self.router.check_spread(_bid, _ask)
+                        if not _ok_spread:
+                            return False, f"Spread veto: {_spread_msg}"
+                        _exec_logger.info(f"[SpreadGate] {symbol} passed: {_spread_pct*100:.2f}%")
+                    else:
+                        _exec_logger.info(f"[SpreadGate] {symbol} skipped (bid/ask depth unavailable)")
 
-                # Phase 3 CONFIRMED meta-label veto gate — BTC-USD LONG entries only
-                # (the exact scope the model was trained + CPCV-validated on:
-                # 15/15 splits uplift-positive, +0.166R mean net of costs, DSR 1.0).
-                # VETO FILTER ONLY: blocks entries with P(win) < GATE_THRESHOLD (0.65); never
-                # used to size up. Fail-open: p=None -> proceed normally.
-                if self.market == "CRYPTO" and symbol.upper() == "BTC-USD":
-                    try:
-                        from analytics.meta_gate import MetaGate, GATE_THRESHOLD
-                        _p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
-                        if _p is not None and _p < GATE_THRESHOLD:
-                            return False, (f"Meta-label veto: P(win)={_p:.3f} < "
-                                           f"{GATE_THRESHOLD} (unfavorable macro regime)")
-                    except Exception as _mg_e:
-                        print(f"[MetaGate] gate error (fail-open): {_mg_e}")
+                    # Phase 3 CONFIRMED meta-label veto gate — BTC-USD LONG entries only
+                    # (the exact scope the model was trained + CPCV-validated on:
+                    # 15/15 splits uplift-positive, +0.166R mean net of costs, DSR 1.0).
+                    # VETO FILTER ONLY: blocks entries with P(win) < GATE_THRESHOLD (0.65); never
+                    # used to size up. Fail-open: p=None -> proceed normally.
+                    if self.market == "CRYPTO" and symbol.upper() == "BTC-USD":
+                        try:
+                            from analytics.meta_gate import MetaGate, GATE_THRESHOLD
+                            _p = await asyncio.to_thread(MetaGate.instance().p_win, symbol)
+                            if _p is not None and _p < GATE_THRESHOLD:
+                                return False, (f"Meta-label veto: P(win)={_p:.3f} < "
+                                               f"{GATE_THRESHOLD} (unfavorable macro regime)")
+                        except Exception as _mg_e:
+                            _exec_logger.warning(f"[MetaGate] gate error (fail-open): {_mg_e}")
 
+                    _atr_raw   = decision.get("entry_features", {}).get("atr_14") or 0.0
+                    _vol_proxy = (_atr_raw / max(price, 1e-9)) if _atr_raw > 0 else 0.02
+                    stop_data  = self.stops.calculate(price, signal, volatility_proxy=_vol_proxy, regime=regime)
+                    p_win_frac = self.rl_engine.regime_win_rate(regime)
+                    # IV&V H3: run the 5k-path MC + any vol fetch in a worker thread
+                    # so the trading loop (and every other market's stop checks) is
+                    # never blocked by CPU or network here.
+                    sim_result = await asyncio.to_thread(
+                        self.simulator.simulate,
+                        current_price=price, stop_loss=stop_data["stop_loss"],
+                        take_profit=stop_data["take_profit"], symbol=symbol,
+                        session_quality=decision.get("session_quality", "NORMAL"),
+                        direction="LONG", p_win=p_win_frac,
+                    )
+                    self.latest_sim_result = sim_result
+                    if p_win_frac is not None and not sim_result["is_viable"]:
+                        ev = sim_result.get("expected_value", 0.0)
+                        return False, f"AI Trade Simulator veto (Monte Carlo EV={ev*100:.3f}%)"
 
+                    fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000), direction="LONG")
+                    avg_fill_price = fill_result["avg_fill_price"]
+                    cost           = fill_result["total_cost"]
 
-                _atr_raw   = decision.get("entry_features", {}).get("atr_14") or 0.0
-                _vol_proxy = (_atr_raw / max(price, 1e-9)) if _atr_raw > 0 else 0.02
-                stop_data  = self.stops.calculate(price, signal, volatility_proxy=_vol_proxy, regime=regime)
-                p_win_frac = self.rl_engine.regime_win_rate(regime)
-                # IV&V H3: run the 5k-path MC + any vol fetch in a worker thread
-                # so the trading loop (and every other market's stop checks) is
-                # never blocked by CPU or network here.
-                sim_result = await asyncio.to_thread(
-                    self.simulator.simulate,
-                    current_price=price, stop_loss=stop_data["stop_loss"],
-                    take_profit=stop_data["take_profit"], symbol=symbol,
-                    session_quality=decision.get("session_quality", "NORMAL"),
-                    direction="LONG", p_win=p_win_frac,
-                )
-                self.latest_sim_result = sim_result
-                if p_win_frac is not None and not sim_result["is_viable"]:
-                    ev = sim_result.get("expected_value", 0.0)
-                    return False, f"AI Trade Simulator veto (Monte Carlo EV={ev*100:.3f}%)"
+                    # E-1: live broker call BEFORE modifying state.
+                    # `shares` is already broker-normalized (see sizing block above).
+                    _is_synthetic_price = False
+                    if self.broker.is_live:
+                        _ok, _msg, _oid = self.broker.buy(symbol, shares, avg_fill_price)
+                        if not _ok:
+                            return False, f"Broker rejected BUY: {_msg}"
+                        if _oid:
+                            fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, shares, avg_fill_price)
+                            if fr.status == "REJECTED":
+                                return False, f"Order {_oid} rejected/cancelled with zero fill: {fr.message}"
+                            if fr.status == "TIMEOUT":
+                                _cancel_ok, _cancel_msg = False, "not attempted"
+                                try:
+                                    _cancel_ok, _cancel_msg = self.broker.cancel_order(_oid)
+                                except Exception as _cancel_err:
+                                    _cancel_msg = str(_cancel_err)
 
-                fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000), direction="LONG")
-                avg_fill_price = fill_result["avg_fill_price"]
-                cost           = fill_result["total_cost"]
+                                # Always verify post-cancel terminal status with one final poll
+                                fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, shares, avg_fill_price)
+                                if fr.status in ("FILLED", "PARTIAL"):
+                                    pass  # Filled during race, fall through and book real fill
+                                elif fr.status == "REJECTED":
+                                    return False, f"Order {_oid} confirmed cancelled/rejected with zero fill: {fr.message}"
+                                else:
+                                    return False, (f"Order {_oid} status unresolved post-cancel ({_cancel_msg}). "
+                                                   f"MANUAL RECONCILIATION REQUIRED for order {_oid}.")
 
-                # E-1: live broker call BEFORE modifying state.
-                # `shares` is already broker-normalized (see sizing block above).
-                if self.broker.is_live:
-                    _ok, _msg, _oid = self.broker.buy(symbol, shares, avg_fill_price)
-                    if not _ok:
-                        return False, f"Broker rejected BUY: {_msg}"
+                            avg_fill_price = fr.fill_price
+                            shares = fr.filled_qty
+                            cost = shares * avg_fill_price
+                            _is_synthetic_price = fr.is_synthetic
+                        else:
+                            _is_synthetic_price = True
 
-                _entry_prec = get_price_precision(symbol)
-                holding = {
-                    "symbol":        symbol,
-                    "shares":        shares,
-                    "entry_price":   round(avg_fill_price, _entry_prec),
-                    "current_price": round(avg_fill_price, _entry_prec),
+                    _entry_prec = get_price_precision(symbol)
+                    holding = {
+                        "symbol":        symbol,
+                        "shares":        shares,
+                        "entry_price":   round(avg_fill_price, _entry_prec),
+                        "current_price": round(avg_fill_price, _entry_prec),
 
-                    "value":         round(cost, 4),
-                    "change":        0.0,
-                    "stop_loss":     round(stop_data["stop_loss"], 4),
-                    "initial_stop":  round(stop_data["stop_loss"], 4),
-                    "take_profit":   round(stop_data["take_profit"], 4),
-                    "tp1_target":    round(stop_data.get("tp1_target", stop_data["take_profit"]), 4),
-                    "tp2_target":    round(stop_data.get("tp2_target", stop_data["take_profit"]), 4),
-                    "breakeven_trigger": round(stop_data.get("breakeven_trigger", avg_fill_price), 4),
-                    "tp1_hit":       False,
-                    "best_price":    round(avg_fill_price, 4),
-                    "sparkline":     [round(avg_fill_price, 4)],
-                    "regime":        decision.get("regime", "Sideways"),
-                    "direction":     "LONG",
-                    # IV&V Medium: stash the entry committee vote so a later
-                    # stop/TP force_close can attribute the outcome to the RL
-                    # agents (previously stops taught the model nothing).
-                    "committee_breakdown": decision.get("committee_breakdown", []),
-                    "metagate_score": decision.get("metagate_score")
-                }
+                        "value":         round(cost, 4),
+                        "is_synthetic_price": _is_synthetic_price,
+                        "change":        0.0,
+                        "stop_loss":     round(stop_data["stop_loss"], 4),
+                        "initial_stop":  round(stop_data["stop_loss"], 4),
+                        "take_profit":   round(stop_data["take_profit"], 4),
+                        "tp1_target":    round(stop_data.get("tp1_target", stop_data["take_profit"]), 4),
+                        "tp2_target":    round(stop_data.get("tp2_target", stop_data["take_profit"]), 4),
+                        "breakeven_trigger": round(stop_data.get("breakeven_trigger", avg_fill_price), 4),
+                        "tp1_hit":       False,
+                        "best_price":    round(avg_fill_price, 4),
+                        "sparkline":     [round(avg_fill_price, 4)],
+                        "regime":        decision.get("regime", "Sideways"),
+                        "direction":     "LONG",
+                        # IV&V Medium: stash the entry committee vote so a later
+                        # stop/TP force_close can attribute the outcome to the RL
+                        # agents (previously stops taught the model nothing).
+                        "committee_breakdown": decision.get("committee_breakdown", []),
+                        "metagate_score": decision.get("metagate_score")
+                    }
 
-                # A-3: update state under lock
-                async with self._get_lock():
-                    self.portfolio_balance -= cost
-                    self.active_holdings.append(holding)
+                    # A-3: update state under lock
+                    async with self._get_lock():
+                        self.portfolio_balance -= cost
+                        self.active_holdings.append(holding)
 
-                if DB_ENABLED:
-                    try:
-                        async with AsyncSessionLocal() as session:
-                            # Open — Order only (no round-trip Trade row yet).
-                            await _persist_fill(session, symbol, "BUY", shares, avg_fill_price)
-                    except Exception as e:
-                        print(f"Failed to write DB order (BUY): {e}")
+                    if DB_ENABLED:
+                        try:
+                            async with AsyncSessionLocal() as session:
+                                # Open — Order only (no round-trip Trade row yet).
+                                await _persist_fill(session, symbol, "BUY", shares, avg_fill_price)
+                        except Exception as e:
+                            print(f"Failed to write DB order (BUY): {e}")
 
-                self.execution_logs.append({
-                    "time": time.time(), "action": "FILLED_BUY",
-                    "symbol": symbol, "shares": shares, "price": price,
-                })
-                self.journal.log_trade(symbol, "BUY", price, decision)
-                await self._save_state_async()
-                return True, f"FILLED BUY {shares} @ ${avg_fill_price:.2f}"
+                    self.execution_logs.append({
+                        "time": time.time(), "action": "FILLED_BUY",
+                        "symbol": symbol, "shares": shares, "price": price,
+                    })
+                    self.journal.log_trade(symbol, "BUY", price, decision)
+                    await self._save_state_async()
+                    return True, f"FILLED BUY {shares} @ ${avg_fill_price:.2f}"
+                finally:
+                    async with self._get_lock():
+                        self._in_flight_entries.discard(symbol)
+
 
         # ── SELL ─────────────────────────────────────────────────────── #
         elif signal == "SELL":
@@ -1009,7 +1097,7 @@ class SmartExecutionEngine:
 
             if long_holding:
                 # ── LIQUIDATE LONG ──
-                # Exit slippage (1–10 bps, adverse)
+                # Default Paper Math fallback
                 _slip = price * _random.uniform(0.0001, 0.001)
                 price = round(price - _slip, 6)
                 _exit_comm  = long_holding["shares"] * price * 0.001
@@ -1017,6 +1105,8 @@ class SmartExecutionEngine:
                 profit_loss = revenue - long_holding["shares"] * long_holding["entry_price"]
                 profit_pct  = (price - long_holding["entry_price"]) / long_holding["entry_price"] * 100
 
+                _final_qty_sold = long_holding["shares"]
+                _is_synthetic_price = False
 
                 # E-1: live broker first.
                 # IV&V C2: EXIT — normalize; close internal state even if sub-lot.
@@ -1026,7 +1116,38 @@ class SmartExecutionEngine:
                         _ok, _msg, _oid = self.broker.sell(symbol, _sell_qty, price)
                         if not _ok:
                             return False, f"Broker rejected SELL: {_msg}"
+                        if _oid:
+                            fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, _sell_qty, price)
+                            if fr.status == "REJECTED":
+                                return False, f"Order {_oid} rejected/cancelled with zero fill: {fr.message}"
+                            if fr.status == "TIMEOUT":
+                                _cancel_ok, _cancel_msg = False, "not attempted"
+                                try:
+                                    _cancel_ok, _cancel_msg = self.broker.cancel_order(_oid)
+                                except Exception as _cancel_err:
+                                    _cancel_msg = str(_cancel_err)
+
+                                # Always verify post-cancel terminal status with one final poll
+                                fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, _sell_qty, price)
+                                if fr.status in ("FILLED", "PARTIAL"):
+                                    pass  # Filled during race, fall through and book real fill
+                                elif fr.status == "REJECTED":
+                                    return False, f"Order {_oid} confirmed cancelled/rejected with zero fill: {fr.message}"
+                                else:
+                                    return False, (f"Order {_oid} status unresolved post-cancel ({_cancel_msg}). "
+                                                   f"MANUAL RECONCILIATION REQUIRED for order {_oid}.")
+
+                            price = fr.fill_price
+                            _final_qty_sold = fr.filled_qty
+                            _exit_comm  = _final_qty_sold * price * 0.001
+                            revenue     = _final_qty_sold * price - _exit_comm
+                            profit_loss = revenue - _final_qty_sold * long_holding["entry_price"]
+                            profit_pct  = (price - long_holding["entry_price"]) / long_holding["entry_price"] * 100
+                            _is_synthetic_price = fr.is_synthetic
+                        else:
+                            _is_synthetic_price = True
                     else:
+                        _is_synthetic_price = True
                         print(f"[SELL] Sub-lot live qty for {symbol} "
                               f"({long_holding['shares']}) — closing internal state only.")
 
@@ -1034,12 +1155,18 @@ class SmartExecutionEngine:
                 async with self._get_lock():
                     if long_holding not in self.active_holdings:
                         return False, f"[A-3] LONG on {symbol} already closed (concurrent)."
-                    self.active_holdings.remove(long_holding)
+                    
                     self.portfolio_balance += revenue
+                    
+                    if _final_qty_sold < long_holding["shares"]:
+                        long_holding["shares"] -= _final_qty_sold
+                    else:
+                        self.active_holdings.remove(long_holding)
 
                 self.execution_logs.append({
                     "time": time.time(), "action": "FILLED_SELL",
-                    "symbol": symbol, "shares": long_holding["shares"], "price": price,
+                    "symbol": symbol, "shares": _final_qty_sold, "price": price,
+                    "is_synthetic_price": _is_synthetic_price,
                 })
                 self.journal.log_trade(symbol, "SELL", price, decision)
 
@@ -1047,7 +1174,7 @@ class SmartExecutionEngine:
                     try:
                         async with AsyncSessionLocal() as session:
                             await _persist_fill(session, symbol, "SELL",
-                                                long_holding["shares"], price, trade={
+                                                _final_qty_sold, price, trade={
                                 "entry":      long_holding.get("entry_price"),
                                 "exit":       price,
                                 "stop_loss":  long_holding.get("stop_loss"),
@@ -1065,17 +1192,18 @@ class SmartExecutionEngine:
                 _lg_stop_dist = abs(_lg_entry - _lg_stop) / max(_lg_entry, 1e-9) * 100
                 trade_result  = {
                     "profit_loss":       profit_loss,
-                    "capital_allocated": long_holding["shares"] * long_holding["entry_price"],
+                    "capital_allocated": _final_qty_sold * long_holding["entry_price"],
                     "action":            "BUY",
                     "regime":            long_holding.get("regime", "Sideways"),
                     "stop_distance_pct": round(_lg_stop_dist, 4),
                 }
                 self.closed_trades.append({
-                    "symbol": symbol, "shares": long_holding["shares"],
+                    "symbol": symbol, "shares": _final_qty_sold,
                     "direction": "LONG",
                     "entry_price": long_holding["entry_price"], "exit_price": price,
                     "profit_loss": round(profit_loss, 2), "profit_pct": round(profit_pct, 2),
                     "time": time.time(), "reason": decision.get("reason", "Unknown"),
+                    "is_synthetic_price": _is_synthetic_price,
                 })
                 if "committee_breakdown" in decision:
                     self.rl_engine.process_trade_outcome(trade_result, decision["committee_breakdown"])
@@ -1102,124 +1230,161 @@ class SmartExecutionEngine:
 
             else:
                 # ── OPEN SHORT ──
-                # Prevent duplicate
+                # Prevent duplicate entries and concurrent in-flight races
                 async with self._get_lock():
+                    if symbol in self._in_flight_entries:
+                        return False, f"Entry order for {symbol} is already in-flight."
                     if any(h["symbol"] == symbol and h.get("direction") == "SHORT"
                            for h in self.active_holdings):
                         return False, f"Already in SHORT on {symbol}."
+                    self._in_flight_entries.add(symbol)
 
-                regime     = decision.get("regime", "Sideways")
-                realized_b = self._get_realized_b()
-                _atr       = decision.get("entry_features", {}).get("atr_14") or decision.get("atr_14", 0.0)
-                _atr_pct   = float(_atr) / max(float(price), 1.0) * 100 if _atr else 0.0
-                size_data  = self.sizer.calculate_size(
-                    confidence, self.portfolio_balance, price,
-                    regime=regime,
-                    recent_win_rate=self.rl_engine.win_rate / 100.0,
-                    n_closed_trades=self.rl_engine.total_closed_trades,
-                    realized_b=realized_b, atr_pct=_atr_pct,
-                )
-                shares = size_data["shares"]
-                if shares <= 0:
-                    return False, f"Kelly sizer returned 0 shares (conf={confidence:.2f})"
+                try:
+                    regime     = decision.get("regime", "Sideways")
+                    realized_b = self._get_realized_b()
+                    _atr       = decision.get("entry_features", {}).get("atr_14") or decision.get("atr_14", 0.0)
+                    _atr_pct   = float(_atr) / max(float(price), 1.0) * 100 if _atr else 0.0
+                    size_data  = self.sizer.calculate_size(
+                        confidence, self.portfolio_balance, price,
+                        regime=regime,
+                        recent_win_rate=self.rl_engine.win_rate / 100.0,
+                        n_closed_trades=self.rl_engine.total_closed_trades,
+                        realized_b=realized_b, atr_pct=_atr_pct,
+                    )
+                    shares = size_data["shares"]
+                    if shares <= 0:
+                        return False, f"Kelly sizer returned 0 shares (conf={confidence:.2f})"
 
-                # IV&V C2: normalize to broker lot size up front (see BUY branch).
-                shares = self.broker.normalize_quantity(symbol, shares)
-                if shares <= 0:
-                    return False, (f"Sub-lot SHORT suppressed for {symbol}: sized quantity "
-                                   f"rounds to 0 tradeable units.")
+                    # IV&V C2: normalize to broker lot size up front (see BUY branch).
+                    shares = self.broker.normalize_quantity(symbol, shares)
+                    if shares <= 0:
+                        return False, (f"Sub-lot SHORT suppressed for {symbol}: sized quantity "
+                                       f"rounds to 0 tradeable units.")
 
-                # IV&V H4: enforce single-position + cash-reserve caps on SHORTs as well.
-                shares, _cap_reject = self._apply_risk_caps(symbol, "SHORT", shares, price)
-                if shares <= 0:
-                    return False, _cap_reject
+                    # IV&V H4: enforce single-position + cash-reserve caps on SHORTs as well.
+                    shares, _cap_reject = self._apply_risk_caps(symbol, "SHORT", shares, price)
+                    if shares <= 0:
+                        return False, _cap_reject
 
-                # Spread & Slippage Guard
-                _bid = float(decision.get("bid") or decision.get("entry_features", {}).get("bid") or 0.0)
-                _ask = float(decision.get("ask") or decision.get("entry_features", {}).get("ask") or 0.0)
-                if _bid > 0 and _ask > 0:
-                    _ok_spread, _spread_pct, _spread_msg = self.router.check_spread(_bid, _ask)
-                    if not _ok_spread:
-                        return False, f"Spread veto: {_spread_msg}"
+                    # Spread & Slippage Guard
+                    _bid = float(decision.get("bid") or decision.get("entry_features", {}).get("bid") or 0.0)
+                    _ask = float(decision.get("ask") or decision.get("entry_features", {}).get("ask") or 0.0)
+                    if _bid > 0 and _ask > 0:
+                        _ok_spread, _spread_pct, _spread_msg = self.router.check_spread(_bid, _ask)
+                        if not _ok_spread:
+                            return False, f"Spread veto: {_spread_msg}"
 
-                _atr_raw   = decision.get("entry_features", {}).get("atr_14") or 0.0
-                _vol_proxy = (_atr_raw / max(price, 1e-9)) if _atr_raw > 0 else 0.02
-                stop_data  = self.stops.calculate(price, signal, volatility_proxy=_vol_proxy, regime=regime)
-                p_win_frac = self.rl_engine.regime_win_rate(regime)
-                # IV&V H3: run MC off-loop (see LONG branch).
-                sim_result = await asyncio.to_thread(
-                    self.simulator.simulate,
-                    current_price=price, stop_loss=stop_data["stop_loss"],
-                    take_profit=stop_data["take_profit"], symbol=symbol,
-                    session_quality=decision.get("session_quality", "NORMAL"),
-                    direction="SHORT", p_win=p_win_frac,
-                )
-                self.latest_sim_result = sim_result
-                if p_win_frac is not None and not sim_result["is_viable"]:
-                    ev = sim_result.get("expected_value", 0.0)
-                    return False, f"AI Trade Simulator veto (Monte Carlo EV={ev*100:.3f}%)"
+                    _atr_raw   = decision.get("entry_features", {}).get("atr_14") or 0.0
+                    _vol_proxy = (_atr_raw / max(price, 1e-9)) if _atr_raw > 0 else 0.02
+                    stop_data  = self.stops.calculate(price, signal, volatility_proxy=_vol_proxy, regime=regime)
+                    p_win_frac = self.rl_engine.regime_win_rate(regime)
+                    # IV&V H3: run MC off-loop (see LONG branch).
+                    sim_result = await asyncio.to_thread(
+                        self.simulator.simulate,
+                        current_price=price, stop_loss=stop_data["stop_loss"],
+                        take_profit=stop_data["take_profit"], symbol=symbol,
+                        session_quality=decision.get("session_quality", "NORMAL"),
+                        direction="SHORT", p_win=p_win_frac,
+                    )
+                    self.latest_sim_result = sim_result
+                    if p_win_frac is not None and not sim_result["is_viable"]:
+                        ev = sim_result.get("expected_value", 0.0)
+                        return False, f"AI Trade Simulator veto (Monte Carlo EV={ev*100:.3f}%)"
 
-                fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000), direction="SHORT")
-                avg_fill_price = fill_result["avg_fill_price"]
-                cost           = fill_result["total_cost"]
+                    fill_result    = self.router.execute(symbol, shares, price, decision.get("volume", 50000), direction="SHORT")
+                    avg_fill_price = fill_result["avg_fill_price"]
+                    cost           = fill_result["total_cost"]
 
-                # M-2: Per-market margin rate (SEBI-compliant 20% for INDIA)
-                _SHORT_MARGIN_RATE = _SHORT_MARGIN_RATES.get(self.market, 0.15)
-                margin_reserved    = round(cost * _SHORT_MARGIN_RATE, 4)
+                    # M-2: Per-market margin rate (SEBI-compliant 20% for INDIA)
+                    _SHORT_MARGIN_RATE = _SHORT_MARGIN_RATES.get(self.market, 0.15)
+                    margin_reserved    = round(cost * _SHORT_MARGIN_RATE, 4)
 
-                # E-1: live broker first.
-                # `shares` is already broker-normalized (see sizing block above).
-                if self.broker.is_live:
-                    _ok, _msg, _oid = self.broker.short(symbol, shares, avg_fill_price)
-                    if not _ok:
-                        return False, f"Broker rejected SHORT: {_msg}"
+                    # E-1: live broker first.
+                    # `shares` is already broker-normalized (see sizing block above).
+                    _is_synthetic_price = False
+                    if self.broker.is_live:
+                        _ok, _msg, _oid = self.broker.short(symbol, shares, avg_fill_price)
+                        if not _ok:
+                            return False, f"Broker rejected SHORT: {_msg}"
+                        if _oid:
+                            fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, shares, avg_fill_price)
+                            if fr.status == "REJECTED":
+                                return False, f"Order {_oid} rejected/cancelled with zero fill: {fr.message}"
+                            if fr.status == "TIMEOUT":
+                                _cancel_ok, _cancel_msg = False, "not attempted"
+                                try:
+                                    _cancel_ok, _cancel_msg = self.broker.cancel_order(_oid)
+                                except Exception as _cancel_err:
+                                    _cancel_msg = str(_cancel_err)
 
-                _entry_prec = get_price_precision(symbol)
-                holding = {
-                    "symbol":          symbol,
-                    "shares":          shares,
-                    "entry_price":     round(avg_fill_price, _entry_prec),
-                    "current_price":   round(avg_fill_price, _entry_prec),
+                                # Always verify post-cancel terminal status with one final poll
+                                fr = await asyncio.to_thread(self.broker.get_fill_status, _oid, shares, avg_fill_price)
+                                if fr.status in ("FILLED", "PARTIAL"):
+                                    pass  # Filled during race, fall through and book real fill
+                                elif fr.status == "REJECTED":
+                                    return False, f"Order {_oid} confirmed cancelled/rejected with zero fill: {fr.message}"
+                                else:
+                                    return False, (f"Order {_oid} status unresolved post-cancel ({_cancel_msg}). "
+                                                   f"MANUAL RECONCILIATION REQUIRED for order {_oid}.")
 
-                    "value":           round(cost, 4),
-                    "change":          0.0,
-                    "stop_loss":       round(stop_data["stop_loss"], 4),
-                    "initial_stop":    round(stop_data["stop_loss"], 4),
-                    "take_profit":     round(stop_data["take_profit"], 4),
-                    "tp1_target":      round(stop_data.get("tp1_target", stop_data["take_profit"]), 4),
-                    "tp2_target":      round(stop_data.get("tp2_target", stop_data["take_profit"]), 4),
-                    "breakeven_trigger": round(stop_data.get("breakeven_trigger", avg_fill_price), 4),
-                    "tp1_hit":         False,
-                    "best_price":      round(avg_fill_price, 4),
-                    "sparkline":       [round(avg_fill_price, 4)],
-                    "regime":          decision.get("regime", "Sideways"),
-                    "direction":       "SHORT",
-                    "margin_reserved": margin_reserved,
-                    # IV&V Medium: see LONG branch — enables RL attribution on
-                    # stop/TP force_close.
-                    "committee_breakdown": decision.get("committee_breakdown", []),
-                }
+                            avg_fill_price = fr.fill_price
+                            shares = fr.filled_qty
+                            cost = shares * avg_fill_price
+                            margin_reserved = round(cost * _SHORT_MARGIN_RATE, 4)
+                            _is_synthetic_price = fr.is_synthetic
+                        else:
+                            _is_synthetic_price = True
 
-                # A-3: update state under lock
-                async with self._get_lock():
-                    self.portfolio_balance -= margin_reserved
-                    self.active_holdings.append(holding)
+                    _entry_prec = get_price_precision(symbol)
+                    holding = {
+                        "symbol":          symbol,
+                        "shares":          shares,
+                        "entry_price":     round(avg_fill_price, _entry_prec),
+                        "current_price":   round(avg_fill_price, _entry_prec),
 
-                if DB_ENABLED:
-                    try:
-                        async with AsyncSessionLocal() as session:
-                            # Open — Order only (round-trip Trade recorded at cover).
-                            await _persist_fill(session, symbol, "SELL", shares, avg_fill_price)
-                    except Exception as e:
-                        print(f"Failed to write DB order (SHORT): {e}")
+                        "value":           round(cost, 4),
+                        "is_synthetic_price": _is_synthetic_price,
+                        "change":          0.0,
+                        "stop_loss":       round(stop_data["stop_loss"], 4),
+                        "initial_stop":    round(stop_data["stop_loss"], 4),
+                        "take_profit":     round(stop_data["take_profit"], 4),
+                        "tp1_target":      round(stop_data.get("tp1_target", stop_data["take_profit"]), 4),
+                        "tp2_target":      round(stop_data.get("tp2_target", stop_data["take_profit"]), 4),
+                        "breakeven_trigger": round(stop_data.get("breakeven_trigger", avg_fill_price), 4),
+                        "tp1_hit":         False,
+                        "best_price":      round(avg_fill_price, 4),
+                        "sparkline":       [round(avg_fill_price, 4)],
+                        "regime":          decision.get("regime", "Sideways"),
+                        "direction":       "SHORT",
+                        "margin_reserved": margin_reserved,
+                        # IV&V Medium: see LONG branch — enables RL attribution on
+                        # stop/TP force_close.
+                        "committee_breakdown": decision.get("committee_breakdown", []),
+                    }
 
-                self.execution_logs.append({
-                    "time": time.time(), "action": "FILLED_SHORT",
-                    "symbol": symbol, "shares": shares, "price": price,
-                })
-                self.journal.log_trade(symbol, "SELL", price, decision)
-                await self._save_state_async()
-                return True, f"FILLED SHORT {shares:.4g} @ ${avg_fill_price:.2f} (margin={_SHORT_MARGIN_RATE*100:.0f}%)"
+                    # A-3: update state under lock
+                    async with self._get_lock():
+                        self.portfolio_balance -= margin_reserved
+                        self.active_holdings.append(holding)
+
+                    if DB_ENABLED:
+                        try:
+                            async with AsyncSessionLocal() as session:
+                                # Open — Order only (round-trip Trade recorded at cover).
+                                await _persist_fill(session, symbol, "SELL", shares, avg_fill_price)
+                        except Exception as e:
+                            print(f"Failed to write DB order (SHORT): {e}")
+
+                    self.execution_logs.append({
+                        "time": time.time(), "action": "FILLED_SHORT",
+                        "symbol": symbol, "shares": shares, "price": price,
+                    })
+                    self.journal.log_trade(symbol, "SELL", price, decision)
+                    await self._save_state_async()
+                    return True, f"FILLED SHORT {shares:.4g} @ ${avg_fill_price:.2f} (margin={_SHORT_MARGIN_RATE*100:.0f}%)"
+                finally:
+                    async with self._get_lock():
+                        self._in_flight_entries.discard(symbol)
 
         return True, "No action required"
 

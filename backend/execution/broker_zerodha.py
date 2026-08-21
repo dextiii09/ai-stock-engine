@@ -166,10 +166,55 @@ class ZerodhaBroker(BrokerBase):
                 order_type=KiteConnect.ORDER_TYPE_MARKET,
                 product=KiteConnect.PRODUCT_MIS,
             )
-            msg = f"[ZERODHA] COVER {qty} {clean} (MIS). ID={order_id}"
+            msg = f"[ZERODHA] COVER {qty} {clean}. ID={order_id}"
             return True, msg, str(order_id)
         except Exception as e:
-            return False, f"[ZERODHA] Cover failed: {e}", None
+            return False, f"Zerodha order failed: {str(e)}", None
+
+    def cancel_order(self, order_id: str) -> Tuple[bool, str]:
+        if not self._connected or self._kite is None:
+            return False, "Not connected"
+        try:
+            self._kite.cancel_order(variety=self._kite.VARIETY_REGULAR, order_id=order_id)
+            return True, f"Cancelled {order_id}"
+        except Exception as e:
+            return False, f"Cancel failed: {e}"
+
+    def get_fill_status(self, order_id: str, requested_qty: float, fallback_price: float):
+        from .broker_base import FillResult
+        if not self._connected or self._kite is None:
+            return FillResult("TIMEOUT", fallback_price, 0.0, True, "Broker not connected")
+        
+        import time
+        for _ in range(15):
+            try:
+                history = self._kite.order_history(order_id=order_id)
+                if history:
+                    last = history[-1]
+                    status = last.get("status")
+                    filled = float(last.get("filled_quantity", 0) or 0)
+
+                    if status == "COMPLETE":
+                        price = last.get("average_price")
+                        if price and filled > 0:
+                            return FillResult("FILLED" if filled >= requested_qty else "PARTIAL",
+                                               float(price), filled, False, "Filled")
+                        return FillResult("TIMEOUT", fallback_price, 0.0, True, "COMPLETE status but no fill data")
+
+                    if status in ("REJECTED", "CANCELLED"):
+                        if filled > 0:
+                            price = float(last.get("average_price") or fallback_price)
+                            return FillResult("PARTIAL", price, filled, price == fallback_price,
+                                               last.get("status_message", status))
+                        return FillResult("REJECTED", 0.0, 0.0, False,
+                                           last.get("status_message", status))
+            except Exception as e:
+                import logging
+                logging.getLogger("ai_stock.execution").warning(f"[ZERODHA] order_history poll failed for {order_id}: {e}")
+            time.sleep(1)
+            
+        return FillResult("TIMEOUT", fallback_price, 0.0, True,
+                           f"Polling timed out after 15s, order {order_id} status unresolved")
 
     def get_account_info(self) -> Dict[str, Any]:
         if not self._connected or self._kite is None:

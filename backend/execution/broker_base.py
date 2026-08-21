@@ -4,6 +4,16 @@ All broker implementations must subclass BrokerBase.
 """
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional, Tuple
+from dataclasses import dataclass
+
+
+@dataclass
+class FillResult:
+    status: str          # "FILLED" | "PARTIAL" | "REJECTED" | "TIMEOUT"
+    fill_price: float    # real average_price if any fill occurred, else 0.0
+    filled_qty: float    # actual filled_quantity (0 for REJECTED/TIMEOUT-with-no-fill)
+    is_synthetic: bool   # True only when fill_price fell back to the router estimate
+    message: str         # status_message or a synthesized reason, for logging
 
 
 class BrokerBase(ABC):
@@ -80,6 +90,18 @@ class BrokerBase(ABC):
 
         Returns:
             (success, message, broker_order_id)
+        """
+
+    @abstractmethod
+    def cancel_order(self, order_id: str) -> Tuple[bool, str]:
+        """Cancel a pending order. Override if broker supports it."""
+        return False, "Order cancellation not supported by this broker."
+
+    @abstractmethod
+    def get_fill_status(self, order_id: str, requested_qty: float, fallback_price: float) -> FillResult:
+        """
+        Poll the broker for the final average fill price and quantity of an order.
+        Should return a FillResult describing whether it filled, partially filled, rejected, or timed out.
         """
 
     def normalize_quantity(self, symbol: str, qty: float) -> float:

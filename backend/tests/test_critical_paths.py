@@ -305,6 +305,13 @@ class TestCalculateSize:
         result = self._sizer().calculate_size(0.9, 0.0, 100.0)
         assert result["shares"] == 0
 
+    def test_negative_realized_b_zeroes_sizing(self):
+        """A terrible realized R:R (e.g. b=0.05) must trigger negative_edge gate and return 0 shares."""
+        s = self._sizer()
+        result = s.calculate_size(0.9, 10_000.0, 100.0, n_closed_trades=50, recent_win_rate=0.50, realized_b=0.05)
+        assert result["shares"] == 0.0
+        assert result["kelly_gate"] == "negative_edge"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Circuit breaker  (PortfolioRiskManager)
@@ -683,15 +690,45 @@ class TestTradePostMortem:
 class TestNewsSentimentScanner:
     def test_news_scanner_adverse_keyword_veto(self):
         from data.news_sentiment_scanner import NewsSentimentScanner
-        scanner = NewsSentimentScanner()
+        scanner = NewsSentimentScanner.instance()
+        scanner._cache.clear()
         # Mock headlines with adverse keyword
-        scanner.fetch_headlines = lambda sym, limit=4: [
-            "SEC launches fraud investigation into accounting irregularities",
-            "Company files bankruptcy petition in Delaware"
-        ]
-        is_veto, score, reason = scanner.check_news_veto("TEST_SYMBOL")
-        assert is_veto is True
+        scanner.fetch_headlines = lambda sym, limit=4: (
+            [
+                "SEC launches fraud investigation into accounting irregularities",
+                "Company files bankruptcy petition in Delaware"
+            ],
+            True
+        )
+
+        adverse_veto, euphoric_veto, score, reason = scanner.check_news_veto("TEST_SYMBOL")
+        assert adverse_veto is True
+        assert euphoric_veto is False
         assert score < -0.70
+
+    def test_news_scanner_euphoric_keyword_veto(self):
+        from data.news_sentiment_scanner import NewsSentimentScanner
+        scanner = NewsSentimentScanner.instance()
+        scanner._cache.clear()
+        scanner.fetch_headlines = lambda sym, limit=4: (
+            ["FDA approval granted for flagship drug, earnings beat estimates"], True
+        )
+        adverse_veto, euphoric_veto, score, reason = scanner.check_news_veto("TEST_SYMBOL")
+        assert adverse_veto is False
+        assert euphoric_veto is True
+        assert score > 0.70
+
+    def test_news_scanner_mixed_keyword_veto(self):
+        from data.news_sentiment_scanner import NewsSentimentScanner
+        scanner = NewsSentimentScanner.instance()
+        scanner._cache.clear()
+        scanner.fetch_headlines = lambda sym, limit=4: (
+            ["Company announces buyout offer but faces SEC investigation"], True
+        )
+        adverse_veto, euphoric_veto, score, reason = scanner.check_news_veto("TEST_SYMBOL")
+        assert adverse_veto is True
+        assert euphoric_veto is True
+        assert score < -0.70  # Defaults to conservative adverse score
 class TestMonteCarloVaR:
     def test_var_all_cash_zero_risk(self):
         from risk.monte_carlo_var import MonteCarloVaREngine

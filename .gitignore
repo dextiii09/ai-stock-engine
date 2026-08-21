@@ -24,6 +24,8 @@ sync_*.py
 *.json.journal
 tmp*
 backend/data/tmp*
+backend/data/backups/
+*.zip
 audit_state_*.json
 backend/data/audit_state_*.json
 journal*.json

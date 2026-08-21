@@ -27,4 +27,10 @@ class PaperBroker(BrokerBase):
         return True, f"[PAPER] SHORT {qty} {symbol} @ {price:.4f} filled.", None
 
     def cover(self, symbol, qty, price, order_type="MARKET"):
-        return True, f"[PAPER] COVER {qty} {symbol} @ {price:.4f} filled.", None
+        _oid = f"PAPER_{int(time.time()*1000)}"
+        return True, f"[PAPER] COVER {qty} {symbol} @ {price}", _oid
+
+    def get_fill_status(self, order_id: str, requested_qty: float, fallback_price: float):
+        from .broker_base import FillResult
+        # Paper trades execute instantly at the simulated router price in full
+        return FillResult("FILLED", fallback_price, requested_qty, False, "Paper fill")

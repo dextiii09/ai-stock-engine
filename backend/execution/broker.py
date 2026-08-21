@@ -20,8 +20,6 @@ def get_price_precision(symbol: str) -> int:
         return 4
     return 2
 
-_get_price_precision = get_price_precision
-
 
 
 class SmartOrderRouter:
@@ -48,7 +46,7 @@ class SmartOrderRouter:
         Returns (is_acceptable, spread_pct, message).
         """
         if bid <= 0 or ask <= 0 or ask < bid:
-            return True, 0.0, "Spread not available or crossed; proceeding with default execution."
+            return False, 0.0, "Invalid market quote."
         mid = (bid + ask) / 2.0
         spread = ask - bid
         spread_pct = spread / mid
@@ -77,7 +75,7 @@ class SmartOrderRouter:
 
     def _market_order(self, symbol: str, shares: float, price: float, direction: str = "LONG") -> Dict[str, Any]:
         """Immediate fill — highest adverse slippage."""
-        prec = _get_price_precision(symbol)
+        prec = get_price_precision(symbol)
         slippage = price * random.uniform(0.0001, 0.001)
         # Adverse slippage: higher price when buying (LONG), lower price when selling short (SHORT)
         fill_price = round(price + slippage, prec) if direction == "LONG" else round(price - slippage, prec)
@@ -88,7 +86,7 @@ class SmartOrderRouter:
         Splits order into N equal time slices.
         Each slice simulates small random walk from market impact.
         """
-        prec = _get_price_precision(symbol)
+        prec = get_price_precision(symbol)
         slice_size = max(1.0 if isinstance(shares, int) else shares / self.slices, shares / self.slices)
         fills = []
         running_price = price
@@ -112,7 +110,7 @@ class SmartOrderRouter:
         Sizes each slice proportional to a simulated intraday volume profile.
         Heaviest at market open and close (U-shaped volume curve).
         """
-        prec = _get_price_precision(symbol)
+        prec = get_price_precision(symbol)
         weights = [0.20, 0.12, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.12]
         fills = []
         running_price = price
@@ -144,7 +142,7 @@ class SmartOrderRouter:
         Hides order size — shows only a small 'tip' (10% visible at a time).
         Reduces market impact for large orders.
         """
-        prec = _get_price_precision(symbol)
+        prec = get_price_precision(symbol)
         visible_size = max(1.0 if isinstance(shares, int) else shares / 10.0, shares / 10.0)
         fills = []
         remaining = shares
@@ -161,25 +159,42 @@ class SmartOrderRouter:
         avg_fill = round(sum(f[0] * f[1] for f in fills) / max(shares, 1e-9), prec)
         return self._fill_summary("ICEBERG", symbol, shares, avg_fill, price, fills, direction=direction)
 
-    def _fill_summary(self, strategy: str, symbol: str, shares: float,
-                      avg_fill: float, market_price: float, fills: List, direction: str = "LONG") -> Dict[str, Any]:
-        prec = _get_price_precision(symbol)
-        diff = (avg_fill - market_price) if direction == "LONG" else (market_price - avg_fill)
-        slippage_bps = round(diff / max(market_price, 1e-9) * 10000, 2)
-        total_cost = round(avg_fill * shares, 2 if prec == 2 else 4)
+    def _fill_summary(
+        self,
+        strategy: str,
+        symbol: str,
+        shares: float,
+        avg_fill_price: float,
+        original_price: float,
+        fills: List[Tuple[float, float]],
+        direction: str = "LONG"
+    ) -> Dict[str, Any]:
+        """
+        Direction-aware slippage calculation:
+        - LONG:  Slippage is positive cost if avg_fill_price > original_price
+        - SHORT: Slippage is positive cost if avg_fill_price < original_price (sold lower than quote)
+        """
+        prec = get_price_precision(symbol)
+        if direction == "LONG":
+            slippage_usd = (avg_fill_price - original_price) * shares
+            slippage_pct = (avg_fill_price - original_price) / original_price
+        else:
+            slippage_usd = (original_price - avg_fill_price) * shares
+            slippage_pct = (original_price - avg_fill_price) / original_price
 
+        total_cost = round(shares * avg_fill_price, 4)
         summary = {
-            "strategy": strategy,
-            "symbol": symbol,
-            "direction": direction,
-            "total_shares": shares,
-            "avg_fill_price": round(avg_fill, prec),
-            "market_price_at_entry": market_price,
-            "slippage_bps": slippage_bps,
-            "total_cost": total_cost,
-            "fill_count": len(fills),
-            "fills": fills,
-            "timestamp": time.time()
+            "strategy":       strategy,
+            "symbol":         symbol,
+            "direction":      direction,
+            "shares":         shares,
+            "target_price":   round(original_price, prec),
+            "avg_fill_price": avg_fill_price,
+            "slippage_usd":   round(slippage_usd, 4),
+            "slippage_bps":   round(slippage_pct * 10000, 2),
+            "total_cost":     total_cost,
+            "num_slices":     len(fills),
+            "timestamp":      time.time(),
         }
         self.execution_log.append(summary)
         return summary

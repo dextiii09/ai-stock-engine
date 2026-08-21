@@ -32,8 +32,8 @@ class PositionSizer:
     ) -> dict:
         """
         Args:
-            confidence:       Committee conviction score (0–1). Used as fallback p
-                              only when win rate is unavailable (first 30 trades).
+            confidence:       Committee conviction score (0–1). Retained for caller
+                              signature compatibility; sizing uses calibrated win rate.
             recent_win_rate:  FRACTION (0–1). Pass rl_engine.win_rate / 100.
             n_closed_trades:  rl_engine.total_closed_trades.
             realized_b:       avg_win / avg_loss from trade history. None → 2.0.
@@ -68,44 +68,56 @@ class PositionSizer:
         p = float(max(0.05, min(0.95, recent_win_rate)))
         q = 1.0 - p
 
-        # b: realized avg_win / avg_loss (trailing).  Fall back to target R:R.
-        b = float(realized_b) if (realized_b is not None and realized_b > 0.1) else 2.0
+        # b: realized avg_win / avg_loss (trailing). Use 1e-4 floor for zero-div safety.
+        b = max(1e-4, float(realized_b)) if realized_b is not None else 2.0
 
         # Half-Kelly: f* = (p·b − q) / b, halved to absorb estimation error
         kelly_fraction = (p * b - q) / b
         half_kelly     = kelly_fraction / 2.0
 
         # ── Adaptive scalers ──────────────────────────────────────────────────
-        # 1. Regime scalar — keyed on 4-name RL vocab (what detect() actually emits).
-        # The old 10-name dict was dead: detect() maps all HMM states to 4 RL names
-        # via HMM_TO_RL before anything downstream sees them, so the 10-name keys
-        # never matched and regime_scalar was silently always 1.0.
-        # Collapsed values are conservative blends of the constituent HMM scalars:
-        #   Trending Bull:   Strong (1.2) + Weak (1.0) + Expansion (1.0) → 1.1
-        #   Trending Bear:   Strong (1.2) + Weak (1.0) → 1.0  (bear momentum = neutral risk)
-        #   Sideways:        Compression (0.5) + Low Liquidity (0.6) → 0.5  (conservative)
-        #   High Volatility: Gap Day (0.5) + News Shock (0.2) + High Liquidity (1.1) → 0.4
-        #                    (unknown sub-type; worst-case News Shock dominates tails)
+        # Map raw HMM state names to the 4 canonical names if unmapped
+        _HMM_FALLBACK = {
+            "Strong Bull": "Trending Bull", "Weak Bull": "Trending Bull", "Bull Expansion": "Trending Bull",
+            "Strong Bear": "Trending Bear", "Weak Bear": "Trending Bear",
+            "Compression": "Sideways", "Low Liquidity": "Sideways",
+            "Gap Day": "High Volatility", "News Shock": "High Volatility", "High Liquidity": "High Volatility"
+        }
+        canonical_regime = _HMM_FALLBACK.get(regime, regime)
         regime_scalars = {
             "Trending Bull":   1.1,
             "Trending Bear":   1.0,
             "Sideways":        0.5,
             "High Volatility": 0.4,
         }
-        regime_scalar = regime_scalars.get(regime, 1.0)
+        regime_scalar = regime_scalars.get(canonical_regime, 1.0)
 
         # 2. Volatility penalty
-        # NOTE: win_rate_scalar removed (Session 5). It was compensation for the old
-        # uncalibrated p=confidence.  Now that p = realized win rate, applying a
-        # win-rate multiplier on top of Kelly's p double-counts the same signal and
-        # amplifies sizing pro-cyclically. Regime + volatility scalars are sufficient.
         volatility_scalar = 1.0
         if atr_pct > 1.0:    volatility_scalar = 0.5
         elif atr_pct > 0.5:  volatility_scalar = 0.8
 
         adjusted_kelly = half_kelly * regime_scalar * volatility_scalar
-        risk_pct = min(max(0.0, adjusted_kelly), self.max_risk_per_trade)
 
+        # ── Negative edge safety gate ──
+        if adjusted_kelly <= 0.0:
+            return {
+                "shares":            0.0,
+                "capital_allocated": 0.0,
+                "risk_pct":          0.0,
+                "scalars": {
+                    "regime":     regime_scalar,
+                    "volatility": volatility_scalar,
+                },
+                "kelly_inputs": {
+                    "p":          round(p, 4),
+                    "b":          round(b, 4),
+                    "half_kelly": round(half_kelly, 4),
+                },
+                "kelly_gate": "negative_edge",
+            }
+
+        risk_pct = min(adjusted_kelly, self.max_risk_per_trade)
         capital_to_allocate = current_capital * risk_pct
         shares = round(capital_to_allocate / max(current_price, 1e-6), 4)
 
@@ -122,4 +134,6 @@ class PositionSizer:
                 "b":          round(b, 4),
                 "half_kelly": round(half_kelly, 4),
             },
+            "kelly_gate": "half_kelly_optimal",
         }
+
