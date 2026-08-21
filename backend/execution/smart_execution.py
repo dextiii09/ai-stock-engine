@@ -77,7 +77,7 @@ from risk.adaptive_stops import AdaptiveStopLoss
 from analytics.simulator import AITradeSimulator
 from analytics.journal import AIJournal
 from analytics.rl_engine import ReinforcementLearningEngine
-from execution.broker import SmartOrderRouter
+from execution.broker import SmartOrderRouter, get_price_precision
 
 # M-2: Per-market SHORT margin rates.
 # SEBI SPAN minimum for Indian equities/futures is 15-25%; we use 20% (conservative).
@@ -951,7 +951,7 @@ class SmartExecutionEngine:
                     if not _ok:
                         return False, f"Broker rejected BUY: {_msg}"
 
-                _entry_prec = 5 if "=X" in symbol else 4
+                _entry_prec = get_price_precision(symbol)
                 holding = {
                     "symbol":        symbol,
                     "shares":        shares,
@@ -1174,7 +1174,7 @@ class SmartExecutionEngine:
                     if not _ok:
                         return False, f"Broker rejected SHORT: {_msg}"
 
-                _entry_prec = 5 if "=X" in symbol else 4
+                _entry_prec = get_price_precision(symbol)
                 holding = {
                     "symbol":          symbol,
                     "shares":          shares,

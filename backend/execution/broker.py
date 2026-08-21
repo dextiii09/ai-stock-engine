@@ -6,7 +6,7 @@ from typing import Dict, Any, List, Optional, Tuple
 MAX_ALLOWED_SPREAD_PCT = 0.0020  # 0.20% (20 bps max tolerance)
 
 
-def _get_price_precision(symbol: str) -> int:
+def get_price_precision(symbol: str) -> int:
     """
     Returns the required decimal precision for execution pricing based on asset class.
     - Forex pairs (e.g. EURUSD=X, GBPUSD=X): 5 decimal places for pip/fractional-pip precision.
@@ -19,6 +19,9 @@ def _get_price_precision(symbol: str) -> int:
     elif sym.endswith("=F") or sym.startswith("^") or sym.endswith("-USD"):
         return 4
     return 2
+
+_get_price_precision = get_price_precision
+
 
 
 class SmartOrderRouter:

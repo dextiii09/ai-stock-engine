@@ -3549,16 +3549,23 @@ async def auto_resume_bots():
     stocks_risk_mode = "Normal"
     crypto_risk_mode = "Normal"
     forex_risk_mode  = "Normal"
+    import logging as _logging
+    _srv_logger = _logging.getLogger("ai_stock.server")
     try:
-        with open(_BOT_STATE_FILE) as _f:
-            _state = _json_state.load(_f)
-        us_risk_mode     = _state.get("us_risk_mode", "Normal")
-        india_risk_mode  = _state.get("india_risk_mode", "Normal")
-        stocks_risk_mode = _state.get("stocks_risk_mode", "Normal")
-        crypto_risk_mode = _state.get("crypto_risk_mode", "Normal")
-        forex_risk_mode  = _state.get("forex_risk_mode", "Normal")
-    except Exception:
-        pass  # First boot or file missing — use defaults
+        if os.path.exists(_BOT_STATE_FILE):
+            with open(_BOT_STATE_FILE) as _f:
+                _state = _json_state.load(_f)
+            us_risk_mode     = _state.get("us_risk_mode", "Normal")
+            india_risk_mode  = _state.get("india_risk_mode", "Normal")
+            stocks_risk_mode = _state.get("stocks_risk_mode", "Normal")
+            crypto_risk_mode = _state.get("crypto_risk_mode", "Normal")
+            forex_risk_mode  = _state.get("forex_risk_mode", "Normal")
+            _srv_logger.info(f"[Server] Restored persisted risk modes: US={us_risk_mode}, IN={india_risk_mode}, ST={stocks_risk_mode}, CX={crypto_risk_mode}, FX={forex_risk_mode}")
+        else:
+            _srv_logger.info(f"[Server] No {_BOT_STATE_FILE} found. Safe-defaulting all 5 market loops to Normal mode.")
+    except Exception as e:
+        _srv_logger.warning(f"[Server] Failed to read {_BOT_STATE_FILE} ({e}). Safe-defaulting all 5 market loops to Normal mode.")
+
 
     # US
     engine_state["is_running"] = True
