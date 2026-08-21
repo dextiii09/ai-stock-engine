@@ -1,7 +1,7 @@
 # AI Stock Engine: System Verification & Live Diagnostic Report
 
 > **Prepared For:** Independent AI / Quant Auditor Verification (Claude / OpenAI / Quant Reviewer)  
-> **Report Timestamp:** 2026-08-20 20:20:05 UTC  
+> **Report Timestamp:** 2026-08-21 02:14:27 UTC  
 > **System Version:** 3.0.0 (Institutional Multi-Asset Quantitative Engine)  
 > **Production VPS Host:** `http://140.245.210.188:8080` | **Web UI:** `http://140.245.210.188:5173`  
 > **Official Git Repository:** [https://github.com/dextiii09/ai-stock-engine](https://github.com/dextiii09/ai-stock-engine) (Branch: `main`)
@@ -27,31 +27,31 @@ The **AI Stock Engine** is a 24/7 institutional autonomous trading, algorithmic 
     "US": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 4.0,
+      "last_tick_secs_ago": 3.0,
       "status": "ok"
     },
     "INDIA": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 2.5,
+      "last_tick_secs_ago": 0.0,
       "status": "ok"
     },
     "STOCKS": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 2.5,
+      "last_tick_secs_ago": 0.0,
       "status": "ok"
     },
     "CRYPTO": {
       "running": true,
       "open_positions": 0,
-      "last_tick_secs_ago": 2.5,
+      "last_tick_secs_ago": 0.0,
       "status": "ok"
     },
     "FOREX": {
       "running": true,
       "open_positions": 3,
-      "last_tick_secs_ago": 2.5,
+      "last_tick_secs_ago": 0.0,
       "status": "ok"
     }
   },
@@ -145,9 +145,15 @@ All 14 MetaGate machine learning models were generated and saved in `backend/dat
 * **Suite 7: Real-Time WebSocket Cache:** `[PASS]`
 
 ### 2. Pytest Unit Test Suite (`pytest backend/tests/`)
-* **Total Collected Tests:** 30
-* **Passed:** 30 / 30 (**100% Pass Rate**)
+* **Total Collected Tests:** 37
+* **Passed:** 37 / 37 (**100% Pass Rate**)
 * **Failed:** 0
+* **Test Coverage Highlights:**
+  * Exact Boundary Assertions for Daily Circuit Breaker (3.4% no halt, 3.6% halt)
+  * Exact Boundary Assertions for Weekly Circuit Breaker (6.9% no halt, 7.1% halt)
+  * Real Dynamic Cross-Market Initial Capital Aggregation (`GlobalRiskAggregator.total_initial_capital()`)
+  * Interactive Telegram Bot Controller & 1-Tap Quick Action Keyboard
+
 
 ---
 

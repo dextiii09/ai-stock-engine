@@ -72,8 +72,19 @@ class GlobalRiskAggregator:
             total += eq
         return total
 
+    def total_initial_capital(self) -> float:
+        """Sum initial capital baseline across all registered engines, normalized to USD."""
+        total = 0.0
+        for e in self._engines:
+            init_bal = getattr(e, "_initial_balance", getattr(e, "portfolio_balance", 10000.0))
+            if getattr(e, "market", "US") == "INDIA":
+                init_bal *= INR_USD_RATE
+            total += init_bal
+        return total
+
     def equity_by_market(self) -> Dict[str, float]:
         return {e.market: round(e.get_total_equity(), 2) for e in self._engines}
+
 
     # ------------------------------------------------------------------ #
     # Circuit-breaker evaluation (call every tick — pure arithmetic)       #

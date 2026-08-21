@@ -2238,7 +2238,7 @@ async def get_portfolio_risk():
     capital = execution_engine.get_total_equity()  # margin-aware: short "value" is notional+PnL, not cash at risk
     risk = portfolio_risk.analyze(holdings, capital)
     trades = execution_engine.closed_trades
-    perf = performance_metrics.compute(trades, initial_capital=100_000.0)
+    perf = performance_metrics.compute(trades, initial_capital=execution_engine._initial_balance)
     # Enrich with per-trade stats that equity-curve metrics don't capture
     if trades:
         gross_profit = sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) > 0)
@@ -2312,11 +2312,17 @@ async def get_analytics_performance_breakdown():
         "CRYPTO": execution_engine_cx,
         "FOREX": execution_engine_fx,
     }
+    combined_initial_capital = (
+        global_risk.total_initial_capital()
+        or global_risk.total_equity()
+        or 100_000.0
+    )
     return performance_metrics.get_comprehensive_performance_breakdown(
         all_closed,
-        initial_capital=100_000.0,
+        initial_capital=combined_initial_capital,
         engines_map=engines_map
     )
+
 
 @router.post("/risk/emergency-kill-switch")
 async def trigger_emergency_kill_switch(reason: str = "Operator Activated"):
@@ -2705,7 +2711,7 @@ async def get_portfolio_risk_in():
     capital = execution_engine_in.get_total_equity()
     risk = portfolio_risk_in.analyze(holdings, capital)
     trades = execution_engine_in.closed_trades
-    perf = performance_metrics.compute(trades, initial_capital=4_150.0)
+    perf = performance_metrics.compute(trades, initial_capital=execution_engine_in._initial_balance)
     if trades:
         gross_profit = sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) > 0)
         gross_loss   = abs(sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) < 0))
@@ -2991,7 +2997,7 @@ async def get_portfolio_risk_st():
     capital = execution_engine_st.get_total_equity()
     risk = portfolio_risk_st.analyze(holdings, capital)
     trades = execution_engine_st.closed_trades
-    perf = performance_metrics.compute(trades, initial_capital=100_000.0)
+    perf = performance_metrics.compute(trades, initial_capital=execution_engine_st._initial_balance)
     if trades:
         gross_profit = sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) > 0)
         gross_loss   = abs(sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) < 0))
@@ -3214,7 +3220,7 @@ async def get_portfolio_risk_cx():
     capital = execution_engine_cx.get_total_equity()
     risk = portfolio_risk_cx.analyze(holdings, capital)
     trades = execution_engine_cx.closed_trades
-    perf = performance_metrics.compute(trades, initial_capital=10_000.0)
+    perf = performance_metrics.compute(trades, initial_capital=execution_engine_cx._initial_balance)
     if trades:
         gross_profit = sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) > 0)
         gross_loss   = abs(sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) < 0))
@@ -3437,7 +3443,7 @@ async def get_portfolio_risk_fx():
     capital = execution_engine_fx.get_total_equity()
     risk = portfolio_risk_fx.analyze(holdings, capital)
     trades = execution_engine_fx.closed_trades
-    perf = performance_metrics.compute(trades, initial_capital=50_000.0)
+    perf = performance_metrics.compute(trades, initial_capital=execution_engine_fx._initial_balance)
     if trades:
         gross_profit = sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) > 0)
         gross_loss   = abs(sum(t.get("profit_loss", 0) for t in trades if t.get("profit_loss", 0) < 0))

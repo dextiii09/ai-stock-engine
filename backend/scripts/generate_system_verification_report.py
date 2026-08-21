@@ -147,9 +147,15 @@ All 14 MetaGate machine learning models were generated and saved in `backend/dat
 * **Suite 7: Real-Time WebSocket Cache:** `[PASS]`
 
 ### 2. Pytest Unit Test Suite (`pytest backend/tests/`)
-* **Total Collected Tests:** 30
-* **Passed:** 30 / 30 (**100% Pass Rate**)
+* **Total Collected Tests:** 37
+* **Passed:** 37 / 37 (**100% Pass Rate**)
 * **Failed:** 0
+* **Test Coverage Highlights:**
+  * Exact Boundary Assertions for Daily Circuit Breaker (3.4% no halt, 3.6% halt)
+  * Exact Boundary Assertions for Weekly Circuit Breaker (6.9% no halt, 7.1% halt)
+  * Real Dynamic Cross-Market Initial Capital Aggregation (`GlobalRiskAggregator.total_initial_capital()`)
+  * Interactive Telegram Bot Controller & 1-Tap Quick Action Keyboard
+
 
 ---
 

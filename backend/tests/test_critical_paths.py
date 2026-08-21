@@ -310,34 +310,56 @@ class TestCalculateSize:
 # Circuit breaker  (PortfolioRiskManager)
 # ─────────────────────────────────────────────────────────────────────────────
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Circuit breaker  (PortfolioRiskManager)
+# ─────────────────────────────────────────────────────────────────────────────
+
 class TestCircuitBreaker:
 
-    def test_daily_halt_fires_on_threshold(self):
+    def test_daily_halt_boundary_below_limit(self):
+        """2.9% daily loss is strictly below 3.0% limit -> NO halt."""
         from risk.portfolio_risk import PortfolioRiskManager
         import tempfile, datetime
         pm = PortfolioRiskManager(state_file=tempfile.mktemp(suffix=".json"))
         pm.daily_start_capital = 10_000.0
         pm._last_reset_date    = datetime.date.today()
-        result = pm.analyze([], 10_000.0 * 0.96)  # 4% loss, limit 3%
-        assert result["halt_trading_for_day"]
-
-    def test_no_halt_below_threshold(self):
-        from risk.portfolio_risk import PortfolioRiskManager
-        import tempfile, datetime
-        pm = PortfolioRiskManager(state_file=tempfile.mktemp(suffix=".json"))
-        pm.daily_start_capital = 10_000.0
-        pm._last_reset_date    = datetime.date.today()
-        result = pm.analyze([], 10_000.0 * 0.98)  # 2% loss, below 3% limit
+        result = pm.analyze([], 10_000.0 * 0.971)  # 2.9% loss
         assert not result["halt_trading_for_day"]
 
-    def test_weekly_halt_fires(self):
+    def test_daily_halt_boundary_above_limit(self):
+        """3.1% daily loss is strictly above 3.0% limit -> fires daily halt."""
+        from risk.portfolio_risk import PortfolioRiskManager
+        import tempfile, datetime
+        pm = PortfolioRiskManager(state_file=tempfile.mktemp(suffix=".json"))
+        pm.daily_start_capital = 10_000.0
+        pm._last_reset_date    = datetime.date.today()
+        result = pm.analyze([], 10_000.0 * 0.969)  # 3.1% loss
+        assert result["halt_trading_for_day"]
+
+    def test_weekly_halt_boundary_below_limit(self):
+        """5.9% weekly loss is strictly below 6.0% limit -> NO halt."""
         from risk.portfolio_risk import PortfolioRiskManager
         import tempfile, datetime
         pm = PortfolioRiskManager(state_file=tempfile.mktemp(suffix=".json"))
         today = datetime.date.today()
         pm.weekly_start_capital = 10_000.0
         pm._last_reset_week     = tuple(today.isocalendar()[:2])
-        result = pm.analyze([], 10_000.0 * 0.93)  # 7% loss, limit 6%
+        pm.daily_start_capital  = 10_000.0 * 0.95
+        pm._last_reset_date     = today
+        result = pm.analyze([], 10_000.0 * 0.941)  # 5.9% weekly loss
+        assert not result["halt_trading_for_week"]
+
+    def test_weekly_halt_boundary_above_limit(self):
+        """6.1% weekly loss is strictly above 6.0% limit -> fires weekly halt."""
+        from risk.portfolio_risk import PortfolioRiskManager
+        import tempfile, datetime
+        pm = PortfolioRiskManager(state_file=tempfile.mktemp(suffix=".json"))
+        today = datetime.date.today()
+        pm.weekly_start_capital = 10_000.0
+        pm._last_reset_week     = tuple(today.isocalendar()[:2])
+        pm.daily_start_capital  = 10_000.0 * 0.95
+        pm._last_reset_date     = today
+        result = pm.analyze([], 10_000.0 * 0.939)  # 6.1% weekly loss
         assert result["halt_trading_for_week"]
 
 
@@ -347,63 +369,86 @@ class TestCircuitBreaker:
 
 class TestGlobalRiskAggregator:
 
-    def _mock_engine(self, equity: float):
+    def _mock_engine(self, equity: float, initial: float = 50_000.0, market: str = "TEST"):
         class _FakeEngine:
-            market = "TEST"
-            def get_total_equity(self): return equity
-        return _FakeEngine()
+            def __init__(self, m, eq, init):
+                self.market = m
+                self._eq = eq
+                self._initial_balance = init
+            def get_total_equity(self): return self._eq
+        return _FakeEngine(market, equity, initial)
 
-    def test_no_halt_below_threshold(self):
+    def test_daily_halt_boundary_3_4_pct_no_halt(self):
+        """3.4% daily drawdown is below 3.5% threshold -> NO global halt."""
         from risk.global_risk import GlobalRiskAggregator
         import tempfile, datetime
         ga = GlobalRiskAggregator(state_file=tempfile.mktemp(suffix=".json"))
         ga.daily_start_equity = 100_000.0
         ga._last_reset_date   = datetime.date.today()
-        ga.register_engines([self._mock_engine(49_000.0), self._mock_engine(49_000.0)])
-        assert not ga.check()["global_halt"]
-
-    def test_halt_fires_at_5pct_daily(self):
-        from risk.global_risk import GlobalRiskAggregator
-        import tempfile, datetime
-        ga = GlobalRiskAggregator(state_file=tempfile.mktemp(suffix=".json"))
-        ga.daily_start_equity = 100_000.0
-        ga._last_reset_date   = datetime.date.today()
-        # 6% combined loss → above 5% threshold
-        ga.register_engines([self._mock_engine(47_000.0), self._mock_engine(47_000.0)])
+        # 100,000 * (1 - 0.034) = 96,600 -> 48,300 + 48,300
+        ga.register_engines([self._mock_engine(48_300.0), self._mock_engine(48_300.0)])
         result = ga.check()
-        assert result["global_halt"]
+        assert not result["global_halt"], "3.4% drawdown must NOT trigger global halt"
+
+    def test_daily_halt_boundary_3_6_pct_fires_halt(self):
+        """3.6% daily drawdown is above 3.5% threshold -> FIRES global halt."""
+        from risk.global_risk import GlobalRiskAggregator
+        import tempfile, datetime
+        ga = GlobalRiskAggregator(state_file=tempfile.mktemp(suffix=".json"))
+        ga.daily_start_equity = 100_000.0
+        ga._last_reset_date   = datetime.date.today()
+        # 100,000 * (1 - 0.036) = 96,400 -> 48,200 + 48,200
+        ga.register_engines([self._mock_engine(48_200.0), self._mock_engine(48_200.0)])
+        result = ga.check()
+        assert result["global_halt"], "3.6% drawdown MUST trigger global halt"
         assert "daily" in result["halt_reason"].lower()
 
-    def test_halt_fires_at_10pct_weekly(self):
-        """11% weekly loss must trigger global halt; weekly_dd_pct must be >= 10%."""
+    def test_weekly_halt_boundary_6_9_pct_no_halt(self):
+        """6.9% weekly drawdown is below 7.0% threshold -> NO weekly halt."""
         from risk.global_risk import GlobalRiskAggregator
         import tempfile, datetime
         ga = GlobalRiskAggregator(state_file=tempfile.mktemp(suffix=".json"))
         today = datetime.date.today()
         ga.weekly_start_equity = 100_000.0
         ga._last_reset_week    = tuple(today.isocalendar()[:2])
-        ga.daily_start_equity  = 100_000.0
+        # Reset daily equity to match so daily 3.5% doesn't preempt weekly test
+        ga.daily_start_equity  = 95_000.0
         ga._last_reset_date    = today
-        ga.register_engines([self._mock_engine(44_500.0), self._mock_engine(44_500.0)])
+        # 100,000 * (1 - 0.069) = 93,100 -> 46,550 + 46,550
+        ga.register_engines([self._mock_engine(46_550.0), self._mock_engine(46_550.0)])
         result = ga.check()
-        assert result["global_halt"], "Should halt on 11% combined loss"
-        assert result["global_weekly_dd_pct"] >= 10.0, (
-            f"Weekly drawdown should be >= 10%, got {result['global_weekly_dd_pct']:.2f}%"
-        )
+        assert not result["global_halt"], "6.9% weekly drawdown must NOT trigger halt"
 
-    def test_equity_by_market_sums_correctly(self):
+    def test_weekly_halt_boundary_7_1_pct_fires_halt(self):
+        """7.1% weekly drawdown is above 7.0% threshold -> FIRES weekly halt."""
+        from risk.global_risk import GlobalRiskAggregator
+        import tempfile, datetime
+        ga = GlobalRiskAggregator(state_file=tempfile.mktemp(suffix=".json"))
+        today = datetime.date.today()
+        ga.weekly_start_equity = 100_000.0
+        ga._last_reset_week    = tuple(today.isocalendar()[:2])
+        # Daily drawdown is 2.0% (95k -> 92.9k = 2.2% < 3.5%), so weekly triggers
+        ga.daily_start_equity  = 95_000.0
+        ga._last_reset_date    = today
+        # 100,000 * (1 - 0.071) = 92,900 -> 46,450 + 46,450
+        ga.register_engines([self._mock_engine(46_450.0), self._mock_engine(46_450.0)])
+        result = ga.check()
+        assert result["global_halt"], "7.1% weekly drawdown MUST trigger global halt"
+        assert "weekly" in result["halt_reason"].lower()
+
+    def test_total_initial_capital_and_equity_aggregation(self):
         from risk.global_risk import GlobalRiskAggregator, INR_USD_RATE
         import tempfile
         ga = GlobalRiskAggregator(state_file=tempfile.mktemp(suffix=".json"))
-        class _E:
-            def __init__(self, m, v): self.market = m; self._v = v
-            def get_total_equity(self): return self._v
-        # Test USD + USD
-        ga.register_engines([_E("US", 10_000.0), _E("STOCKS", 5_000.0)])
-        assert ga.total_equity() == pytest.approx(15_000.0)
-        # Test USD + INDIA (normalized via INR_USD_RATE)
-        ga.register_engines([_E("US", 10_000.0), _E("INDIA", 5_000.0)])
-        assert ga.total_equity() == pytest.approx(10_000.0 + 5_000.0 * INR_USD_RATE)
+        ga.register_engines([
+            self._mock_engine(equity=50_000.0, initial=50_000.0, market="US"),
+            self._mock_engine(equity=500_000.0, initial=500_000.0, market="INDIA"),
+            self._mock_engine(equity=10_000.0, initial=10_000.0, market="CRYPTO"),
+        ])
+        expected_usd = 50_000.0 + (500_000.0 * INR_USD_RATE) + 10_000.0
+        assert ga.total_equity() == pytest.approx(expected_usd)
+        assert ga.total_initial_capital() == pytest.approx(expected_usd)
+
 
 
 class TestAdaptiveStops:

@@ -455,9 +455,15 @@ class TelegramBotController:
                 "CRYPTO": execution_engine_cx,
                 "FOREX": execution_engine_fx,
             }
-            stats = performance_metrics.get_comprehensive_performance_breakdown(
-                all_closed, initial_capital=100000.0, engines_map=engines_map
+            combined_initial_capital = (
+                global_risk.total_initial_capital()
+                or global_risk.total_equity()
+                or 100_000.0
             )
+            stats = performance_metrics.get_comprehensive_performance_breakdown(
+                all_closed, initial_capital=combined_initial_capital, engines_map=engines_map
+            )
+
             ov = stats.get("overall", {})
             r30 = stats.get("rolling_30d", {})
 
