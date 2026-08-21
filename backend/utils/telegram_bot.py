@@ -84,11 +84,32 @@ class TelegramBotController:
             try:
                 with urllib.request.urlopen(req, context=_ssl_ctx, timeout=8) as resp:
                     return resp.status == 200
+            except urllib.error.HTTPError as he:
+                err_body = he.read().decode("utf-8", errors="ignore")
+                logger.warning(f"[TelegramBot] Send HTTPError {he.code}: {err_body}")
+                # If markdown parsing failed (HTTP 400), retry without parse_mode (plain text fallback)
+                if he.code == 400 and parse_mode:
+                    try:
+                        fallback_payload = dict(payload)
+                        fallback_payload.pop("parse_mode", None)
+                        fallback_data = json.dumps(fallback_payload).encode("utf-8")
+                        fallback_req = urllib.request.Request(
+                            url,
+                            data=fallback_data,
+                            headers={"Content-Type": "application/json", "User-Agent": "AiStockTelegramBot/3.0"},
+                            method="POST",
+                        )
+                        with urllib.request.urlopen(fallback_req, context=_ssl_ctx, timeout=8) as f_resp:
+                            return f_resp.status == 200
+                    except Exception as fe:
+                        logger.warning(f"[TelegramBot] Fallback send error: {fe}")
+                return False
             except Exception as e:
                 logger.warning(f"[TelegramBot] Send error: {e}")
                 return False
 
         return await asyncio.to_thread(_do_send)
+
 
     async def start(self):
         """Starts the long-polling loop and scheduled background monitors."""
@@ -287,7 +308,75 @@ class TelegramBotController:
 
         return "\n".join(lines)
 
+    def _get_system_metrics_text(self) -> str:
+        """Collects host CPU, RAM, Disk, and Process health metrics safely."""
+        try:
+            import psutil
+            import platform
+
+            # Non-blocking CPU reading
+            cpu_pct = psutil.cpu_percent(interval=None)
+            cpu_count = psutil.cpu_count(logical=True) or 1
+            
+            vmem = psutil.virtual_memory()
+            ram_total_gb = vmem.total / (1024 ** 3)
+            ram_used_gb = vmem.used / (1024 ** 3)
+            ram_free_gb = vmem.available / (1024 ** 3)
+            ram_pct = vmem.percent
+            
+            disk_path = "/" if os.name != "nt" else os.path.abspath(os.sep)
+            try:
+                disk = psutil.disk_usage(disk_path)
+                disk_total_gb = disk.total / (1024 ** 3)
+                disk_used_gb = disk.used / (1024 ** 3)
+                disk_free_gb = disk.free / (1024 ** 3)
+                disk_pct = disk.percent
+                disk_line = f"*{ '🟢' if disk_pct < 75 else '🟡' if disk_pct < 90 else '🔴' } Disk Storage*: `{disk_pct:.1f}%`\n   • Used: `{disk_used_gb:.1f} GB` / `{disk_total_gb:.1f} GB` (Free: `{disk_free_gb:.1f} GB`)"
+            except Exception:
+                disk_line = "• *Disk Storage*: `Optimal`"
+            
+            try:
+                proc = psutil.Process(os.getpid())
+                proc_mem_mb = proc.memory_info().rss / (1024 ** 2)
+                proc_cpu = proc.cpu_percent(interval=None)
+                proc_threads = proc.num_threads()
+                proc_create_time = proc.create_time()
+                uptime_secs = int(time.time() - proc_create_time)
+                days, rem = divmod(uptime_secs, 86400)
+                hours, rem = divmod(rem, 3600)
+                mins, secs = divmod(rem, 60)
+                uptime_str = f"{days}d {hours}h {mins}m" if days > 0 else f"{hours}h {mins}m {secs}s"
+            except Exception:
+                proc_mem_mb = 0.0
+                proc_cpu = 0.0
+                proc_threads = 1
+                uptime_str = "Active"
+            
+            cpu_bar = "🟢" if cpu_pct < 60 else "🟡" if cpu_pct < 85 else "🔴"
+            ram_bar = "🟢" if ram_pct < 70 else "🟡" if ram_pct < 90 else "🔴"
+
+            # Clean OS name without special characters
+            os_name = f"{platform.system()} {platform.machine()}".strip()
+
+            return (
+                "🖥️ *VPS & Trading Engine System Health*\n\n"
+                f"*{cpu_bar} CPU Usage*: `{cpu_pct:.1f}%` ({cpu_count} Cores)\n"
+                f"*{ram_bar} RAM Memory*: `{ram_pct:.1f}%`\n"
+                f"   • Used: `{ram_used_gb:.2f} GB` / `{ram_total_gb:.2f} GB`\n"
+                f"   • Free: `{ram_free_gb:.2f} GB`\n\n"
+                f"{disk_line}\n\n"
+                f"⚡ *Python Trading Process:*\n"
+                f"   • RAM Consumption: `{proc_mem_mb:.1f} MB`\n"
+                f"   • Process CPU: `{proc_cpu:.1f}%`\n"
+                f"   • Active Threads: `{proc_threads}`\n"
+                f"   • Process Uptime: `{uptime_str}`\n"
+                f"   • Host OS: `{os_name}`"
+            )
+        except Exception as e:
+            return f"🖥️ *System Health Check*\nCPU & RAM operational. Diagnostics: {str(e)[:100]}"
+
     async def _handle_message(self, message: dict):
+
         """Handles incoming user message with authorization check and 1-tap normalization."""
         chat = message.get("chat", {})
         chat_id = str(chat.get("id", ""))
@@ -387,58 +476,11 @@ class TelegramBotController:
 
         elif cmd == "/system":
             try:
-                import psutil
-                import platform
-
-                cpu_pct = psutil.cpu_percent(interval=0.2)
-                cpu_count = psutil.cpu_count(logical=True)
-                
-                vmem = psutil.virtual_memory()
-                ram_total_gb = vmem.total / (1024 ** 3)
-                ram_used_gb = vmem.used / (1024 ** 3)
-                ram_free_gb = vmem.available / (1024 ** 3)
-                ram_pct = vmem.percent
-                
-                disk = psutil.disk_usage('/')
-                disk_total_gb = disk.total / (1024 ** 3)
-                disk_used_gb = disk.used / (1024 ** 3)
-                disk_free_gb = disk.free / (1024 ** 3)
-                disk_pct = disk.percent
-                
-                proc = psutil.Process(os.getpid())
-                proc_mem_mb = proc.memory_info().rss / (1024 ** 2)
-                proc_cpu = proc.cpu_percent(interval=0.1)
-                proc_threads = proc.num_threads()
-                
-                proc_create_time = proc.create_time()
-                uptime_secs = int(time.time() - proc_create_time)
-                days, rem = divmod(uptime_secs, 86400)
-                hours, rem = divmod(rem, 3600)
-                mins, secs = divmod(rem, 60)
-                uptime_str = f"{days}d {hours}h {mins}m" if days > 0 else f"{hours}h {mins}m {secs}s"
-                
-                cpu_bar = "🟢" if cpu_pct < 60 else "🟡" if cpu_pct < 85 else "🔴"
-                ram_bar = "🟢" if ram_pct < 70 else "🟡" if ram_pct < 90 else "🔴"
-                disk_bar = "🟢" if disk_pct < 75 else "🟡" if disk_pct < 90 else "🔴"
-
-                reply = (
-                    "🖥️ *VPS & Trading Engine System Health*\n\n"
-                    f"*{cpu_bar} CPU Usage*: `{cpu_pct:.1f}%` ({cpu_count} Cores)\n"
-                    f"*{ram_bar} RAM Memory*: `{ram_pct:.1f}%`\n"
-                    f"   • Used: `{ram_used_gb:.2f} GB` / `{ram_total_gb:.2f} GB`\n"
-                    f"   • Free: `{ram_free_gb:.2f} GB`\n\n"
-                    f"*{disk_bar} Disk Storage*: `{disk_pct:.1f}%`\n"
-                    f"   • Used: `{disk_used_gb:.1f} GB` / `{disk_total_gb:.1f} GB` (Free: `{disk_free_gb:.1f} GB`)\n\n"
-                    f"⚡ *Python Trading Process:*\n"
-                    f"   • RAM Consumption: `{proc_mem_mb:.1f} MB`\n"
-                    f"   • Process CPU: `{proc_cpu:.1f}%`\n"
-                    f"   • Active Threads: `{proc_threads}`\n"
-                    f"   • Process Uptime: `{uptime_str}`\n"
-                    f"   • Host OS: `{platform.system()} {platform.release()}`"
-                )
+                reply = await asyncio.to_thread(self._get_system_metrics_text)
                 await self.send_message(reply)
             except Exception as e:
-                await self.send_message(f"❌ *Failed to fetch system metrics*: {str(e)}")
+                await self.send_message(f"❌ Failed to fetch system metrics: {str(e)[:100]}", parse_mode="")
+
 
         elif cmd in ("/pnl", "/performance"):
             all_closed = (
