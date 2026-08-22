@@ -24,7 +24,14 @@ from execution.smart_execution import SmartExecutionEngine
 
 
 def _run(coro):
-    return asyncio.get_event_loop().run_until_complete(coro)
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_closed():
+            raise RuntimeError
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop.run_until_complete(coro)
 
 
 class MockLiveBroker(BrokerBase):
