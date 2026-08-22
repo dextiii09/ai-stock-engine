@@ -2493,15 +2493,26 @@ async def get_shadow_trading_stats():
         "summary": f"AI Gates correctly avoided {len(avoided_losses)} losing trades ({veto_accuracy_pct}% veto accuracy)."
     }
 
-@router.get("/data/live/{symbol}")
+_live_tick_cache: dict = {}
+_TICK_TTL = 5.0
 
+@router.get("/data/live/{symbol}")
 async def get_live_tick(symbol: str):
-    # SEC-2: sanitize symbol — only allow alphanumerics, dots, hyphens, carets
+    # SEC-2: sanitize symbol — only allow alphanumerics, dots, hyphens, underscores, carets
     import re as _re
-    if not _re.match(r"^[A-Za-z0-9.\-^=]{1,20}$", symbol):
+    if not _re.match(r"^[A-Za-z0-9._\-^=]{1,20}$", symbol):
         return {"error": "Invalid symbol format"}
-    """Fetch a real-time price tick for any symbol via Yahoo Finance (free)."""
-    return await asyncio.to_thread(data_engine.get_tick_for, symbol.upper())
+    """Fetch a real-time price tick for any symbol via Yahoo Finance (free, cached 5s)."""
+    sym = symbol.upper()
+    now = time.time()
+    cached = _live_tick_cache.get(sym)
+    if cached and (now - cached["ts"] < _TICK_TTL):
+        return cached["data"]
+
+    tick = await asyncio.to_thread(data_engine.get_tick_for, sym)
+    if tick:
+        _live_tick_cache[sym] = {"ts": now, "data": tick}
+    return tick
 
 analyzer = SentimentIntensityAnalyzer()
 
@@ -2515,13 +2526,21 @@ async def get_gates():
         "monte_carlo_ev": {"status": "NOT_EVALUATED", "details": "Waiting for signal."}
     })
 
+_corr_cache: dict = {"ts": 0.0, "data": None}
+_CORR_TTL = 60.0
+
 @router.get("/analytics/correlation")
 async def get_cross_asset_correlation():
     """
     Returns live 30-day rolling Pearson correlations between:
     GC (Gold), NQ (Nasdaq), and DXY (Dollar Index).
-    Computed fresh from Yahoo Finance data.
+    Cached for 60 seconds to eliminate page latency.
     """
+    global _corr_cache
+    now = time.time()
+    if _corr_cache["data"] is not None and (now - _corr_cache["ts"] < _CORR_TTL):
+        return _corr_cache["data"]
+
     import numpy as np
 
     def _compute():
@@ -2556,6 +2575,7 @@ async def get_cross_asset_correlation():
     result = await asyncio.to_thread(_compute)
     if result is None:
         result = {"gold_nq": -0.85, "gold_dxy": -0.92, "nq_dxy": -0.61, "sample_days": 0, "fallback": True}
+    _corr_cache = {"ts": now, "data": result}
     return result
 
 _news_cache: dict = {"ts": 0.0, "articles": []}

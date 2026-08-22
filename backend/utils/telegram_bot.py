@@ -77,7 +77,8 @@ class TelegramBotController:
             "disable_web_page_preview": True,
         }
         if with_keyboard:
-            payload["reply_markup"] = DEFAULT_KEYBOARD
+            kb = DEFAULT_KEYBOARD if with_keyboard is True else with_keyboard
+            payload["reply_markup"] = kb
 
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(
@@ -117,13 +118,34 @@ class TelegramBotController:
 
         return await asyncio.to_thread(_do_send)
 
+    async def answer_callback_query(self, query_id: str, text: str = "", show_alert: bool = False) -> bool:
+        """Acknowledges an inline callback query button tap with an optional popup alert."""
+        if not self.bot_token or not query_id:
+            return False
+        url = f"https://api.telegram.org/bot{self.bot_token}/answerCallbackQuery"
+        payload = {"callback_query_id": query_id, "text": text, "show_alert": show_alert}
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            url,
+            data=data,
+            headers={"Content-Type": "application/json", "User-Agent": "AiStockTelegramBot/3.0"},
+            method="POST",
+        )
+        def _do_answer():
+            try:
+                with urllib.request.urlopen(req, context=_ssl_ctx, timeout=8) as resp:
+                    return resp.status == 200
+            except Exception:
+                return False
+        return await asyncio.to_thread(_do_answer)
+
     async def send_photo(
         self,
         photo_bytes: bytes,
         caption: str = "",
         parse_mode: str = "Markdown",
         chat_id: Optional[str] = None,
-        with_keyboard: bool = True
+        with_keyboard: Any = True
     ) -> bool:
         """Sends a photo/chart to Telegram using multipart/form-data."""
         target_chat = chat_id or self.allowed_chat_id
@@ -154,10 +176,11 @@ class TelegramBotController:
             body.append(parse_mode.encode("utf-8"))
 
         if with_keyboard:
+            kb = DEFAULT_KEYBOARD if with_keyboard is True else with_keyboard
             body.append(f"--{boundary}".encode("utf-8"))
             body.append(f'Content-Disposition: form-data; name="reply_markup"'.encode("utf-8"))
             body.append(b"")
-            body.append(json.dumps(DEFAULT_KEYBOARD).encode("utf-8"))
+            body.append(json.dumps(kb).encode("utf-8"))
 
         body.append(f"--{boundary}".encode("utf-8"))
         body.append(f'Content-Disposition: form-data; name="photo"; filename="chart.png"'.encode("utf-8"))
@@ -192,7 +215,225 @@ class TelegramBotController:
 
         return await asyncio.to_thread(_do_send_photo)
 
+    def generate_trade_chart(
+        self,
+        symbol: str,
+        direction: str,
+        entry_price: float,
+        stop_loss: float,
+        take_profit: float,
+        tp2_target: Optional[float] = None,
+        sparkline: Optional[list] = None
+    ) -> Optional[bytes]:
+        """
+        Renders a sleek dark-mode trade execution chart with Entry, SL, and TP target lines.
+        """
+        try:
+            import matplotlib
+            matplotlib.use("Agg")
+            import matplotlib.pyplot as plt
+            import numpy as np
+            import io
 
+            plt.style.use("dark_background")
+            fig, ax = plt.subplots(figsize=(8, 4.2), facecolor="#0b0f19")
+            ax.set_facecolor("#0f172a")
+
+            # Generate synthetic or actual price trajectory
+            if sparkline and len(sparkline) >= 5:
+                prices = [float(p) for p in sparkline]
+            else:
+                # Build a clean 20-bar trajectory leading to entry
+                np.random.seed(int(abs(entry_price * 100)) % 10000)
+                noise = np.random.normal(0, 0.003, 20)
+                if direction.upper() == "LONG":
+                    drift = np.linspace(-0.015, 0.0, 20)
+                else:
+                    drift = np.linspace(0.015, 0.0, 20)
+                prices = [entry_price * (1 + d + n) for d, n in zip(drift, noise)]
+                prices[-1] = entry_price
+
+            x = list(range(len(prices)))
+            ax.plot(x, prices, color="#38bdf8", linewidth=2.0, label=f"{symbol} Price Action")
+
+            # Horizontal Level Lines
+            ax.axhline(entry_price, color="#38bdf8", linestyle="-", linewidth=1.5, label=f"Entry: ${entry_price:,.2f}")
+            ax.axhline(stop_loss, color="#ef4444", linestyle="--", linewidth=1.5, label=f"Stop Loss: ${stop_loss:,.2f}")
+            ax.axhline(take_profit, color="#10b981", linestyle="--", linewidth=1.5, label=f"TP1 Target: ${take_profit:,.2f}")
+            if tp2_target:
+                ax.axhline(tp2_target, color="#34d399", linestyle=":", linewidth=1.2, label=f"TP2 Runner: ${tp2_target:,.2f}")
+
+            # Highlight current point
+            marker_color = "#10b981" if direction.upper() == "LONG" else "#ef4444"
+            ax.scatter([x[-1]], [entry_price], color=marker_color, s=80, zorder=5)
+
+            # Titles & Grid
+            dir_badge = "LONG" if direction.upper() == "LONG" else "SHORT"
+            ax.set_title(
+                f"TRADE EXECUTION: {symbol} [{dir_badge}]\nEntry: ${entry_price:,.2f} | SL: ${stop_loss:,.2f} | TP1: ${take_profit:,.2f}",
+                fontsize=10.5, color="#f8fafc", fontweight="bold", pad=10
+            )
+            ax.set_ylabel("Price", color="#94a3b8", fontsize=9)
+            ax.grid(True, color="#1e293b", linestyle=":", alpha=0.6)
+            ax.legend(loc="upper left", facecolor="#1e293b", edgecolor="none", fontsize=8)
+
+            plt.tight_layout()
+            buf = io.BytesIO()
+            plt.savefig(buf, format="png", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
+            plt.close(fig)
+            buf.seek(0)
+            return buf.getvalue()
+        except Exception as e:
+            logger.warning(f"[TelegramBot] Trade chart render error: {e}")
+            return None
+
+    async def notify_trade_entry(self, trade: dict, market: str = "US") -> bool:
+        """Sends rich trade execution alert with dark-mode chart and 1-tap inline action buttons."""
+        if not self.is_configured:
+            return False
+        
+        symbol = trade.get("symbol", "N/A")
+        direction = trade.get("direction", "LONG")
+        entry_price = trade.get("entry_price", 0.0)
+        shares = trade.get("shares", 0.0)
+        stop_loss = trade.get("stop_loss", 0.0)
+        take_profit = trade.get("take_profit", 0.0)
+        tp2_target = trade.get("tp2_target")
+        regime = trade.get("regime", "Unknown")
+        currency = "₹" if market.upper() == "INDIA" else "$"
+
+        dir_icon = "🟢 LONG" if direction == "LONG" else "🔴 SHORT"
+        caption = (
+            f"⚡ *NEW TRADE EXECUTED • {market} Market*\n\n"
+            f"• *Symbol*: `{symbol}` ({dir_icon})\n"
+            f"• *Quantity*: `{shares:.4g}` units\n"
+            f"• *Entry Price*: `{currency}{entry_price:,.2f}`\n"
+            f"• *Stop Loss*: `{currency}{stop_loss:,.2f}`\n"
+            f"• *TP1 Target*: `{currency}{take_profit:,.2f}`\n"
+            f"• *Market Regime*: `{regime}`\n\n"
+            f"👇 *Remote 1-Tap Execution:* Tap below to manage trade instantly:"
+        )
+
+        inline_kb = {
+            "inline_keyboard": [
+                [
+                    {"text": "🛑 Emergency Close", "callback_data": f"close:{market}:{symbol}"},
+                    {"text": "🎯 Breakeven Stop", "callback_data": f"be:{market}:{symbol}"},
+                ],
+                [
+                    {"text": "💰 Lock 50% Profit", "callback_data": f"tp50:{market}:{symbol}"}
+                ]
+            ]
+        }
+
+        chart_bytes = await asyncio.to_thread(
+            self.generate_trade_chart,
+            symbol=symbol,
+            direction=direction,
+            entry_price=entry_price,
+            stop_loss=stop_loss,
+            take_profit=take_profit,
+            tp2_target=tp2_target,
+            sparkline=trade.get("sparkline")
+        )
+
+        if chart_bytes:
+            return await self.send_photo(chart_bytes, caption=caption, with_keyboard=inline_kb)
+        else:
+            return await self.send_message(caption, with_keyboard=inline_kb)
+
+    async def notify_trade_exit(self, trade: dict, market: str = "US") -> bool:
+        """Delivers real-time exit notification with realized PnL and outcome badge."""
+        if not self.is_configured:
+            return False
+
+        symbol = trade.get("symbol", "N/A")
+        pnl = trade.get("profit_loss", trade.get("profit", 0.0))
+        pnl_pct = trade.get("profit_pct", 0.0)
+        reason = trade.get("reason", "Exit Trigger")
+        currency = "₹" if market.upper() == "INDIA" else "$"
+
+        badge = "🏆 WIN" if pnl > 0 else "🛑 LOSS"
+        msg = (
+            f"{'🎉' if pnl > 0 else '⚠️'} *POSITION CLOSED • {badge}*\n\n"
+            f"• *Symbol*: `{symbol}` ({market})\n"
+            f"• *Realized PnL*: `{currency}{pnl:+,.2f}` (`{pnl_pct:+.2f}%`)\n"
+            f"• *Exit Reason*: `{reason}`\n"
+            f"• *Timestamp*: `{datetime.now().strftime('%H:%M:%S IST')}`\n\n"
+            f"AI Post-Mortem recorded to learning ledger."
+        )
+        return await self.send_message(msg, with_keyboard=True)
+
+    async def generate_pre_market_brief(self) -> str:
+        """Generates 09:00 AM IST morning brief of global overnight market cues."""
+        from api.routes import global_risk
+        import yfinance as yf
+
+        def _fetch_cues():
+            try:
+                tickers = ["^NSEI", "MNQ=F", "MGC=F", "MCL=F", "DX-Y.NYB", "BTC-USD"]
+                data = yf.download(tickers, period="5d", interval="1d", progress=False)
+                closes = data["Close"].dropna()
+                cues = {}
+                for t in tickers:
+                    if t in closes.columns and len(closes[t]) >= 2:
+                        p_curr = float(closes[t].iloc[-1])
+                        p_prev = float(closes[t].iloc[-2])
+                        chg_pct = (p_curr - p_prev) / p_prev * 100
+                        cues[t] = (p_curr, chg_pct)
+                return cues
+            except Exception:
+                return {}
+
+        cues = await asyncio.to_thread(_fetch_cues)
+        lines = [
+            "🌅 *PRE-MARKET GLOBAL BRIEFING (09:00 AM IST)*",
+            f"📅 Date: `{date.today().strftime('%d %B %Y')}`\n",
+            "🌐 *Overnight Global Cues:*",
+        ]
+        sym_map = {
+            "^NSEI": "🇮🇳 Nifty Prev Close",
+            "MNQ=F": "🇺🇸 Nasdaq Futures",
+            "MGC=F": "🥇 Gold (MGC)",
+            "MCL=F": "🛢️ Crude Oil (WTI)",
+            "DX-Y.NYB": "💵 US Dollar Index (DXY)",
+            "BTC-USD": "🪙 Bitcoin",
+        }
+        for k, label in sym_map.items():
+            if k in cues:
+                px, chg = cues[k]
+                icon = "🟢" if chg >= 0 else "🔴"
+                lines.append(f"• {icon} *{label}*: `{px:,.2f}` (`{chg:+.2f}%`)")
+            else:
+                lines.append(f"• ⚪ *{label}*: `Data active`")
+
+        lines.append(f"\n🛡️ *System Status*: `{'HALTED ⛔' if global_risk.global_halt else 'ACTIVE 🟢'}`")
+        lines.append(f"💰 *Portfolio Equity*: `${global_risk.total_equity():,.2f}`")
+        lines.append("\n⚡ _All 5 market engines ready for the opening bell._")
+        return "\n".join(lines)
+
+    async def _pre_market_loop(self):
+        """Runs daily at 03:30 UTC (09:00 AM IST) on weekdays for pre-market morning brief."""
+        while self.is_running:
+            try:
+                now = datetime.utcnow()
+                target = now.replace(hour=3, minute=30, second=0, microsecond=0)
+                if now >= target:
+                    target = target.replace(day=target.day + 1)
+                
+                while target.weekday() >= 5:  # Skip Saturday and Sunday
+                    target = target.replace(day=target.day + 1)
+
+                wait_secs = (target - now).total_seconds()
+                await asyncio.sleep(wait_secs)
+
+                report = await self.generate_pre_market_brief()
+                await self.send_message(report, with_keyboard=True)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"[TelegramBot] Pre-market loop error: {e}")
+                await asyncio.sleep(60)
 
     async def start(self):
         """Starts the long-polling loop and scheduled background monitors."""
@@ -203,6 +444,7 @@ class TelegramBotController:
         self.is_running = True
         self._poll_task = asyncio.create_task(self._polling_loop())
         self._eod_task = asyncio.create_task(self._daily_eod_loop())
+        self._pre_market_task = asyncio.create_task(self._pre_market_loop())
         self._macro_task = asyncio.create_task(self._macro_blackout_monitor())
         logger.info("[TelegramBot] Interactive Telegram Bot listener & schedulers started.")
         await self.send_message(
@@ -215,7 +457,7 @@ class TelegramBotController:
     async def stop(self):
         """Stops the polling loop and scheduled tasks."""
         self.is_running = False
-        for task in (self._poll_task, self._eod_task, self._macro_task):
+        for task in (self._poll_task, self._eod_task, self._pre_market_task, self._macro_task):
             if task:
                 task.cancel()
                 try:
@@ -225,7 +467,7 @@ class TelegramBotController:
         logger.info("[TelegramBot] Interactive Telegram Bot stopped.")
 
     async def _polling_loop(self):
-        """Long-polling update loop for incoming Telegram messages."""
+        """Long-polling update loop for incoming Telegram messages and callback buttons."""
         while self.is_running:
             try:
                 updates = await self._fetch_updates(offset=self._last_update_id + 1)
@@ -237,12 +479,76 @@ class TelegramBotController:
                     msg = update.get("message") or update.get("edited_message")
                     if msg:
                         await self._handle_message(msg)
+
+                    cb_query = update.get("callback_query")
+                    if cb_query:
+                        await self._handle_callback_query(cb_query)
             except asyncio.CancelledError:
                 break
             except Exception as e:
                 logger.warning(f"[TelegramBot] Polling loop exception: {e}")
                 await asyncio.sleep(5)
             await asyncio.sleep(1.0)
+
+    async def _handle_callback_query(self, cb: dict):
+        """Handles inline interactive button taps."""
+        cb_id = cb.get("id")
+        user_chat_id = str(cb.get("message", {}).get("chat", {}).get("id", "") or cb.get("from", {}).get("id", ""))
+        data = cb.get("data", "")
+        
+        # Security: ensure sender is the authorized user
+        if self.allowed_chat_id and user_chat_id != self.allowed_chat_id:
+            await self.answer_callback_query(cb_id, "⛔ Unauthorized operator.", show_alert=True)
+            return
+
+        from api.routes import (
+            execution_engine, execution_engine_in, execution_engine_st,
+            execution_engine_cx, execution_engine_fx
+        )
+        engines_map = {
+            "US": execution_engine,
+            "INDIA": execution_engine_in,
+            "STOCKS": execution_engine_st,
+            "CRYPTO": execution_engine_cx,
+            "FOREX": execution_engine_fx,
+        }
+
+        parts = data.split(":")
+        if len(parts) >= 3:
+            action, mkt, sym = parts[0], parts[1].upper(), parts[2].upper()
+            eng = engines_map.get(mkt, execution_engine)
+            
+            target_h = next((h for h in getattr(eng, "active_holdings", []) if h.get("symbol", "").upper() == sym), None)
+            
+            if not target_h:
+                await self.answer_callback_query(cb_id, f"⚠️ Holding {sym} is no longer active.", show_alert=True)
+                return
+
+            curr_price = target_h.get("current_price", target_h.get("entry_price", 0.0))
+
+            if action == "close":
+                ok, msg = await eng.force_close(target_h, curr_price, "Operator Telegram Action")
+                if ok:
+                    await self.answer_callback_query(cb_id, f"🛑 {sym} position CLOSED! {msg}", show_alert=True)
+                    await self.send_message(f"🛑 *Position Closed via Telegram*\n• Symbol: `{sym}` ({mkt})\n• Result: `{msg}`")
+                else:
+                    await self.answer_callback_query(cb_id, f"❌ Close failed: {msg}", show_alert=True)
+
+            elif action == "be":
+                target_h["stop_loss"] = target_h["entry_price"]
+                await eng._save_state_async()
+                await self.answer_callback_query(cb_id, f"🎯 Stop Loss moved to Breakeven (${target_h['entry_price']:.2f}) for {sym}!", show_alert=True)
+                await self.send_message(f"🎯 *Stop Ratchet via Telegram*\n• Symbol: `{sym}`\n• New Stop Loss: `${target_h['entry_price']:.2f}` (Breakeven)")
+
+            elif action == "tp50":
+                ok, msg = await eng.partial_close(target_h, curr_price, fraction=0.5, reason="Telegram_Manual_50pct")
+                if ok:
+                    await self.answer_callback_query(cb_id, f"💰 50% Profit Locked! {msg}", show_alert=True)
+                    await self.send_message(f"💰 *50% Profit Scaled Out via Telegram*\n• Symbol: `{sym}`\n• Detail: `{msg}`")
+                else:
+                    await self.answer_callback_query(cb_id, f"❌ Scale-out failed: {msg}", show_alert=True)
+        else:
+            await self.answer_callback_query(cb_id, "Action processed.")
 
     async def _fetch_updates(self, offset: int) -> list:
         """Fetches pending updates from Telegram API."""

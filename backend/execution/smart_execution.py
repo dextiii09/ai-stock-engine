@@ -437,6 +437,17 @@ class SmartExecutionEngine:
             self._stop_cooldown[symbol] = time.time()
 
         await self._save_state_async()   # A-2: non-blocking
+        try:
+            from utils.telegram_bot import telegram_bot
+            if telegram_bot.is_configured:
+                asyncio.create_task(telegram_bot.notify_trade_exit({
+                    "symbol": symbol,
+                    "profit_loss": profit_loss,
+                    "profit_pct": profit_pct,
+                    "reason": reason,
+                }, market=self.market))
+        except Exception:
+            pass
         return True, f"PnL: ${profit_loss:.2f} ({profit_pct:.2f}%)"
 
     async def partial_close(self, holding: dict, price: float, fraction: float = 0.5, reason: str = "TP1_1.5R") -> tuple:
@@ -1175,6 +1186,12 @@ class SmartExecutionEngine:
                     })
                     self.journal.log_trade(symbol, "BUY", price, decision)
                     await self._save_state_async()
+                    try:
+                        from utils.telegram_bot import telegram_bot
+                        if telegram_bot.is_configured:
+                            asyncio.create_task(telegram_bot.notify_trade_entry(holding, market=self.market))
+                    except Exception:
+                        pass
                     return True, f"FILLED BUY {shares} @ ${avg_fill_price:.2f}"
                 finally:
                     async with self._get_lock():
@@ -1475,6 +1492,12 @@ class SmartExecutionEngine:
                     })
                     self.journal.log_trade(symbol, "SELL", price, decision)
                     await self._save_state_async()
+                    try:
+                        from utils.telegram_bot import telegram_bot
+                        if telegram_bot.is_configured:
+                            asyncio.create_task(telegram_bot.notify_trade_entry(holding, market=self.market))
+                    except Exception:
+                        pass
                     return True, f"FILLED SHORT {shares:.4g} @ ${avg_fill_price:.2f} (margin={_SHORT_MARGIN_RATE*100:.0f}%)"
                 finally:
                     async with self._get_lock():
