@@ -128,6 +128,7 @@ _cors_origins = [o.strip() for o in _os.getenv("APP_CORS_ORIGINS", _default_orig
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins if _cors_origins else ["*"],
+    allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
